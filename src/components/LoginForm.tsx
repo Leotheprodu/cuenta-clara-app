@@ -10,33 +10,67 @@ import { useEffect, useState } from "react";
 import { fetchAPI } from "./helpers/fetchAPI";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
+import { Toaster, toast } from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 export const LoginForm = () => {
+    const [sendLogin, setSendLogin] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [form, setForm] = useState({ email: "", password: "" });
     const toggleVisibility = () => setIsVisible(!isVisible);
     const user = useStore($user);
+    if (sendLogin && user.isLoggedIn) {
+        redirect("/");
+    }
     useEffect(() => {
-        console.log(user);
-        /*   const checkIsLogedIn = async () => {
-            const userData = await fetchAPI({
-                url: "auth/login",
-                method: "POST",
-                body: form,
+        const checkIsLogedIn = async () => {
+            const { data, error } = await fetchAPI({
+                url: "auth/check-session",
             });
-        }; */
+            if (!error) $user.set(data);
+        };
+        if (!user.isLoggedIn) {
+            checkIsLogedIn();
+        }
     }, [user]);
-
     const handleLogin = async () => {
-        const { data, status, error } = await fetchAPI({
+        const { data, error } = await fetchAPI({
             url: "auth/login",
             method: "POST",
             body: form,
         });
-        if (!error) $user.set(data);
+        if (!error) {
+            $user.set(data);
+            setSendLogin(true);
+        } else {
+            toast.dismiss();
+            toast.error(error);
+        }
     };
+    const handleLogout = async () => {
+        const { data, status, error } = await fetchAPI({
+            url: "auth/logout",
+        });
+        if (!error) $user.set({ ...user, isLoggedIn: false });
+    };
+
+    if (user.isLoggedIn) {
+        return (
+            <div>
+                <h1>Ya estas logeado</h1>
+                <Button
+                    onClick={handleLogout}
+                    className="uppercase"
+                    color="warning"
+                >
+                    Salir
+                </Button>
+            </div>
+        );
+    }
     return (
         <form className="flex flex-col gap-4">
+            <Toaster />
             <div>
                 <Input
                     size="lg"
