@@ -9,7 +9,7 @@ export const MainPage = () => {
     const user = useStore($user);
     const [userChecked, setUserChecked] = useState(false);
     if (userChecked && !user.isLoggedIn) {
-        redirect("/login");
+        redirect("/sesion-de-usuario");
     }
 
     useEffect(() => {

@@ -1,13 +1,9 @@
 import { PageWrapper } from "@/components/PageWrapper";
-import { MainPage } from "../components/client/MainPage";
-
-export default function Home() {
+export default function NuevoCliente() {
     return (
         <PageWrapper>
             <main className="flex min-h-screen justify-center items-center p-2">
-                <section>
-                    <MainPage />
-                </section>
+                <section>Nuevo Cliente</section>
             </main>
         </PageWrapper>
     );

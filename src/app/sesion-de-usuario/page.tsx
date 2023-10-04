@@ -1,12 +1,12 @@
+import { LoginForm } from "@/components/LoginForm";
 import { PageWrapper } from "@/components/PageWrapper";
-import { MainPage } from "../components/client/MainPage";
 
-export default function Home() {
+export default function Login() {
     return (
         <PageWrapper>
             <main className="flex min-h-screen justify-center items-center p-2">
                 <section>
-                    <MainPage />
+                    <LoginForm />
                 </section>
             </main>
         </PageWrapper>
