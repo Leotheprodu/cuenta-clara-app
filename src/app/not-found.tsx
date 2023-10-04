@@ -1,6 +1,6 @@
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layout/PageWrapper";
 export default function NotFound() {
     return (
         <PageWrapper>

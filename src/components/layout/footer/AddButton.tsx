@@ -15,7 +15,7 @@ export const AddButton = () => {
     const content = (
         <PopoverContent>
             <div>
-                <Link className="" href="/nueva-transaccion">
+                <Link className="hover:" href="/nueva-transaccion">
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{

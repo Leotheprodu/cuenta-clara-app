@@ -5,7 +5,7 @@ import { $user } from "@/stores/users";
 import { fetchAPI } from "@/components/helpers/fetchAPI";
 import { redirect } from "next/navigation";
 
-export const MainPage = () => {
+export const useCheckSession = () => {
     const user = useStore($user);
     const [userChecked, setUserChecked] = useState(false);
     if (userChecked && !user.isLoggedIn) {
@@ -24,6 +24,4 @@ export const MainPage = () => {
             checkIsLogedIn();
         }
     }, [user]);
-
-    return <div>MainPage</div>;
 };

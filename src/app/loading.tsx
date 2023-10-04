@@ -1,6 +1,6 @@
 import React from "react";
 import { Spinner } from "@nextui-org/spinner";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layout/PageWrapper";
 
 export default function App() {
     return (
