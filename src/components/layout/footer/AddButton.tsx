@@ -65,7 +65,7 @@ export const AddButton = () => {
 
     return (
         <div className="absolute top-[-1rem]">
-            <Popover placement="top" className="flex flex-col">
+            <Popover className="flex flex-col">
                 <PopoverTrigger>
                     <Button
                         isIconOnly

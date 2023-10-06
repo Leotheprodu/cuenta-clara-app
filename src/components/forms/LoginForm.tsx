@@ -98,7 +98,6 @@ export const LoginForm = () => {
                     type="email"
                     label="Correo Electronico"
                     placeholder="Ingresa tu correo electronico"
-                    isClearable
                     startContent={
                         <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                     }

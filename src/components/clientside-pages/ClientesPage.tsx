@@ -35,7 +35,7 @@ export const ClientesPage = () => {
             <div className="flex flex-col gap-2 fixed top-5 right-2">
                 {letters.map((letter) => (
                     <button
-                        className={`relative rounded-full w-3 h-3 flex justify-center items-center uppercase transition-all duration-300`}
+                        className={`relative rounded-full w-3 h-3 flex justify-center items-center uppercase`}
                         key={letter}
                         onClick={() => {
                             setLetterSelected(letter);
@@ -69,7 +69,7 @@ export const ClientesPage = () => {
                             initial={{ opacity: 0, x: 40 }}
                             animate={{ opacity: 1, x: 10 }}
                             exit={{ opacity: 0, x: 40 }}
-                            className="flex rounded-xl border-1 border-gris min-w-[15rem] max-w-[30rem] h-[7rem] p-2 shadow-md"
+                            className="flex rounded-xl border-1 border-gris w-[15rem] h-[8rem] p-2 shadow-md"
                             key={client.id}
                         >
                             <div className="flex flex-col justify-between">
