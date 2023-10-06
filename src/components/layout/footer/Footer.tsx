@@ -12,7 +12,7 @@ export const Footer = () => {
     return (
         <>
             {path !== "/sesion-de-usuario" && (
-                <footer className="fixed bottom-0 h-16 w-full bg-primario">
+                <footer className="fixed z-10 bottom-0 h-16 w-full bg-primario">
                     <div className="flex gap-28 justify-center items-center w-full h-full relative ">
                         <Link
                             className="relative text-xs text-blanco flex flex-col justify-center items-center"

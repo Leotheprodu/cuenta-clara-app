@@ -20,9 +20,11 @@ export default async function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className={inter.className}>
+            <body className={`${inter.className}`}>
                 <GlobalToast />
-                <Providers>{children}</Providers>
+                <div className="overflow-y-auto mb-16 pb-4">
+                    <Providers>{children}</Providers>
+                </div>
                 <Footer />
             </body>
         </html>
