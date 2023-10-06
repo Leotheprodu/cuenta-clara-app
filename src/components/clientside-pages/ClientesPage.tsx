@@ -4,7 +4,6 @@ import { useCheckSession } from "../hooks/useCheckSession";
 import { fetchAPI } from "../helpers/fetchAPI";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { formatCellphone } from "../helpers/formatCellphone";
 
 export const ClientesPage = () => {
     useCheckSession();
@@ -79,12 +78,20 @@ export const ClientesPage = () => {
                                         {client.username}
                                     </h1>
                                     <div>
-                                        <p className="text-xs text-secundario">
-                                            {client.email}
-                                        </p>
-                                        <p className="text-xs text-secundario">
-                                            {`+506 ${client.cellphone}`}
-                                        </p>
+                                        <a href={`mailto:${client.email}`}>
+                                            <p className="text-xs text-secundario">
+                                                {client.email}
+                                            </p>
+                                        </a>
+
+                                        <a
+                                            target="_blank"
+                                            href={`https://wa.me/506${client.cellphone}?text=Hola!%20${client.username},%20`}
+                                        >
+                                            <p className="text-xs text-secundario">
+                                                {`+506 ${client.cellphone}`}
+                                            </p>
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap gap-2 text-xs">

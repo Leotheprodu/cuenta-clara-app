@@ -15,7 +15,6 @@ import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
-    const toastMessage = useStore($toastGlobal);
     const router = useRouter();
     const [sendLogin, setSendLogin] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
