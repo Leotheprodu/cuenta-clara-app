@@ -10,8 +10,16 @@ import {
 } from "@nextui-org/react";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export const AddButton = () => {
+    const pathname = usePathname();
+    const [isOpen, setIsOpen] = useState(false);
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
+
     const content = (
         <PopoverContent>
             <div>
@@ -37,7 +45,7 @@ export const AddButton = () => {
                         </div>
                     </motion.div>
                 </Link>
-                <Link className="" href="/clientes/nuevo-cliente">
+                <Link className="" href="/clientes/nuevo">
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{
@@ -65,13 +73,19 @@ export const AddButton = () => {
 
     return (
         <div className="absolute top-[-1rem]">
-            <Popover className="flex flex-col">
+            <Popover
+                shouldCloseOnBlur
+                onClose={() => setIsOpen(false)}
+                backdrop="blur"
+                isOpen={isOpen}
+            >
                 <PopoverTrigger>
                     <Button
                         isIconOnly
                         aria-label="agregar"
                         radius="full"
                         className="h-16 w-16 p-0 m-0 bg-secundario shadow-xl text-blanco flex justify-center items-center"
+                        onClick={() => setIsOpen(!isOpen)}
                     >
                         <AddIcon />
                     </Button>

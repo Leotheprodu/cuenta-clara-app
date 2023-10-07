@@ -7,6 +7,7 @@ import Link from "next/link";
 
 export const ClientesPage = () => {
     useCheckSession();
+    const domain = process.env.NEXT_PUBLIC_DOMAIN;
     const letters = "abcdefghijklmnñopqrstuvwxyz".split("");
     const [clients, setClients] = useState([]);
     const [filteredClients, setFilteredClients] = useState([]);
@@ -90,6 +91,25 @@ export const ClientesPage = () => {
                                         >
                                             <p className="text-xs text-secundario">
                                                 {`+506 ${client.cellphone}`}
+                                            </p>
+                                        </a>
+                                        <a
+                                            target="_blank"
+                                            href={`https://wa.me/506${
+                                                client.cellphone
+                                            }?text=%2ALink%20de%20Dashboard%2A%0A%0A${
+                                                client.username
+                                            }%2C%20tu%20Link%20es%3A%20%0A%0A${
+                                                domain +
+                                                "/" +
+                                                "dashboard/?token=" +
+                                                client.token +
+                                                "%26id=" +
+                                                client.id
+                                            }%0A%0A_Recuerda%20no%20compartir%20este%20link%2C%20para%20proteger%20tu%20informaci%C3%B3n_`}
+                                        >
+                                            <p className="text-xs text-secundario">
+                                                Enviar Link
                                             </p>
                                         </a>
                                     </div>

@@ -91,11 +91,13 @@ export const LoginForm = () => {
         );
     }
     return (
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <div>
                 <Input
                     size="lg"
                     type="email"
+                    isClearable
+                    onClear={() => setForm({ ...form, email: "" })}
                     label="Correo Electronico"
                     placeholder="Ingresa tu correo electronico"
                     startContent={
@@ -141,13 +143,7 @@ export const LoginForm = () => {
                     }}
                 />
             </div>
-            <Button
-                type="submit"
-                // @ts-ignore
-                onClick={handleLogin}
-                className="uppercase"
-                color="primary"
-            >
+            <Button type="submit" className="uppercase" color="primary">
                 Entrar
             </Button>
         </form>
