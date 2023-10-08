@@ -12,7 +12,7 @@ export const NewClient = () => {
     const [form, setForm] = useState({
         username: "",
         email: "",
-        cellphone: "",
+        whatsapp: "",
         token: "",
     });
     clienteCreado && redirect("/clientes");
@@ -65,10 +65,8 @@ export const NewClient = () => {
                 isRequired
                 variant="underlined"
                 placeholder="Ingresa el telefono celular"
-                value={form.cellphone}
-                onChange={(e) =>
-                    setForm({ ...form, cellphone: e.target.value })
-                }
+                value={form.whatsapp}
+                onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
             ></Input>
             <Button color="primary" className=" uppercase w-full" type="submit">
                 Crear
