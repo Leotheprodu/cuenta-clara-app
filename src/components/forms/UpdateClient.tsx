@@ -26,7 +26,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
                 setForm({
                     ...form,
                     username: data.username,
-                    email: data.email || null,
+                    email: data.email || "",
                     cellphone: data.cellphone,
                     token: data.token,
                 });
@@ -41,7 +41,6 @@ export const UpdateClient = ({ id }: { id: string }) => {
     clienteActualizado && redirect("/clientes");
     const handleUpdateClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(form);
         $toastGlobal.set({ type: "loading", message: "Cargando..." });
         const { error } = await fetchAPI({
             url: "clients",
