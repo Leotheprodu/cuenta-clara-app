@@ -4,11 +4,13 @@ import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { fetchAPI } from "@/components/helpers/fetchAPI";
 import { redirect } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export const useCheckSession = () => {
+    const pathname = usePathname();
     const user = useStore($user);
     const [userChecked, setUserChecked] = useState(false);
-    if (userChecked && !user.isLoggedIn) {
+    if (pathname !== "/sesion-de-usuario" && userChecked && !user.isLoggedIn) {
         redirect("/sesion-de-usuario");
     }
 
