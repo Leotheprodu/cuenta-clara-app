@@ -2,8 +2,8 @@
 import { Button } from "@nextui-org/react";
 import { IsLoggedInHandle } from "./IsLoggedInHandle";
 import { useLoginForm } from "@/components/forms/LoginForm/useLoginForm";
-import { InputEmail } from "./InputEmail";
-import { InputPassword } from "./InputPassword";
+import { InputEmailLoginForm } from "./InputEmailLoginForm";
+import { InputPasswordLoginForm } from "./InputPasswordLoginForm";
 
 export const LoginForm = () => {
     const {
@@ -23,8 +23,10 @@ export const LoginForm = () => {
     }
     return (
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            <InputEmail handle={{ handleOnClear, email, handleOnChange }} />
-            <InputPassword
+            <InputEmailLoginForm
+                handle={{ handleOnClear, email, handleOnChange }}
+            />
+            <InputPasswordLoginForm
                 handle={{
                     handleOnChange,
                     isVisible,

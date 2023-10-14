@@ -5,11 +5,8 @@ import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
-
-interface FormValues {
-    email: string;
-    password: string;
-}
+import { FormValues } from "./LoginFormInterfaces";
+import { handleOnChange, handleOnClear } from "@/components/helpers/formUtils";
 
 export const useLoginForm = (formInit: FormValues) => {
     useCheckSession();
@@ -24,15 +21,6 @@ export const useLoginForm = (formInit: FormValues) => {
     }
 
     const toggleVisibility = () => setIsVisible(!isVisible);
-
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleOnClear = (name: string) => {
-        setForm((prev) => ({ ...prev, [name]: "" }));
-    };
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         $toastGlobal.set({ type: "loading", message: "Cargando..." });
@@ -56,10 +44,10 @@ export const useLoginForm = (formInit: FormValues) => {
 
     return {
         ...form,
-        form,
         toggleVisibility,
-        handleOnChange,
-        handleOnClear,
+        handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+            handleOnChange(setForm, e),
+        handleOnClear: (name: string) => handleOnClear(name, setForm),
         handleLogin,
         isVisible,
         isInvalidPass,

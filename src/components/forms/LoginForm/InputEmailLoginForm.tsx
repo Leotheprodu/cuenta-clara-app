@@ -1,13 +1,8 @@
 import { MailIcon } from "@/icons/MailIcon";
 import { Input } from "@nextui-org/react";
-interface InputEmailProps {
-    handle: {
-        handleOnClear: (name: string) => void;
-        email: string;
-        handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    };
-}
-export const InputEmail = ({ handle }: InputEmailProps) => {
+import { InputEmailLoginFormProps } from "./LoginFormInterfaces";
+
+export const InputEmailLoginForm = ({ handle }: InputEmailLoginFormProps) => {
     const { handleOnClear, email, handleOnChange } = handle;
     return (
         <div>

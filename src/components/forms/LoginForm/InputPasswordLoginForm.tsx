@@ -1,18 +1,11 @@
-import { EyeFilledIcon } from "@/icons/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "@/icons/EyeSlashFilledIcon";
 import { KeyIcon } from "@/icons/KeyIcon";
 import { Input } from "@nextui-org/react";
+import { EndContentInputPassword } from "./EndContentInputPassword";
+import { InputPasswordLoginFormProps } from "./LoginFormInterfaces";
 
-interface InputEmailProps {
-    handle: {
-        isVisible: boolean;
-        isInvalidPass: boolean;
-        toggleVisibility: () => void;
-        password: string;
-        handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    };
-}
-export const InputPassword = ({ handle }: InputEmailProps) => {
+export const InputPasswordLoginForm = ({
+    handle,
+}: InputPasswordLoginFormProps) => {
     const {
         handleOnChange,
         isVisible,
@@ -28,17 +21,10 @@ export const InputPassword = ({ handle }: InputEmailProps) => {
                 label="Contraseña"
                 placeholder="Ingresa tu contraseña"
                 endContent={
-                    <button
-                        className="focus:outline-none"
-                        type="button"
-                        onClick={toggleVisibility}
-                    >
-                        {isVisible ? (
-                            <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                        ) : (
-                            <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                        )}
-                    </button>
+                    <EndContentInputPassword
+                        isVisible={isVisible}
+                        toggleVisibility={toggleVisibility}
+                    />
                 }
                 type={isVisible ? "text" : "password"}
                 className="max-w-xs"
