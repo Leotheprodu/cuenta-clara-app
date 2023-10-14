@@ -1,8 +1,8 @@
 import React from "react";
-import { InputEmailNewClientProps } from "./NewClientsInterfaces";
+import { InputEmailProps } from "./InterfacesNewClient";
 import { Input } from "@nextui-org/react";
 
-export const InputEmailNewClient = ({ handle }: InputEmailNewClientProps) => {
+export const InputEmail = ({ handle }: InputEmailProps) => {
     const { handleOnChange, email } = handle;
     return (
         <Input

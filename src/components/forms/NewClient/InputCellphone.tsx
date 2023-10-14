@@ -1,10 +1,8 @@
 import React from "react";
-import { InputCellphoneNewClientProps } from "./NewClientsInterfaces";
+import { InputCellphoneProps } from "./InterfacesNewClient";
 import { Input } from "@nextui-org/react";
 
-export const InputCellphoneNewClient = ({
-    handle,
-}: InputCellphoneNewClientProps) => {
+export const InputCellphone = ({ handle }: InputCellphoneProps) => {
     const { handleOnChange, cellphone } = handle;
     return (
         <Input

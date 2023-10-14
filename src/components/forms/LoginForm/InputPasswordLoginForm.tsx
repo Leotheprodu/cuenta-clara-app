@@ -1,7 +1,7 @@
 import { KeyIcon } from "@/icons/KeyIcon";
 import { Input } from "@nextui-org/react";
 import { EndContentInputPassword } from "./EndContentInputPassword";
-import { InputPasswordLoginFormProps } from "./LoginFormInterfaces";
+import { InputPasswordLoginFormProps } from "./InterfacesLoginForm";
 
 export const InputPasswordLoginForm = ({
     handle,

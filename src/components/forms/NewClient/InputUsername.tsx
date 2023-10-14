@@ -1,10 +1,8 @@
 import React from "react";
-import { InputUsernameNewClientProps } from "./NewClientsInterfaces";
+import { InputUsernameProps } from "./InterfacesNewClient";
 import { Input } from "@nextui-org/react";
 
-export const InputUsernameNewClient = ({
-    handle,
-}: InputUsernameNewClientProps) => {
+export const InputUsername = ({ handle }: InputUsernameProps) => {
     const { handleOnChange, username } = handle;
     return (
         <Input

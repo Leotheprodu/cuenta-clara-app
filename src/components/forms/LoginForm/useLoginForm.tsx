@@ -5,7 +5,7 @@ import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
-import { FormValues } from "./LoginFormInterfaces";
+import { FormValues } from "./InterfacesLoginForm";
 import { handleOnChange, handleOnClear } from "@/components/helpers/formUtils";
 
 export const useLoginForm = (formInit: FormValues) => {

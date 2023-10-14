@@ -4,19 +4,19 @@ export interface FormValuesNewClient {
     cellphone: string;
     token: string;
 }
-export interface InputUsernameNewClientProps {
+export interface InputUsernameProps {
     handle: {
         username: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
 }
-export interface InputEmailNewClientProps {
+export interface InputEmailProps {
     handle: {
         email: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
 }
-export interface InputCellphoneNewClientProps {
+export interface InputCellphoneProps {
     handle: {
         cellphone: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

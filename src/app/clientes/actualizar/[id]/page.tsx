@@ -1,4 +1,4 @@
-import { UpdateClient } from "@/components/forms/UpdateClient";
+import { UpdateClient } from "@/components/forms/UpdateClient/UpdateClient";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 export default function ActualizarCliente({
     params,
