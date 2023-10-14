@@ -1,6 +1,6 @@
 "use client";
 import { useCheckSession } from "../hooks/useCheckSession";
-import { fetchAPI } from "../helpers/fetchAPI";
+import { fetchAPI } from "../Utils/fetchAPI";
 import { Button } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 import { $toastGlobal } from "@/stores/toast";

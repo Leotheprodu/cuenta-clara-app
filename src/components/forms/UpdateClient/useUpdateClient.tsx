@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchAPI } from "../../helpers/fetchAPI";
+import { fetchAPI } from "../../Utils/fetchAPI";
 import { $toastGlobal } from "@/stores/toast";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
-import { handleOnChange } from "@/components/helpers/formUtils";
-import { idGenerator } from "../../helpers/idGenerator";
+import { handleOnChange } from "@/components/Utils/formUtils";
+import { idGenerator } from "../../Utils/idGenerator";
 import { FormValuesUpdateClient } from "./InterfacesUpdateClient";
 
 export const useUpdateClient = (

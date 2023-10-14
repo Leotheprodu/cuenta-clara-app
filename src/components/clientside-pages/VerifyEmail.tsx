@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAPI } from "../helpers/fetchAPI";
+import { fetchAPI } from "../Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { $toastGlobal } from "@/stores/toast";
 export const EmailVerification = ({ token }: { token: string }) => {

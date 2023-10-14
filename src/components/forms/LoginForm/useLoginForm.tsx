@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { fetchAPI } from "../../helpers/fetchAPI";
+import { fetchAPI } from "../../Utils/fetchAPI";
 import { $toastGlobal } from "@/stores/toast";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { FormValues } from "./InterfacesLoginForm";
-import { handleOnChange, handleOnClear } from "@/components/helpers/formUtils";
+import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 
 export const useLoginForm = (formInit: FormValues) => {
     useCheckSession();

@@ -1,4 +1,4 @@
-import { fetchAPI } from "../../helpers/fetchAPI";
+import { fetchAPI } from "../../Utils/fetchAPI";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { $toastGlobal } from "@/stores/toast";

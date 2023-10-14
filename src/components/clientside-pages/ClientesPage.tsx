@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useCheckSession } from "../hooks/useCheckSession";
-import { fetchAPI } from "../helpers/fetchAPI";
+import { fetchAPI } from "../Utils/fetchAPI";
 import { motion } from "framer-motion";
 import Link from "next/link";
 

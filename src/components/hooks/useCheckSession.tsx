@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
-import { fetchAPI } from "@/components/helpers/fetchAPI";
+import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
 
