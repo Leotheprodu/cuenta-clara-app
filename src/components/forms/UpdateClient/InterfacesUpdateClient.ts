@@ -1,11 +1,11 @@
-export interface FormValuesUpdateClient {
+interface FormValuesUpdateClient {
     id: string;
     username: string;
     email: string;
     cellphone: string;
     token: string;
 }
-export interface InputChangeTokenProps {
+interface InputChangeTokenProps {
     handle: {
         token: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ClientCardProps } from "./InterfacesClientsPage";
 
 export const ClientSections = ({ client }: ClientCardProps) => {
     const { id } = client;

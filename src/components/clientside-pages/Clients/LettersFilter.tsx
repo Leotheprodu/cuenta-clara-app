@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { LettersFilterProps } from "./InterfacesClientsPage";
 
 export const LettersFilter = ({ handle }: LettersFilterProps) => {
     const { HandleLetterFilter, letterSelected } = handle;

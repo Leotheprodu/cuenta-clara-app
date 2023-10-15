@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "../../Utils/idGenerator";
-import { FormValuesNewClient } from "./InterfacesNewClient";
 
 export const useNewClient = (formInit: FormValuesNewClient) => {
     useCheckSession();

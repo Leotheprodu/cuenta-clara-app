@@ -1,5 +1,4 @@
 import { Button, Input } from "@nextui-org/react";
-import { InputChangeTokenProps } from "./InterfacesUpdateClient";
 
 export const InputChangeToken = ({ handle }: InputChangeTokenProps) => {
     const { handleOnChange, handleNewToken, token } = handle;

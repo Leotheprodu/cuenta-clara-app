@@ -1,4 +1,4 @@
-import { EmailVerification } from "@/components/clientside-pages/VerifyEmail";
+import { EmailVerification } from "@/components/clientside-pages/VerifyEmail/EmailVerification";
 
 import { PageWrapper } from "@/components/layout/PageWrapper";
 

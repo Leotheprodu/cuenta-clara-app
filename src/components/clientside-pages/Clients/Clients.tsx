@@ -3,7 +3,6 @@ import { LettersFilter } from "./LettersFilter";
 import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
-import { ClientProps } from "./InterfacesClientsPage";
 
 export const Clients = () => {
     const { filteredClients, HandleLetterFilter, letterSelected } =

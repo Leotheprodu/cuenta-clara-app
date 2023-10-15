@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchAPI } from "../Utils/fetchAPI";
+import { fetchAPI } from "../../Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { $toastGlobal } from "@/stores/toast";
-export const EmailVerification = ({ token }: { token: string }) => {
+
+export const useEmailVerification = (token: string) => {
     const [redirecting, setRedirecting] = useState(false);
     redirecting && redirect("/");
     useEffect(() => {
@@ -25,6 +26,4 @@ export const EmailVerification = ({ token }: { token: string }) => {
         };
         verifyEmail();
     }, [token]);
-
-    return <div>Verificando...</div>;
 };

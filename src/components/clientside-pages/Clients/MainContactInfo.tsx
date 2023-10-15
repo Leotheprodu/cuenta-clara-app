@@ -1,5 +1,3 @@
-import { ClientCardProps } from "./InterfacesClientsPage";
-
 export const MainContactInfo = ({ client }: ClientCardProps) => {
     const { username, email, cellphone, token, id } = client;
     const domain = process.env.NEXT_PUBLIC_DOMAIN;

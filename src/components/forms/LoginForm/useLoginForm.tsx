@@ -5,10 +5,9 @@ import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
-import { FormValues } from "./InterfacesLoginForm";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 
-export const useLoginForm = (formInit: FormValues) => {
+export const useLoginForm = (formInit: FormValuesLoginForm) => {
     useCheckSession();
     const user = useStore($user);
     const [form, setForm] = useState(formInit);

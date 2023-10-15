@@ -1,6 +1,5 @@
 import { EyeFilledIcon } from "@/icons/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "@/icons/EyeSlashFilledIcon";
-import { EndContentInputPasswordProps } from "./InterfacesLoginForm";
 
 export const EndContentInputPassword = ({
     toggleVisibility,

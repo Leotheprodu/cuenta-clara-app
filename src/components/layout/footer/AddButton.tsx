@@ -72,7 +72,7 @@ export const AddButton = () => {
     );
 
     return (
-        <div className="absolute top-[-1rem]">
+        <div className="absolute top-[-1rem] transform-translate-y-1/2">
             <Popover
                 shouldCloseOnBlur
                 onClose={() => setIsOpen(false)}

@@ -1,4 +1,4 @@
-export interface InputEmailLoginFormProps {
+interface InputEmailLoginFormProps {
     handle: {
         handleOnClear: (name: string) => void;
         email: string;
@@ -6,7 +6,7 @@ export interface InputEmailLoginFormProps {
     };
 }
 
-export interface InputPasswordLoginFormProps {
+interface InputPasswordLoginFormProps {
     handle: {
         isVisible: boolean;
         isInvalidPass: boolean;
@@ -16,12 +16,12 @@ export interface InputPasswordLoginFormProps {
     };
 }
 
-export interface EndContentInputPasswordProps {
+interface EndContentInputPasswordProps {
     isVisible: boolean;
     toggleVisibility: () => void;
 }
 
-export interface FormValues {
+interface FormValuesLoginForm {
     email: string;
     password: string;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useCheckSession } from "../hooks/useCheckSession";
+import { useCheckSession } from "../../hooks/useCheckSession";
 
 export const MainPage = () => {
     useCheckSession();

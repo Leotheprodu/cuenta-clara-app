@@ -1,10 +1,10 @@
-export interface LettersFilterProps {
+interface LettersFilterProps {
     handle: {
         HandleLetterFilter: (letter: string) => void;
         letterSelected: string;
     };
 }
-export interface ClientProps {
+interface ClientProps {
     id: number;
     username: string;
     email: string | null;
@@ -15,7 +15,7 @@ export interface ClientProps {
     createdAt: string;
     updatedAt: string;
 }
-export interface ClientCardProps {
+interface ClientCardProps {
     client: {
         id: number;
         username: string;

@@ -1,5 +1,5 @@
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { MainPage } from "@/components/clientside-pages/MainPage";
+import { MainPage } from "@/components/clientside-pages/MainPage/MainPage";
 
 export default function Home() {
     return (
