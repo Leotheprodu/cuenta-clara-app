@@ -8,3 +8,19 @@ interface LinkItemFooterProps {
     link: LinkItemFooter;
     path: string;
 }
+
+interface AddButtonLinkItemProps {
+    link: {
+        href: string;
+        icon: JSX.Element;
+        title: string;
+        description: string;
+        delay: number;
+    };
+}
+
+interface AddButtonPopoverTriggerProps {
+    handle: {
+        handlePopoverTriggerClick: () => void;
+    };
+}

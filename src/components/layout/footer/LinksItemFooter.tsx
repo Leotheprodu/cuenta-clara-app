@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export const LinkItemFooter = ({ link, path }: LinkItemFooterProps) => {
+export const LinksItemFooter = ({ link, path }: LinkItemFooterProps) => {
     const { href, icon, text } = link;
     return (
         <Link
