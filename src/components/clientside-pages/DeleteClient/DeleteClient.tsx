@@ -1,30 +1,9 @@
 "use client";
-import { useCheckSession } from "../../hooks/useCheckSession";
-import { fetchAPI } from "../../Utils/fetchAPI";
 import { Button } from "@nextui-org/react";
-import { redirect } from "next/navigation";
-import { $toastGlobal } from "@/stores/toast";
-import { useState } from "react";
-export const DeleteClientPage = ({ id }: { id: string }) => {
-    const [redirecting, setRedirecting] = useState(false);
-    redirecting && redirect("/clientes");
-    useCheckSession();
-    const handleDelete = async () => {
-        const { data, error } = await fetchAPI({
-            url: `clients/${id}`,
-            method: "DELETE",
-        });
+import { useDeleteClient } from "./useDeleteClient";
 
-        if (data) {
-            $toastGlobal.set({
-                type: "success",
-                message: `Cliente eliminado correctamente`,
-            });
-            setRedirecting(true);
-        } else {
-            $toastGlobal.set({ type: "error", message: error });
-        }
-    };
+export const DeleteClientPage = ({ id }: { id: string }) => {
+    const { handleDelete } = useDeleteClient(id);
     return (
         <div className="flex flex-col gap-3 justify-center items-center text-center">
             <h1 className="uppercase text-primario">Eliminar cliente</h1>
