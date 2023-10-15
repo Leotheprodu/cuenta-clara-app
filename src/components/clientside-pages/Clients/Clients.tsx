@@ -5,7 +5,7 @@ import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
 import { ClientProps } from "./InterfacesClientsPage";
 
-export const ClientsPage = () => {
+export const Clients = () => {
     const { filteredClients, HandleLetterFilter, letterSelected } =
         useClientsPage();
 

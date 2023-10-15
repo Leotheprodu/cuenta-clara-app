@@ -1,4 +1,4 @@
-import { DeleteClientPage } from "@/components/clientside-pages/DeleteClientPage";
+import { DeleteClientPage } from "@/components/clientside-pages/DeleteClient/DeleteClient";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 
 export default function DeleteClient({ params }: { params: { id: string } }) {

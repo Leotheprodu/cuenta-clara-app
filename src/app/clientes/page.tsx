@@ -1,12 +1,12 @@
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { ClientsPage } from "@/components/clientside-pages/ClientsPage/ClientsPage";
+import { Clients } from "@/components/clientside-pages/Clients/Clients";
 
 export default function Clientes() {
     return (
         <PageWrapper>
             <main className="flex min-h-screen justify-center items-center">
                 <section className="">
-                    <ClientsPage />
+                    <Clients />
                 </section>
             </main>
         </PageWrapper>
