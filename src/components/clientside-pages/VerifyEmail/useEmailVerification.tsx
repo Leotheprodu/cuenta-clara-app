@@ -10,7 +10,7 @@ export const useEmailVerification = (token: string) => {
         const verifyEmail = async () => {
             if (token) {
                 const { error } = await fetchAPI({
-                    url: `email-verification/${token}`,
+                    url: `auth/email-verification/${token}`,
                 });
 
                 if (!error) {
