@@ -12,7 +12,6 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
     const user = useStore($user);
     const [form, setForm] = useState(formInit);
     const [isVisible, setIsVisible] = useState(false);
-    const [sendLogin, setSendLogin] = useState(false);
     const [isInvalidPass, setIsInvalidPass] = useState(false);
     const { status, data, mutate, error, isPending } = useMutation({
         mutationKey: ["Login"],
@@ -23,23 +22,17 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
                 body: form,
             }),
     });
-    if (sendLogin && user.isLoggedIn) {
-        redirect("/");
-    }
     useEffect(() => {
-        if (status === "pending") {
-            toast.loading("Cargando...");
-        } else if (status === "success") {
+        if (status === "success") {
             $user.set(data);
-            toast.dismiss();
             toast.success(`Bienvenido ${data.user.username}`);
-            setSendLogin(true);
+            redirect("/");
         } else if (status === "error") {
-            toast.dismiss();
             toast.error(error?.message || "");
             error?.message === "Contraseña Incorrecta" &&
                 setIsInvalidPass(true);
         }
+        return () => toast.dismiss();
     }, [data, error, status]);
 
     const toggleVisibility = () => setIsVisible(!isVisible);

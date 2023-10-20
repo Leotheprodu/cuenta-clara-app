@@ -6,13 +6,19 @@ import { InputEmail } from "./InputEmail";
 import { InputCellphone } from "./InputCellphone";
 
 export const NewClient = () => {
-    const { handleCreateClient, handleOnChange, username, email, cellphone } =
-        useNewClient({
-            username: "",
-            email: "",
-            cellphone: "",
-            token: "",
-        });
+    const {
+        handleCreateClient,
+        handleOnChange,
+        username,
+        email,
+        cellphone,
+        isPending,
+    } = useNewClient({
+        username: "",
+        email: "",
+        cellphone: "",
+        token: "",
+    });
 
     return (
         <form
@@ -22,7 +28,12 @@ export const NewClient = () => {
             <InputUsername handle={{ username, handleOnChange }} />
             <InputEmail handle={{ email, handleOnChange }} />
             <InputCellphone handle={{ cellphone, handleOnChange }} />
-            <Button color="primary" className=" uppercase w-full" type="submit">
+            <Button
+                isLoading={isPending}
+                color="primary"
+                className=" uppercase w-full"
+                type="submit"
+            >
                 Crear
             </Button>
         </form>

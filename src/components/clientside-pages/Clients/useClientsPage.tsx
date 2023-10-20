@@ -10,7 +10,7 @@ export const useClientsPage = () => {
     const [clients, setClients] = useState([]);
     const [filteredClients, setFilteredClients] = useState([]);
     const [letterSelected, setLetterSelected] = useState("");
-    const { status, data } = useQuery({
+    const { status, data, isLoading } = useQuery({
         queryKey: ["clientes"],
         queryFn: async () =>
             await fetchAPI({
@@ -19,17 +19,14 @@ export const useClientsPage = () => {
         retry: 2,
     });
     useEffect(() => {
-        if (status === "pending") {
-            toast.loading("Cargando...");
-        } else if (status === "success") {
-            toast.dismiss();
+        if (status === "success") {
             setClients(data);
             toast(`Tienes ${data.length} clientes!`, {
                 position: "top-left",
                 icon: "👉🏽",
             });
+            return () => toast.dismiss();
         } else if (status === "error") {
-            toast.dismiss();
             toast.error("Error al cargar los clientes");
         }
     }, [data, status]);
@@ -57,5 +54,6 @@ export const useClientsPage = () => {
         filteredClients,
         HandleLetterFilter,
         letterSelected,
+        isLoading,
     };
 };

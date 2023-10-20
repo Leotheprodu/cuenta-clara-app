@@ -3,10 +3,12 @@ import { LettersFilter } from "./LettersFilter";
 import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
+import Loading from "@/app/loading";
 
 export const Clients = () => {
-    const { filteredClients, HandleLetterFilter, letterSelected } =
+    const { filteredClients, HandleLetterFilter, letterSelected, isLoading } =
         useClientsPage();
+    if (isLoading) return <Loading />;
 
     return (
         <div className="">

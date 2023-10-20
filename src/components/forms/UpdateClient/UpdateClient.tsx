@@ -15,6 +15,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
         email,
         cellphone,
         token,
+        isPending,
     } = useUpdateClient(
         {
             id: id,
@@ -41,7 +42,12 @@ export const UpdateClient = ({ id }: { id: string }) => {
                 handle={{ token, handleOnChange, handleNewToken }}
             />
 
-            <Button color="primary" className="uppercase w-full" type="submit">
+            <Button
+                isLoading={isPending}
+                color="primary"
+                className="uppercase w-full"
+                type="submit"
+            >
                 Actualizar
             </Button>
         </form>

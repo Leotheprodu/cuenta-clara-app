@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "@/components/Utils/idGenerator";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 export const useUpdateClient = (
     formInit: FormValuesUpdateClient,
@@ -12,29 +13,56 @@ export const useUpdateClient = (
 ) => {
     useCheckSession();
     const [form, setForm] = useState(formInit);
-    const [clienteActualizado, setClienteActualizado] = useState(false);
-    clienteActualizado && redirect("/clientes");
-    useEffect(() => {
-        const UdateData = async () => {
-            const { data, error } = await fetchAPI({
+    const {
+        status: statusFetchClient,
+        data,
+        error: errorFetchClient,
+    } = useQuery({
+        queryKey: ["fetch-client"],
+        queryFn: async () =>
+            await fetchAPI({
                 url: `clients/${id}`,
+            }),
+        retry: 2,
+    });
+    const { status, mutate, error, isPending } = useMutation({
+        mutationKey: ["update-client"],
+        mutationFn: async () =>
+            await fetchAPI({
+                url: "clients",
+                method: "PUT",
+                body: form,
+            }),
+    });
+    useEffect(() => {
+        const { username, email, cellphone, token } = data || {};
+
+        if (statusFetchClient === "success") {
+            setForm({
+                ...form,
+                username,
+                email: email || "",
+                cellphone,
+                token,
             });
-            if (!error) {
-                setForm({
-                    ...form,
-                    username: data.username,
-                    email: data.email || "",
-                    cellphone: data.cellphone,
-                    token: data.token,
-                });
-            } else {
-                toast.dismiss();
-                toast.error(error);
-            }
-        };
-        UdateData();
-        // eslint-disable-next-line
-    }, [id]);
+        } else if (statusFetchClient === "error") {
+            toast.error(errorFetchClient?.message || "");
+        }
+        return () => toast.dismiss();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [statusFetchClient, errorFetchClient, data]);
+
+    useEffect(() => {
+        if (status === "success") {
+            toast.success(`${form.username} ha sido actualizado`);
+            redirect("/clientes");
+        } else if (status === "error") {
+            toast.error(error?.message || "");
+        }
+
+        return () => toast.dismiss();
+    }, [status, error, form]);
+
     const handleNewToken = () => {
         setForm({
             ...form,
@@ -43,20 +71,7 @@ export const useUpdateClient = (
     };
     const handleUpdateClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        toast.loading("Cargando...");
-        const { error } = await fetchAPI({
-            url: "clients",
-            method: "PUT",
-            body: form,
-        });
-        if (!error) {
-            toast.dismiss();
-            toast.success(`${form.username} ha sido actualizado`);
-            setClienteActualizado(true);
-        } else {
-            toast.dismiss();
-            toast.error(error);
-        }
+        mutate();
     };
 
     return {
@@ -65,5 +80,6 @@ export const useUpdateClient = (
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnChange(setForm, e),
         handleNewToken,
+        isPending,
     };
 };

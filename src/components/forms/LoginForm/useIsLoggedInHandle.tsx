@@ -8,7 +8,6 @@ import { useEffect } from "react";
 export const useIsLoggedInHandle = () => {
     const router = useRouter();
     const user = useStore($user);
-
     const { status, mutate, error, isPending } = useMutation({
         mutationKey: ["checkIsLogedIn"],
         mutationFn: async () =>
@@ -23,6 +22,7 @@ export const useIsLoggedInHandle = () => {
             $user.set({ ...user, isLoggedIn: false });
             toast.success(`Nos vemos pronto ${user.user.username}`);
         } else if (status === "error") toast.error(error?.message || "");
+        return () => toast.dismiss();
     }, [user, status, error]);
 
     const handleLogout = () => {
