@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useCheckSession } from "../../hooks/useCheckSession";
 import { fetchAPI } from "../../Utils/fetchAPI";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 export const useClientsPage = () => {
     useCheckSession();
@@ -8,18 +10,29 @@ export const useClientsPage = () => {
     const [clients, setClients] = useState([]);
     const [filteredClients, setFilteredClients] = useState([]);
     const [letterSelected, setLetterSelected] = useState("");
-
+    const { status, data } = useQuery({
+        queryKey: ["clientes"],
+        queryFn: async () =>
+            await fetchAPI({
+                url: "clients?activo=true",
+            }),
+        retry: 2,
+    });
     useEffect(() => {
-        const bdClients = async () => {
-            if (clients.length === 0) {
-                const { data } = await fetchAPI({
-                    url: "clients?activo=true",
-                });
-                setClients(data);
-            }
-        };
-        bdClients();
-    }, [clients]);
+        if (status === "pending") {
+            toast.loading("Cargando...");
+        } else if (status === "success") {
+            toast.dismiss();
+            setClients(data);
+            toast(`Tienes ${data.length} clientes!`, {
+                position: "top-left",
+                icon: "👉🏽",
+            });
+        } else if (status === "error") {
+            toast.dismiss();
+            toast.error("Error al cargar los clientes");
+        }
+    }, [data, status]);
 
     useEffect(() => {
         if (!letterSelected) {
