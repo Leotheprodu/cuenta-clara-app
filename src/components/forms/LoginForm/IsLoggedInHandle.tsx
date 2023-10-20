@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/react";
 import { useIsLoggedInHandle } from "./useIsLoggedInHandle";
 
 export const IsLoggedInHandle = () => {
-    const { handleLogout, router } = useIsLoggedInHandle();
+    const { handleLogout, router, isPending } = useIsLoggedInHandle();
 
     return (
         <div className="flex flex-col items-center justify-center gap-4">
@@ -16,6 +16,7 @@ export const IsLoggedInHandle = () => {
                     Atras
                 </Button>
                 <Button
+                    isLoading={isPending}
                     onClick={handleLogout}
                     className="uppercase"
                     color="danger"

@@ -16,6 +16,7 @@ export const LoginForm = () => {
         email,
         password,
         user,
+        isPending,
     } = useLoginForm({ email: "", password: "" });
 
     if (user.isLoggedIn) {
@@ -35,7 +36,12 @@ export const LoginForm = () => {
                     password,
                 }}
             />
-            <Button type="submit" className="uppercase" color="primary">
+            <Button
+                isLoading={isPending}
+                type="submit"
+                className="uppercase"
+                color="primary"
+            >
                 Entrar
             </Button>
         </form>

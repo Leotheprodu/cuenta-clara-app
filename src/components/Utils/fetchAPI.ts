@@ -38,23 +38,15 @@ export async function fetchAPI<T>({
         const { data } = await response.json();
 
         if (response.status === 200) {
-            return { data, error: null, status: 200 };
+            return data;
         } else if (response.status === 429) {
-            return {
-                data,
-                error: "Ha excedido el limite de consultas permitido",
-                status: 429,
-            };
+            throw new Error("Ha excedido el limite de consultas permitido");
         } else {
             const error = data.message || "Error desconocido";
-            return { data: null, error, status: response.status };
+            throw new Error(error);
         }
     } catch (error) {
         const myError = error as MyCustomError;
-        return {
-            data: null,
-            error: myError.message,
-            status: myError.status || 500,
-        };
+        throw new Error(myError.message);
     }
 }

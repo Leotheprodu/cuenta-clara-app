@@ -1,7 +1,7 @@
 import { useCheckSession } from "../../hooks/useCheckSession";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { redirect } from "next/navigation";
-import { $toastGlobal } from "@/stores/toast";
+import { toast } from "react-hot-toast";
 import { useState } from "react";
 
 export const useDeleteClient = (id: string) => {
@@ -15,13 +15,10 @@ export const useDeleteClient = (id: string) => {
         });
 
         if (data) {
-            $toastGlobal.set({
-                type: "success",
-                message: `Cliente eliminado correctamente`,
-            });
+            toast.success(`Cliente eliminado correctamente`);
             setRedirecting(true);
         } else {
-            $toastGlobal.set({ type: "error", message: error });
+            toast.error(error);
         }
     };
 

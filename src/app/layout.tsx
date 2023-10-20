@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { Footer } from "@/components/layout/footer/Footer";
-import { GlobalToast } from "@/components/layout/GlobalToast";
-
+import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export default async function RootLayout({
     return (
         <html lang="es">
             <body className={`${inter.className}`}>
-                <GlobalToast />
+                <Toaster />
                 <div className="overflow-y-auto mb-16 pb-4">
                     <Providers>{children}</Providers>
                 </div>

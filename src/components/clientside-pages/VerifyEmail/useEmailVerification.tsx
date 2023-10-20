@@ -1,6 +1,6 @@
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { redirect } from "next/navigation";
-import { $toastGlobal } from "@/stores/toast";
+import { toast } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 export const useEmailVerification = (token: string) => {
@@ -16,15 +16,14 @@ export const useEmailVerification = (token: string) => {
 
     useEffect(() => {
         if (isLoading) {
-            $toastGlobal.set({ type: "loading", message: "Verificando..." });
+            toast.loading("Verificando...");
         } else if (status === "success") {
-            $toastGlobal.set({
-                type: "success",
-                message: `Correo verificado correctamente`,
-            });
+            toast.dismiss();
+            toast.success(`Correo verificado correctamente`);
             setIsRedirecting(true);
         } else if (status === "error") {
-            $toastGlobal.set({ type: "error", message: "Hubo un Error" });
+            toast.dismiss();
+            toast.error("Hubo un error");
         }
     }, [status, isLoading]);
 };

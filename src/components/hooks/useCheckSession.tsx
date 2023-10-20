@@ -5,6 +5,7 @@ import { $user } from "@/stores/users";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
 export const useCheckSession = () => {
     const pathname = usePathname();
@@ -13,17 +14,22 @@ export const useCheckSession = () => {
     if (pathname !== "/sesion-de-usuario" && userChecked && !user.isLoggedIn) {
         redirect("/sesion-de-usuario");
     }
-
-    useEffect(() => {
-        const checkIsLogedIn = async () => {
-            const { data, error } = await fetchAPI({
+    const { status, data } = useQuery({
+        queryKey: ["checkIsLogedIn"],
+        queryFn: async () =>
+            await fetchAPI({
                 url: "auth/check-session",
-            });
-            if (!error) $user.set(data);
+            }),
+        retry: 2,
+    });
+    useEffect(() => {
+        if (status === "success") {
+            if (data.isLoggedIn) {
+                $user.set(data);
+                setUserChecked(true);
+            }
+        } else if (status === "error") {
             setUserChecked(true);
-        };
-        if (!user.isLoggedIn) {
-            checkIsLogedIn();
         }
-    }, [user]);
+    }, [data, status]);
 };

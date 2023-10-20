@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
-import { $toastGlobal } from "@/stores/toast";
+import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { handleOnChange } from "@/components/Utils/formUtils";
@@ -28,7 +28,8 @@ export const useUpdateClient = (
                     token: data.token,
                 });
             } else {
-                $toastGlobal.set({ type: "error", message: error });
+                toast.dismiss();
+                toast.error(error);
             }
         };
         UdateData();
@@ -42,20 +43,19 @@ export const useUpdateClient = (
     };
     const handleUpdateClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        $toastGlobal.set({ type: "loading", message: "Cargando..." });
+        toast.loading("Cargando...");
         const { error } = await fetchAPI({
             url: "clients",
             method: "PUT",
             body: form,
         });
         if (!error) {
-            $toastGlobal.set({
-                type: "success",
-                message: `${form.username} ha sido actualizado`,
-            });
+            toast.dismiss();
+            toast.success(`${form.username} ha sido actualizado`);
             setClienteActualizado(true);
         } else {
-            $toastGlobal.set({ type: "error", message: error });
+            toast.dismiss();
+            toast.error(error);
         }
     };
 
