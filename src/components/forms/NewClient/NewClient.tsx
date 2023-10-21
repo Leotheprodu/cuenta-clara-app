@@ -18,6 +18,7 @@ export const NewClient = () => {
         email: "",
         cellphone: "",
         token: "",
+        id_business: 0,
     });
 
     return (

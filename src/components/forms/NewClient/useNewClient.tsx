@@ -11,7 +11,7 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
     useCheckSession();
     const [form, setForm] = useState(formInit);
     const { status, mutate, error, isPending } = useMutation({
-        mutationKey: ["NewClient"],
+        mutationKey: ["new-client"],
         mutationFn: async () =>
             await fetchAPI({
                 url: "clients",

@@ -3,6 +3,7 @@ interface FormValuesNewClient {
     email: string;
     cellphone: string;
     token: string;
+    id_business: number;
 }
 interface InputUsernameProps {
     handle: {
