@@ -30,6 +30,7 @@ interface BusinessListProps {
         selectedKeys: Set<string>;
         handleSelectionChange: (selectedKeys: any) => void;
     };
+    title: string;
 }
 interface BusinessProps {
     id: number;

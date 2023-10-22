@@ -32,6 +32,7 @@ export const NewClient = () => {
             className="flex flex-col items-center justify-center gap-4 p-3"
         >
             <BusinessList
+                title="Crea un nuevo cliente"
                 handle={{
                     isLoadingBusiness,
                     business,

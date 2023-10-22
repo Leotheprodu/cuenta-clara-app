@@ -5,6 +5,7 @@ import { InputUsername } from "../NewClient/InputUsername";
 import { InputEmail } from "../NewClient/InputEmail";
 import { InputCellphone } from "../NewClient/InputCellphone";
 import { InputChangeToken } from "./InputChangeToken";
+import { BusinessList } from "../NewClient/BusinessList";
 
 export const UpdateClient = ({ id }: { id: string }) => {
     const {
@@ -16,6 +17,10 @@ export const UpdateClient = ({ id }: { id: string }) => {
         cellphone,
         token,
         isPending,
+        isLoadingBusiness,
+        business,
+        selectedKeys,
+        handleSelectionChange,
     } = useUpdateClient(
         {
             id: id,
@@ -23,6 +28,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
             email: "",
             cellphone: "",
             token: "",
+            id_business: [],
         },
         id
     );
@@ -32,6 +38,15 @@ export const UpdateClient = ({ id }: { id: string }) => {
             onSubmit={handleUpdateClient}
             className="flex flex-col items-center justify-center gap-4"
         >
+            <BusinessList
+                title="Actualiza tu cliente"
+                handle={{
+                    isLoadingBusiness,
+                    business,
+                    selectedKeys,
+                    handleSelectionChange,
+                }}
+            />
             <InputUsername handle={{ username, handleOnChange }} />
 
             <InputEmail handle={{ email, handleOnChange }} />
