@@ -4,6 +4,7 @@ import { useNewClient } from "./useNewClient";
 import { InputUsername } from "./InputUsername";
 import { InputEmail } from "./InputEmail";
 import { InputCellphone } from "./InputCellphone";
+import { BusinessList } from "./BusinessList";
 
 export const NewClient = () => {
     const {
@@ -13,26 +14,38 @@ export const NewClient = () => {
         email,
         cellphone,
         isPending,
+        isLoadingBusiness,
+        business,
+        selectedKeys,
+        handleSelectionChange,
     } = useNewClient({
         username: "",
         email: "",
         cellphone: "",
         token: "",
-        id_business: 0,
+        id_business: [],
     });
 
     return (
         <form
             onSubmit={handleCreateClient}
-            className="flex flex-col items-center justify-center gap-4"
+            className="flex flex-col items-center justify-center gap-4 p-3"
         >
+            <BusinessList
+                handle={{
+                    isLoadingBusiness,
+                    business,
+                    selectedKeys,
+                    handleSelectionChange,
+                }}
+            />
             <InputUsername handle={{ username, handleOnChange }} />
-            <InputEmail handle={{ email, handleOnChange }} />
             <InputCellphone handle={{ cellphone, handleOnChange }} />
+            <InputEmail handle={{ email, handleOnChange }} />
             <Button
                 isLoading={isPending}
                 color="primary"
-                className=" uppercase w-full"
+                className=" uppercase w-full mt-3"
                 type="submit"
             >
                 Crear

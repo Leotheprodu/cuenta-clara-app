@@ -7,7 +7,7 @@ export const InputUsername = ({ handle }: InputUsernameProps) => {
         <Input
             type="text"
             isRequired
-            label="Nombre"
+            label="Nombre del Cliente"
             variant="underlined"
             placeholder="Ingresa el nombre del cliente"
             value={username}

@@ -6,13 +6,13 @@ export const InputCellphone = ({ handle }: InputCellphoneProps) => {
     return (
         <Input
             type="number"
-            label="Telefono Celular"
-            isRequired
+            label="Teléfono Celular"
             variant="underlined"
-            placeholder="Ingresa el telefono celular"
+            placeholder="Ingresa el teléfono celular"
             value={cellphone}
             onChange={handleOnChange}
             name="cellphone"
+            description="Preferiblemente el número de WhatsApp"
         ></Input>
     );
 };
