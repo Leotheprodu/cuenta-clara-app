@@ -13,7 +13,7 @@ export const Clients = () => {
     return (
         <div className="">
             <LettersFilter handle={{ HandleLetterFilter, letterSelected }} />
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap gap-3 px-10 justify-center py-10">
                 {filteredClients.length > 0 &&
                     filteredClients.map((client: ClientProps) => (
                         <MotionClientsCard key={client.id}>

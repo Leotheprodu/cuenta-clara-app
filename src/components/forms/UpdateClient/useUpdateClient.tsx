@@ -42,7 +42,7 @@ export const useUpdateClient = (
                 ...form,
                 username,
                 email: email || "",
-                cellphone,
+                cellphone: cellphone || "",
                 token,
             });
         } else if (statusFetchClient === "error") {
