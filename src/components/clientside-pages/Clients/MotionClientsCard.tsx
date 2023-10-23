@@ -9,7 +9,7 @@ export const MotionClientsCard = ({
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 10 }}
         exit={{ opacity: 0, x: 40 }}
-        className="flex rounded-xl border-1 border-gris w-[15rem] h-[8rem] p-2 shadow-md"
+        className="flex rounded-xl border-1 border-gris w-[18rem] h-[10rem] p-2 shadow-md"
     >
         {children}
     </motion.div>

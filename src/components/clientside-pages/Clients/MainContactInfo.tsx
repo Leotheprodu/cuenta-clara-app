@@ -5,7 +5,9 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
         <div>
             {email && (
                 <a href={`mailto:${email}`}>
-                    <p className="text-xs text-secundario">{email}</p>
+                    <p className="text-xs hover:font-semibold hover:text-secundario transition-all ease-linear duration-100">
+                        {email}
+                    </p>
                 </a>
             )}
             {cellphone && (
@@ -16,8 +18,8 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                     >
                         <p
                             title={`Enviar mensaje de texto a ${username} por medio de whatsapp`}
-                            className="text-xs text-secundario"
-                        >{`+506 ${cellphone}`}</p>
+                            className="text-xs hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"
+                        >{`+506${cellphone}`}</p>
                     </a>
                     <a
                         target="_blank"
@@ -27,7 +29,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                     >
                         <p
                             title={`Enviar link de conexion a ${username} por medio de WhatsApp`}
-                            className="text-xs text-secundario"
+                            className="text-xs hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"
                         >
                             {" "}
                             Enviar Link
