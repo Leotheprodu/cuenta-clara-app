@@ -5,20 +5,20 @@ import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-export const useDeleteClient = (id: string) => {
+export const useDeactivateClient = (id: string) => {
     useCheckSession();
     const { status, mutate, error, isPending } = useMutation({
-        mutationKey: ["DeleteClient"],
+        mutationKey: ["deactivate-client"],
         mutationFn: async () =>
             await fetchAPI({
-                url: `clients/${id}`,
-                method: "DELETE",
+                url: `clients/deactivate/${id}`,
+                method: "GET",
             }),
     });
 
     useEffect(() => {
         if (status === "success") {
-            toast.success(`Cliente eliminado correctamente`);
+            toast.success(`Cliente desactivado correctamente`);
             redirect("/clientes");
         } else if (status === "error") {
             toast.error(error?.message || "");

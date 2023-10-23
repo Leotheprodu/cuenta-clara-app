@@ -18,9 +18,9 @@ export const ClientSections = ({ client }: ClientCardProps) => {
             </Link>
             <Link
                 className="hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"
-                href={`/clientes/eliminar/${id}`}
+                href={`/clientes/desactivar/${id}`}
             >
-                Eliminar
+                Desactivar
             </Link>
             <Link
                 className="hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"

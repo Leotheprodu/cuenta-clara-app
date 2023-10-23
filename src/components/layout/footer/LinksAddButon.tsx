@@ -10,9 +10,9 @@ export const LinksAddButon = [
         delay: 0.2,
     },
     {
-        href: "/clientes/nuevo",
+        href: "/clientes/crear",
         icon: <AddClientIcon />,
-        title: "Nuevo Cliente",
+        title: "Crear Cliente",
         description: "Agregar un nuevo cliente",
         delay: 0.4,
     },

@@ -21,10 +21,6 @@ export const useClientsPage = () => {
     useEffect(() => {
         if (status === "success") {
             setClients(data);
-            toast(`Tienes ${data.length} clientes!`, {
-                position: "top-left",
-                icon: "👉🏽",
-            });
             return () => toast.dismiss();
         } else if (status === "error") {
             toast.error("Error al cargar los clientes");
