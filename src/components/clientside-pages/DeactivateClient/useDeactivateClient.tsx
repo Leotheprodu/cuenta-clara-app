@@ -4,9 +4,11 @@ import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export const useDeactivateClient = (id: string) => {
     useCheckSession();
+    const router = useRouter();
     const { status, mutate, error, isPending } = useMutation({
         mutationKey: ["deactivate-client"],
         mutationFn: async () =>
@@ -32,5 +34,6 @@ export const useDeactivateClient = (id: string) => {
     return {
         handleDelete,
         isPending,
+        router,
     };
 };
