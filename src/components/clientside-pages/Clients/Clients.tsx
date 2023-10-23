@@ -11,7 +11,7 @@ export const Clients = () => {
     if (isLoading) return <Loading />;
 
     return (
-        <div className="">
+        <div>
             <LettersFilter handle={{ HandleLetterFilter, letterSelected }} />
             <div className="flex flex-wrap gap-3 px-10 justify-center py-10">
                 {filteredClients.length > 0 &&

@@ -2,8 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-import { Footer } from "@/components/layout/footer/Footer";
+import { Footer } from "@/components/layout/Footer/Footer";
 import { Toaster } from "react-hot-toast";
+import { Header } from "@/components/layout/Header/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,11 +21,14 @@ export default async function RootLayout({
     return (
         <html lang="es">
             <body className={`${inter.className}`}>
-                <Toaster />
-                <div className="overflow-y-auto mb-16 pb-4">
-                    <Providers>{children}</Providers>
-                </div>
-                <Footer />
+                <Providers>
+                    <Toaster />
+                    <Header />
+                    <div className="overflow-y-auto mb-16 mt-16 pb-4">
+                        {children}
+                    </div>
+                    <Footer />
+                </Providers>
             </body>
         </html>
     );
