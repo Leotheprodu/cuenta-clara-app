@@ -27,4 +27,5 @@ interface ClientCardProps {
         createdAt: string;
         updatedAt: string;
     };
+    isSelected: boolean;
 }

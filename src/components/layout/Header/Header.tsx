@@ -28,7 +28,7 @@ export const Header = () => {
                     isDisabled={isLoadingBusiness || isPending}
                     items={business}
                     label="Selecciona tu negocio"
-                    className="max-w-xs text-blanco"
+                    className="max-w-[10rem] text-blanco"
                     selectedKeys={value}
                     onSelectionChange={handleSelectionBusiness}
                     onChange={mutateFunction}

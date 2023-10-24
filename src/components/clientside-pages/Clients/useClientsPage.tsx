@@ -6,15 +6,15 @@ import toast from "react-hot-toast";
 
 export const useClientsPage = () => {
     useCheckSession();
-
+    const [isSelected, setIsSelected] = useState(true);
     const [clients, setClients] = useState([]);
     const [filteredClients, setFilteredClients] = useState([]);
     const [letterSelected, setLetterSelected] = useState("");
-    const { status, data, isLoading } = useQuery({
+    const { status, data, isLoading, refetch } = useQuery({
         queryKey: ["clientes"],
         queryFn: async () =>
             await fetchAPI({
-                url: "clients?activo=true",
+                url: `clients?activo=${isSelected ? "true" : "false"}`,
             }),
         retry: 2,
     });
@@ -32,6 +32,10 @@ export const useClientsPage = () => {
             setFilteredClients(clients);
         }
     }, [letterSelected, clients]);
+    useEffect(() => {
+        refetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isSelected]);
 
     const HandleLetterFilter = (letter: string) => {
         setLetterSelected(letter);
@@ -45,11 +49,16 @@ export const useClientsPage = () => {
             setFilteredClients(clients);
         }
     };
+    const HanldeIsSelected = (value: boolean) => {
+        setIsSelected(value);
+    };
 
     return {
         filteredClients,
         HandleLetterFilter,
         letterSelected,
         isLoading,
+        HanldeIsSelected,
+        isSelected,
     };
 };
