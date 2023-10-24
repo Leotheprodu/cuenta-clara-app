@@ -1,9 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useStore } from "@nanostores/react";
+import { $user } from "@/stores/users";
 
 export const useHeader = () => {
+    const user = useStore($user);
     const [business, setBusiness] = useState([
         { id: 0, name: "", default: false, user_id: 0 },
     ]);
@@ -23,7 +25,7 @@ export const useHeader = () => {
     });
 
     useEffect(() => {
-        if (statusBusiness === "success") {
+        if (statusBusiness === "success" && user.isLoggedIn) {
             setBusiness(dataBusiness);
             dataBusiness.filter((item: any) => {
                 if (item.default) {
@@ -32,7 +34,7 @@ export const useHeader = () => {
                 return item;
             });
         }
-    }, [statusBusiness, dataBusiness]);
+    }, [statusBusiness, dataBusiness, user]);
 
     const { status, mutate, error, isPending } = useMutation({
         mutationKey: ["favorite-business"],
@@ -43,11 +45,11 @@ export const useHeader = () => {
         retry: 2,
     });
     useEffect(() => {
-        if (status === "success") {
+        if (status === "success" && user.isLoggedIn) {
             refetch();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status]);
+    }, [status, user]);
 
     const handleSelectionBusiness = (e: any) => {
         setValue(e);
