@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
+
 export const useClientsPage = () => {
     useCheckSession();
     const selectedBusiness = useStore($selectedBusiness);
@@ -12,6 +13,7 @@ export const useClientsPage = () => {
     const [activeClients, setActiveClients] = useState([{}]);
     const [clients, setClients] = useState([{}]);
     const [filteredClients, setFilteredClients] = useState([{}]);
+    const [filteredClientsWB, setFilteredClientsWB] = useState([{}]);
     const [letterSelected, setLetterSelected] = useState("");
     const [dataBalances, setDatabalances] = useState([{}]);
 
@@ -74,6 +76,21 @@ export const useClientsPage = () => {
             setFilteredClients(clients);
         }
     }, [letterSelected, clients]);
+    useEffect(() => {
+        if (filteredClients.length > 0 && dataBalances.length > 0) {
+            const usuariosConBalance = filteredClients.map((cliente: any) => {
+                const balance: any = dataBalances.find(
+                    (b: any) => b.client_id === cliente.id
+                );
+                return {
+                    ...cliente,
+                    balance: balance ? balance.amount : 0,
+                };
+            });
+
+            setFilteredClientsWB(usuariosConBalance);
+        }
+    }, [filteredClients, dataBalances]);
 
     const HandleLetterFilter = (letter: string) => {
         setLetterSelected(letter);
@@ -92,7 +109,7 @@ export const useClientsPage = () => {
     };
 
     return {
-        filteredClients,
+        filteredClientsWB,
         HandleLetterFilter,
         letterSelected,
         isLoading,

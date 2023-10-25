@@ -2,7 +2,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
     const { username, email, cellphone, token, id } = client;
     const domain = process.env.NEXT_PUBLIC_DOMAIN;
     return (
-        <div className="flex flex-col gap-1 mt-2">
+        <div className="flex flex-col gap-1 mt-2 w-full h-[3.5rem]">
             {email && (
                 <a href={`mailto:${email}`}>
                     <p className="text-xs hover:font-semibold hover:text-secundario transition-all ease-linear duration-100">

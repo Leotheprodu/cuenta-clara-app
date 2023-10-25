@@ -24,6 +24,7 @@ interface ClientCardProps {
         token: string;
         user_id: number | null;
         activo: boolean;
+        balance?: number;
         createdAt: string;
         updatedAt: string;
     };

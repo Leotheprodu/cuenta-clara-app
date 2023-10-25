@@ -4,7 +4,7 @@ import { Clients } from "@/components/clientside-pages/Clients/Clients";
 export default function Clientes() {
     return (
         <PageWrapper>
-            <main className="flex min-h-screen w-full pt-6">
+            <main className="flex min-h-screen w-full">
                 <section>
                     <Clients />
                 </section>
