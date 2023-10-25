@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 export default function NuevaTransaccion() {
     return (
         <PageWrapper>

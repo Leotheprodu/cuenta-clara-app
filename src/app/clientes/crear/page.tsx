@@ -1,5 +1,5 @@
 import { NewClient } from "@/components/forms/NewClient/NewClient";
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 export default function NuevoCliente() {
     return (
         <PageWrapper>

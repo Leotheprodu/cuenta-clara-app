@@ -1,6 +1,6 @@
 import { EmailVerification } from "@/components/clientside-pages/VerifyEmail/EmailVerification";
 
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 
 export default function VerifyEmail({ params }: { params: { token: string } }) {
     return (

@@ -1,5 +1,5 @@
 import { DeactivateClient } from "@/components/clientside-pages/DeactivateClient/DeactivateClient";
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 
 export default function DeactivateClientPage({
     params,

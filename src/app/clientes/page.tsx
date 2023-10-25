@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 import { Clients } from "@/components/clientside-pages/Clients/Clients";
 
 export default function Clientes() {

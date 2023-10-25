@@ -1,6 +1,6 @@
 import React from "react";
 import { Spinner } from "@nextui-org/spinner";
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
 
 export default function Loading({ label = "Cargando" }: { label?: string }) {
     return (
