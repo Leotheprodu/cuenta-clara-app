@@ -1,8 +1,9 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
+import { $selectedBusiness } from "@/stores/business";
 
 export const useHeader = () => {
     const user = useStore($user);
@@ -30,13 +31,14 @@ export const useHeader = () => {
             dataBusiness.filter((item: any) => {
                 if (item.default) {
                     setValue(new Set([item.id.toString()]));
+                    $selectedBusiness.set(item.id);
                 }
                 return item;
             });
         }
     }, [statusBusiness, dataBusiness, user]);
 
-    const { status, mutate, error, isPending } = useMutation({
+    const { status, mutate, isPending } = useMutation({
         mutationKey: ["favorite-business"],
         mutationFn: async () =>
             await fetchAPI({
@@ -47,6 +49,7 @@ export const useHeader = () => {
     useEffect(() => {
         if (status === "success" && user.isLoggedIn) {
             refetch();
+            $selectedBusiness.set(Number(Array.from(value)[0]));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status, user]);

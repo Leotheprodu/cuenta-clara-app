@@ -3,39 +3,77 @@ import { useCheckSession } from "../../hooks/useCheckSession";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-
+import { useStore } from "@nanostores/react";
+import { $selectedBusiness } from "@/stores/business";
 export const useClientsPage = () => {
     useCheckSession();
-    const [isSelected, setIsSelected] = useState(true);
-    const [clients, setClients] = useState([]);
-    const [filteredClients, setFilteredClients] = useState([]);
+    const selectedBusiness = useStore($selectedBusiness);
+    const [showActivos, setShowActivos] = useState(true);
+    const [activeClients, setActiveClients] = useState([{}]);
+    const [clients, setClients] = useState([{}]);
+    const [filteredClients, setFilteredClients] = useState([{}]);
     const [letterSelected, setLetterSelected] = useState("");
-    const { status, data, isLoading, refetch } = useQuery({
+    const [dataBalances, setDatabalances] = useState([{}]);
+
+    const { status, data, isLoading } = useQuery({
         queryKey: ["clientes"],
         queryFn: async () =>
             await fetchAPI({
-                url: `clients?activo=${isSelected ? "true" : "false"}`,
+                url: `clients`,
             }),
         retry: 2,
     });
+
+    const { status: statusBalances, data: dataFromBalances } = useQuery({
+        queryKey: ["balances-clients"],
+        queryFn: async () =>
+            await fetchAPI({
+                url: `balances`,
+            }),
+        retry: 2,
+    });
+
     useEffect(() => {
         if (status === "success") {
-            setClients(data);
+            if (showActivos)
+                setActiveClients(data.filter((item: any) => item.activo == 1));
+            else setActiveClients(data.filter((item: any) => item.activo == 0));
+        }
+    }, [showActivos, data, status]);
+
+    useEffect(() => {
+        if (statusBalances === "success") {
+            setDatabalances(
+                dataFromBalances.filter(
+                    (item: any) => item.business_id === selectedBusiness
+                )
+            );
+        }
+    }, [selectedBusiness, dataFromBalances, statusBalances]);
+    useEffect(() => {
+        if (
+            status === "success" &&
+            activeClients.length > 0 &&
+            dataBalances.length > 0
+        ) {
+            setClients(
+                activeClients.filter((item: any) =>
+                    dataBalances.some(
+                        (balance: any) => balance.client_id === item.id
+                    )
+                )
+            );
             return () => toast.dismiss();
         } else if (status === "error") {
             toast.error("Error al cargar los clientes");
         }
-    }, [data, status]);
+    }, [activeClients, dataBalances, status]);
 
     useEffect(() => {
         if (!letterSelected) {
             setFilteredClients(clients);
         }
     }, [letterSelected, clients]);
-    useEffect(() => {
-        refetch();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSelected]);
 
     const HandleLetterFilter = (letter: string) => {
         setLetterSelected(letter);
@@ -50,7 +88,7 @@ export const useClientsPage = () => {
         }
     };
     const HanldeIsSelected = (value: boolean) => {
-        setIsSelected(value);
+        setShowActivos(value);
     };
 
     return {
@@ -59,6 +97,6 @@ export const useClientsPage = () => {
         letterSelected,
         isLoading,
         HanldeIsSelected,
-        isSelected,
+        isSelected: showActivos,
     };
 };

@@ -18,13 +18,13 @@ export const Clients = () => {
     if (isLoading) return <Loading />;
 
     return (
-        <div className="relative ">
+        <div className=" w-full">
             <SwitchActivo handle={{ isSelected, HanldeIsSelected }} />
             <div className="">
                 <LettersFilter
                     handle={{ HandleLetterFilter, letterSelected }}
                 />
-                <div className="flex flex-wrap gap-3 px-10 justify-center py-10">
+                <div className="flex flex-wrap gap-3 px-10 justify-center py-10 w-full">
                     {filteredClients.length > 0 &&
                         filteredClients.map((client: ClientProps) => (
                             <MotionClientsCard key={client.id}>
@@ -35,7 +35,6 @@ export const Clients = () => {
                             </MotionClientsCard>
                         ))}
                 </div>
-                S
             </div>
         </div>
     );
