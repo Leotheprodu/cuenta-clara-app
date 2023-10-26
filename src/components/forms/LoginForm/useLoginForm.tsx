@@ -3,12 +3,10 @@ import { fetchAPI } from "../../Utils/fetchAPI";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { redirect } from "next/navigation";
-import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 export const useLoginForm = (formInit: FormValuesLoginForm) => {
-    useCheckSession();
     const user = useStore($user);
     const [form, setForm] = useState(formInit);
     const [isVisible, setIsVisible] = useState(false);
@@ -22,6 +20,7 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
                 body: form,
             }),
     });
+
     useEffect(() => {
         if (status === "success") {
             $user.set(data);

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useCheckSession } from "../../hooks/useCheckSession";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -7,7 +6,6 @@ import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 
 export const useClientsPage = () => {
-    useCheckSession();
     const selectedBusiness = useStore($selectedBusiness);
     const [showActivos, setShowActivos] = useState(true);
     const [activeClients, setActiveClients] = useState([{}]);

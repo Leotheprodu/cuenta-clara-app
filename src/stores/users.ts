@@ -21,7 +21,7 @@ interface ApiResponse {
 
 export type IsLoggedInValue = ApiResponse;
 export const $user = atom<IsLoggedInValue>({
-    isLoggedIn: false,
+    isLoggedIn: true,
     user: {
         id: 0,
         username: "",

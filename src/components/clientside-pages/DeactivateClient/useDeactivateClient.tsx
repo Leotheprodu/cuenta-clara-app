@@ -1,4 +1,3 @@
-import { useCheckSession } from "../../hooks/useCheckSession";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
@@ -7,7 +6,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export const useDeactivateClient = (id: string) => {
-    useCheckSession();
     const router = useRouter();
     const [client, setClient] = useState({ username: "", activo: 0 });
     const { status: statusFetchClient, data } = useQuery({

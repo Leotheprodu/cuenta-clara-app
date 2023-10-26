@@ -4,6 +4,8 @@ import { IsLoggedInHandle } from "./IsLoggedInHandle";
 import { useLoginForm } from "@/components/forms/LoginForm/useLoginForm";
 import { InputEmailLoginForm } from "./InputEmailLoginForm";
 import { InputPasswordLoginForm } from "./InputPasswordLoginForm";
+import Loading from "@/app/loading";
+import { useLoadingByCriticProcess } from "@/components/hooks/useLoadingByCriticProcess";
 
 export const LoginForm = () => {
     const {
@@ -19,9 +21,18 @@ export const LoginForm = () => {
         isPending,
     } = useLoginForm({ email: "", password: "" });
 
+    const { showLoading, LoadingElement } = useLoadingByCriticProcess({
+        label: "Cargando...",
+    });
+
+    if (showLoading) {
+        return LoadingElement;
+    }
+
     if (user.isLoggedIn) {
         return <IsLoggedInHandle />;
     }
+
     return (
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <InputEmailLoginForm

@@ -16,7 +16,6 @@ export const Clients = () => {
         isLoading,
     } = useClientsPage();
     if (isLoading) return <Loading />;
-
     return (
         <div className="h-full w-full">
             <div className="z-10 flex fixed items-center justify-center w-full bg-blanco/90 shadow-sm backdrop-blur-sm border-b border-secundario">
@@ -27,7 +26,7 @@ export const Clients = () => {
                     handle={{ HandleLetterFilter, letterSelected }}
                 />
                 <div className="flex flex-wrap gap-3 p-10 justify-center">
-                    {filteredClientsWB.length > 0 &&
+                    {filteredClientsWB.length > 1 &&
                         filteredClientsWB.map((client: any) => (
                             <MotionClientsCard key={client.id}>
                                 <ClientCard

@@ -1,8 +1,14 @@
 "use client";
-import { useCheckSession } from "../../hooks/useCheckSession";
+
+import { useLoadingByCriticProcess } from "@/components/hooks/useLoadingByCriticProcess";
 
 export const MainPage = () => {
-    useCheckSession();
+    const { showLoading, LoadingElement } = useLoadingByCriticProcess({
+        label: "Cargando...",
+    });
 
+    if (showLoading) {
+        return LoadingElement;
+    }
     return <div>MainPage</div>;
 };

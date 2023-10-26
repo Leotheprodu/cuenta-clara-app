@@ -2,13 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "../../Utils/idGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useNewClient = (formInit: FormValuesNewClient) => {
-    useCheckSession();
     const [form, setForm] = useState(formInit);
     const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
     const [business, setBusiness] = useState([

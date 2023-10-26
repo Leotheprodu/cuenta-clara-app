@@ -4,8 +4,12 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { $selectedBusiness } from "@/stores/business";
+import { useCheckSession } from "@/components/hooks/useCheckSession";
+import { usePathname } from "next/navigation";
 
 export const useHeader = () => {
+    useCheckSession();
+    const path = usePathname();
     const user = useStore($user);
     const [business, setBusiness] = useState([
         { id: 0, name: "", default: false, user_id: 0 },
@@ -22,7 +26,7 @@ export const useHeader = () => {
             await fetchAPI({
                 url: "users_business",
             }),
-        retry: 2,
+        retry: 4,
     });
 
     useEffect(() => {
@@ -67,5 +71,6 @@ export const useHeader = () => {
         handleSelectionBusiness,
         isPending,
         mutateFunction,
+        path,
     };
 };
