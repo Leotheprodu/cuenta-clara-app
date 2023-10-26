@@ -2,13 +2,13 @@ import { ClientSections } from "./ClientSections";
 import { MainContactInfo } from "./MainContactInfo";
 import { moneyFormat } from "@/components/Utils/MoneyFormat";
 
-export const ClientCard = ({ client, isSelected }: ClientCardProps) => {
+export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
     const { username, id, balance = 0 } = client;
 
     return (
         <div
             className={`flex flex-col justify-between w-full p-2 rounded-xl ${
-                isSelected ? "bg-blanco" : "bg-primario/10"
+                isShowActivoButton ? "bg-blanco" : "bg-primario/10"
             } ${balance < 0 && "border-2 border-danger-400"} ${
                 balance > 0 && "border-1 border-success-400"
             }`}
@@ -18,7 +18,10 @@ export const ClientCard = ({ client, isSelected }: ClientCardProps) => {
                     <h2 className="font-bold">{username}</h2>
                     <span className="text-xs opacity-70">id: {id}</span>
                 </div>
-                <MainContactInfo isSelected={isSelected} client={client} />
+                <MainContactInfo
+                    isShowActivoButton={isShowActivoButton}
+                    client={client}
+                />
             </div>
             <div
                 className={`flex gap-2 w-full bg-gris px-2 py-1 rounded-sm ${
@@ -30,7 +33,10 @@ export const ClientCard = ({ client, isSelected }: ClientCardProps) => {
                     <p className={``}>{moneyFormat(balance, "CRC", "es-CR")}</p>
                 </div>
             </div>
-            <ClientSections isSelected={isSelected} client={client} />
+            <ClientSections
+                isShowActivoButton={isShowActivoButton}
+                client={client}
+            />
         </div>
     );
 };

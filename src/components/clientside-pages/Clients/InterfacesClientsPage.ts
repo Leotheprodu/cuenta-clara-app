@@ -28,5 +28,12 @@ interface ClientCardProps {
         createdAt: string;
         updatedAt: string;
     };
-    isSelected: boolean;
+    isShowActivoButton: boolean;
+}
+interface FilterClientsProps {
+    data: any[];
+    status: string;
+    isShowActivoButton: boolean;
+    dataBalances: any[];
+    letterSelected: string;
 }

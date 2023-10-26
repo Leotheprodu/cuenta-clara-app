@@ -3,9 +3,12 @@ import { Switch, cn } from "@nextui-org/react";
 export const SwitchActivo = ({
     handle,
 }: {
-    handle: { isSelected: boolean; HanldeIsSelected: (value: boolean) => void };
+    handle: {
+        isShowActivoButton: boolean;
+        HanldeIsSelected: (value: boolean) => void;
+    };
 }) => {
-    const { HanldeIsSelected, isSelected } = handle;
+    const { HanldeIsSelected, isShowActivoButton } = handle;
     return (
         <div className=" flex justify-end p-2 rounded-b-md  ">
             <Switch
@@ -34,12 +37,12 @@ export const SwitchActivo = ({
                         "group-data-[selected]:group-data-[pressed]: border-none"
                     ),
                 }}
-                isSelected={isSelected}
+                isSelected={isShowActivoButton}
                 onValueChange={HanldeIsSelected}
                 size="sm"
                 color="primary"
             >
-                {isSelected ? "Activos" : "Inactivos"}
+                {isShowActivoButton ? "Activos" : "Inactivos"}
             </Switch>
         </div>
     );
