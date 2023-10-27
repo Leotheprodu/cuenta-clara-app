@@ -48,6 +48,12 @@ export const useFiltersClients = ({
             const filtered = clients.filter((client: any) =>
                 client.username.toLowerCase().startsWith(letterSelected)
             );
+            if (filtered.length === 0) {
+                toast.error(
+                    `No hay clientes Con la letra ${letterSelected.toUpperCase()}`
+                );
+                return;
+            }
             setFilteredClients(filtered);
         }
     }, [letterSelected, clients]);
