@@ -8,7 +8,6 @@ import { useFiltersClients } from "./useFiltersClients";
 export const useClientsPage = () => {
     const selectedBusiness = useStore($selectedBusiness);
     const [isShowActivoButton, setIsShowActivoButton] = useState(true);
-    const [letterSelected, setLetterSelected] = useState("");
     const [dataBalances, setDatabalances] = useState([{}]);
 
     const { status, data, isLoading } = useQuery({
@@ -34,7 +33,6 @@ export const useClientsPage = () => {
         status,
         isShowActivoButton,
         dataBalances,
-        letterSelected,
     });
 
     //Extrae los balances filtrados por Negocio
@@ -49,17 +47,6 @@ export const useClientsPage = () => {
     }, [selectedBusiness, dataFromBalances, statusBalances]);
 
     /**
-     * Filtra a los clientes por la letra seleccionada por el usuario.
-     * Funcion exclusiva del componente LettersFilter.
-     * @param {string[]} letter - Es la letra seleccionada por el usuario.
-     * @returns {} - No retorna nada.
-     */
-    const HandleLetterFilter = (letter: string) => {
-        if (letterSelected === letter) {
-            setLetterSelected("");
-        } else setLetterSelected(letter);
-    };
-    /**
      * Activa o desactiva el boton que muestra usuario activos o no activos.
      * @param {boolean[]} value - Es el valor que se le asigna al estado isShowActivoButton.
      */
@@ -69,8 +56,6 @@ export const useClientsPage = () => {
 
     return {
         filteredClientsWB,
-        HandleLetterFilter,
-        letterSelected,
         isLoading,
         HanldeIsSelected,
         isShowActivoButton,

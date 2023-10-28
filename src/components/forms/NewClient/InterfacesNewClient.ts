@@ -21,6 +21,7 @@ interface InputCellphoneProps {
     handle: {
         cellphone: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+        codeSelected: string;
     };
 }
 interface BusinessListProps {

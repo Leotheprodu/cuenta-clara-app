@@ -6,12 +6,11 @@ export const useFiltersClients = ({
     status,
     isShowActivoButton,
     dataBalances,
-    letterSelected,
 }: FilterClientsProps) => {
     const [activeClients, setActiveClients] = useState([{}]);
     const [clients, setClients] = useState([{}]);
-    const [filteredClients, setFilteredClients] = useState([{}]);
     const [filteredClientsWB, setFilteredClientsWB] = useState([{}]);
+
     //1 Clientes activos o inactivos
     useEffect(() => {
         if (status === "success") {
@@ -40,28 +39,10 @@ export const useFiltersClients = ({
         }
     }, [activeClients, dataBalances]);
 
-    //3 en este punto los cuando se seleciona una letra la funcion filtra los clientes por la letra seleccionada
+    //3 Se rellena el estado de los clientes con su balance (saldo)
     useEffect(() => {
-        if (!letterSelected) {
-            setFilteredClients(clients);
-        } else {
-            const filtered = clients.filter((client: any) =>
-                client.username.toLowerCase().startsWith(letterSelected)
-            );
-            if (filtered.length === 0) {
-                toast.error(
-                    `No hay clientes Con la letra ${letterSelected.toUpperCase()}`
-                );
-                return;
-            }
-            setFilteredClients(filtered);
-        }
-    }, [letterSelected, clients]);
-
-    //4 Se rellena el estado de los clientes con su balance (saldo)
-    useEffect(() => {
-        if (filteredClients.length > 0 && dataBalances.length > 0) {
-            const usuariosConBalance = filteredClients.map((cliente: any) => {
+        if (clients.length > 0 && dataBalances.length > 0) {
+            const usuariosConBalance = clients.map((cliente: any) => {
                 const balance: any = dataBalances.find(
                     (b: any) => b.client_id === cliente.id
                 );
@@ -75,9 +56,9 @@ export const useFiltersClients = ({
 
             setFilteredClientsWB(usuariosConBalance);
         } else {
-            setFilteredClientsWB(filteredClients);
+            setFilteredClientsWB(clients);
         }
-    }, [filteredClients, dataBalances]);
+    }, [clients, dataBalances]);
 
     return {
         filteredClientsWB,

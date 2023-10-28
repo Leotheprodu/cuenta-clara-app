@@ -1,14 +1,8 @@
-interface LettersFilterProps {
-    handle: {
-        HandleLetterFilter: (letter: string) => void;
-        letterSelected: string;
-    };
-}
 interface ClientProps {
     id: number;
     username: string;
     email: string | null;
-    cellphone: number;
+    cellphone: string;
     token: string;
     user_id: number | null;
     activo: boolean;
@@ -20,7 +14,7 @@ interface ClientCardProps {
         id: number;
         username: string;
         email: string | null;
-        cellphone: number;
+        cellphone: string;
         token: string;
         user_id: number | null;
         activo: boolean;
@@ -35,5 +29,4 @@ interface FilterClientsProps {
     status: string;
     isShowActivoButton: boolean;
     dataBalances: any[];
-    letterSelected: string;
 }

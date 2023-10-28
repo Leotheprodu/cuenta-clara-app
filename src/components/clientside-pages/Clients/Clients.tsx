@@ -1,5 +1,5 @@
 "use client";
-import { LettersFilter } from "./LettersFilter";
+
 import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
@@ -10,6 +10,7 @@ import { $LetterViewClient } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { SearchIcon } from "@/icons/SearchIcon";
 export const Clients = () => {
     const letterViewClient = useStore($LetterViewClient);
     const [searchClient, setSearchClient] = useState("");
@@ -17,10 +18,8 @@ export const Clients = () => {
 
     const {
         filteredClientsWB,
-        HandleLetterFilter,
         HanldeIsSelected,
         isShowActivoButton,
-        letterSelected,
         isLoading,
     } = useClientsPage();
     const handleSearchClient = (e: any) => {
@@ -28,9 +27,19 @@ export const Clients = () => {
     };
     useEffect(() => {
         if (searchClient.length > 0) {
-            const filtered = filteredClientsWB.filter((client: any) =>
-                client.username.toLowerCase().startsWith(searchClient)
-            );
+            const searchLower = searchClient.toLowerCase(); // Convertimos el input a minúsculas
+            const filtered = filteredClientsWB.filter((client: any) => {
+                const usernameMatch = client.username
+                    .toLowerCase()
+                    .includes(searchLower);
+                const cellphoneMatch =
+                    client.cellphone && client.cellphone.includes(searchClient);
+                const emailMatch =
+                    client.email &&
+                    client.email.toLowerCase().includes(searchLower);
+                return usernameMatch || cellphoneMatch || emailMatch;
+            });
+
             if (filtered.length === 0) {
                 return;
             }
@@ -51,14 +60,15 @@ export const Clients = () => {
                     onChange={handleSearchClient}
                     value={searchClient}
                     type="text"
-                    placeholder="Buscar Cliente"
-                    className="sm:w-1/4"
+                    size="sm"
+                    placeholder="Busca por nombre, correo o teléfono"
+                    className="sm:w-1/4 shadow-sm"
+                    startContent={
+                        <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+                    }
                 ></Input>
             </div>
             <div className=" py-28 sm:px-[10rem]">
-                {/* <LettersFilter
-                    handle={{ HandleLetterFilter, letterSelected }}
-                /> */}
                 <div className="flex flex-col items-center gap-3">
                     {ClientsSearched.length > 0 &&
                         ClientsSearched.map((client: any) => (
@@ -73,7 +83,8 @@ export const Clients = () => {
                         ))}
                     {letterViewClient.isClientView && (
                         <motion.div
-                            className="fixed bottom-1/2 font-bold text-9xl text-primario"
+                            style={{ pointerEvents: "none" }}
+                            className="fixed  bottom-1/2 font-bold text-9xl text-primario"
                             animate={{ opacity: [0, 1, 0] }}
                             transition={{ duration: 1 }}
                         >

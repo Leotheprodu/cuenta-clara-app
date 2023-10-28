@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-export const ClientSections = ({ client, isSelected }: ClientCardProps) => {
+export const ClientSections = ({
+    client,
+    isShowActivoButton,
+}: ClientCardProps) => {
     const { id } = client;
     return (
         <div className="flex flex-wrap gap-2 text-xs">
@@ -20,7 +23,7 @@ export const ClientSections = ({ client, isSelected }: ClientCardProps) => {
                 className="hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"
                 href={`/clientes/desactivar/${id}`}
             >
-                {isSelected ? "Desactivar" : "Activar"}
+                {isShowActivoButton ? "Desactivar" : "Activar"}
             </Link>
             <Link
                 className="hover:font-semibold hover:text-secundario transition-all ease-linear duration-100"

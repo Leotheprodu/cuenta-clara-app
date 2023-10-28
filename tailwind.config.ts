@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
 import { nextui } from "@nextui-org/react";
+/** @type {import('tailwindcss').Config} */
 const config: Config = {
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./*.{js,ts,jsx,tsx}",
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
@@ -25,6 +27,7 @@ const config: Config = {
             cuaternario: "#ffd60a",
         },
     },
+    darkMode: "class",
     plugins: [nextui()],
 };
 export default config;

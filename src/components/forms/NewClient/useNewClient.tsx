@@ -5,10 +5,15 @@ import { redirect } from "next/navigation";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "../../Utils/idGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { countryCodes } from "@/data/constants";
 
 export const useNewClient = (formInit: FormValuesNewClient) => {
     const [form, setForm] = useState(formInit);
     const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
+    const [countrySelected, setCountrySelected] = useState(
+        new Set(["Costa Rica"])
+    );
+    const [codeSelected, setCodeSelected] = useState("506");
     const [business, setBusiness] = useState([
         { id: 0, name: "", default: false, user_id: 0 },
     ]);
@@ -56,6 +61,9 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
                 body: {
                     ...form,
                     token: `${form.username.slice(0, 2)}-${idGenerator()}`,
+                    cellphone: form.cellphone
+                        ? (codeSelected + form.cellphone).replace(/\D/g, "")
+                        : null,
                 },
             }),
     });
@@ -70,6 +78,13 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
         return () => toast.dismiss();
     }, [form, status, error]);
 
+    useEffect(() => {
+        const code = countryCodes.find(
+            (item) => item.country === Array.from(countrySelected)[0]
+        );
+        setCodeSelected(code ? code.code : "");
+    }, [countrySelected]);
+
     const handleCreateClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         mutate();
@@ -81,15 +96,22 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
         () => Array.from(selectedKeys).map((id) => parseInt(id, 10)),
         [selectedKeys]
     );
+    const handleCountrySelectionChange = (keys: any) => {
+        setCountrySelected(keys);
+    };
     return {
         ...form,
         handleCreateClient,
+        handleCountrySelectionChange,
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnChange(setForm, e),
         isPending,
         isLoadingBusiness,
         business,
         selectedKeys,
+        countryCodes,
+        countrySelected,
+        codeSelected,
         handleSelectionChange,
     };
 };

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
     const { username, id, balance = 0 } = client;
     const [ref, inView] = useInView({ rootMargin: "-300px 300px" });
-    const letter = username[0];
+    const letter = inView ? username[0] : "";
     useEffect(() => {
         $LetterViewClient.set({ letter, isClientView: inView });
     }, [inView, letter]);
