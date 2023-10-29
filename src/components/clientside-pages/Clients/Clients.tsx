@@ -68,8 +68,8 @@ export const Clients = () => {
                     }
                 ></Input>
             </div>
-            <div className=" py-28 sm:px-[10rem]">
-                <div className="flex flex-col items-center gap-3">
+            <div className=" py-28 ">
+                <div className="flex flex-col gap-2 items-center">
                     {ClientsSearched.length > 0 &&
                         ClientsSearched.map((client: any) => (
                             <div className="" key={client.id}>

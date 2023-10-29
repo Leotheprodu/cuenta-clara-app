@@ -2,17 +2,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
     const { username, email, cellphone, token, id } = client;
     const domain = process.env.NEXT_PUBLIC_DOMAIN;
     return (
-        <div className="flex flex-col gap-1 mt-2 w-[6rem] h-[3.5rem]">
-            {email && (
-                <a
-                    title={`Enviar mensaje al correo electronico`}
-                    target="_blank"
-                    className="text-xs hover:text-secundario ease-in duration-300"
-                    href={`mailto:${email}`}
-                >
-                    <p>{email}</p>
-                </a>
-            )}
+        <div className="flex flex-wrap justify-center items-center mt-2 h-[3.5rem] border-x-1 border-terciario">
             {cellphone && (
                 <>
                     <a
@@ -27,7 +17,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                         " " +
                         cellphone.toString().slice(-4)
                     }`}</a>
-
+                    <span className="px-2 my-auto mx-0">-</span>
                     <a
                         title={`Enviar link de conexion por WhatsApp`}
                         className="text-xs hover:text-secundario ease-in duration-300"
@@ -38,6 +28,19 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                     >
                         Enviar Link
                     </a>
+                    {email && (
+                        <>
+                            <span className="px-2 my-auto mx-0">-</span>
+                            <a
+                                title={`Enviar mensaje al correo electronico`}
+                                target="_blank"
+                                className="text-xs hover:text-secundario ease-in duration-300"
+                                href={`mailto:${email}`}
+                            >
+                                <p>{email}</p>
+                            </a>
+                        </>
+                    )}
                 </>
             )}
         </div>

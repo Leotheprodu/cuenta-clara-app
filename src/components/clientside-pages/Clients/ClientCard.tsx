@@ -22,29 +22,31 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
             }`}
         >
             <div>
-                <div className="flex gap-1 items-center">
-                    <h2 className="font-bold">{username}</h2>
+                <div className="flex flex-col justify-center items-center">
+                    <h2 className="font-bold text-2xl">{username}</h2>
                     <span className="text-xs opacity-70">id: {id}</span>
                 </div>
+                <ClientSections
+                    isShowActivoButton={isShowActivoButton}
+                    client={client}
+                />
                 <MainContactInfo
                     isShowActivoButton={isShowActivoButton}
                     client={client}
                 />
             </div>
             <div
-                className={`flex gap-2 w-full bg-gris px-2 py-1 rounded-sm ${
+                className={`flex relative gap-2 border-x-1 border-b-1 justify-center border-terciario w-full rounded-b-md bg-secundario px-2 py-1 rounded-sm ${
                     balance < 0 && "text-danger-400"
                 }`}
             >
-                <h3>Saldo:</h3>
+                <h3 className="text-terciario absolute left-2">Saldo:</h3>
                 <div>
-                    <p className={``}>{moneyFormat(balance, "CRC", "es-CR")}</p>
+                    <p className="text-blanco font-sans text-xl text-center w-full">
+                        {moneyFormat(balance, "CRC", "es-CR")}
+                    </p>
                 </div>
             </div>
-            <ClientSections
-                isShowActivoButton={isShowActivoButton}
-                client={client}
-            />
         </div>
     );
 };

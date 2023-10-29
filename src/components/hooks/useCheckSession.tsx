@@ -24,7 +24,7 @@ export const useCheckSession = () => {
     }, [isLoading]);
     useEffect(() => {
         if (!user.isLoggedIn && !whiteListPaths.includes(pathname)) {
-            redirect("/sesion-de-usuario");
+            redirect("/sesion");
         }
     }, [user, pathname]);
     useEffect(() => {
@@ -35,7 +35,7 @@ export const useCheckSession = () => {
         } else if (status === "error") {
             $user.set({ ...user, isLoggedIn: false });
             if (!whiteListPaths.includes(pathname)) {
-                redirect("/sesion-de-usuario");
+                redirect("/sesion");
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
