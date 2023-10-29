@@ -54,7 +54,11 @@ export const ClientSections = ({
                 </Link>
             </Tooltip>
             <Tooltip
-                content="Desactivar Cliente"
+                content={
+                    isShowActivoButton
+                        ? "Desactivar Cliente"
+                        : "Activar Cliente"
+                }
                 showArrow
                 placement="top"
                 color="danger"
