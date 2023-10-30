@@ -1,3 +1,5 @@
+import { baseUrl } from "@/data/constants";
+
 interface MyCustomError {
     message: string;
     status?: number;
@@ -19,7 +21,6 @@ export async function fetchAPI<T>({
     body?: T | FormData | null;
     isFormData?: boolean;
 }) {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const config: RequestInit = {
         method,
         credentials: "include",

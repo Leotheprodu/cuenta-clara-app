@@ -2,5 +2,37 @@
     {
         "page": "create-invoice",
         "href": "/facturas/crear"
+    },
+    {
+        "page": "home",
+        "href": "/"
+    },
+    {
+        "page": "invoices",
+        "href": "/facturas"
+    },
+    {
+        "page": "create-customer",
+        "href": "/clientes/crear"
+    },
+    {
+        "page": "clients",
+        "href": "/clientes"
+    },
+    {
+        "page": "create-product",
+        "href": "/productos/crear"
+    },
+    {
+        "page": "products",
+        "href": "/productos"
+    },
+    {
+        "page": "create-user",
+        "href": "/usuarios/crear"
+    },
+    {
+        "page": "users",
+        "href": "/sesion"
     }
 ]

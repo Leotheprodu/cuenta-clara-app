@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { internalLinks } from "@/components/Utils/internalLinks";
 export const useLoginForm = (formInit: FormValuesLoginForm) => {
     const user = useStore($user);
     const [form, setForm] = useState(formInit);
@@ -25,7 +26,7 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
         if (status === "success") {
             $user.set(data);
             toast.success(`Bienvenido ${data.user.username}`);
-            redirect("/");
+            redirect(internalLinks("home") || "/");
         } else if (status === "error") {
             toast.error(error?.message || "");
             error?.message === "Contraseña Incorrecta" &&

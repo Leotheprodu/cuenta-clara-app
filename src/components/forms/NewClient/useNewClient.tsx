@@ -6,6 +6,7 @@ import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "../../Utils/idGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { countryCodes } from "@/data/constants";
+import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const useNewClient = (formInit: FormValuesNewClient) => {
     const [form, setForm] = useState(formInit);
@@ -71,7 +72,7 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
     useEffect(() => {
         if (status === "success") {
             toast.success(`${form.username} ha sido creado`);
-            redirect("/clientes");
+            redirect(internalLinks("clients") || "/");
         } else if (status === "error") {
             toast.error(error?.message || "");
         }

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "@/components/Utils/idGenerator";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const useUpdateClient = (
     formInit: FormValuesUpdateClient,
@@ -99,7 +100,7 @@ export const useUpdateClient = (
     useEffect(() => {
         if (status === "success") {
             toast.success(`${form.username} ha sido actualizado`);
-            redirect("/clientes");
+            redirect(internalLinks("clients") || "/");
         } else if (status === "error") {
             toast.error(error?.message || "");
         }

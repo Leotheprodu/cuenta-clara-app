@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $isCheckingSession } from "@/stores/generalConfig";
 import { whiteListPaths } from "@/data/constants";
+import { internalLinks } from "../Utils/internalLinks";
 export const useCheckSession = () => {
     const pathname = usePathname();
     const user = useStore($user);
@@ -24,7 +25,7 @@ export const useCheckSession = () => {
     }, [isLoading]);
     useEffect(() => {
         if (!user.isLoggedIn && !whiteListPaths.includes(pathname)) {
-            redirect("/sesion");
+            redirect(internalLinks("users") || "/");
         }
     }, [user, pathname]);
     useEffect(() => {
@@ -35,7 +36,7 @@ export const useCheckSession = () => {
         } else if (status === "error") {
             $user.set({ ...user, isLoggedIn: false });
             if (!whiteListPaths.includes(pathname)) {
-                redirect("/sesion");
+                redirect(internalLinks("users") || "/");
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

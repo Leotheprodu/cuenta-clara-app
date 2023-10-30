@@ -8,7 +8,7 @@ export const useClientCard = ({ username }: UseClientCardProps) => {
     const [ref, inView] = useInView({ rootMargin: "-300px 300px" });
     const [letter, setLetter] = useState("");
     useEffect(() => {
-        setLetter(username[0]);
+        username && setLetter(username[0]);
     }, [username]);
     useEffect(() => {
         $LetterViewClient.set({ letter, isClientView: inView });

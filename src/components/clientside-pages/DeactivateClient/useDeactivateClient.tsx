@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const useDeactivateClient = (id: string) => {
     const router = useRouter();
@@ -38,7 +39,7 @@ export const useDeactivateClient = (id: string) => {
                     client.activo == 0 ? "activado" : "desactivado"
                 } correctamente`
             );
-            redirect("/clientes");
+            redirect(internalLinks("clients") || "/");
         } else if (status === "error") {
             toast.error(error?.message || "");
         }
