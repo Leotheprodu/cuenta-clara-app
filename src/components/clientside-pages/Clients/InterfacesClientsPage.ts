@@ -43,3 +43,9 @@ interface HeaderClientsProps {
         searchClient: string;
     };
 }
+interface letterViewClientProps {
+    letterViewClient: {
+        letter: string;
+        isClientView: boolean;
+    };
+}

@@ -1,11 +1,10 @@
 "use client";
-
 import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
 import Loading from "@/app/loading";
-import { motion } from "framer-motion";
 import { HeaderClients } from "./HeaderClients";
+import { ClientsLetterView } from "./ClientsLetterView";
 export const Clients = () => {
     const {
         handleSearchClient,
@@ -29,30 +28,24 @@ export const Clients = () => {
                 }}
             />
             <div className=" py-28 ">
-                <div className="flex flex-col gap-2 items-center">
+                <div className="flex flex-col gap-4 items-center justify-center">
                     {clientsSearched.length > 0 &&
                         clientsSearched.map((client: any) => (
-                            <div className="" key={client.id}>
-                                <MotionClientsCard>
-                                    <ClientCard
-                                        isShowActivoButton={isShowActivoButton}
-                                        client={client}
-                                    />
+                            <>
+                                <MotionClientsCard key={client.id}>
+                                    <div className="flex flex-col rounded-2xl border-1 border-secundario p-2 w-[20rem] shadow-md hover:scale-[.98] ease-in-out duration-200">
+                                        <ClientCard
+                                            isShowActivoButton={
+                                                isShowActivoButton
+                                            }
+                                            client={client}
+                                        />
+                                    </div>
                                 </MotionClientsCard>
-                            </div>
+                            </>
                         ))}
-                    {letterViewClient.isClientView && (
-                        <motion.div
-                            style={{ pointerEvents: "none" }}
-                            className="fixed  bottom-1/2 font-bold text-9xl text-primario"
-                            animate={{ opacity: [0, 1, 0] }}
-                            transition={{ duration: 1 }}
-                        >
-                            <p>{letterViewClient.letter}</p>
-                        </motion.div>
-                    )}
+                    <ClientsLetterView letterViewClient={letterViewClient} />
                 </div>
-                H
             </div>
         </div>
     );

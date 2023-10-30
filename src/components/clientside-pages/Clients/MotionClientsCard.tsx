@@ -6,10 +6,10 @@ export const MotionClientsCard = ({
     children: React.ReactNode;
 }) => (
     <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 10 }}
-        exit={{ opacity: 0, x: 40 }}
-        className="flex flex-col rounded-xl border-1 w-[20rem] border-secundario"
+        initial={{ opacity: 0, x: 150 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 200 }}
+        className=""
     >
         {children}
     </motion.div>
