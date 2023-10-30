@@ -6,10 +6,12 @@ export const useFiltersClients = ({
     status,
     isShowActivoButton,
     dataBalances,
+    searchClient,
 }: FilterClientsProps) => {
     const [activeClients, setActiveClients] = useState([{}]);
     const [clients, setClients] = useState([{}]);
     const [filteredClientsWB, setFilteredClientsWB] = useState([{}]);
+    const [clientsSearched, setClientsSearched] = useState([{}]);
 
     //1 Clientes activos o inactivos
     useEffect(() => {
@@ -39,7 +41,7 @@ export const useFiltersClients = ({
         }
     }, [activeClients, dataBalances]);
 
-    //3 Se rellena el estado de los clientes con su balance (saldo)
+    //3 Se rellena el estado de los clientes con su respectivo balance (saldo)
     useEffect(() => {
         if (clients.length > 0 && dataBalances.length > 0) {
             const usuariosConBalance = clients.map((cliente: any) => {
@@ -59,8 +61,32 @@ export const useFiltersClients = ({
             setFilteredClientsWB(clients);
         }
     }, [clients, dataBalances]);
+    // Filtra clientes por nombre, correo o teléfono
+    useEffect(() => {
+        if (searchClient.length > 0) {
+            const searchLower = searchClient.toLowerCase(); // Convertimos el input a minúsculas
+            const filtered = filteredClientsWB.filter((client: any) => {
+                const usernameMatch = client.username
+                    .toLowerCase()
+                    .includes(searchLower);
+                const cellphoneMatch =
+                    client.cellphone && client.cellphone.includes(searchClient);
+                const emailMatch =
+                    client.email &&
+                    client.email.toLowerCase().includes(searchLower);
+                return usernameMatch || cellphoneMatch || emailMatch;
+            });
+
+            if (filtered.length === 0) {
+                return;
+            }
+            setClientsSearched(filtered);
+        } else {
+            setClientsSearched(filteredClientsWB);
+        }
+    }, [searchClient, filteredClientsWB]);
 
     return {
-        filteredClientsWB,
+        clientsSearched,
     };
 };

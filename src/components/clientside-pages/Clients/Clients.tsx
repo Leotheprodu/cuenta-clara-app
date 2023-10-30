@@ -4,74 +4,34 @@ import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
 import Loading from "@/app/loading";
-import { SwitchActivo } from "./SwitchActivo";
 import { motion } from "framer-motion";
-import { $LetterViewClient } from "@/stores/generalConfig";
-import { useStore } from "@nanostores/react";
-import { Input } from "@nextui-org/react";
-import { useEffect, useState } from "react";
-import { SearchIcon } from "@/icons/SearchIcon";
+import { HeaderClients } from "./HeaderClients";
 export const Clients = () => {
-    const letterViewClient = useStore($LetterViewClient);
-    const [searchClient, setSearchClient] = useState("");
-    const [ClientsSearched, setClientsSearched] = useState([{}]);
-
     const {
-        filteredClientsWB,
+        handleSearchClient,
         HanldeIsSelected,
         isShowActivoButton,
         isLoading,
+        letterViewClient,
+        searchClient,
+        clientsSearched,
     } = useClientsPage();
-    const handleSearchClient = (e: any) => {
-        setSearchClient(e.target.value);
-    };
-    useEffect(() => {
-        if (searchClient.length > 0) {
-            const searchLower = searchClient.toLowerCase(); // Convertimos el input a minúsculas
-            const filtered = filteredClientsWB.filter((client: any) => {
-                const usernameMatch = client.username
-                    .toLowerCase()
-                    .includes(searchLower);
-                const cellphoneMatch =
-                    client.cellphone && client.cellphone.includes(searchClient);
-                const emailMatch =
-                    client.email &&
-                    client.email.toLowerCase().includes(searchLower);
-                return usernameMatch || cellphoneMatch || emailMatch;
-            });
-
-            if (filtered.length === 0) {
-                return;
-            }
-            setClientsSearched(filtered);
-        } else {
-            setClientsSearched(filteredClientsWB);
-        }
-    }, [searchClient, filteredClientsWB]);
 
     if (isLoading) return <Loading />;
     return (
         <div className="h-full w-full">
-            <div className="z-10 flex fixed left-0 items-center justify-center w-full bg-blanco/80 shadow-md backdrop-blur-sm">
-                <SwitchActivo
-                    handle={{ isShowActivoButton, HanldeIsSelected }}
-                />
-                <Input
-                    onChange={handleSearchClient}
-                    value={searchClient}
-                    type="text"
-                    size="sm"
-                    placeholder="Busca por nombre, correo o teléfono"
-                    className="sm:w-1/4 shadow-sm"
-                    startContent={
-                        <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
-                    }
-                ></Input>
-            </div>
+            <HeaderClients
+                handle={{
+                    isShowActivoButton,
+                    HanldeIsSelected,
+                    handleSearchClient,
+                    searchClient,
+                }}
+            />
             <div className=" py-28 ">
                 <div className="flex flex-col gap-2 items-center">
-                    {ClientsSearched.length > 0 &&
-                        ClientsSearched.map((client: any) => (
+                    {clientsSearched.length > 0 &&
+                        clientsSearched.map((client: any) => (
                             <div className="" key={client.id}>
                                 <MotionClientsCard>
                                     <ClientCard
@@ -92,6 +52,7 @@ export const Clients = () => {
                         </motion.div>
                     )}
                 </div>
+                H
             </div>
         </div>
     );

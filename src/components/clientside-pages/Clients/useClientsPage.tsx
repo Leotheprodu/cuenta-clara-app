@@ -3,12 +3,14 @@ import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
+import { $LetterViewClient } from "@/stores/generalConfig";
 import { useFiltersClients } from "./useFiltersClients";
-
 export const useClientsPage = () => {
     const selectedBusiness = useStore($selectedBusiness);
     const [isShowActivoButton, setIsShowActivoButton] = useState(true);
     const [dataBalances, setDatabalances] = useState([{}]);
+    const letterViewClient = useStore($LetterViewClient);
+    const [searchClient, setSearchClient] = useState("");
 
     const { status, data, isLoading } = useQuery({
         queryKey: ["clientes"],
@@ -28,11 +30,12 @@ export const useClientsPage = () => {
         retry: 2,
     });
 
-    const { filteredClientsWB } = useFiltersClients({
+    const { clientsSearched } = useFiltersClients({
         data,
         status,
         isShowActivoButton,
         dataBalances,
+        searchClient,
     });
 
     //Extrae los balances filtrados por Negocio
@@ -47,17 +50,26 @@ export const useClientsPage = () => {
     }, [selectedBusiness, dataFromBalances, statusBalances]);
 
     /**
-     * Activa o desactiva el boton que muestra usuario activos o no activos.
+     * @description Activa o desactiva el boton que muestra usuario activos o no activos.
      * @param {boolean[]} value - Es el valor que se le asigna al estado isShowActivoButton.
      */
     const HanldeIsSelected = (value: boolean) => {
         setIsShowActivoButton(value);
     };
+    /**
+     * @description maneja el onChange de el buscador de Clientes.
+     */
+    const handleSearchClient = (e: any) => {
+        setSearchClient(e.target.value);
+    };
 
     return {
-        filteredClientsWB,
+        clientsSearched,
         isLoading,
         HanldeIsSelected,
         isShowActivoButton,
+        handleSearchClient,
+        letterViewClient,
+        searchClient,
     };
 };

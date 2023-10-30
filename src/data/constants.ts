@@ -19,3 +19,7 @@ export const clienteDefault = {
     user_id: null,
     activo: true,
 };
+/**
+ * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
+ */
+export const domain = process.env.NEXT_PUBLIC_DOMAIN;
