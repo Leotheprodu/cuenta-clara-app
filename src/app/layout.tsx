@@ -5,12 +5,12 @@ import { Providers } from "./providers";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { Header } from "@/components/layout/Header/Header";
+import { appDescription, appName } from "@/data/constants";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Cuenta Clara",
-    description:
-        "Cuenta Clara, controla las cuentas con los clientes de tu negocio",
+    title: `${appName}`,
+    description: `${appDescription}`,
 };
 
 export default async function RootLayout({

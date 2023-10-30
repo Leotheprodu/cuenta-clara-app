@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useHeader } from "./useHeader";
 import { HeaderBusinessSelector } from "./HeaderBusinessSelector";
+import { appName } from "@/data/constants";
 
 export const Header = () => {
     const {
@@ -19,7 +20,7 @@ export const Header = () => {
             <div className="flex w-full h-full items-center px-6">
                 <Link href="/">
                     <h1 className="text-cuaternario font-sans uppercase">
-                        Cuenta <span className="text-gris">Clara</span>
+                        {appName}
                     </h1>
                 </Link>
                 <HeaderBusinessSelector
