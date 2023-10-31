@@ -20,7 +20,8 @@ const clienteDefault = {
     cellphone: 7777777,
     token: "token",
     user_id: null,
-    activo: true,
+    active: true,
+    country: "Costa Rica",
 };
 
 /* ----------------------------------URLs------------------------------------ */

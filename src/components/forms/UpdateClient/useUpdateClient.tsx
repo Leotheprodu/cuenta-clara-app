@@ -12,7 +12,7 @@ export const useUpdateClient = (
     id: string
 ) => {
     const [form, setForm] = useState(formInit);
-    const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["0"]));
     const [business, setBusiness] = useState([
         { id: 0, name: "", default: false, user_id: 0 },
     ]);

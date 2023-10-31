@@ -6,7 +6,6 @@ import { useClientCard } from "./useClientCard";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
     const { username, id, balance = 0 } = client;
     const { ref } = useClientCard({ username });
-
     return (
         <div
             ref={ref}

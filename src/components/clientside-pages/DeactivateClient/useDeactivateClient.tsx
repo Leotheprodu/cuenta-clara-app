@@ -8,7 +8,7 @@ import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const useDeactivateClient = (id: string) => {
     const router = useRouter();
-    const [client, setClient] = useState({ username: "", activo: 0 });
+    const [client, setClient] = useState({ username: "", active: 0 });
     const { status: statusFetchClient, data } = useQuery({
         queryKey: ["fetch-client"],
         queryFn: async () =>
@@ -36,7 +36,7 @@ export const useDeactivateClient = (id: string) => {
         if (status === "success") {
             toast.success(
                 `"${client.username}" ${
-                    client.activo == 0 ? "activado" : "desactivado"
+                    client.active == 0 ? "activado" : "desactivado"
                 } correctamente`
             );
             redirect(internalLinks("clients") || "/");

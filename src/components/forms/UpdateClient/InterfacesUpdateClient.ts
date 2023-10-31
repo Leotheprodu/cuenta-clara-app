@@ -1,5 +1,5 @@
 interface FormValuesUpdateClient {
-    id: string;
+    id: number;
     username: string;
     email: string;
     cellphone: string;

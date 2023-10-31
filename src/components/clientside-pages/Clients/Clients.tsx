@@ -31,18 +31,14 @@ export const Clients = () => {
                 <div className="flex flex-col gap-4 items-center justify-center">
                     {clientsSearched.length > 0 &&
                         clientsSearched.map((client: any) => (
-                            <>
-                                <MotionClientsCard key={client.id}>
-                                    <div className="flex flex-col rounded-2xl border-1 border-secundario p-2 w-[20rem] shadow-md hover:scale-[.98] ease-in-out duration-200">
-                                        <ClientCard
-                                            isShowActivoButton={
-                                                isShowActivoButton
-                                            }
-                                            client={client}
-                                        />
-                                    </div>
-                                </MotionClientsCard>
-                            </>
+                            <MotionClientsCard key={client.id}>
+                                <div className="flex flex-col rounded-2xl border-1 border-secundario p-2 w-[20rem] shadow-md hover:scale-[.98] ease-in-out duration-200">
+                                    <ClientCard
+                                        isShowActivoButton={isShowActivoButton}
+                                        client={client}
+                                    />
+                                </div>
+                            </MotionClientsCard>
                         ))}
                     <ClientsLetterView letterViewClient={letterViewClient} />
                 </div>

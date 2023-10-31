@@ -71,5 +71,6 @@ export const useClientsPage = () => {
         handleSearchClient,
         letterViewClient,
         searchClient,
+        selectedBusiness,
     };
 };

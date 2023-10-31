@@ -8,17 +8,19 @@ export const useFiltersClients = ({
     dataBalances,
     searchClient,
 }: FilterClientsProps) => {
-    const [activeClients, setActiveClients] = useState([{}]);
-    const [clients, setClients] = useState([{}]);
-    const [filteredClientsWB, setFilteredClientsWB] = useState([{}]);
-    const [clientsSearched, setClientsSearched] = useState([{}]);
+    const [activeClients, setActiveClients] = useState([clienteDefault]);
+    const [clients, setClients] = useState([clienteDefault]);
+    const [filteredClientsWB, setFilteredClientsWB] = useState([
+        clienteDefault,
+    ]);
+    const [clientsSearched, setClientsSearched] = useState([clienteDefault]);
 
     //1 Clientes activos o inactivos
     useEffect(() => {
         if (status === "success") {
             if (isShowActivoButton)
-                setActiveClients(data.filter((item: any) => item.activo == 1));
-            else setActiveClients(data.filter((item: any) => item.activo == 0));
+                setActiveClients(data.filter((item: any) => item.active == 1));
+            else setActiveClients(data.filter((item: any) => item.active == 0));
         } else if (status === "error") {
             toast.error("Error al cargar los clientes");
             setActiveClients([clienteDefault]);

@@ -12,9 +12,9 @@ export const useHeader = () => {
     const path = usePathname();
     const user = useStore($user);
     const [business, setBusiness] = useState([
-        { id: 0, name: "", default: false, user_id: 0 },
+        { id: 0, name: "Tu Negocio", default: false, user_id: 0 },
     ]);
-    const [value, setValue] = useState(new Set([""]));
+    const [value, setValue] = useState(new Set(["0"]));
     const {
         status: statusBusiness,
         data: dataBusiness,
@@ -32,13 +32,15 @@ export const useHeader = () => {
     useEffect(() => {
         if (statusBusiness === "success" && user.isLoggedIn) {
             setBusiness(dataBusiness);
-            dataBusiness.filter((item: any) => {
+            const defaultBussines = dataBusiness.filter((item: any) => {
                 if (item.default) {
-                    setValue(new Set([item.id.toString()]));
-                    $selectedBusiness.set(item.id);
+                    return item;
                 }
-                return item;
             });
+            if (defaultBussines.length === 1) {
+                setValue(new Set([defaultBussines[0].id.toString()]));
+                $selectedBusiness.set(defaultBussines[0].id);
+            }
         }
     }, [statusBusiness, dataBusiness, user]);
 

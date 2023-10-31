@@ -23,7 +23,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
         handleSelectionChange,
     } = useUpdateClient(
         {
-            id: id,
+            id: parseInt(id, 10),
             username: "",
             email: "",
             cellphone: "",

@@ -7,12 +7,12 @@ export const DeactivateClient = ({ id }: { id: string }) => {
     return (
         <div className="flex flex-col gap-3 justify-center items-center text-center">
             <h1 className="uppercase text-primario">
-                Estas a punto de {client.activo == 0 ? "activar" : "desactivar"}{" "}
+                Estas a punto de {client.active == 0 ? "activar" : "desactivar"}{" "}
                 un cliente
             </h1>
             <h2>
                 ¿Estás seguro de que quieres{" "}
-                {client.activo == 0 ? "activar" : "desactivar"} a:{" "}
+                {client.active == 0 ? "activar" : "desactivar"} a:{" "}
                 <span className="font-bold">{client.username}</span>?
             </h2>
             <div className="flex gap-2">
@@ -29,7 +29,7 @@ export const DeactivateClient = ({ id }: { id: string }) => {
                     color="danger"
                     onClick={handleDelete}
                 >
-                    {client.activo == 0 ? "activar" : "desactivar"}
+                    {client.active == 0 ? "activar" : "desactivar"}
                 </Button>
             </div>
         </div>

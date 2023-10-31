@@ -4,6 +4,7 @@ interface FormValuesNewClient {
     cellphone: string;
     token: string;
     id_business: Array<number>;
+    country: string;
 }
 interface InputUsernameProps {
     handle: {
@@ -21,7 +22,7 @@ interface InputCellphoneProps {
     handle: {
         cellphone: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-        codeSelected: string;
+        codeSelected?: string;
     };
 }
 interface BusinessListProps {
