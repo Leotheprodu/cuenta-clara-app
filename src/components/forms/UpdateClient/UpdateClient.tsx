@@ -6,6 +6,7 @@ import { InputEmail } from "../NewClient/InputEmail";
 import { InputCellphone } from "../NewClient/InputCellphone";
 import { InputChangeToken } from "./InputChangeToken";
 import { BusinessList } from "../NewClient/BusinessList";
+import { SelectCountry } from "../NewClient/SelectCountry";
 
 export const UpdateClient = ({ id }: { id: string }) => {
     const {
@@ -20,7 +21,11 @@ export const UpdateClient = ({ id }: { id: string }) => {
         isLoadingBusiness,
         business,
         selectedKeys,
+        codeSelected,
         handleSelectionChange,
+        handleCountrySelectionChange,
+        countryCodes,
+        countrySelected,
     } = useUpdateClient(
         {
             id: parseInt(id, 10),
@@ -47,11 +52,20 @@ export const UpdateClient = ({ id }: { id: string }) => {
                     handleSelectionChange,
                 }}
             />
+            <SelectCountry
+                handle={{
+                    countryCodes,
+                    countrySelected,
+                    handleCountrySelectionChange,
+                }}
+            />
             <InputUsername handle={{ username, handleOnChange }} />
 
             <InputEmail handle={{ email, handleOnChange }} />
 
-            <InputCellphone handle={{ cellphone, handleOnChange }} />
+            <InputCellphone
+                handle={{ cellphone, handleOnChange, codeSelected }}
+            />
 
             <InputChangeToken
                 handle={{ token, handleOnChange, handleNewToken }}

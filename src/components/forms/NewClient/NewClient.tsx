@@ -5,8 +5,8 @@ import { InputUsername } from "./InputUsername";
 import { InputEmail } from "./InputEmail";
 import { InputCellphone } from "./InputCellphone";
 import { BusinessList } from "./BusinessList";
+import { SelectCountry } from "./SelectCountry";
 
-import { Select, SelectItem } from "@nextui-org/react";
 export const NewClient = () => {
     const {
         handleCreateClient,
@@ -29,6 +29,7 @@ export const NewClient = () => {
         cellphone: "",
         token: "",
         id_business: [],
+        country: "",
     });
 
     return (
@@ -45,22 +46,13 @@ export const NewClient = () => {
                     handleSelectionChange,
                 }}
             />
-            <Select
-                isRequired
-                label="País"
-                placeholder="Slecciona el país del cliente"
-                defaultSelectedKeys={["Costa Rica"]}
-                className=""
-                variant="underlined"
-                onSelectionChange={handleCountrySelectionChange}
-                selectedKeys={countrySelected}
-            >
-                {countryCodes.map((item) => (
-                    <SelectItem key={item.country} value={item.code}>
-                        {item.country}
-                    </SelectItem>
-                ))}
-            </Select>
+            <SelectCountry
+                handle={{
+                    countryCodes,
+                    countrySelected,
+                    handleCountrySelectionChange,
+                }}
+            />
             <InputUsername handle={{ username, handleOnChange }} />
             <InputCellphone
                 handle={{ cellphone, handleOnChange, codeSelected }}

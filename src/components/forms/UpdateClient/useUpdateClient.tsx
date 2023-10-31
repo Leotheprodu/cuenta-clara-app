@@ -6,6 +6,7 @@ import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "@/components/Utils/idGenerator";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { internalLinks } from "@/components/Utils/internalLinks";
+import { BusinessDefault, countryCodes } from "@/data/constants";
 
 export const useUpdateClient = (
     formInit: FormValuesUpdateClient,
@@ -13,9 +14,11 @@ export const useUpdateClient = (
 ) => {
     const [form, setForm] = useState(formInit);
     const [selectedKeys, setSelectedKeys] = useState(new Set(["0"]));
-    const [business, setBusiness] = useState([
-        { id: 0, name: "", default: false, user_id: 0 },
-    ]);
+    const [business, setBusiness] = useState([BusinessDefault]);
+    const [countrySelected, setCountrySelected] = useState(
+        new Set(["Costa Rica"])
+    );
+    const [codeSelected, setCodeSelected] = useState("506");
     const {
         status: statusBusiness,
         data: dataBusiness,
@@ -57,7 +60,12 @@ export const useUpdateClient = (
         setForm({ ...form, id_business: selectedIds });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedKeys]);
-
+    useEffect(() => {
+        const code = countryCodes.find(
+            (item) => item.country === Array.from(countrySelected)[0]
+        );
+        setCodeSelected(code ? code.code : "");
+    }, [countrySelected]);
     const {
         status: statusFetchClient,
         data,
@@ -76,11 +84,17 @@ export const useUpdateClient = (
             await fetchAPI({
                 url: "clients",
                 method: "PUT",
-                body: form,
+                body: {
+                    ...form,
+                    cellphone: form.cellphone
+                        ? form.cellphone.replace(/\D/g, "")
+                        : null,
+                    country: Array.from(countrySelected)[0],
+                },
             }),
     });
     useEffect(() => {
-        const { username, email, cellphone, token } = data || {};
+        const { username, email, cellphone, token, country } = data || {};
 
         if (statusFetchClient === "success") {
             setForm({
@@ -90,6 +104,7 @@ export const useUpdateClient = (
                 cellphone: cellphone || "",
                 token,
             });
+            setCountrySelected(new Set([country]));
         } else if (statusFetchClient === "error") {
             toast.error(errorFetchClient?.message || "");
         }
@@ -125,7 +140,9 @@ export const useUpdateClient = (
         () => Array.from(selectedKeys).map((id) => parseInt(id, 10)),
         [selectedKeys]
     );
-
+    const handleCountrySelectionChange = (keys: any) => {
+        setCountrySelected(keys);
+    };
     return {
         ...form,
         handleUpdateClient,
@@ -137,5 +154,9 @@ export const useUpdateClient = (
         business,
         selectedKeys,
         handleSelectionChange,
+        handleCountrySelectionChange,
+        codeSelected,
+        countryCodes,
+        countrySelected,
     };
 };

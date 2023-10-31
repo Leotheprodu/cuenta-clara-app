@@ -23,6 +23,12 @@ const clienteDefault = {
     active: true,
     country: "Costa Rica",
 };
+const BusinessDefault = {
+    id: 0,
+    name: "Su negocio",
+    default: false,
+    user_id: 0,
+};
 
 /* ----------------------------------URLs------------------------------------ */
 /**
@@ -37,6 +43,7 @@ export {
     whiteListPaths,
     countryCodes,
     clienteDefault,
+    BusinessDefault,
     domain,
     baseUrl,
 };

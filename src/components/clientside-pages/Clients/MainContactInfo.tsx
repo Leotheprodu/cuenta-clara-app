@@ -1,9 +1,11 @@
 import { cellphoneFormat } from "@/components/Utils/cellphoneFormat";
 import { whatsappMsgs } from "@/components/Utils/whatsappMsgs";
 import { Tooltip } from "@nextui-org/react";
+import { countryCodes } from "@/data/constants";
 
 export const MainContactInfo = ({ client }: ClientCardProps) => {
-    const { email, cellphone } = client;
+    const { email, cellphone, country } = client;
+    const code = countryCodes.find((item) => item.country === country);
     return (
         <div className="flex flex-wrap justify-center items-center mt-2 h-[3.5rem] border-x-1 border-terciario">
             {cellphone && (
@@ -12,10 +14,17 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                         <a
                             className="text-sm hover:text-secundario ease-in duration-300"
                             target="_blank"
-                            href={whatsappMsgs("justContact", client)}
+                            href={whatsappMsgs(
+                                "justContact",
+                                client,
+                                code?.code
+                            )}
                         >
                             <p className="hover:scale-110 duration-200">
-                                {cellphoneFormat(cellphone)}
+                                {"+" +
+                                    code?.code +
+                                    " " +
+                                    cellphoneFormat(cellphone)}
                             </p>
                         </a>
                     </Tooltip>

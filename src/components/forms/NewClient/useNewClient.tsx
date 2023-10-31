@@ -5,19 +5,17 @@ import { redirect } from "next/navigation";
 import { handleOnChange } from "@/components/Utils/formUtils";
 import { idGenerator } from "../../Utils/idGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { countryCodes } from "@/data/constants";
+import { BusinessDefault, countryCodes } from "@/data/constants";
 import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const useNewClient = (formInit: FormValuesNewClient) => {
     const [form, setForm] = useState(formInit);
-    const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["0"]));
     const [countrySelected, setCountrySelected] = useState(
         new Set(["Costa Rica"])
     );
     const [codeSelected, setCodeSelected] = useState("506");
-    const [business, setBusiness] = useState([
-        { id: 0, name: "", default: false, user_id: 0 },
-    ]);
+    const [business, setBusiness] = useState([BusinessDefault]);
     const {
         status: statusBusiness,
         data: dataBusiness,
@@ -35,12 +33,7 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
         if (statusBusiness === "success") {
             setBusiness(dataBusiness);
             const defaultBusiness = dataBusiness.find(
-                (item: {
-                    id: number;
-                    name: string;
-                    default: boolean;
-                    user_id: number;
-                }) => item.default === true
+                (item: BusinessProps) => item.default === true
             );
             // Si se encontró un elemento con default=true, establece su id como el elemento inicial en selectedKeys
             if (defaultBusiness) {
@@ -63,8 +56,9 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
                     ...form,
                     token: `${form.username.slice(0, 2)}-${idGenerator()}`,
                     cellphone: form.cellphone
-                        ? (codeSelected + form.cellphone).replace(/\D/g, "")
+                        ? form.cellphone.replace(/\D/g, "")
                         : null,
+                    country: Array.from(countrySelected)[0],
                 },
             }),
     });

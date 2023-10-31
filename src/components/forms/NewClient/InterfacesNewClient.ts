@@ -40,3 +40,10 @@ interface BusinessProps {
     default: boolean;
     user_id: number;
 }
+interface SelectCountryProps {
+    handle: {
+        countryCodes: { country: string; code: string }[];
+        countrySelected: Set<string>;
+        handleCountrySelectionChange: (keys: any) => void;
+    };
+}

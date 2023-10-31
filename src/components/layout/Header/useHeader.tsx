@@ -6,14 +6,13 @@ import { $user } from "@/stores/users";
 import { $selectedBusiness } from "@/stores/business";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
+import { BusinessDefault } from "@/data/constants";
 
 export const useHeader = () => {
     useCheckSession();
     const path = usePathname();
     const user = useStore($user);
-    const [business, setBusiness] = useState([
-        { id: 0, name: "Tu Negocio", default: false, user_id: 0 },
-    ]);
+    const [business, setBusiness] = useState([BusinessDefault]);
     const [value, setValue] = useState(new Set(["0"]));
     const {
         status: statusBusiness,
