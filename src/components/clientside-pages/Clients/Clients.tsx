@@ -1,18 +1,17 @@
 "use client";
-import { MotionClientsCard } from "./MotionClientsCard";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
 import Loading from "@/app/loading";
 import { HeaderClients } from "./HeaderClients";
 import { ClientsLetterView } from "./ClientsLetterView";
-import { motion } from "framer-motion";
+import { PageWrapper } from "@/components/Utils/PageWrapper";
+import { DragableClient } from "./DragableClient";
 export const Clients = () => {
     const {
         handleSearchClient,
         HanldeIsSelected,
         isShowActivoButton,
         isLoading,
-        letterViewClient,
         searchClient,
         clientsSearched,
     } = useClientsPage();
@@ -28,25 +27,20 @@ export const Clients = () => {
                     searchClient,
                 }}
             />
-            <div className=" py-28 ">
-                <div className="flex flex-col gap-4 items-center justify-center">
-                    {clientsSearched.length > 0 &&
-                        clientsSearched.map((client: any) => (
-                            <MotionClientsCard key={client.id}>
-                                <motion.div
-                                    whileHover={{ scale: [null, 1.3, 1.2] }}
-                                    transition={{ duration: 0.3 }}
-                                    className=" flex flex-col z-10 rounded-2xl border-1 bg-blanco border-secundario p-2 w-[20rem] shadow-md"
-                                >
-                                    <ClientCard
-                                        isShowActivoButton={isShowActivoButton}
-                                        client={client}
-                                    />
-                                </motion.div>
-                            </MotionClientsCard>
-                        ))}
-                    <ClientsLetterView letterViewClient={letterViewClient} />
-                </div>
+
+            <div className=" py-28 flex flex-col gap-4 items-center justify-center">
+                {clientsSearched.length > 0 &&
+                    clientsSearched.map((client: any) => (
+                        <PageWrapper key={client.id}>
+                            <DragableClient id={client.id}>
+                                <ClientCard
+                                    isShowActivoButton={isShowActivoButton}
+                                    client={client}
+                                />
+                            </DragableClient>
+                        </PageWrapper>
+                    ))}
+                <ClientsLetterView />
             </div>
         </div>
     );

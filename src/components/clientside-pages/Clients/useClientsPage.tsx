@@ -3,13 +3,11 @@ import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
-import { $LetterViewClient } from "@/stores/generalConfig";
 import { useFiltersClients } from "./useFiltersClients";
 export const useClientsPage = () => {
     const selectedBusiness = useStore($selectedBusiness);
     const [isShowActivoButton, setIsShowActivoButton] = useState(true);
     const [dataBalances, setDatabalances] = useState([{}]);
-    const letterViewClient = useStore($LetterViewClient);
     const [searchClient, setSearchClient] = useState("");
 
     const { status, data, isLoading } = useQuery({
@@ -69,7 +67,6 @@ export const useClientsPage = () => {
         HanldeIsSelected,
         isShowActivoButton,
         handleSearchClient,
-        letterViewClient,
         searchClient,
         selectedBusiness,
     };

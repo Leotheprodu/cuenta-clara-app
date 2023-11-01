@@ -3,12 +3,10 @@ import { Clients } from "@/components/clientside-pages/Clients/Clients";
 
 export default function Clientes() {
     return (
-        <PageWrapper>
-            <main className="flex min-h-screen w-full justify-center">
-                <section>
-                    <Clients />
-                </section>
-            </main>
-        </PageWrapper>
+        <main className="flex min-h-screen w-full justify-center">
+            <section>
+                <Clients />
+            </section>
+        </main>
     );
 }

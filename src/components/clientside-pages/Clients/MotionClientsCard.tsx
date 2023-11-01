@@ -6,9 +6,9 @@ export const MotionClientsCard = ({
     children: React.ReactNode;
 }) => (
     <motion.div
-        initial={{ opacity: 0, x: 150 }}
+        /* initial={{ opacity: 0, x: 150 }}
         animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 200 }}
+        exit={{ opacity: 0, x: 200 }} */
         className=""
     >
         {children}
