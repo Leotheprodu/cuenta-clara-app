@@ -1,3 +1,4 @@
+import { internalLinks } from "@/components/Utils/internalLinks";
 import { AddClientIcon } from "@/icons/AddClientIcon";
 import { AddInvoiceIcon } from "@/icons/AddInvoiceIcon";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
@@ -22,7 +23,7 @@ export const ClientSections = ({
             >
                 <Link
                     className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-lg transition-all duration-200 p-1"
-                    href={`/clientes/${id}`}
+                    href={`${internalLinks("client-invoices")}${id}`}
                 >
                     <AddTransactionIcon className="w-6 h-6" />
                 </Link>
@@ -35,7 +36,7 @@ export const ClientSections = ({
             >
                 <Link
                     className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
-                    href={`/nueva-transaccion?id=${id}`}
+                    href={`${internalLinks("add-invoice")}${id}`}
                 >
                     <AddInvoiceIcon className="w-6 h-6" />
                 </Link>
@@ -48,7 +49,7 @@ export const ClientSections = ({
             >
                 <Link
                     className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
-                    href={`/clientes/actualizar/${id}`}
+                    href={`${internalLinks("update-client")}${id}`}
                 >
                     <EditIcon className="w-6 h-6" />
                 </Link>
@@ -65,7 +66,7 @@ export const ClientSections = ({
             >
                 <Link
                     className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-md transition-all duration-200 p-1"
-                    href={`/clientes/desactivar/${id}`}
+                    href={`${internalLinks("deactivate-client")}${id}`}
                 >
                     {isShowActivoButton ? (
                         <DeleteUserIcon className="w-6 h-6" />

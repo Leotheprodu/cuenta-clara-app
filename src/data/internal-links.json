@@ -8,12 +8,24 @@
         "href": "/"
     },
     {
-        "page": "invoices",
-        "href": "/facturas"
+        "page": "create-client",
+        "href": "/clientes/crear"
     },
     {
-        "page": "create-customer",
-        "href": "/clientes/crear"
+        "page": "update-client",
+        "href": "/clientes/actualizar/"
+    },
+    {
+        "page": "deactivate-client",
+        "href": "/clientes/desactivar/"
+    },
+    {
+        "page": "client-invoices",
+        "href": "/facturas/"
+    },
+    {
+        "page": "add-invoice",
+        "href": "/facturas/crear/"
     },
     {
         "page": "clients",
