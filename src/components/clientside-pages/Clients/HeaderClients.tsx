@@ -17,7 +17,7 @@ export const HeaderClients = ({ handle }: HeaderClientsProps) => {
                 value={searchClient}
                 type="text"
                 size="sm"
-                placeholder="Busca por nombre, correo o teléfono"
+                placeholder="Buscar cliente"
                 className="sm:w-1/4 shadow-sm"
                 startContent={
                     <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
