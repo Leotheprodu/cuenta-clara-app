@@ -11,6 +11,7 @@ interface ClientProps {
     active: boolean;
     balance?: number;
     country: string;
+    detail: string;
     createdAt: string;
     updatedAt: string;
 }

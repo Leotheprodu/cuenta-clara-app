@@ -14,7 +14,7 @@ export const ClientsLetterView = ({
                     exit={{ opacity: [1, 0] }}
                     transition={{ duration: 1 }}
                 >
-                    <p>{letterViewClient.letter}</p>
+                    <p>{letterViewClient.letter.toUpperCase()}</p>
                 </motion.div>
             )}
         </AnimatePresence>

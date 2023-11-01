@@ -7,6 +7,7 @@ import { InputCellphone } from "../NewClient/InputCellphone";
 import { InputChangeToken } from "./InputChangeToken";
 import { BusinessList } from "../NewClient/BusinessList";
 import { SelectCountry } from "../NewClient/SelectCountry";
+import { InputDetail } from "../NewClient/InputDetail";
 
 export const UpdateClient = ({ id }: { id: string }) => {
     const {
@@ -14,6 +15,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
         handleOnChange,
         handleNewToken,
         username,
+        detail,
         email,
         cellphone,
         token,
@@ -33,6 +35,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
             email: "",
             cellphone: "",
             token: "",
+            detail: "",
             id_business: [],
         },
         id
@@ -66,6 +69,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
             <InputCellphone
                 handle={{ cellphone, handleOnChange, codeSelected }}
             />
+            <InputDetail handle={{ detail, handleOnChange }} />
 
             <InputChangeToken
                 handle={{ token, handleOnChange, handleNewToken }}

@@ -5,6 +5,7 @@ interface FormValuesNewClient {
     token: string;
     id_business: Array<number>;
     country: string;
+    detail: string;
 }
 interface InputUsernameProps {
     handle: {
@@ -15,6 +16,12 @@ interface InputUsernameProps {
 interface InputEmailProps {
     handle: {
         email: string;
+        handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    };
+}
+interface InputDetailProps {
+    handle: {
+        detail: string;
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
 }

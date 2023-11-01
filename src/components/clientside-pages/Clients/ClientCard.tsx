@@ -2,9 +2,11 @@ import { ClientSections } from "./ClientSections";
 import { MainContactInfo } from "./MainContactInfo";
 import { moneyFormat } from "@/components/Utils/MoneyFormat";
 import { useClientCard } from "./useClientCard";
+import { InfoIcon } from "@/icons/infoIcon";
+import { Tooltip } from "@nextui-org/react";
 
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
-    const { username, id, balance = 0 } = client;
+    const { username, id, balance = 0, detail = "" } = client;
     const { ref } = useClientCard({ username });
     return (
         <div
@@ -16,8 +18,22 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
             } ${balance > 0 && "border-t-2 border-cuaternario"}`}
         >
             <div>
-                <div className="flex flex-col justify-center items-center">
+                <div className="relative flex flex-col justify-center items-center">
                     <h2 className="font-bold text-2xl">{username}</h2>
+                    {detail?.length > 0 && (
+                        <>
+                            <Tooltip
+                                content={detail}
+                                showArrow
+                                placement="bottom"
+                                color="primary"
+                            >
+                                <div className="absolute right-1 top-1">
+                                    <InfoIcon className="w-6 h-6" />
+                                </div>
+                            </Tooltip>
+                        </>
+                    )}
                     <span className="text-xs opacity-70">id: {id}</span>
                 </div>
                 <ClientSections

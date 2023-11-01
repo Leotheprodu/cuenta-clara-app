@@ -1,4 +1,4 @@
-import { UpdateClient } from "@/components/forms/UpdateClient/UpdateClient";
+import { UpdateClientPage } from "@/components/clientside-pages/UpdateClientPage/UpdateClientPage";
 import { PageWrapper } from "@/components/Utils/PageWrapper";
 export default function ActualizarCliente({
     params,
@@ -9,7 +9,7 @@ export default function ActualizarCliente({
         <PageWrapper>
             <main className="flex min-h-screen justify-center items-center p-2">
                 <section>
-                    <UpdateClient id={params.id} />
+                    <UpdateClientPage id={params.id} />
                 </section>
             </main>
         </PageWrapper>

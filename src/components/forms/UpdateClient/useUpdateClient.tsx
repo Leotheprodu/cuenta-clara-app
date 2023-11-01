@@ -94,7 +94,8 @@ export const useUpdateClient = (
             }),
     });
     useEffect(() => {
-        const { username, email, cellphone, token, country } = data || {};
+        const { username, email, cellphone, token, country, detail } =
+            data || {};
 
         if (statusFetchClient === "success") {
             setForm({
@@ -103,6 +104,7 @@ export const useUpdateClient = (
                 email: email || "",
                 cellphone: cellphone || "",
                 token,
+                detail: detail || "",
             });
             setCountrySelected(new Set([country]));
         } else if (statusFetchClient === "error") {

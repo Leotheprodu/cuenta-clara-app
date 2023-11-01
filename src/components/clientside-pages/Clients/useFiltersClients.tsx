@@ -76,7 +76,12 @@ export const useFiltersClients = ({
                 const emailMatch =
                     client.email &&
                     client.email.toLowerCase().includes(searchLower);
-                return usernameMatch || cellphoneMatch || emailMatch;
+                const detailMatch =
+                    client.detail &&
+                    client.detail.toLowerCase().includes(searchLower);
+                return (
+                    usernameMatch || cellphoneMatch || emailMatch || detailMatch
+                );
             });
 
             if (filtered.length === 0) {

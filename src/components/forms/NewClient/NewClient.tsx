@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@nextui-org/react";
 import { useNewClient } from "./useNewClient";
 import { InputUsername } from "./InputUsername";
@@ -6,12 +5,14 @@ import { InputEmail } from "./InputEmail";
 import { InputCellphone } from "./InputCellphone";
 import { BusinessList } from "./BusinessList";
 import { SelectCountry } from "./SelectCountry";
+import { InputDetail } from "./InputDetail";
 
 export const NewClient = () => {
     const {
         handleCreateClient,
         handleOnChange,
         username,
+        detail,
         email,
         cellphone,
         isPending,
@@ -30,6 +31,7 @@ export const NewClient = () => {
         token: "",
         id_business: [],
         country: "",
+        detail: "",
     });
 
     return (
@@ -58,6 +60,8 @@ export const NewClient = () => {
                 handle={{ cellphone, handleOnChange, codeSelected }}
             />
             <InputEmail handle={{ email, handleOnChange }} />
+
+            <InputDetail handle={{ detail, handleOnChange }} />
             <Button
                 isLoading={isPending}
                 color="primary"

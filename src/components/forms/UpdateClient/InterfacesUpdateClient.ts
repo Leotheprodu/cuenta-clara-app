@@ -4,6 +4,7 @@ interface FormValuesUpdateClient {
     email: string;
     cellphone: string;
     token: string;
+    detail: string;
     id_business: Array<number>;
 }
 interface InputChangeTokenProps {
