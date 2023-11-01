@@ -4,7 +4,6 @@ import { IsLoggedInHandle } from "./IsLoggedInHandle";
 import { useLoginForm } from "@/components/forms/LoginForm/useLoginForm";
 import { InputEmailLoginForm } from "./InputEmailLoginForm";
 import { InputPasswordLoginForm } from "./InputPasswordLoginForm";
-import Loading from "@/app/loading";
 import { useLoadingByCriticProcess } from "@/components/hooks/useLoadingByCriticProcess";
 
 export const LoginForm = () => {

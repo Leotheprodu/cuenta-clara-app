@@ -6,8 +6,11 @@ import { InputCellphone } from "./InputCellphone";
 import { BusinessList } from "./BusinessList";
 import { SelectCountry } from "./SelectCountry";
 import { InputDetail } from "./InputDetail";
+import { useRouter } from "next/navigation";
 
 export const NewClient = () => {
+    const router = useRouter();
+
     const {
         handleCreateClient,
         handleOnChange,
@@ -33,7 +36,6 @@ export const NewClient = () => {
         country: "",
         detail: "",
     });
-
     return (
         <form
             onSubmit={handleCreateClient}
@@ -62,14 +64,24 @@ export const NewClient = () => {
             <InputEmail handle={{ email, handleOnChange }} />
 
             <InputDetail handle={{ detail, handleOnChange }} />
-            <Button
-                isLoading={isPending}
-                color="primary"
-                className=" uppercase w-full mt-3"
-                type="submit"
-            >
-                Crear
-            </Button>
+            <div className="flex gap-2 mt-3">
+                <Button
+                    onClick={() => router.back()}
+                    type="button"
+                    color="danger"
+                    className=" uppercase w-full"
+                >
+                    Cancelar
+                </Button>
+                <Button
+                    isLoading={isPending}
+                    color="primary"
+                    className=" uppercase w-full "
+                    type="submit"
+                >
+                    Crear
+                </Button>
+            </div>
         </form>
     );
 };

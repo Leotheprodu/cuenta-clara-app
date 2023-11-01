@@ -11,13 +11,13 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
     return (
         <div
             ref={ref}
-            className={`flex flex-col rounded-xl ${
+            className={`flex z-0 flex-col rounded-xl ${
                 isShowActivoButton ? "bg-primario/10" : "bg-danger-400/10"
             } ${
                 balance < 0 && "border-t-2 border-danger-400 bg-danger-400/5"
             } ${balance > 0 && "border-t-2 border-cuaternario"}`}
         >
-            <div>
+            <div className="z-0">
                 <div className="relative flex flex-col justify-center items-center">
                     <h2 className="font-bold text-2xl">{username}</h2>
                     {detail?.length > 0 && (
@@ -28,7 +28,7 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
                                 placement="bottom"
                                 color="primary"
                             >
-                                <div className="absolute right-1 top-1">
+                                <div className="text-secundario/50 absolute right-1 top-1">
                                     <InfoIcon className="w-6 h-6" />
                                 </div>
                             </Tooltip>

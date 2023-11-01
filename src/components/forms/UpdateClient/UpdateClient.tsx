@@ -8,8 +8,11 @@ import { InputChangeToken } from "./InputChangeToken";
 import { BusinessList } from "../NewClient/BusinessList";
 import { SelectCountry } from "../NewClient/SelectCountry";
 import { InputDetail } from "../NewClient/InputDetail";
+import { useRouter } from "next/navigation";
 
 export const UpdateClient = ({ id }: { id: string }) => {
+    const router = useRouter();
+
     const {
         handleUpdateClient,
         handleOnChange,
@@ -74,15 +77,25 @@ export const UpdateClient = ({ id }: { id: string }) => {
             <InputChangeToken
                 handle={{ token, handleOnChange, handleNewToken }}
             />
+            <div className="flex gap-2 mt-3">
+                <Button
+                    onClick={() => router.back()}
+                    type="button"
+                    color="danger"
+                    className=" uppercase w-full"
+                >
+                    Cancelar
+                </Button>
 
-            <Button
-                isLoading={isPending}
-                color="primary"
-                className="uppercase w-full"
-                type="submit"
-            >
-                Actualizar
-            </Button>
+                <Button
+                    isLoading={isPending}
+                    color="primary"
+                    className="uppercase w-full"
+                    type="submit"
+                >
+                    Actualizar
+                </Button>
+            </div>
         </form>
     );
 };

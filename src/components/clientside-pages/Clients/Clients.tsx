@@ -5,6 +5,7 @@ import { useClientsPage } from "./useClientsPage";
 import Loading from "@/app/loading";
 import { HeaderClients } from "./HeaderClients";
 import { ClientsLetterView } from "./ClientsLetterView";
+import { motion } from "framer-motion";
 export const Clients = () => {
     const {
         handleSearchClient,
@@ -32,12 +33,16 @@ export const Clients = () => {
                     {clientsSearched.length > 0 &&
                         clientsSearched.map((client: any) => (
                             <MotionClientsCard key={client.id}>
-                                <div className="flex flex-col rounded-2xl border-1 border-secundario p-2 w-[20rem] shadow-md hover:scale-[.98] ease-in-out duration-200">
+                                <motion.div
+                                    whileHover={{ scale: [null, 1.3, 1.2] }}
+                                    transition={{ duration: 0.3 }}
+                                    className=" flex flex-col z-10 rounded-2xl border-1 bg-blanco border-secundario p-2 w-[20rem] shadow-md"
+                                >
                                     <ClientCard
                                         isShowActivoButton={isShowActivoButton}
                                         client={client}
                                     />
-                                </div>
+                                </motion.div>
                             </MotionClientsCard>
                         ))}
                     <ClientsLetterView letterViewClient={letterViewClient} />

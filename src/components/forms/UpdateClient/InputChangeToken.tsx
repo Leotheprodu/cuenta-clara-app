@@ -1,4 +1,4 @@
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Tooltip } from "@nextui-org/react";
 
 export const InputChangeToken = ({ handle }: InputChangeTokenProps) => {
     const { handleOnChange, handleNewToken, token } = handle;
@@ -13,9 +13,19 @@ export const InputChangeToken = ({ handle }: InputChangeTokenProps) => {
                 onChange={handleOnChange}
                 name="token"
             ></Input>
-            <Button color="secondary" onClick={handleNewToken}>
-                Nuevo Token
-            </Button>
+            <Tooltip
+                color="secondary"
+                showArrow
+                content="Generar un nuevo token"
+            >
+                <Button
+                    color="secondary"
+                    className="uppercase w-1/2"
+                    onClick={handleNewToken}
+                >
+                    Nuevo token
+                </Button>
+            </Tooltip>
         </div>
     );
 };
