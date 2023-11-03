@@ -30,7 +30,7 @@ export const useHeader = () => {
     });
 
     useEffect(() => {
-        if (statusBusiness === "success" && user.isLoggedIn) {
+        if (statusBusiness === "success") {
             setBusiness(dataBusiness);
             const defaultBussines = dataBusiness.filter((item: any) => {
                 if (item.default) {

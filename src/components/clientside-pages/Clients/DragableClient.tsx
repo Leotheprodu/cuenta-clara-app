@@ -1,6 +1,6 @@
 import Loading from "@/app/loading";
 import { internalLinks } from "@/components/Utils/internalLinks";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -45,6 +45,9 @@ export const DragableClient = ({
                 >
                     {children}
                 </motion.div>
+                <AnimatePresence>
+                    {isRedirecting && <Loading />}
+                </AnimatePresence>
             </div>
         </div>
     );
