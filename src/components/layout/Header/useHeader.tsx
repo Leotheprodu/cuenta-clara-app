@@ -14,6 +14,7 @@ export const useHeader = () => {
     const user = useStore($user);
     const [business, setBusiness] = useState([BusinessDefault]);
     const [value, setValue] = useState(new Set(["0"]));
+
     const {
         status: statusBusiness,
         data: dataBusiness,
@@ -40,7 +41,10 @@ export const useHeader = () => {
                 setValue(new Set([defaultBussines[0].id.toString()]));
                 $selectedBusiness.set(defaultBussines[0].id);
             }
+        } else {
+            refetch();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [statusBusiness, dataBusiness, user]);
 
     const { status, mutate, isPending } = useMutation({
