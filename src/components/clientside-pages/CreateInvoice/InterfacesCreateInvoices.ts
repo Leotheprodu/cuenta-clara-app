@@ -82,6 +82,7 @@ interface ModalAddInvoiceDetailProps {
             handleOnBlurCode: () => void;
             handleEraseModal: () => void;
             codeInput: React.RefObject<HTMLInputElement>;
+            quantityInput: React.RefObject<HTMLInputElement>;
             handleOpenSearchPS: () => void;
             handleFocus: (e: React.FocusEvent<Element, Element>) => void;
         };

@@ -28,6 +28,7 @@ export const ModalAddInvoiceDetail = ({
         handleEraseModal,
         handleOpenSearchPS,
         handleFocus,
+        quantityInput,
     } = createInvoiceDetail;
     return (
         <Modal
@@ -77,6 +78,7 @@ export const ModalAddInvoiceDetail = ({
                                 </div>
                                 <Input
                                     className="h-12"
+                                    ref={quantityInput}
                                     isRequired
                                     variant="underlined"
                                     label="Cantidad"

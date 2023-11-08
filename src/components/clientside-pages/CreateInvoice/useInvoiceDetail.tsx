@@ -6,7 +6,10 @@ import { Tooltip, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
-import { initialStateInvoiceDetail } from "@/data/constants";
+import {
+    initialStateInvoiceDetail,
+    productsAndServicesDefault,
+} from "@/data/constants";
 import { productAndServiceCodeClean } from "@/components/Utils/productAndServiceCodeClean";
 
 export const useInvoiceDetail = ({
@@ -15,7 +18,9 @@ export const useInvoiceDetail = ({
     selectedBusiness,
 }: UseInvoiceDetailProps) => {
     const { user } = useStore($user);
-
+    const [searchPS, setSearchPS] = useState("");
+    const [filteredProductsAndServices, setFilteredProductsAndServices] =
+        useState<DataProductsAndServicesProps[]>([productsAndServicesDefault]);
     // Estado para almacenar los detalles de la factura
     const [invoiceDetails, setInvoiceDetails] = useState([
         initialStateInvoiceDetail,
@@ -30,6 +35,8 @@ export const useInvoiceDetail = ({
 
     // Referencia para el input de código en el modal de agregar detalle
     const codeInput: React.RefObject<HTMLInputElement> = useRef(null);
+    // Referencia para el input de cantidad en el modal de agregar detalle
+    const quantityInput: React.RefObject<HTMLInputElement> = useRef(null);
 
     // Estado para almacenar si se esta editando un detalle
     const [isEditing, setIsEditing] = useState<{
@@ -78,7 +85,7 @@ export const useInvoiceDetail = ({
             toast.error("Por favor complete todos los campos", {
                 duration: 4000,
             });
-            focusFirstInput();
+            focusFirstInput(codeInput);
             return;
         }
         // Si no se esta editando un detalle se agrega uno nuevo al estado de detalles de factura y al localstorage
@@ -95,7 +102,7 @@ export const useInvoiceDetail = ({
             );
             toast.success("Detalle agregado correctamente", { duration: 4000 });
             setFormDataDetail(initialStateInvoiceDetail);
-            focusFirstInput();
+            focusFirstInput(codeInput);
             // Si se esta editando un detalle se edita el detalle en el estado de detalles de factura y en el localstorage
         } else if (isEditing.state && isEditing.index !== null) {
             const idClient = localStorage.getItem("idClient");
@@ -116,9 +123,9 @@ export const useInvoiceDetail = ({
         }
     };
     // Función para enfocar el primer input del modal de agregar detalle
-    const focusFirstInput = () => {
-        if (codeInput.current) {
-            codeInput.current.focus();
+    const focusFirstInput = (ref: React.RefObject<HTMLInputElement>) => {
+        if (ref.current) {
+            ref.current.focus();
         }
     };
     // Obtener los detalles de la factura del localstorage
@@ -186,8 +193,51 @@ export const useInvoiceDetail = ({
     const handleCloseModalPS = (onClose: () => void) => {
         onClose();
     };
-    const handleAddPStoDetail = (onClose: () => void) => {
+    useEffect(() => {
+        if (searchPS.length > 0) {
+            const searchLower = searchPS.toLowerCase(); // Convertimos el input a minúsculas
+            const filtered = productsAndServices.all.filter(
+                (PorS: DataProductsAndServicesProps) => {
+                    const nameMatch = PorS.name
+                        .toLowerCase()
+                        .includes(searchLower);
+                    const descriptionMatch =
+                        PorS.description &&
+                        PorS.description.toLowerCase().includes(searchLower);
+                    const priceMatch =
+                        PorS.unit_price &&
+                        PorS.unit_price.toString().includes(searchPS);
+                    const unitMatch =
+                        PorS.unit &&
+                        PorS.unit.toLowerCase().includes(searchLower);
+                    return (
+                        nameMatch || descriptionMatch || priceMatch || unitMatch
+                    );
+                }
+            );
+
+            if (filtered.length === 0) {
+                return;
+            }
+            setFilteredProductsAndServices(filtered);
+        } else {
+            setFilteredProductsAndServices(productsAndServices.all);
+        }
+    }, [searchPS, productsAndServices.all]);
+    const handleAddPStoDetail = (
+        onClose: () => void,
+        ps: DataProductsAndServicesProps
+    ) => {
+        setFormDataDetail({
+            code: productAndServiceCodeClean(ps.code),
+            quantity: 0,
+            price: ps.unit_price,
+            description: ps.description,
+        });
         onClose();
+    };
+    const handleSearchPS = (e: any) => {
+        setSearchPS(e.target.value);
     };
     // Función para buscar el producto o servicio con el código ingresado y llenar los campos
     const handleOnBlurCode = () => {
@@ -209,7 +259,7 @@ export const useInvoiceDetail = ({
     // Función para limpiar el modal de agregar detalle de factura
     const handleEraseModal = () => {
         setFormDataDetail(initialStateInvoiceDetail);
-        focusFirstInput();
+        focusFirstInput(codeInput);
     };
     // Función para renderizar las celdas de la tabla de detalles de la factura
     const renderCell: RenderCellProps = (detail, columnKey, index) => {
@@ -283,6 +333,7 @@ export const useInvoiceDetail = ({
             isOpen,
             onOpenChange,
             codeInput,
+            quantityInput,
             renderCell,
             columnNames,
             handleCloseModal,
@@ -293,6 +344,10 @@ export const useInvoiceDetail = ({
             handleCloseModalPS,
             handleAddPStoDetail,
             handleOpenSearchPS,
+            productsAndServices,
+            handleSearchPS,
+            searchPS,
+            filteredProductsAndServices,
         },
     };
 };
