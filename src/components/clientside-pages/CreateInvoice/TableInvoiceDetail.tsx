@@ -14,7 +14,9 @@ export const TableInvoiceDetail = ({ handle }: TableInvoiceDetailProps) => {
         <Table aria-label="Detalle de Factura">
             <TableHeader>
                 {columnNames.map((column: ColumnNamesProps) => (
-                    <TableColumn key={column.key}>{column.name}</TableColumn>
+                    <TableColumn className="text-center" key={column.key}>
+                        {column.name}
+                    </TableColumn>
                 ))}
             </TableHeader>
             <TableBody emptyContent={"No hay detalles para mostrar"}>

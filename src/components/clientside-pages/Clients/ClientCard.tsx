@@ -1,6 +1,6 @@
 import { ClientSections } from "./ClientSections";
 import { MainContactInfo } from "./MainContactInfo";
-import { moneyFormat } from "@/components/Utils/MoneyFormat";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 import { useClientCard } from "./useClientCard";
 import { InfoIcon } from "@/icons/infoIcon";
 import { Tooltip } from "@nextui-org/react";

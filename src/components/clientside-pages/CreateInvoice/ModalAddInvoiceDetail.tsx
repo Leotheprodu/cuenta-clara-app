@@ -27,6 +27,7 @@ export const ModalAddInvoiceDetail = ({
         handleOnBlurCode,
         handleEraseModal,
         handleOpenSearchPS,
+        handleFocus,
     } = createInvoiceDetail;
     return (
         <Modal
@@ -67,8 +68,10 @@ export const ModalAddInvoiceDetail = ({
                                         name="code"
                                         value={formDataDetail.code}
                                         autoFocus
+                                        isRequired
                                         onChange={handleOnChangeDetail}
                                         onBlur={handleOnBlurCode}
+                                        onFocus={handleFocus}
                                         tabIndex={1}
                                     />
                                 </div>
@@ -79,6 +82,7 @@ export const ModalAddInvoiceDetail = ({
                                     label="Cantidad"
                                     type="number"
                                     inputMode="numeric"
+                                    step={0.01}
                                     name="quantity"
                                     value={
                                         formDataDetail.quantity === 0
@@ -86,23 +90,8 @@ export const ModalAddInvoiceDetail = ({
                                             : formDataDetail.quantity.toString()
                                     }
                                     onChange={handleOnChangeDetail}
+                                    onFocus={handleFocus}
                                     tabIndex={2}
-                                />
-                                <Input
-                                    className="h-12"
-                                    isRequired
-                                    variant="underlined"
-                                    label="Precio"
-                                    inputMode="numeric"
-                                    type="text"
-                                    name="price"
-                                    value={
-                                        formDataDetail.price === 0
-                                            ? ""
-                                            : formDataDetail.price.toString()
-                                    }
-                                    onChange={handleOnChangeDetail}
-                                    tabIndex={3}
                                 />
                                 <Textarea
                                     className=""
@@ -112,6 +101,7 @@ export const ModalAddInvoiceDetail = ({
                                     name="description"
                                     value={formDataDetail.description}
                                     onChange={handleOnChangeDetail}
+                                    onFocus={handleFocus}
                                     tabIndex={4}
                                 />
                             </div>

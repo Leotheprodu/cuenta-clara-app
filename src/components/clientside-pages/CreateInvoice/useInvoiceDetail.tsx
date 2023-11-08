@@ -1,7 +1,7 @@
 import { EditRowIcon } from "@/icons/EditRowIcon";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
 import toast from "react-hot-toast";
-import { moneyFormat } from "@/components/Utils/MoneyFormat";
+import { formatNumber, moneyFormat } from "@/components/Utils/dataFormat";
 import { Tooltip, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 import { useStore } from "@nanostores/react";
@@ -220,14 +220,22 @@ export const useInvoiceDetail = ({
             case "code":
                 return <p>{detail.code}</p>;
             case "quantity":
-                return <p>{detail.quantity}</p>;
+                return (
+                    <p className="text-right">
+                        {formatNumber(detail.quantity)}
+                    </p>
+                );
             case "price":
-                return <p>{moneyFormat(detail.price, "CRC", "es-CR")}</p>;
+                return (
+                    <p className="text-right">
+                        {moneyFormat(detail.price, "CRC", "es-CR")}
+                    </p>
+                );
             case "description":
                 return <p>{detail.description}</p>;
             case "subtotal":
                 return (
-                    <p>
+                    <p className="text-right">
                         {moneyFormat(
                             detail.quantity * detail.price,
                             "CRC",

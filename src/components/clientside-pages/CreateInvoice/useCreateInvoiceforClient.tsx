@@ -1,4 +1,4 @@
-import { handleOnChange } from "@/components/Utils/formUtils";
+import { handleFocus, handleOnChange } from "@/components/Utils/formUtils";
 import { getCurrentDate } from "@/components/Utils/getCurrentDate";
 import { useEffect, useState } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
@@ -145,6 +145,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         businessSelected,
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnChange(setFormInvoice, e),
-        createInvoiceDetail,
+        createInvoiceDetail: { ...createInvoiceDetail, handleFocus },
     };
 };
