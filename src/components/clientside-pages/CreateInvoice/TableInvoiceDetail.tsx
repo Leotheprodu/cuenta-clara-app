@@ -8,7 +8,8 @@ import {
 } from "@nextui-org/react";
 
 export const TableInvoiceDetail = ({ handle }: TableInvoiceDetailProps) => {
-    const { invoiceDetails, renderCell, columnNames } = handle;
+    const { createInvoiceDetail } = handle;
+    const { invoiceDetails, renderCell, columnNames } = createInvoiceDetail;
     return (
         <Table aria-label="Detalle de Factura">
             <TableHeader>

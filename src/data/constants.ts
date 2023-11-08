@@ -29,6 +29,26 @@ const BusinessDefault = {
     default: false,
     user_id: 0,
 };
+// constante que contiene los datos por defecto de los productos y servicios
+const productsAndServicesDefault: DataProductsAndServicesProps = {
+    id: null,
+    user_id: null,
+    name: "",
+    description: "",
+    unit: "",
+    unit_price: 0,
+    default: false,
+    business_id: null,
+    code: "",
+    type: "",
+};
+// Datos iniciales para los detalles de la factura
+const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
+    code: "",
+    quantity: 0,
+    price: 0,
+    description: "",
+};
 
 /* ----------------------------------URLs------------------------------------ */
 /**
@@ -46,4 +66,6 @@ export {
     BusinessDefault,
     domain,
     baseUrl,
+    productsAndServicesDefault,
+    initialStateInvoiceDetail,
 };

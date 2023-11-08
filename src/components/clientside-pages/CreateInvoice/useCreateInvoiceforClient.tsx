@@ -6,20 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
+import { productsAndServicesDefault } from "@/data/constants";
 
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
-    const productsAndServicesDefault: DataProductsAndServicesProps = {
-        id: null,
-        user_id: null,
-        name: "",
-        description: "",
-        unit: "",
-        unit_price: 0,
-        default: false,
-        business_id: null,
-        code: "",
-        type: "",
-    };
     // estado para almacenar los datos del cliente
     const [client, setClient] = useState({ username: "", active: 0 });
     // estado para almacenar el negocio seleccionado
@@ -43,21 +32,11 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         date: getCurrentDate(),
     });
     // Hook para manejar los detalles de la factura
-    const {
-        invoiceDetails,
-        formDataDetail,
-        handleOnChangeDetail,
-        handleAddInvoiceDetail,
-        handleOpenAddDetail,
-        isOpen,
-        onOpenChange,
-        codeInput,
-        renderCell,
-        columnNames,
-        handleCloseModal,
-        handleOnBlurCode,
-        handleEraseModal,
-    } = useInvoiceDetail({ id, productsAndServices, selectedBusiness });
+    const { createInvoiceDetail } = useInvoiceDetail({
+        id,
+        productsAndServices,
+        selectedBusiness,
+    });
 
     // obtener los datos del cliente
     const { status: statusFetchClient, data: clientData } = useQuery({
@@ -145,7 +124,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
             const productsAndServices = dataProductsAndServices;
             //encuentra el producto o servicio default
             const defaultProductOrService = productsAndServices.find(
-                (item: any) => item.default === 1
+                (item: any) => item.default === true
             );
 
             setProductsAndServices({
@@ -166,18 +145,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         businessSelected,
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnChange(setFormInvoice, e),
-        invoiceDetails,
-        formDataDetail,
-        handleOnChangeDetail,
-        handleAddInvoiceDetail,
-        handleOpenAddDetail,
-        isOpen,
-        onOpenChange,
-        codeInput,
-        renderCell,
-        columnNames,
-        handleCloseModal,
-        handleOnBlurCode,
-        handleEraseModal,
+        createInvoiceDetail,
     };
 };

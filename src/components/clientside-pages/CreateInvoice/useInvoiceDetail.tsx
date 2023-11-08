@@ -6,6 +6,8 @@ import { Tooltip, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
+import { initialStateInvoiceDetail } from "@/data/constants";
+import { productAndServiceCodeClean } from "@/components/Utils/productAndServiceCodeClean";
 
 export const useInvoiceDetail = ({
     id,
@@ -13,19 +15,19 @@ export const useInvoiceDetail = ({
     selectedBusiness,
 }: UseInvoiceDetailProps) => {
     const { user } = useStore($user);
-    // Datos iniciales para los detalles de la factura
-    const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
-        code: "",
-        quantity: 0,
-        price: 0,
-        description: "",
-    };
+
     // Estado para almacenar los detalles de la factura
     const [invoiceDetails, setInvoiceDetails] = useState([
         initialStateInvoiceDetail,
     ]);
     // Hook para manejar el modal de agregar detalle
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const {
+        isOpen: isOpenModalPS,
+        onOpen: onOpenModalPS,
+        onOpenChange: onOpenChangeModalPS,
+    } = useDisclosure();
+
     // Referencia para el input de código en el modal de agregar detalle
     const codeInput: React.RefObject<HTMLInputElement> = useRef(null);
 
@@ -49,8 +51,22 @@ export const useInvoiceDetail = ({
     ];
     // Función para abrir el modal de agregar detalle
     const handleOpenAddDetail = () => {
-        setFormDataDetail(initialStateInvoiceDetail);
+        if (productsAndServices.default) {
+            setFormDataDetail({
+                code: productAndServiceCodeClean(
+                    productsAndServices.default.code
+                ),
+                quantity: 0,
+                price: productsAndServices.default.unit_price,
+                description: productsAndServices.default.description,
+            });
+        } else {
+            setFormDataDetail(initialStateInvoiceDetail);
+        }
         onOpen();
+    };
+    const handleOpenSearchPS = () => {
+        onOpenModalPS();
     };
     // Función para agregar un nuevo detalle de factura al estado
     const handleAddInvoiceDetail: HandleAddInvoiceDetailProps = (onClose) => {
@@ -124,14 +140,20 @@ export const useInvoiceDetail = ({
         setFormDataDetail({ ...formDataDetail, [name]: value });
     };
     // Función para editar una línea de detalle
-    const handleEditInvoiceDetail = (e: any, index: any) => {
+    const handleEditInvoiceDetail: HandleWithIndexAndEventProps = (
+        e,
+        index
+    ) => {
         e.preventDefault();
         setFormDataDetail(invoiceDetails[index]);
         setIsEditing({ state: true, index });
         onOpen();
     };
     // Función para eliminar una línea de detalle
-    const handleRemoveInvoiceDetail = (e: any, index: any) => {
+    const handleRemoveInvoiceDetail: HandleWithIndexAndEventProps = (
+        e,
+        index
+    ) => {
         e.preventDefault();
         const idClient = localStorage.getItem("idClient");
         // Si el id del cliente en el localstorage es diferente al id del cliente actual se elimina el id del cliente del localstorage
@@ -154,11 +176,17 @@ export const useInvoiceDetail = ({
         );
     };
     // Función para cerrar el modal de agregar detalle
-    const handleCloseModal = (onClose: any) => {
+    const handleCloseModal = (onClose: () => void) => {
         setFormDataDetail(initialStateInvoiceDetail);
         if (isEditing) {
             setIsEditing({ state: false, index: 0 });
         }
+        onClose();
+    };
+    const handleCloseModalPS = (onClose: () => void) => {
+        onClose();
+    };
+    const handleAddPStoDetail = (onClose: () => void) => {
         onClose();
     };
     // Función para buscar el producto o servicio con el código ingresado y llenar los campos
@@ -238,18 +266,25 @@ export const useInvoiceDetail = ({
         }
     };
     return {
-        invoiceDetails,
-        formDataDetail,
-        handleOnChangeDetail,
-        handleAddInvoiceDetail,
-        handleOpenAddDetail,
-        isOpen,
-        onOpenChange,
-        codeInput,
-        renderCell,
-        columnNames,
-        handleCloseModal,
-        handleOnBlurCode,
-        handleEraseModal,
+        createInvoiceDetail: {
+            invoiceDetails,
+            formDataDetail,
+            handleOnChangeDetail,
+            handleAddInvoiceDetail,
+            handleOpenAddDetail,
+            isOpen,
+            onOpenChange,
+            codeInput,
+            renderCell,
+            columnNames,
+            handleCloseModal,
+            handleOnBlurCode,
+            handleEraseModal,
+            isOpenModalPS,
+            onOpenChangeModalPS,
+            handleCloseModalPS,
+            handleAddPStoDetail,
+            handleOpenSearchPS,
+        },
     };
 };

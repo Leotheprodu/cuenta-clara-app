@@ -10,10 +10,12 @@ import {
     Textarea,
     Tooltip,
 } from "@nextui-org/react";
+import { ModalSearchProductsAndServices } from "./ModalSearchProductsAndServices";
 
 export const ModalAddInvoiceDetail = ({
     handle,
 }: ModalAddInvoiceDetailProps) => {
+    const { createInvoiceDetail } = handle;
     const {
         formDataDetail,
         handleOnChangeDetail,
@@ -24,10 +26,11 @@ export const ModalAddInvoiceDetail = ({
         handleCloseModal,
         handleOnBlurCode,
         handleEraseModal,
-    } = handle;
+        handleOpenSearchPS,
+    } = createInvoiceDetail;
     return (
         <Modal
-            backdrop="blur"
+            backdrop="opaque"
             placement="center"
             isOpen={isOpen}
             onOpenChange={onOpenChange}
@@ -43,13 +46,18 @@ export const ModalAddInvoiceDetail = ({
                                 <div className="flex gap-2 w-full relative">
                                     <Tooltip content="Buscar">
                                         <button
+                                            onClick={() => handleOpenSearchPS()}
                                             name="buscar"
                                             className="absolute left-[-2rem] bottom-1 bg-secundario/20 rounded-md text-blanco hover:bg-secundario duration-300"
                                         >
                                             <AddIcon />
                                         </button>
                                     </Tooltip>
-
+                                    <ModalSearchProductsAndServices
+                                        handle={{
+                                            createInvoiceDetail,
+                                        }}
+                                    />
                                     <Input
                                         className="h-12"
                                         ref={codeInput}

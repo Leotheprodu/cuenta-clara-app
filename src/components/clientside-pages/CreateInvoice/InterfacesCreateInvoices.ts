@@ -22,6 +22,9 @@ interface HeaderCreateInvoiceProps {
 interface HandleOnChangeDetailProps {
     (e: React.ChangeEvent<HTMLInputElement>): void;
 }
+interface HandleWithIndexAndEventProps {
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number): void;
+}
 interface HandleAddInvoiceDetailProps {
     (onClose: () => void): void;
 }
@@ -41,39 +44,46 @@ interface ColumnNamesProps {
 }
 interface CreateInvoiceDetailProps {
     handle: {
-        formDataDetail: InitialStateInvoiceDetailProps;
-        handleOnChangeDetail: HandleOnChangeDetailProps;
-        handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
-        invoiceDetails: InitialStateInvoiceDetailProps[];
-        handleOpenAddDetail: () => void;
-        isOpen: boolean;
-        onOpenChange: () => void;
-        codeInput: React.RefObject<HTMLInputElement>;
-        renderCell: RenderCellProps;
-        columnNames: ColumnNamesProps[];
-        handleCloseModal: HandleCloseModalProps;
-        handleOnBlurCode: () => void;
-        handleEraseModal: () => void;
+        createInvoiceDetail: {
+            formDataDetail: InitialStateInvoiceDetailProps;
+            handleOnChangeDetail: HandleOnChangeDetailProps;
+            handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
+            invoiceDetails: InitialStateInvoiceDetailProps[];
+            handleOpenAddDetail: () => void;
+            isOpen: boolean;
+            onOpenChange: () => void;
+            codeInput: React.RefObject<HTMLInputElement>;
+            renderCell: RenderCellProps;
+            columnNames: ColumnNamesProps[];
+            handleCloseModal: HandleCloseModalProps;
+            handleOnBlurCode: () => void;
+            handleEraseModal: () => void;
+        };
     };
 }
 interface TableInvoiceDetailProps {
     handle: {
-        invoiceDetails: InitialStateInvoiceDetailProps[];
-        renderCell: RenderCellProps;
-        columnNames: ColumnNamesProps[];
+        createInvoiceDetail: {
+            invoiceDetails: InitialStateInvoiceDetailProps[];
+            renderCell: RenderCellProps;
+            columnNames: ColumnNamesProps[];
+        };
     };
 }
 interface ModalAddInvoiceDetailProps {
     handle: {
-        formDataDetail: InitialStateInvoiceDetailProps;
-        handleOnChangeDetail: HandleOnChangeDetailProps;
-        handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
-        isOpen: boolean;
-        onOpenChange: () => void;
-        handleCloseModal: HandleCloseModalProps;
-        handleOnBlurCode: () => void;
-        handleEraseModal: () => void;
-        codeInput: React.RefObject<HTMLInputElement>;
+        createInvoiceDetail: {
+            formDataDetail: InitialStateInvoiceDetailProps;
+            handleOnChangeDetail: HandleOnChangeDetailProps;
+            handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
+            isOpen: boolean;
+            onOpenChange: () => void;
+            handleCloseModal: HandleCloseModalProps;
+            handleOnBlurCode: () => void;
+            handleEraseModal: () => void;
+            codeInput: React.RefObject<HTMLInputElement>;
+            handleOpenSearchPS: () => void;
+        };
     };
 }
 interface UseInvoiceDetailProps {

@@ -3,21 +3,9 @@ import { ModalAddInvoiceDetail } from "./ModalAddInvoiceDetail";
 import { TableInvoiceDetail } from "./TableInvoiceDetail";
 
 export const CreateInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
-    const {
-        formDataDetail,
-        handleOnChangeDetail,
-        handleAddInvoiceDetail,
-        invoiceDetails,
-        handleOpenAddDetail,
-        isOpen,
-        onOpenChange,
-        codeInput,
-        renderCell,
-        columnNames,
-        handleCloseModal,
-        handleOnBlurCode,
-        handleEraseModal,
-    } = handle;
+    const { createInvoiceDetail } = handle;
+    const { handleOpenAddDetail } = createInvoiceDetail;
+
     return (
         <div>
             <h2 className="text-2xl text-center font-bold my-10">
@@ -32,22 +20,12 @@ export const CreateInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
             </Button>
             <ModalAddInvoiceDetail
                 handle={{
-                    formDataDetail,
-                    handleOnChangeDetail,
-                    handleAddInvoiceDetail,
-                    isOpen,
-                    onOpenChange,
-                    codeInput,
-                    handleCloseModal,
-                    handleOnBlurCode,
-                    handleEraseModal,
+                    createInvoiceDetail,
                 }}
             />
             <TableInvoiceDetail
                 handle={{
-                    invoiceDetails,
-                    renderCell,
-                    columnNames,
+                    createInvoiceDetail,
                 }}
             />
         </div>

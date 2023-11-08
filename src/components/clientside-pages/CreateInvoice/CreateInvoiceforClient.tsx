@@ -12,19 +12,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
         handleOnChange,
         username,
         businessSelected,
-        formDataDetail,
-        handleOnChangeDetail,
-        handleAddInvoiceDetail,
-        invoiceDetails,
-        handleOpenAddDetail,
-        isOpen,
-        onOpenChange,
-        codeInput,
-        renderCell,
-        columnNames,
-        handleCloseModal,
-        handleOnBlurCode,
-        handleEraseModal,
+        createInvoiceDetail,
     } = useCreateInvoiceforClient({
         id,
     });
@@ -49,23 +37,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                             value={date}
                             onChange={handleOnChange}
                         />
-                        <CreateInvoiceDetail
-                            handle={{
-                                handleOnChangeDetail,
-                                formDataDetail,
-                                handleAddInvoiceDetail,
-                                invoiceDetails,
-                                handleOpenAddDetail,
-                                isOpen,
-                                onOpenChange,
-                                codeInput,
-                                renderCell,
-                                columnNames,
-                                handleCloseModal,
-                                handleOnBlurCode,
-                                handleEraseModal,
-                            }}
-                        />
+                        <CreateInvoiceDetail handle={{ createInvoiceDetail }} />
                     </form>
                 </PageWrapper>
             </section>
