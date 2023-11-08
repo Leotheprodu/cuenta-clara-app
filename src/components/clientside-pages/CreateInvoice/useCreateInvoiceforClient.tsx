@@ -8,6 +8,40 @@ import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
 
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
+    const productsAndServicesDefault: DataProductsAndServicesProps = {
+        id: null,
+        user_id: null,
+        name: "",
+        description: "",
+        unit: "",
+        unit_price: 0,
+        default: false,
+        business_id: null,
+        code: "",
+        type: "",
+    };
+    // estado para almacenar los datos del cliente
+    const [client, setClient] = useState({ username: "", active: 0 });
+    // estado para almacenar el negocio seleccionado
+    const selectedBusiness = useStore($selectedBusiness);
+    // estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
+    const [businessSelected, setBusinessSelected] =
+        useState<BusinessSelecterProps>({
+            id: 0,
+            name: "",
+            isClientInBusiness: true,
+        });
+    // estado para almacenar los productos y el servicio default del negocio seleccionado
+    const [productsAndServices, setProductsAndServices] =
+        useState<ProductsAndServicesProps>({
+            all: [productsAndServicesDefault],
+            default: productsAndServicesDefault,
+        });
+    // estado para almacenar los datos de la factura
+    const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
+        client_id: parseInt(id, 10),
+        date: getCurrentDate(),
+    });
     // Hook para manejar los detalles de la factura
     const {
         invoiceDetails,
@@ -21,24 +55,9 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         renderCell,
         columnNames,
         handleCloseModal,
-    } = useInvoiceDetail({ id });
-    // estado para almacenar los datos del cliente
-    const [client, setClient] = useState({ username: "", active: 0 });
-    // estado para almacenar el negocio seleccionado
-    const selectedBusiness = useStore($selectedBusiness);
-    // estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
-    const [businessSelected, setBusinessSelected] =
-        useState<BusinessSelecterProps>({
-            id: 0,
-            name: "",
-            isClientInBusiness: true,
-        });
-
-    // estado para almacenar los datos de la factura
-    const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
-        client_id: parseInt(id, 10),
-        date: getCurrentDate(),
-    });
+        handleOnBlurCode,
+        handleEraseModal,
+    } = useInvoiceDetail({ id, productsAndServices, selectedBusiness });
 
     // obtener los datos del cliente
     const { status: statusFetchClient, data: clientData } = useQuery({
@@ -67,6 +86,19 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
             }),
         retry: 2,
     });
+    const {
+        status: statusProductsAndServices,
+        data: dataProductsAndServices,
+        refetch: refetchProductsAndServices,
+    } = useQuery({
+        queryKey: ["user-products-and-services"],
+        queryFn: async () =>
+            await fetchAPI({
+                url: `products_and_services/${selectedBusiness}`,
+            }),
+        retry: 2,
+    });
+
     useEffect(() => {
         // si el cliente existe, setearlo en el estado
         if (statusFetchClient === "success") {
@@ -107,6 +139,27 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         statusFetchClient,
     ]);
 
+    // obtener productos y servicios del negocio seleccionado del cliente
+    useEffect(() => {
+        if (statusProductsAndServices === "success") {
+            const productsAndServices = dataProductsAndServices;
+            //encuentra el producto o servicio default
+            const defaultProductOrService = productsAndServices.find(
+                (item: any) => item.default === 1
+            );
+
+            setProductsAndServices({
+                all: productsAndServices,
+                default: defaultProductOrService,
+            });
+        }
+    }, [statusProductsAndServices, dataProductsAndServices]);
+
+    // cuando cambie el negocio seleccionado se refetchearan los productos y servicios
+    useEffect(() => {
+        selectedBusiness && refetchProductsAndServices();
+    }, [selectedBusiness, refetchProductsAndServices]);
+
     return {
         ...formInvoice,
         ...client,
@@ -124,5 +177,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         renderCell,
         columnNames,
         handleCloseModal,
+        handleOnBlurCode,
+        handleEraseModal,
     };
 };

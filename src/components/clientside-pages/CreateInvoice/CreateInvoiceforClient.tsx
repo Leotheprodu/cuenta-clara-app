@@ -23,6 +23,8 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
         renderCell,
         columnNames,
         handleCloseModal,
+        handleOnBlurCode,
+        handleEraseModal,
     } = useCreateInvoiceforClient({
         id,
     });
@@ -60,6 +62,8 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                                 renderCell,
                                 columnNames,
                                 handleCloseModal,
+                                handleOnBlurCode,
+                                handleEraseModal,
                             }}
                         />
                     </form>

@@ -4,8 +4,15 @@ import toast from "react-hot-toast";
 import { moneyFormat } from "@/components/Utils/MoneyFormat";
 import { Tooltip, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
+import { useStore } from "@nanostores/react";
+import { $user } from "@/stores/users";
 
-export const useInvoiceDetail = ({ id }: { id: string }) => {
+export const useInvoiceDetail = ({
+    id,
+    productsAndServices,
+    selectedBusiness,
+}: UseInvoiceDetailProps) => {
+    const { user } = useStore($user);
     // Datos iniciales para los detalles de la factura
     const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
         code: "",
@@ -154,6 +161,28 @@ export const useInvoiceDetail = ({ id }: { id: string }) => {
         }
         onClose();
     };
+    // Función para buscar el producto o servicio con el código ingresado y llenar los campos
+    const handleOnBlurCode = () => {
+        if (formDataDetail.code !== "") {
+            const productOrService = productsAndServices.all.find(
+                (productOrService: any) =>
+                    productOrService.code ===
+                    `${user.id}-${selectedBusiness}-${formDataDetail.code}`
+            );
+            if (productOrService) {
+                setFormDataDetail({
+                    ...formDataDetail,
+                    description: productOrService.description,
+                    price: productOrService.unit_price,
+                });
+            }
+        }
+    };
+    // Función para limpiar el modal de agregar detalle de factura
+    const handleEraseModal = () => {
+        setFormDataDetail(initialStateInvoiceDetail);
+        focusFirstInput();
+    };
     // Función para renderizar las celdas de la tabla de detalles de la factura
     const renderCell: RenderCellProps = (detail, columnKey, index) => {
         const cellValue =
@@ -220,5 +249,7 @@ export const useInvoiceDetail = ({ id }: { id: string }) => {
         renderCell,
         columnNames,
         handleCloseModal,
+        handleOnBlurCode,
+        handleEraseModal,
     };
 };

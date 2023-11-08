@@ -52,7 +52,50 @@ interface CreateInvoiceDetailProps {
         renderCell: RenderCellProps;
         columnNames: ColumnNamesProps[];
         handleCloseModal: HandleCloseModalProps;
+        handleOnBlurCode: () => void;
+        handleEraseModal: () => void;
     };
+}
+interface TableInvoiceDetailProps {
+    handle: {
+        invoiceDetails: InitialStateInvoiceDetailProps[];
+        renderCell: RenderCellProps;
+        columnNames: ColumnNamesProps[];
+    };
+}
+interface ModalAddInvoiceDetailProps {
+    handle: {
+        formDataDetail: InitialStateInvoiceDetailProps;
+        handleOnChangeDetail: HandleOnChangeDetailProps;
+        handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
+        isOpen: boolean;
+        onOpenChange: () => void;
+        handleCloseModal: HandleCloseModalProps;
+        handleOnBlurCode: () => void;
+        handleEraseModal: () => void;
+        codeInput: React.RefObject<HTMLInputElement>;
+    };
+}
+interface UseInvoiceDetailProps {
+    id: string;
+    productsAndServices: ProductsAndServicesProps;
+    selectedBusiness: number;
+}
+interface ProductsAndServicesProps {
+    all: DataProductsAndServicesProps[];
+    default: DataProductsAndServicesProps;
+}
+interface DataProductsAndServicesProps {
+    id: number | null;
+    user_id: number | null;
+    name: string;
+    description: string;
+    unit: string;
+    unit_price: number;
+    default: boolean;
+    business_id: number | null;
+    code: string;
+    type: string;
 }
 interface InitialStateInvoiceDetailProps {
     code: string;
