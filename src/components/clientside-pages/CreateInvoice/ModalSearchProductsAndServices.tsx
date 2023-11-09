@@ -61,7 +61,7 @@ export const ModalSearchProductsAndServices = ({ handle }: any) => {
                                         <thead className="bg-gris/80 text-center">
                                             <tr>
                                                 <th className="py-1 px-2">
-                                                    Codigo
+                                                    Código
                                                 </th>
                                                 <th className="py-1 px-2">
                                                     Nombre
@@ -76,7 +76,7 @@ export const ModalSearchProductsAndServices = ({ handle }: any) => {
                                                     Favorito
                                                 </th>
                                                 <th className="py-1 px-2">
-                                                    Descripcion
+                                                    Descripción
                                                 </th>
                                             </tr>
                                         </thead>
@@ -134,7 +134,7 @@ export const ModalSearchProductsAndServices = ({ handle }: any) => {
                                 color="danger"
                                 variant="ghost"
                                 onPress={() => handleCloseModalPS(onClose)}
-                                tabIndex={-1}
+                                tabIndex={1}
                             >
                                 Cerrar
                             </Button>

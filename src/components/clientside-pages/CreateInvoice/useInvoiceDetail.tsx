@@ -49,10 +49,10 @@ export const useInvoiceDetail = ({
     );
     //Estado para almacenar las columnas de la tabla
     const columnNames: ColumnNamesProps[] = [
-        { key: "code", name: "Codigo" },
+        { key: "code", name: "Código" },
         { key: "quantity", name: "Cantidad" },
         { key: "price", name: "Precio" },
-        { key: "description", name: "Descripcion" },
+        { key: "description", name: "Descripción" },
         { key: "subtotal", name: "Subtotal" },
         { key: "actions", name: "Acciones" },
     ];
