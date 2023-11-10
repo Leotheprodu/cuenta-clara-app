@@ -47,11 +47,28 @@ export const useInvoiceDetail = ({
     const [formDataDetail, setFormDataDetail] = useState(
         initialStateInvoiceDetail
     );
+    const nameOfProductOrService = (code: string) => {
+        const productOrService = productsAndServices.all.find(
+            (productOrService: any) =>
+                productOrService.code ===
+                `${user.id}-${selectedBusiness}-${code}`
+        );
+        if (productOrService) {
+            return productOrService.name;
+        }
+    };
+    useEffect(() => {
+        setFormDataDetail({
+            ...formDataDetail,
+            subtotal: formDataDetail.unit_price * formDataDetail.quantity,
+        });
+    }, [formDataDetail]);
     //Estado para almacenar las columnas de la tabla
     const columnNames: ColumnNamesProps[] = [
         { key: "code", name: "Código" },
         { key: "quantity", name: "Cantidad" },
         { key: "price", name: "Precio" },
+        { key: "name", name: "Nombre" },
         { key: "description", name: "Descripción" },
         { key: "subtotal", name: "Subtotal" },
         { key: "actions", name: "Acciones" },
@@ -64,8 +81,9 @@ export const useInvoiceDetail = ({
                     productsAndServices.default.code
                 ),
                 quantity: 0,
-                price: productsAndServices.default.unit_price,
+                unit_price: productsAndServices.default.unit_price,
                 description: productsAndServices.default.description,
+                subtotal: 0,
             });
         } else {
             setFormDataDetail(initialStateInvoiceDetail);
@@ -79,7 +97,7 @@ export const useInvoiceDetail = ({
     const handleAddInvoiceDetail: HandleAddInvoiceDetailProps = (onClose) => {
         if (
             formDataDetail.quantity === 0 ||
-            formDataDetail.price === 0 ||
+            formDataDetail.unit_price === 0 ||
             formDataDetail.description === ""
         ) {
             toast.error("Por favor complete todos los campos", {
@@ -231,8 +249,9 @@ export const useInvoiceDetail = ({
         setFormDataDetail({
             code: productAndServiceCodeClean(ps.code),
             quantity: 0,
-            price: ps.unit_price,
+            unit_price: ps.unit_price,
             description: ps.description,
+            subtotal: 0,
         });
         onClose();
     };
@@ -251,7 +270,7 @@ export const useInvoiceDetail = ({
                 setFormDataDetail({
                     ...formDataDetail,
                     description: productOrService.description,
-                    price: productOrService.unit_price,
+                    unit_price: productOrService.unit_price,
                 });
             }
         }
@@ -278,19 +297,18 @@ export const useInvoiceDetail = ({
             case "price":
                 return (
                     <p className="text-right">
-                        {moneyFormat(detail.price, "CRC", "es-CR")}
+                        {moneyFormat(detail.unit_price, "CRC", "es-CR")}
                     </p>
                 );
+            case "name":
+                return <p>{nameOfProductOrService(detail.code)}</p>;
+
             case "description":
                 return <p>{detail.description}</p>;
             case "subtotal":
                 return (
                     <p className="text-right">
-                        {moneyFormat(
-                            detail.quantity * detail.price,
-                            "CRC",
-                            "es-CR"
-                        )}
+                        {moneyFormat(detail.subtotal, "CRC", "es-CR")}
                     </p>
                 );
 

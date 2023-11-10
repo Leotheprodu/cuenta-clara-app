@@ -46,7 +46,8 @@ const productsAndServicesDefault: DataProductsAndServicesProps = {
 const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
     code: "",
     quantity: 0,
-    price: 0,
+    unit_price: 0,
+    subtotal: 0,
     description: "",
 };
 

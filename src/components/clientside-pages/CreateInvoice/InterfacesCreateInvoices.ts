@@ -1,6 +1,9 @@
 interface FormValuesNewInvoice {
     date: string;
     client_id: number;
+    business_id: number;
+    invoice_details: InitialStateInvoiceDetailProps[];
+    total: number;
 }
 interface BusinessSelecterProps {
     id: number;
@@ -112,6 +115,7 @@ interface DataProductsAndServicesProps {
 interface InitialStateInvoiceDetailProps {
     code: string;
     quantity: number;
-    price: number;
+    unit_price: number;
     description: string;
+    subtotal: number;
 }

@@ -25,12 +25,12 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
     return (
         <div className="w-full flex flex-col gap-2">
             <HeaderCreateInvoice handle={{ username, businessSelected }} />
-            <section className="pt-14 w-full">
+            <section className="pt-14 px-4">
                 <PageWrapper>
-                    <form>
+                    <form className="w-[20rem] sm:w-full">
                         <Input
                             className="h-12"
-                            labelPlacement="outside-left"
+                            labelPlacement="inside"
                             isRequired
                             variant="underlined"
                             label="Fecha"

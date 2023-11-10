@@ -11,7 +11,7 @@ export const TableInvoiceDetail = ({ handle }: TableInvoiceDetailProps) => {
     const { createInvoiceDetail } = handle;
     const { invoiceDetails, renderCell, columnNames } = createInvoiceDetail;
     return (
-        <Table aria-label="Detalle de Factura">
+        <Table isStriped aria-label="Detalle de Factura">
             <TableHeader>
                 {columnNames.map((column: ColumnNamesProps) => (
                     <TableColumn className="text-center" key={column.key}>

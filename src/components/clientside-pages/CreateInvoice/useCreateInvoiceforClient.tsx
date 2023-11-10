@@ -11,7 +11,6 @@ import { productsAndServicesDefault } from "@/data/constants";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     //estado para almacenar el total de la factura
     const [total, setTotal] = useState<number>(0);
-
     // estado para almacenar los datos del cliente
     const [client, setClient] = useState({ username: "", active: 0 });
     // estado para almacenar el negocio seleccionado
@@ -30,10 +29,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
             default: productsAndServicesDefault,
         });
     // estado para almacenar los datos de la factura
-    const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
-        client_id: parseInt(id, 10),
-        date: getCurrentDate(),
-    });
     // Hook para manejar los detalles de la factura
     const { createInvoiceDetail } = useInvoiceDetail({
         id,
@@ -41,11 +36,27 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         selectedBusiness,
     });
     const { invoiceDetails } = createInvoiceDetail;
+    const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
+        client_id: parseInt(id, 10),
+        date: getCurrentDate(),
+        business_id: selectedBusiness || 0,
+        total: 0,
+        invoice_details: [],
+    });
+    // hook useEffect para setear los datos de la factura
+    useEffect(() => {
+        setFormInvoice({
+            ...formInvoice,
+            business_id: selectedBusiness,
+            total: total,
+            invoice_details: invoiceDetails,
+        });
+    }, [invoiceDetails, total, selectedBusiness, formInvoice]);
 
     // hook useEffect para calcular el total de la factura
     useEffect(() => {
         const total = invoiceDetails.reduce((acc, item) => {
-            return acc + item.price * item.quantity;
+            return acc + item.unit_price * item.quantity;
         }, 0);
         setTotal(total);
     }, [invoiceDetails]);
