@@ -5,6 +5,7 @@ import { PageWrapper } from "@/components/Utils/PageWrapper";
 import { HeaderCreateInvoice } from "./HeaderCreateInvoice";
 import { NotClientInBusiness } from "./NotClientInBusiness";
 import { CreateInvoiceDetail } from "./CreateInvoiceDetail";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 
 export const CreateInvoiceforClient = ({ id }: { id: string }) => {
     const {
@@ -13,6 +14,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
         username,
         businessSelected,
         createInvoiceDetail,
+        total,
     } = useCreateInvoiceforClient({
         id,
     });
@@ -38,6 +40,14 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                             onChange={handleOnChange}
                         />
                         <CreateInvoiceDetail handle={{ createInvoiceDetail }} />
+                        <div className="bg-blanco text-secundario rounded-xl flex justify-end mt-4 ">
+                            <p className="bg-gris rounded-lg p-3 shadow-md">
+                                Total:{" "}
+                                <span className="text-primario">
+                                    {moneyFormat(total, "CRC", "es-CR")}
+                                </span>
+                            </p>
+                        </div>
                     </form>
                 </PageWrapper>
             </section>
