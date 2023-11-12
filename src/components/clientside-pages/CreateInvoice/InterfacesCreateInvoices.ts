@@ -61,36 +61,23 @@ interface CreateInvoiceDetailProps {
             handleCloseModal: HandleCloseModalProps;
             handleOnBlurCode: () => void;
             handleEraseModal: () => void;
-        };
-    };
-}
-interface TableInvoiceDetailProps {
-    handle: {
-        createInvoiceDetail: {
-            invoiceDetails: InitialStateInvoiceDetailProps[];
-            renderCell: RenderCellProps;
-            columnNames: ColumnNamesProps[];
-        };
-    };
-}
-interface ModalAddInvoiceDetailProps {
-    handle: {
-        createInvoiceDetail: {
-            formDataDetail: InitialStateInvoiceDetailProps;
-            handleOnChangeDetail: HandleOnChangeDetailProps;
-            handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
-            isOpen: boolean;
-            onOpenChange: () => void;
-            handleCloseModal: HandleCloseModalProps;
-            handleOnBlurCode: () => void;
-            handleEraseModal: () => void;
-            codeInput: React.RefObject<HTMLInputElement>;
+            handleFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
             quantityInput: React.RefObject<HTMLInputElement>;
             handleOpenSearchPS: () => void;
-            handleFocus: (e: React.FocusEvent<Element, Element>) => void;
+            isOpenModalPS: boolean;
+            onOpenChangeModalPS: () => void;
+            handleCloseModalPS: HandleCloseModalProps;
+            handleAddPStoDetail: (
+                onClose: () => void,
+                ps: DataProductsAndServicesProps
+            ) => void;
+            filteredProductsAndServices: DataProductsAndServicesProps[];
+            searchPS: string;
+            handleSearchPS: (e: React.ChangeEvent<HTMLInputElement>) => void;
         };
     };
 }
+
 interface UseInvoiceDetailProps {
     id: string;
     productsAndServices: ProductsAndServicesProps;

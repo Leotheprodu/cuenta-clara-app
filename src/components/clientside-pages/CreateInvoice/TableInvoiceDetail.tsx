@@ -7,7 +7,7 @@ import {
     TableCell,
 } from "@nextui-org/react";
 
-export const TableInvoiceDetail = ({ handle }: TableInvoiceDetailProps) => {
+export const TableInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
     const { createInvoiceDetail } = handle;
     const { invoiceDetails, renderCell, columnNames } = createInvoiceDetail;
     return (

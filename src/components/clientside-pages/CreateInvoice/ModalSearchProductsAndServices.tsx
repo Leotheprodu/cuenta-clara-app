@@ -10,7 +10,9 @@ import {
     Button,
     Input,
 } from "@nextui-org/react";
-export const ModalSearchProductsAndServices = ({ handle }: any) => {
+export const ModalSearchProductsAndServices = ({
+    handle,
+}: CreateInvoiceDetailProps) => {
     const { createInvoiceDetail } = handle;
     const {
         isOpenModalPS,

@@ -12,9 +12,7 @@ import {
 } from "@nextui-org/react";
 import { ModalSearchProductsAndServices } from "./ModalSearchProductsAndServices";
 
-export const ModalAddInvoiceDetail = ({
-    handle,
-}: ModalAddInvoiceDetailProps) => {
+export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
     const { createInvoiceDetail } = handle;
     const {
         formDataDetail,
