@@ -62,7 +62,8 @@ export const useInvoiceDetail = ({
             ...formDataDetail,
             subtotal: formDataDetail.unit_price * formDataDetail.quantity,
         });
-    }, [formDataDetail]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formDataDetail.quantity, formDataDetail.unit_price]);
     //Estado para almacenar las columnas de la tabla
     const columnNames: ColumnNamesProps[] = [
         { key: "code", name: "Código" },

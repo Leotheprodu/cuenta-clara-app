@@ -51,7 +51,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
             total: total,
             invoice_details: invoiceDetails,
         });
-    }, [invoiceDetails, total, selectedBusiness, formInvoice]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [invoiceDetails, total, selectedBusiness]);
 
     // hook useEffect para calcular el total de la factura
     useEffect(() => {

@@ -27,9 +27,9 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
             <HeaderCreateInvoice handle={{ username, businessSelected }} />
             <section className="pt-14 px-4">
                 <PageWrapper>
-                    <form className="w-[20rem] sm:w-full">
+                    <form className="w-[20rem] sm:w-full mt-20">
                         <Input
-                            className="h-12"
+                            className="h-12 w-[10rem]"
                             labelPlacement="inside"
                             isRequired
                             variant="underlined"
