@@ -2,11 +2,12 @@ import { handleFocus, handleOnChange } from "@/components/Utils/formUtils";
 import { getCurrentDate } from "@/components/Utils/getCurrentDate";
 import { useEffect, useState } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
 import { productsAndServicesDefault } from "@/data/constants";
+import toast from "react-hot-toast";
 
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     //estado para almacenar el total de la factura
@@ -39,8 +40,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
         client_id: parseInt(id, 10),
         date: getCurrentDate(),
-        business_id: selectedBusiness || 0,
-        total: 0,
+        business_id: selectedBusiness,
+        total,
         invoice_details: [],
     });
     // hook useEffect para setear los datos de la factura
@@ -48,7 +49,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         setFormInvoice({
             ...formInvoice,
             business_id: selectedBusiness,
-            total: total,
+            total,
             invoice_details: invoiceDetails,
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,6 +101,21 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
                 url: `products_and_services/${selectedBusiness}`,
             }),
         retry: 2,
+    });
+    const {
+        status: statusCreateInvoice,
+        data: dataCreateInvoice,
+        mutate: mutateCreateInvoice,
+        error: errorCreateInvoice,
+        isPending: isPendingCreateInvoice,
+    } = useMutation({
+        mutationKey: ["invoice-create"],
+        mutationFn: async () =>
+            await fetchAPI({
+                url: "invoices/create",
+                method: "POST",
+                body: formInvoice,
+            }),
     });
 
     useEffect(() => {
@@ -162,12 +178,22 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     useEffect(() => {
         selectedBusiness && refetchProductsAndServices();
     }, [selectedBusiness, refetchProductsAndServices]);
+    useEffect(() => {
+        if (statusCreateInvoice === "success") {
+            toast.success("Factura creada exitosamente");
+        }
+    }, [dataCreateInvoice, statusCreateInvoice]);
 
+    const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        mutateCreateInvoice();
+    };
     return {
         ...formInvoice,
         ...client,
         total,
         businessSelected,
+        handleCreateInvoice,
         handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handleOnChange(setFormInvoice, e),
         createInvoiceDetail: { ...createInvoiceDetail, handleFocus },

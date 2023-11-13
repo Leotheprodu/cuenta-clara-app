@@ -229,8 +229,15 @@ export const useInvoiceDetail = ({
                     const unitMatch =
                         PorS.unit &&
                         PorS.unit.toLowerCase().includes(searchLower);
+                    const codeMatch =
+                        PorS.code &&
+                        PorS.code.toLowerCase().includes(searchLower);
                     return (
-                        nameMatch || descriptionMatch || priceMatch || unitMatch
+                        nameMatch ||
+                        descriptionMatch ||
+                        priceMatch ||
+                        unitMatch ||
+                        codeMatch
                     );
                 }
             );

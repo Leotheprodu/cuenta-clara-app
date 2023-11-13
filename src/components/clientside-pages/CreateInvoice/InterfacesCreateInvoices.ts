@@ -61,7 +61,7 @@ interface CreateInvoiceDetailProps {
             handleCloseModal: HandleCloseModalProps;
             handleOnBlurCode: () => void;
             handleEraseModal: () => void;
-            handleFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+            handleFocus: (e: any) => void;
             quantityInput: React.RefObject<HTMLInputElement>;
             handleOpenSearchPS: () => void;
             isOpenModalPS: boolean;

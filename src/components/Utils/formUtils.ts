@@ -25,7 +25,7 @@ export const handleOnClear = (
     setForm((prev) => ({ ...prev, [name]: "" }));
 };
 
-export const handleFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
+export const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     // Selecciona automáticamente el contenido del input cuando se enfoca en él
     e.target.select();
 };
