@@ -178,12 +178,16 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     useEffect(() => {
         selectedBusiness && refetchProductsAndServices();
     }, [selectedBusiness, refetchProductsAndServices]);
+
+    // cuando se cree la factura se mostrara un toast
     useEffect(() => {
         if (statusCreateInvoice === "success") {
             toast.success("Factura creada exitosamente");
+            console.log(dataCreateInvoice);
         }
     }, [dataCreateInvoice, statusCreateInvoice]);
 
+    // funcion para crear la factura interactuando con el servidor
     const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         mutateCreateInvoice();
