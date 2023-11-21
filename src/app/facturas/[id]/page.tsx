@@ -1,14 +1,14 @@
 import { PageWrapper } from "@/components/Utils/PageWrapper";
-import { ShowInvoices } from "@/components/clientside-pages/Invoices/ShowInvoices";
+import { InvoicesByClient } from "@/components/clientside-pages/Invoices/InvoicesByClient";
 
 export default function Invoices({ params }: { params: { id: string } }) {
-    return (
-        <PageWrapper>
-            <main className="flex min-h-screen w-full justify-center">
-                <section>
-                    <ShowInvoices id={params.id} />
-                </section>
-            </main>
-        </PageWrapper>
-    );
+  return (
+    <PageWrapper>
+      <main className="flex min-h-screen w-full justify-center">
+        <section>
+          <InvoicesByClient id={params.id} />
+        </section>
+      </main>
+    </PageWrapper>
+  );
 }

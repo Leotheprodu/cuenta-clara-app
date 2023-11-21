@@ -1,108 +1,109 @@
 interface FormValuesNewInvoice {
-    date: string;
-    client_id: number;
-    business_id: number;
-    invoice_details: InitialStateInvoiceDetailProps[];
-    total: number;
+  date: string;
+  client_id: number;
+  business_id: number;
+  invoice_details: InitialStateInvoiceDetailProps[];
+  total: number;
 }
 interface BusinessSelecterProps {
-    id: number;
-    name: string;
-    isClientInBusiness: boolean;
+  id: number;
+  name: string;
+  isClientInBusiness: boolean;
 }
 interface NotClientInBusinessProps {
-    handle: {
-        username: string;
-        businessSelected: BusinessSelecterProps;
-    };
+  handle: {
+    username: string;
+    businessSelected: BusinessSelecterProps;
+  };
 }
 interface HeaderCreateInvoiceProps {
-    handle: {
-        username: string;
-        businessSelected: BusinessSelecterProps;
-    };
+  handle: {
+    username: string;
+    businessSelected: BusinessSelecterProps;
+  };
 }
 interface HandleOnChangeDetailProps {
-    (e: React.ChangeEvent<HTMLInputElement>): void;
+  (e: React.ChangeEvent<HTMLInputElement>): void;
 }
 interface HandleWithIndexAndEventProps {
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number): void;
+  (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number): void;
 }
 interface HandleAddInvoiceDetailProps {
-    (onClose: () => void): void;
+  (onClose: () => void): void;
 }
 interface HandleCloseModalProps {
-    (onClose: () => void): void;
+  (onClose: () => void): void;
 }
 interface RenderCellProps {
-    (
-        detail: InitialStateInvoiceDetailProps,
-        columnKey: React.Key,
-        index: number
-    ): JSX.Element;
+  (
+    detail: InitialStateInvoiceDetailProps,
+    columnKey: React.Key,
+    index: number
+  ): JSX.Element;
 }
 interface ColumnNamesProps {
-    key: string;
-    name: string;
+  key: string;
+  name: string;
 }
 interface CreateInvoiceDetailProps {
-    handle: {
-        createInvoiceDetail: {
-            formDataDetail: InitialStateInvoiceDetailProps;
-            handleOnChangeDetail: HandleOnChangeDetailProps;
-            handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
-            invoiceDetails: InitialStateInvoiceDetailProps[];
-            handleOpenAddDetail: () => void;
-            isOpen: boolean;
-            onOpenChange: () => void;
-            codeInput: React.RefObject<HTMLInputElement>;
-            renderCell: RenderCellProps;
-            columnNames: ColumnNamesProps[];
-            handleCloseModal: HandleCloseModalProps;
-            handleOnBlurCode: () => void;
-            handleEraseModal: () => void;
-            handleFocus: (e: any) => void;
-            quantityInput: React.RefObject<HTMLInputElement>;
-            handleOpenSearchPS: () => void;
-            isOpenModalPS: boolean;
-            onOpenChangeModalPS: () => void;
-            handleCloseModalPS: HandleCloseModalProps;
-            handleAddPStoDetail: (
-                onClose: () => void,
-                ps: DataProductsAndServicesProps
-            ) => void;
-            filteredProductsAndServices: DataProductsAndServicesProps[];
-            searchPS: string;
-            handleSearchPS: (e: React.ChangeEvent<HTMLInputElement>) => void;
-        };
+  handle: {
+    createInvoiceDetail: {
+      formDataDetail: InitialStateInvoiceDetailProps;
+      handleOnChangeDetail: HandleOnChangeDetailProps;
+      handleAddInvoiceDetail: HandleAddInvoiceDetailProps;
+      invoiceDetails: InitialStateInvoiceDetailProps[];
+      handleOpenAddDetail: () => void;
+      isOpen: boolean;
+      onOpenChange: () => void;
+      codeInput: React.RefObject<HTMLInputElement>;
+      renderCell: RenderCellProps;
+      columnNames: ColumnNamesProps[];
+      handleCloseModal: HandleCloseModalProps;
+      handleOnBlurCode: () => void;
+      handleEraseModal: () => void;
+      handleFocus: (e: any) => void;
+      quantityInput: React.RefObject<HTMLInputElement>;
+      handleOpenSearchPS: () => void;
+      isOpenModalPS: boolean;
+      onOpenChangeModalPS: () => void;
+      handleCloseModalPS: HandleCloseModalProps;
+      handleAddPStoDetail: (
+        onClose: () => void,
+        ps: DataProductsAndServicesProps
+      ) => void;
+      filteredProductsAndServices: DataProductsAndServicesProps[];
+      searchPS: string;
+      handleSearchPS: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
+  };
 }
 
 interface UseInvoiceDetailProps {
-    id: string;
-    productsAndServices: ProductsAndServicesProps;
-    selectedBusiness: number;
+  id: string;
+  productsAndServices: ProductsAndServicesProps;
+  selectedBusiness: number;
+  statusCreateInvoice: string;
 }
 interface ProductsAndServicesProps {
-    all: DataProductsAndServicesProps[];
-    default: DataProductsAndServicesProps;
+  all: DataProductsAndServicesProps[];
+  default: DataProductsAndServicesProps;
 }
 interface DataProductsAndServicesProps {
-    id: number | null;
-    user_id: number | null;
-    name: string;
-    description: string;
-    unit: string;
-    unit_price: number;
-    default: boolean;
-    business_id: number | null;
-    code: string;
-    type: string;
+  id: number | null;
+  user_id: number | null;
+  name: string;
+  description: string;
+  unit: string;
+  unit_price: number;
+  default: boolean;
+  business_id: number | null;
+  code: string;
+  type: string;
 }
 interface InitialStateInvoiceDetailProps {
-    code: string;
-    quantity: number;
-    unit_price: number;
-    description: string;
-    subtotal: number;
+  code: string;
+  quantity: number;
+  unit_price: number;
+  description: string;
+  subtotal: number;
 }
