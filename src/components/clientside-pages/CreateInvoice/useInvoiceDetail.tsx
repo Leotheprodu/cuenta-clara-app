@@ -27,8 +27,7 @@ export const useInvoiceDetail = ({
     initialStateInvoiceDetail,
   ]);
   useEffect(() => {
-    statusCreateInvoice === "success" &&
-      setInvoiceDetails([initialStateInvoiceDetail]);
+    statusCreateInvoice === "success" && setInvoiceDetails([]);
   }, [statusCreateInvoice]);
 
   // Hook para manejar el modal de agregar detalle

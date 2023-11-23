@@ -8,6 +8,7 @@ import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
 import { productsAndServicesDefault } from "@/data/constants";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   //FN estado para almacenar el total de la factura
@@ -68,7 +69,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invoiceDetails, total, selectedBusiness]);
 
-  //FN hook useEffect para calcular el total de la factura
+  //FN hook useEffect para calcular el monto total de la factura
   useEffect(() => {
     const total = invoiceDetails.reduce((acc, item) => {
       return acc + item.unit_price * item.quantity;
@@ -174,13 +175,13 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     selectedBusiness && refetchProductsAndServices();
   }, [selectedBusiness, refetchProductsAndServices]);
 
-  //FN cuando se cree la factura se mostrara un toast
+  //FN cuando se cree la factura se redireccionara a la pagina de la factura
   useEffect(() => {
     if (statusCreateInvoice === "success") {
       toast.success("Factura creada exitosamente");
-      console.log(dataCreateInvoice);
+      redirect(`/facturas/${id}`);
     }
-  }, [dataCreateInvoice, statusCreateInvoice]);
+  }, [dataCreateInvoice, statusCreateInvoice, id]);
 
   //FN funcion para crear la factura interactuando con el servidor
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
