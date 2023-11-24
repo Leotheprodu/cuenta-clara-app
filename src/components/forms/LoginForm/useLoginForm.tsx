@@ -26,7 +26,7 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
     if (status === "success") {
       $user.set(data);
       toast.success(`Bienvenido ${data.user.username}`);
-      redirect(internalLinks("clients") || "/clients");
+      redirect(internalLinks("clients"));
     } else if (status === "error") {
       toast.error(error?.message || "");
       error?.message === "Contraseña Incorrecta" && setIsInvalidPass(true);
