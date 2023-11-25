@@ -1,4 +1,4 @@
-#### Cuenta Clara Documentation
+# Cuenta Clara Documentation
 
 This is a project made with Next.js and TailwindCSS for the frontend and Node.js, Express.js and Mysql for the backend. This project is a documentation for the Cuenta Clara Project, it's an application that will allow you to control when a client buy/pay a product/service, the application will allow you to control the inventory, the clients, the products, the services, the sales, the expenses, the incomes, the taxes, the reports, the payments, the debts, the credits, and let your client check the status of their orders, invoices, payment options, and much more.. This project is made by Leonardo Serrano Alfaro (@Leotheprodu). Currently is in development.
 
