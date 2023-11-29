@@ -1,14 +1,14 @@
 import { Link } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
-export const LinksItemFooter = ({
+export const LinkNav = ({
   link,
   path,
   textColor = "blanco",
   flexType = "col",
   size = "xs",
-  component = "footer",
-}: LinkItemFooterProps) => {
+  component,
+}: LinkNavProps) => {
   const { href, icon, text } = link;
   return (
     <Link

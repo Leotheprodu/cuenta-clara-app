@@ -2,7 +2,7 @@
 import { AddButton } from "./AddButton";
 import { usePathname } from "next/navigation";
 import { LinksFooter } from "./LinksFooter";
-import { LinksItemFooter } from "./LinksItemFooter";
+import { LinkNav } from "../Header/nav/LinkNav";
 import { whiteListPaths } from "@/data/constants";
 
 export const Footer = () => {
@@ -14,7 +14,7 @@ export const Footer = () => {
           <div className="flex gap-28 justify-center items-center w-full h-full  ">
             <AddButton />
             {LinksFooter.map((link, index) => (
-              <LinksItemFooter key={index} link={link} path={path} />
+              <LinkNav key={index} link={link} path={path} component="footer" />
             ))}
           </div>
         </footer>

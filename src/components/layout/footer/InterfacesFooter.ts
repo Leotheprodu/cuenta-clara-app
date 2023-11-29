@@ -4,15 +4,6 @@ interface LinkItemFooter {
   text: string;
 }
 
-interface LinkItemFooterProps {
-  link: LinkItemFooter;
-  path: string;
-  textColor?: string;
-  flexType?: string;
-  size?: "xs" | "sm" | "md" | "lg";
-  component?: string;
-}
-
 interface AddButtonLinkItemProps {
   link: {
     href: string;

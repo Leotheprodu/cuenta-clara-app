@@ -2,7 +2,7 @@ import { MenuButtonIcon } from "@/icons/MenuButtonIcon";
 import { useState } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
-import { LinksItemFooter } from "../../Footer/LinksItemFooter";
+import { LinkNav } from "./LinkNav";
 import { usePathname } from "next/navigation";
 import { ClientsIcon } from "@/icons/ClientsIcon";
 import { Button, Popover, PopoverTrigger } from "@nextui-org/react";
@@ -18,7 +18,7 @@ export const AddButtonPopoverContent = () => {
     <PopoverContent className="p-10">
       <nav className="flex flex-col items-start">
         <MotionAddButtonLink delay={0.1}>
-          <LinksItemFooter
+          <LinkNav
             link={{
               href: "/sesion",
               icon: user.isLoggedIn === true ? <LogoutIcon /> : <LoginIcon />,
@@ -33,7 +33,7 @@ export const AddButtonPopoverContent = () => {
           />
         </MotionAddButtonLink>
         <MotionAddButtonLink delay={0.2}>
-          <LinksItemFooter
+          <LinkNav
             link={{
               href: "/clientes",
               icon: <ClientsIcon />,
