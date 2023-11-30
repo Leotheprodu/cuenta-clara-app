@@ -1,50 +1,54 @@
 [
-    {
-        "page": "create-invoice",
-        "href": "/facturas/crear"
-    },
-    {
-        "page": "home",
-        "href": "/"
-    },
-    {
-        "page": "create-client",
-        "href": "/clientes/crear"
-    },
-    {
-        "page": "update-client",
-        "href": "/clientes/actualizar/"
-    },
-    {
-        "page": "deactivate-client",
-        "href": "/clientes/desactivar/"
-    },
-    {
-        "page": "client-invoices",
-        "href": "/facturas/"
-    },
-    {
-        "page": "add-invoice",
-        "href": "/facturas/crear/"
-    },
-    {
-        "page": "clients",
-        "href": "/clientes"
-    },
-    {
-        "page": "create-product",
-        "href": "/productos/crear"
-    },
-    {
-        "page": "products",
-        "href": "/productos"
-    },
-    {
-        "page": "create-user",
-        "href": "/usuarios/crear"
-    },
-    {
-        "page": "users",
-        "href": "/sesion"
-    }
+  {
+    "page": "create-invoice",
+    "href": "/facturas/crear"
+  },
+  {
+    "page": "home",
+    "href": "/"
+  },
+  {
+    "page": "create-client",
+    "href": "/clientes/crear"
+  },
+  {
+    "page": "update-client",
+    "href": "/clientes/actualizar/"
+  },
+  {
+    "page": "deactivate-client",
+    "href": "/clientes/desactivar/"
+  },
+  {
+    "page": "client-invoices",
+    "href": "/facturas/"
+  },
+  {
+    "page": "add-invoice",
+    "href": "/facturas/crear/"
+  },
+  {
+    "page": "clients",
+    "href": "/clientes"
+  },
+  {
+    "page": "create-product",
+    "href": "/productos/crear"
+  },
+  {
+    "page": "products",
+    "href": "/productos"
+  },
+  {
+    "page": "create-user",
+    "href": "/usuarios/crear"
+  },
+  {
+    "page": "users",
+    "href": "/sesion"
+  },
+  {
+    "page": "sign-up",
+    "href": "/sesion/registrarse"
+  }
 ]
