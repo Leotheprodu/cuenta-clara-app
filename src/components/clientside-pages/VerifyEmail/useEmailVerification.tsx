@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { internalLinks } from "@/components/Utils/internalLinks";
 export const useEmailVerification = (token: string) => {
-  const { status, isLoading, isError, isSuccess } = useQuery({
+  const { status, isLoading, isError, isSuccess, error, data } = useQuery({
     queryKey: ["email-verification"],
     queryFn: async () =>
       await fetchAPI({
@@ -15,12 +15,13 @@ export const useEmailVerification = (token: string) => {
 
   useEffect(() => {
     if (status === "success") {
-      toast.success(`Correo verificado correctamente`);
+      toast.success("Verificado exitosamente", { duration: 5000 });
     } else if (status === "error") {
       toast.error("Hubo un error");
+      console.log(error);
     }
     /* return () => toast.dismiss(); */
-  }, [status]);
+  }, [status, error, data]);
 
   return {
     isLoading,

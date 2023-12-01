@@ -14,6 +14,7 @@ export const Header = () => {
     isPending,
     mutateFunction,
     path,
+    isLoggedIn,
   } = useHeader();
 
   return (
@@ -22,17 +23,19 @@ export const Header = () => {
         <Link href="/">
           <h1 className="text-cuaternario font-sans uppercase">{appName}</h1>
         </Link>
-        <HeaderBusinessSelector
-          handle={{
-            business,
-            isLoadingBusiness,
-            handleSelectionBusiness,
-            value,
-            isPending,
-            mutateFunction,
-            path,
-          }}
-        />
+        {isLoggedIn && (
+          <HeaderBusinessSelector
+            handle={{
+              business,
+              isLoadingBusiness,
+              handleSelectionBusiness,
+              value,
+              isPending,
+              mutateFunction,
+              path,
+            }}
+          />
+        )}
       </div>
       <NavMenu />
     </header>

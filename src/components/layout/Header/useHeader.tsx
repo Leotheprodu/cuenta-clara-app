@@ -9,73 +9,77 @@ import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
 
 export const useHeader = () => {
-    useCheckSession();
-    const path = usePathname();
-    const user = useStore($user);
-    const [business, setBusiness] = useState([BusinessDefault]);
-    const [value, setValue] = useState(new Set(["0"]));
+  useCheckSession();
+  const path = usePathname();
+  const user = useStore($user);
+  const [business, setBusiness] = useState([BusinessDefault]);
+  const [value, setValue] = useState(new Set(["0"]));
 
-    const {
-        status: statusBusiness,
-        data: dataBusiness,
-        isLoading: isLoadingBusiness,
-        refetch,
-    } = useQuery({
-        queryKey: ["users-business"],
-        queryFn: async () =>
-            await fetchAPI({
-                url: "users_business",
-            }),
-        retry: 4,
-    });
+  const {
+    status: statusBusiness,
+    data: dataBusiness,
+    isLoading: isLoadingBusiness,
+    refetch,
+  } = useQuery({
+    queryKey: ["users-business"],
+    queryFn: async () =>
+      await fetchAPI({
+        url: "users_business",
+      }),
+    retry: 4,
+  });
 
-    useEffect(() => {
-        if (statusBusiness === "success") {
-            setBusiness(dataBusiness);
-            const defaultBussines = dataBusiness.filter((item: any) => {
-                if (item.default) {
-                    return item;
-                }
-            });
-            if (defaultBussines.length === 1) {
-                setValue(new Set([defaultBussines[0].id.toString()]));
-                $selectedBusiness.set(defaultBussines[0].id);
-            }
-        } else {
-            refetch();
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      return;
+    }
+    if (statusBusiness === "success") {
+      setBusiness(dataBusiness);
+      const defaultBussines = dataBusiness.filter((item: any) => {
+        if (item.default) {
+          return item;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [statusBusiness, dataBusiness, user]);
+      });
+      if (defaultBussines.length === 1) {
+        setValue(new Set([defaultBussines[0].id.toString()]));
+        $selectedBusiness.set(defaultBussines[0].id);
+      }
+    } else {
+      refetch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusBusiness, dataBusiness, user]);
 
-    const { status, mutate, isPending } = useMutation({
-        mutationKey: ["favorite-business"],
-        mutationFn: async () =>
-            await fetchAPI({
-                url: `users_business/favorite/${Array.from(value)[0]}`,
-            }),
-        retry: 2,
-    });
-    useEffect(() => {
-        if (status === "success" && user.isLoggedIn) {
-            refetch();
-            $selectedBusiness.set(Number(Array.from(value)[0]));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status, user]);
+  const { status, mutate, isPending } = useMutation({
+    mutationKey: ["favorite-business"],
+    mutationFn: async () =>
+      await fetchAPI({
+        url: `users_business/favorite/${Array.from(value)[0]}`,
+      }),
+    retry: 2,
+  });
+  useEffect(() => {
+    if (status === "success" && user.isLoggedIn) {
+      refetch();
+      $selectedBusiness.set(Number(Array.from(value)[0]));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, user]);
 
-    const handleSelectionBusiness = (e: any) => {
-        setValue(e);
-    };
-    const mutateFunction = () => {
-        mutate();
-    };
-    return {
-        business,
-        isLoadingBusiness,
-        value,
-        handleSelectionBusiness,
-        isPending,
-        mutateFunction,
-        path,
-    };
+  const handleSelectionBusiness = (e: any) => {
+    setValue(e);
+  };
+  const mutateFunction = () => {
+    mutate();
+  };
+  return {
+    business,
+    isLoadingBusiness,
+    value,
+    handleSelectionBusiness,
+    isPending,
+    mutateFunction,
+    path,
+    isLoggedIn: user.isLoggedIn,
+  };
 };
