@@ -3,40 +3,41 @@ import { Input } from "@nextui-org/react";
 import { EndContentInputPassword } from "./EndContentInputPassword";
 
 export const InputPasswordLoginForm = ({
-    handle,
+  handle,
 }: InputPasswordLoginFormProps) => {
-    const {
-        handleOnChange,
-        isVisible,
-        toggleVisibility,
-        isInvalidPass,
-        password,
-    } = handle;
+  const {
+    handleOnChange,
+    isVisible,
+    toggleVisibility,
+    isInvalidPass = false,
+    password,
+    confirmPassword = false,
+  } = handle;
 
-    return (
-        <div>
-            <Input
-                size="lg"
-                label="Contraseña"
-                placeholder="Ingresa tu contraseña"
-                endContent={
-                    <EndContentInputPassword
-                        isVisible={isVisible}
-                        toggleVisibility={toggleVisibility}
-                    />
-                }
-                type={isVisible ? "text" : "password"}
-                className="max-w-xs"
-                startContent={
-                    <KeyIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                }
-                autoComplete="current-password"
-                isInvalid={isInvalidPass}
-                errorMessage={isInvalidPass && "Contraseña Incorrecta"}
-                value={password}
-                onChange={handleOnChange}
-                name="password"
-            />
-        </div>
-    );
+  return (
+    <div>
+      <Input
+        size="lg"
+        label={confirmPassword ? "Confirmar contraseña" : "Contraseña"}
+        placeholder="Ingresa tu contraseña"
+        endContent={
+          <EndContentInputPassword
+            isVisible={isVisible}
+            toggleVisibility={toggleVisibility}
+          />
+        }
+        type={isVisible ? "text" : "password"}
+        className="max-w-xs"
+        startContent={
+          <KeyIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+        }
+        autoComplete="current-password"
+        isInvalid={isInvalidPass}
+        errorMessage={isInvalidPass && "Contraseña Incorrecta"}
+        value={password}
+        onChange={handleOnChange}
+        name={confirmPassword ? "password2" : "password"}
+      />
+    </div>
+  );
 };

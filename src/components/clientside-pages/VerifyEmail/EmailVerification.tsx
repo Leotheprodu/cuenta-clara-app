@@ -1,10 +1,18 @@
 "use client";
 import Loading from "@/app/loading";
 import { useEmailVerification } from "./useEmailVerification";
+import { Link } from "@nextui-org/react";
+import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const EmailVerification = ({ token }: { token: string }) => {
-    const { isLoading, isError, isSuccess } = useEmailVerification(token);
-    if (isLoading) return <Loading label="Verificando" />;
-    if (isError) return <div>Hubo un error</div>;
-    if (isSuccess) return <div>Ya estas verificado</div>;
+  const { isLoading, isSuccess } = useEmailVerification(token);
+  if (isLoading) return <Loading label="Verificando" />;
+  if (isSuccess)
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="text-primario text-2xl">Hemos verificado tu correo</h1>
+        <p className="text-base">Ahora puedes iniciar sesion</p>;
+        <Link href={internalLinks("users")}>Inicia sesion</Link>;
+      </div>
+    );
 };

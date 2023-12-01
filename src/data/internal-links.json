@@ -50,5 +50,9 @@
   {
     "page": "sign-up",
     "href": "/sesion/registrarse"
+  },
+  {
+    "page": "verify-email",
+    "href": "/sesion/verificar-email/"
   }
 ]
