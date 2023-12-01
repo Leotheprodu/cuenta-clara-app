@@ -111,14 +111,9 @@ export const useInvoiceDetail = ({
     }
     // Si no se esta editando un detalle se agrega uno nuevo al estado de detalles de factura y al localstorage
     if (!isEditing.state) {
-      const idClient = localStorage.getItem("idClient");
-
       setInvoiceDetails([...invoiceDetails, formDataDetail]);
-      if (idClient && idClient !== id) {
-        localStorage.setItem("idClient", `${id}`);
-      }
       localStorage.setItem(
-        "invoiceDetails",
+        `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
         JSON.stringify([...invoiceDetails, formDataDetail])
       );
       toast.success("Detalle agregado correctamente", { duration: 4000 });
@@ -126,15 +121,14 @@ export const useInvoiceDetail = ({
       focusFirstInput(codeInput);
       // Si se esta editando un detalle se edita el detalle en el estado de detalles de factura y en el localstorage
     } else if (isEditing.state && isEditing.index !== null) {
-      const idClient = localStorage.getItem("idClient");
       const newInvoiceDetails = [...invoiceDetails];
       newInvoiceDetails[isEditing.index] = formDataDetail;
       setInvoiceDetails(newInvoiceDetails);
-      localStorage.setItem("invoiceDetails", JSON.stringify(newInvoiceDetails));
+      localStorage.setItem(
+        `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
+        JSON.stringify(newInvoiceDetails)
+      );
       toast.success("Detalle editado correctamente", { duration: 4000 });
-      if (idClient && idClient !== id) {
-        localStorage.setItem("idClient", `${id}`);
-      }
       setFormDataDetail(initialStateInvoiceDetail);
       setIsEditing({ state: false, index: null });
       onClose();
@@ -148,15 +142,16 @@ export const useInvoiceDetail = ({
   };
   // Obtener los detalles de la factura del localstorage
   useEffect(() => {
-    const data = localStorage.getItem("invoiceDetails");
-    const idClient = localStorage.getItem("idClient");
+    const data = localStorage.getItem(
+      `invoiceDetails${user.id}-${selectedBusiness}-${id}`
+    );
 
-    if (idClient === id && data) {
+    if (data) {
       setInvoiceDetails(JSON.parse(data));
     } else {
       setInvoiceDetails([]);
     }
-  }, [id]);
+  }, [id, selectedBusiness, user.id]);
 
   // Función para manejar el cambio de los inputs del modal de agregar detalle
   const handleOnChangeDetail: HandleOnChangeDetailProps = (e) => {
@@ -177,17 +172,12 @@ export const useInvoiceDetail = ({
     index
   ) => {
     e.preventDefault();
-    const idClient = localStorage.getItem("idClient");
-    // Si el id del cliente en el localstorage es diferente al id del cliente actual se elimina el id del cliente del localstorage
-    if (idClient && idClient !== id) {
-      localStorage.setItem("idClient", `${id}`);
-    }
     // Se elimina la línea de detalle del estado y del localstorage
     setInvoiceDetails(
       invoiceDetails.filter((detail, detailIndex) => detailIndex !== index)
     );
     localStorage.setItem(
-      "invoiceDetails",
+      `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
       JSON.stringify(
         invoiceDetails.filter((detail, detailIndex) => detailIndex !== index)
       )

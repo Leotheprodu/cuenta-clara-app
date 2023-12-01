@@ -9,7 +9,7 @@ import { useInvoiceDetail } from "./useInvoiceDetail";
 import { productsAndServicesDefault } from "@/data/constants";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-
+import { $user } from "@/stores/users";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   //FN estado para almacenar el total de la factura
   const [total, setTotal] = useState<number>(0);
@@ -17,6 +17,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const [client, setClient] = useState({ username: "", active: 0 });
   //FN  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);
+  //FN  estado para almacenar el usuario logueado
+  const { user } = useStore($user);
   //FN  estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
   const [businessSelected, setBusinessSelected] =
     useState<BusinessSelecterProps>({
@@ -187,8 +189,9 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateCreateInvoice();
-    localStorage.removeItem("invoiceDetails");
-    localStorage.removeItem("idClient");
+    localStorage.removeItem(
+      `invoiceDetails${user.id}-${selectedBusiness}-${id}`
+    );
   };
   return {
     ...formInvoice,
