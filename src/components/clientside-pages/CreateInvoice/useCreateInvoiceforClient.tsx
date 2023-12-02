@@ -11,22 +11,22 @@ import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
-  //FN estado para almacenar el total de la factura
+  // estado para almacenar el total de la factura
   const [total, setTotal] = useState<number>(0);
-  //FN  estado para almacenar los datos del cliente
+  //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
-  //FN  estado para almacenar el negocio seleccionado
+  //  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);
-  //FN  estado para almacenar el usuario logueado
+  //  estado para almacenar el usuario logueado
   const { user } = useStore($user);
-  //FN  estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
+  //  estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
   const [businessSelected, setBusinessSelected] =
     useState<BusinessSelecterProps>({
       id: 0,
       name: "",
       isClientInBusiness: true,
     });
-  //FN estado para almacenar los productos y el servicio default del negocio seleccionado
+  // estado para almacenar los productos y el servicio default del negocio seleccionado
   const [productsAndServices, setProductsAndServices] =
     useState<ProductsAndServicesProps>({
       all: [productsAndServicesDefault],
@@ -34,6 +34,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     });
   const {
     status: statusCreateInvoice,
+    error: errorCreateInvoice,
     data: dataCreateInvoice,
     mutate: mutateCreateInvoice,
   } = useMutation({
@@ -45,7 +46,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         body: formInvoice,
       }),
   });
-  //FN  Hook para manejar los detalles de la factura
+  //  Hook para manejar los detalles de la factura
   const { createInvoiceDetail } = useInvoiceDetail({
     id,
     productsAndServices,
@@ -60,7 +61,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     total,
     invoice_details: [],
   });
-  //FN hook useEffect para setear los datos de la factura
+  // hook useEffect para setear los datos de la factura
   useEffect(() => {
     setFormInvoice({
       ...formInvoice,
@@ -71,7 +72,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invoiceDetails, total, selectedBusiness]);
 
-  //FN hook useEffect para calcular el monto total de la factura
+  //hook useEffect para calcular el monto total de la factura
   useEffect(() => {
     const total = invoiceDetails.reduce((acc, item) => {
       return acc + item.unit_price * item.quantity;
@@ -79,7 +80,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     setTotal(total);
   }, [invoiceDetails]);
 
-  //FN Obtener los datos del cliente
+  // Obtener los datos del cliente
   const { status: statusFetchClient, data: clientData } = useQuery({
     queryKey: ["fetch-client"],
     queryFn: async () =>
@@ -88,7 +89,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
-  //FN obtener los negocios del cliente que esta logueado
+  //obtener los negocios del cliente que esta logueado
   const { status: statusBusiness, data: dataBusiness } = useQuery({
     queryKey: ["users-business"],
     queryFn: async () =>
@@ -97,7 +98,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
-  //FN obtener el balance del cliente en el negocio seleccionado
+  // obtener el balance del cliente en el negocio seleccionado
   const { status: statusBalance, data: dataBalance } = useQuery({
     queryKey: ["user-balance"],
     queryFn: async () =>
@@ -120,7 +121,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   });
 
   useEffect(() => {
-    //NOTE si el cliente existe, setearlo en el estado
+    // si el cliente existe, setearlo en el estado
     if (statusFetchClient === "success") {
       setClient(clientData);
     } else if (statusFetchClient === "error") {
@@ -134,13 +135,13 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       statusBusiness === "success" &&
       selectedBusiness
     ) {
-      //NOTE buscar el nombre del negocio seleccionado
+      // buscar el nombre del negocio seleccionado
       const findBusinessName = dataBusiness.find(
         (item: BusinessProps) => item.id === selectedBusiness
       );
-      //NOTE buscar los negocios donde el cliente tiene balances
+      // buscar los negocios donde el cliente tiene balances
       const businessofClient = dataBalance.map((item: any) => item.business_id);
-      //NOTE setear el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
+      // setear el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
       setBusinessSelected({
         id: findBusinessName?.id,
         name: findBusinessName?.name,
@@ -156,11 +157,11 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     statusFetchClient,
   ]);
 
-  //FN obtener productos y servicios del negocio seleccionado del cliente
+  //obtener productos y servicios del negocio seleccionado del cliente
   useEffect(() => {
     if (statusProductsAndServices === "success") {
       const productsAndServices = dataProductsAndServices;
-      //NOTE encuentra el producto o servicio default
+      // encuentra el producto o servicio default
       const defaultProductOrService = productsAndServices.find(
         (item: any) => item.default === true
       );
@@ -172,20 +173,22 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     }
   }, [statusProductsAndServices, dataProductsAndServices]);
 
-  //FN cuando cambie el negocio seleccionado se refetchearan los productos y servicios
+  //cuando cambie el negocio seleccionado se refetchearan los productos y servicios
   useEffect(() => {
     selectedBusiness && refetchProductsAndServices();
   }, [selectedBusiness, refetchProductsAndServices]);
 
-  //FN cuando se cree la factura se redireccionara a la pagina de la factura
+  // cuando se cree la factura se redireccionara a la pagina de la factura
   useEffect(() => {
     if (statusCreateInvoice === "success") {
       toast.success("Factura creada exitosamente");
       redirect(`/facturas/${id}`);
+    } else if (statusCreateInvoice === "error") {
+      toast.error(errorCreateInvoice?.message || "Error al crear la factura");
     }
-  }, [dataCreateInvoice, statusCreateInvoice, id]);
+  }, [dataCreateInvoice, statusCreateInvoice, errorCreateInvoice, id]);
 
-  //FN funcion para crear la factura interactuando con el servidor
+  //funcion para crear la factura interactuando con el servidor
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateCreateInvoice();

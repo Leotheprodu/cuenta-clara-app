@@ -1,7 +1,7 @@
 /* 
 TODO crear la logica de la tabla de facturas
 [x] hacer el fetch de las facturas del cliente
-[ ] hacer el fetch de los detalles de las facturas NOTE mostrar el detalle en un modal
+[ ] hacer el fetch de los detalles de las facturas
 */
 
 import { fetchAPI } from "@/components/Utils/fetchAPI";
@@ -34,10 +34,10 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     retry: 2,
   });
   //Estado para almacenar las columnas de la tabla
-  // FN state para almacenar las facturas
+  //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
 
-  //FN hook useEffect para obtener las facturas del cliente
+  //hook useEffect para obtener las facturas del cliente
   useEffect(() => {
     if (statusInvoices === "success") {
       setInvoices(dataInvoices);
