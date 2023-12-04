@@ -2,8 +2,8 @@ import whiteListPathsJson from "./paths-redirect-session-whitelist.json";
 import countryCodesJson from "./country-codes.json";
 
 /* ----------------------------------Basic Constants------------------------------------ */
-const appName = "Monni";
-const appDescription = `${appName}, Facilita tu vida, una app para administrar saldos, pagos, recibos de dinero de manera sencilla.`;
+const appName = "Yehu";
+const appDescription = `${appName}, Tu negocio en tus manos`;
 const BalanceControlPrice = 0.05;
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
