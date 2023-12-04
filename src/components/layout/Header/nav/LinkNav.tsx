@@ -1,5 +1,6 @@
-import { Link } from "@nextui-org/react";
+/* import { Link } from "@nextui-org/react"; */
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export const LinkNav = ({
   link,
@@ -12,8 +13,7 @@ export const LinkNav = ({
   const { href, icon, text } = link;
   return (
     <Link
-      isBlock
-      className={`relative text-${size} text-${textColor} flex flex-${flexType} justify-center items-center ${
+      className={`relative text-${size} text-${textColor} flex flex-${flexType} justify-center items-center hover:bg-secundario/20 rounded-t-lg p-1 duration-300 ease-in ${
         flexType === "row" ? "gap-4" : "gap-0"
       }`}
       href={href}

@@ -7,6 +7,7 @@ import { $selectedBusiness } from "@/stores/business";
 import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 
 export const useHeader = () => {
   useCheckSession();
@@ -14,6 +15,7 @@ export const useHeader = () => {
   const user = useStore($user);
   const [business, setBusiness] = useState([BusinessDefault]);
   const [value, setValue] = useState(new Set(["0"]));
+  const [showBalance, setShowBalance] = useState(true);
 
   const {
     status: statusBusiness,
@@ -26,7 +28,6 @@ export const useHeader = () => {
       await fetchAPI({
         url: "users_business",
       }),
-    retry: 4,
   });
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export const useHeader = () => {
     } else {
       refetch();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusBusiness, dataBusiness, user]);
 
@@ -69,6 +71,9 @@ export const useHeader = () => {
   const handleSelectionBusiness = (e: any) => {
     setValue(e);
   };
+  const handleShowBalance = () => {
+    setShowBalance(!showBalance);
+  };
   const mutateFunction = () => {
     mutate();
   };
@@ -81,5 +86,8 @@ export const useHeader = () => {
     mutateFunction,
     path,
     isLoggedIn: user.isLoggedIn,
+    balance: moneyFormat(user.balance, "CRC", "es-CR"),
+    handleShowBalance,
+    showBalance,
   };
 };

@@ -4,6 +4,7 @@ import countryCodesJson from "./country-codes.json";
 /* ----------------------------------Basic Constants------------------------------------ */
 const appName = "Monni";
 const appDescription = `${appName}, Facilita tu vida, una app para administrar saldos, pagos, recibos de dinero de manera sencilla.`;
+const BalanceControlPrice = 0.05;
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
 const countryCodes: { country: string; code: string }[] = countryCodesJson;
@@ -79,4 +80,5 @@ export {
   productsAndServicesDefault,
   initialStateInvoiceDetail,
   invoiceDefault,
+  BalanceControlPrice,
 };

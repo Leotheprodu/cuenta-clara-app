@@ -6,7 +6,10 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
-import { productsAndServicesDefault } from "@/data/constants";
+import {
+  BalanceControlPrice,
+  productsAndServicesDefault,
+} from "@/data/constants";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
@@ -18,7 +21,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   //  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);
   //  estado para almacenar el usuario logueado
-  const { user } = useStore($user);
+  const user = useStore($user);
   //  estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
   const [businessSelected, setBusinessSelected] =
     useState<BusinessSelecterProps>({
@@ -182,19 +185,24 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   useEffect(() => {
     if (statusCreateInvoice === "success") {
       toast.success("Factura creada exitosamente");
+      localStorage.removeItem(
+        `invoiceDetails${user.user.id}-${selectedBusiness}-${id}`
+      );
+      $user.set({
+        ...user,
+        balance: user.balance - total * BalanceControlPrice,
+      });
       redirect(`/facturas/${id}`);
     } else if (statusCreateInvoice === "error") {
       toast.error(errorCreateInvoice?.message || "Error al crear la factura");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataCreateInvoice, statusCreateInvoice, errorCreateInvoice, id]);
 
   //funcion para crear la factura interactuando con el servidor
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateCreateInvoice();
-    localStorage.removeItem(
-      `invoiceDetails${user.id}-${selectedBusiness}-${id}`
-    );
   };
   return {
     ...formInvoice,
