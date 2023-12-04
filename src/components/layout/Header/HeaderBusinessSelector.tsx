@@ -18,6 +18,8 @@ export const HeaderBusinessSelector = ({
     handleShowBalance,
     showBalance,
   } = handle;
+  const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
+  const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
   return (
     <>
       {!whiteListPaths.includes(path) && (
@@ -56,6 +58,12 @@ export const HeaderBusinessSelector = ({
       {showBalance && (
         <motion.div
           drag
+          dragConstraints={{
+            top: 0,
+            left: 0,
+            right: maxWidth,
+            bottom: maxHeight,
+          }}
           className="fixed left-2 top-[8rem] z-40 bg-gris p-4 shadow-sm rounded-md"
           layoutId="balance"
         >
