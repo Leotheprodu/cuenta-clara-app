@@ -1,6 +1,5 @@
 import { PageWrapper } from "@/components/Utils/PageWrapper";
 import { appName } from "@/data/constants";
-
 export default function Home() {
   return (
     <PageWrapper>
