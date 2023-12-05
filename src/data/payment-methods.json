@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Efectivo"
+  },
+  {
+    "id": 2,
+    "name": "Sinpe Movil"
+  },
+  {
+    "id": 3,
+    "name": "Desposito Bancario"
+  },
+  {
+    "id": 4,
+    "name": "Paypal"
+  },
+  {
+    "id": 5,
+    "name": "Tarjeta de Credito"
+  }
+]

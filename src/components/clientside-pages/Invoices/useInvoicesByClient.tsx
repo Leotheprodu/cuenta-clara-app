@@ -15,7 +15,6 @@ import {
   formatNumber,
   moneyFormat,
 } from "@/components/Utils/dataFormat";
-import { EditRowIcon } from "@/icons/EditRowIcon";
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
 import { invoiceDefault } from "@/data/constants";

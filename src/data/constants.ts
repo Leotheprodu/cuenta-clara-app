@@ -1,5 +1,6 @@
 import whiteListPathsJson from "./paths-redirect-session-whitelist.json";
 import countryCodesJson from "./country-codes.json";
+import paymentMethodsJson from "./payment-methods.json";
 
 /* ----------------------------------Basic Constants------------------------------------ */
 const appName = "Yehu";
@@ -8,7 +9,7 @@ const BalanceControlPrice = 0.05;
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
 const countryCodes: { country: string; code: string }[] = countryCodesJson;
-
+const paymentMethods: { id: number; name: string }[] = paymentMethodsJson;
 /* ----------------------------------Default Initial Data------------------------------------ */
 /**
  * @description Constante que contiene el objeto de cliente por defecto
@@ -81,4 +82,5 @@ export {
   initialStateInvoiceDetail,
   invoiceDefault,
   BalanceControlPrice,
+  paymentMethods,
 };

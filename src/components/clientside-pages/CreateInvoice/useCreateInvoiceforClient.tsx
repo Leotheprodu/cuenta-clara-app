@@ -18,6 +18,9 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const [total, setTotal] = useState<number>(0);
   //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
+
+  const [payNow, setPayNow] = useState<boolean>(true);
+  const [payment_method_id, setPayment_method_id] = useState<string>("1");
   //  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);
   //  estado para almacenar el usuario logueado
@@ -63,6 +66,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     business_id: selectedBusiness,
     total,
     invoice_details: [],
+    payment_method_id,
+    status: payNow ? "paid" : "pending",
   });
   // hook useEffect para setear los datos de la factura
   useEffect(() => {
@@ -204,12 +209,28 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     e.preventDefault();
     mutateCreateInvoice();
   };
+  /*   useEffect(() => {
+    console.log(payment_method_id);
+  }, [payment_method_id]); */
+
+  const handlePayNow = () => {
+    setPayNow(!payNow);
+  };
+  const handleSelectPaymentMethod = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setPayment_method_id(e.target.value);
+  };
   return {
     ...formInvoice,
     ...client,
     total,
     businessSelected,
+    payNow,
     handleCreateInvoice,
+    handleSelectPaymentMethod,
+    payment_method_id,
+    handlePayNow,
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
       handleOnChange(setFormInvoice, e),
     createInvoiceDetail: { ...createInvoiceDetail, handleFocus },
