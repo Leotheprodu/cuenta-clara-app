@@ -66,7 +66,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     business_id: selectedBusiness,
     total,
     invoice_details: [],
-    payment_method_id,
+    payment_method_id: parseInt(payment_method_id, 10),
     status: payNow ? "paid" : "pending",
   });
   // hook useEffect para setear los datos de la factura

@@ -4,7 +4,7 @@ interface FormValuesNewInvoice {
   business_id: number;
   invoice_details: InitialStateInvoiceDetailProps[];
   total: number;
-  payment_method_id: string;
+  payment_method_id: number;
   status: string;
 }
 interface BusinessSelecterProps {
