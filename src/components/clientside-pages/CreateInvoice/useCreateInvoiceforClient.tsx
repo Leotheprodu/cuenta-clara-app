@@ -6,10 +6,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
-import {
-  BalanceControlPrice,
-  productsAndServicesDefault,
-} from "@/data/constants";
+import { billingPrice, productsAndServicesDefault } from "@/data/constants";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
@@ -195,7 +192,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       );
       $user.set({
         ...user,
-        balance: user.balance - total * BalanceControlPrice,
+        balance: user.balance - total * billingPrice,
       });
       redirect(`/facturas/${id}`);
     } else if (statusCreateInvoice === "error") {

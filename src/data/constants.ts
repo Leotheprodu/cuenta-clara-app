@@ -5,7 +5,7 @@ import paymentMethodsJson from "./payment-methods.json";
 /* ----------------------------------Basic Constants------------------------------------ */
 const appName = "Yehu";
 const appDescription = `${appName}, Tu negocio en tus manos`;
-const BalanceControlPrice = 0.05;
+const billingPrice = 0.03;
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
 const countryCodes: { country: string; code: string }[] = countryCodesJson;
@@ -81,6 +81,6 @@ export {
   productsAndServicesDefault,
   initialStateInvoiceDetail,
   invoiceDefault,
-  BalanceControlPrice,
+  billingPrice,
   paymentMethods,
 };
