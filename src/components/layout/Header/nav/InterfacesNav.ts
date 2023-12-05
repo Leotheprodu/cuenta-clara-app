@@ -5,4 +5,5 @@ interface LinkNavProps {
   flexType?: string;
   size?: "xs" | "sm" | "md" | "lg";
   component: string;
+  handlePopoverTriggerClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }

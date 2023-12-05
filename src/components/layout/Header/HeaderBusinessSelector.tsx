@@ -27,11 +27,12 @@ export const HeaderBusinessSelector = ({
           <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
           <Select
             size="sm"
-            variant="underlined"
+            variant="faded"
+            color="primary"
             isDisabled={isLoadingBusiness || isPending}
             items={business}
             label="Selecciona tu negocio"
-            className="max-w-[10rem] text-blanco"
+            className="max-w-[14rem]"
             selectedKeys={value}
             onSelectionChange={handleSelectionBusiness}
             onChange={mutateFunction}
@@ -55,7 +56,7 @@ export const HeaderBusinessSelector = ({
           )}
         </>
       )}
-      {showBalance && (
+      {!whiteListPaths.includes(path) && showBalance && (
         <motion.div
           drag
           dragConstraints={{

@@ -11,7 +11,8 @@ import { LogoutIcon } from "@/icons/LogoutIcon";
 import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../../Footer/MotionAddButtonLink";
 
-export const AddButtonPopoverContent = () => {
+export const AddButtonPopoverContent = ({ handle }: any) => {
+  const { handlePopoverTriggerClick } = handle;
   const path = usePathname();
   const user = useStore($user);
   return (
@@ -19,6 +20,7 @@ export const AddButtonPopoverContent = () => {
       <nav className="flex flex-col items-start">
         <MotionAddButtonLink delay={0.1}>
           <LinkNav
+            handlePopoverTriggerClick={handlePopoverTriggerClick}
             link={{
               href: "/sesion",
               icon: user.isLoggedIn === true ? <LogoutIcon /> : <LoginIcon />,
@@ -34,6 +36,7 @@ export const AddButtonPopoverContent = () => {
         </MotionAddButtonLink>
         <MotionAddButtonLink delay={0.2}>
           <LinkNav
+            handlePopoverTriggerClick={handlePopoverTriggerClick}
             link={{
               href: "/clientes",
               icon: <ClientsIcon />,
@@ -84,7 +87,7 @@ export const NavMenu = () => {
         showArrow
       >
         <NavMenuPopoverTrigger handle={{ handlePopoverTriggerClick }} />
-        <AddButtonPopoverContent />
+        <AddButtonPopoverContent handle={{ handlePopoverTriggerClick }} />
       </Popover>
     </>
   );

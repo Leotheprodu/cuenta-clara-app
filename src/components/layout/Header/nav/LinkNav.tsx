@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export const LinkNav = ({
+  handlePopoverTriggerClick,
   link,
   path,
   textColor = "blanco",
@@ -17,6 +18,7 @@ export const LinkNav = ({
         flexType === "row" ? "gap-4" : "gap-0"
       }`}
       href={href}
+      onClick={handlePopoverTriggerClick}
     >
       {path === href && (
         <motion.span
