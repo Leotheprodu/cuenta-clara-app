@@ -18,6 +18,7 @@ import {
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
 import { invoiceDefault } from "@/data/constants";
+import { getStatusNameInvoices } from "@/components/Utils/getStatusName";
 
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   const {
@@ -47,7 +48,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     { key: "id", name: "Id" },
     { key: "date", name: "Fecha" },
     { key: "total_amount", name: "Monto" },
-    { key: "paid", name: "Status" },
+    { key: "status", name: "Status" },
     { key: "actions", name: "Acciones" },
   ];
   const handleRemoveInvoice = (e: any, index: any) => {
@@ -81,8 +82,8 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
             {moneyFormat(invoice.total_amount, "CRC", "es-CR")}
           </p>
         );
-      case "paid":
-        return <p>{invoice.paid ? "Pagado" : "No Pagado"}</p>;
+      case "status":
+        return <p>{getStatusNameInvoices(invoice.status)}</p>;
 
       case "actions":
         return (

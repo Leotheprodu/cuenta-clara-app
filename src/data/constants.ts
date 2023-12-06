@@ -36,7 +36,7 @@ const invoiceDefault = {
   parent_user_id: 0,
   client_id: 0,
   total_amount: 0,
-  paid: false,
+  status: "",
   business_id: 0,
   date: "",
 };
@@ -61,7 +61,11 @@ const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
   subtotal: 0,
   description: "",
 };
-
+const statusInvoice = [
+  { status: "paid", name: "Pagada" },
+  { status: "pending", name: "Pendiente" },
+  { status: "canceled", name: "Cancelada" },
+];
 /* ----------------------------------URLs------------------------------------ */
 /**
  * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
@@ -83,4 +87,5 @@ export {
   invoiceDefault,
   billingPrice,
   paymentMethods,
+  statusInvoice,
 };

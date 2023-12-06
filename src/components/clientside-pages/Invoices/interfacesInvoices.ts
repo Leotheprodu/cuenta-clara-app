@@ -3,7 +3,7 @@ interface Invoice {
   parent_user_id: number;
   client_id: number;
   total_amount: number;
-  paid: boolean;
+  status: string;
   business_id: Number;
   date: string;
 }
