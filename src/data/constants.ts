@@ -31,14 +31,44 @@ const BusinessDefault = {
   default: false,
   user_id: 0,
 };
-const invoiceDefault = {
+const invoiceDefault: Invoice = {
   id: 0,
-  parent_user_id: 0,
-  client_id: 0,
-  total_amount: 0,
+  total_amount: 0.0,
   status: "",
-  business_id: 0,
   date: "",
+  users_business: {
+    id: 0,
+    name: "",
+  },
+  client: {
+    id: 0,
+    username: "",
+  },
+  invoice_details: [
+    {
+      id: 0,
+      quantity: "0.00",
+      unit_price: "0.00",
+      subtotal: "0.00",
+      code: "",
+    },
+  ],
+  transactions: [
+    {
+      id: "",
+      amount: "0.00",
+      description: "",
+      date: "",
+      payment_method: {
+        id: 0,
+        name: "",
+      },
+      payment_status: {
+        id: 0,
+        name: "",
+      },
+    },
+  ],
 };
 // constante que contiene los datos por defecto de los productos y servicios
 const productsAndServicesDefault: DataProductsAndServicesProps = {

@@ -21,7 +21,7 @@ interface NotClientInBusinessProps {
 interface HeaderCreateInvoiceProps {
   handle: {
     username: string;
-    businessSelected: BusinessSelecterProps;
+    businessSelected?: BusinessSelecterProps;
   };
 }
 interface HandleOnChangeDetailProps {

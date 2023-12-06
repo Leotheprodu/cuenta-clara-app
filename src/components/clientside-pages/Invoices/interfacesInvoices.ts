@@ -1,9 +1,47 @@
+interface UserBusiness {
+  id: number;
+  name: string;
+}
+
+interface Client {
+  id: number;
+  username: string;
+}
+
+interface InvoiceDetail {
+  id: number;
+  quantity: string;
+  unit_price: string;
+  subtotal: string;
+  code: string;
+}
+
+interface PaymentMethod {
+  id: number;
+  name: string;
+}
+
+interface PaymentStatus {
+  id: number;
+  name: string;
+}
+
+interface Transaction {
+  id: string;
+  amount: string;
+  description: string;
+  date: string;
+  payment_method: PaymentMethod;
+  payment_status: PaymentStatus;
+}
+
 interface Invoice {
   id: number;
-  parent_user_id: number;
-  client_id: number;
   total_amount: number;
   status: string;
-  business_id: Number;
   date: string;
+  users_business: UserBusiness;
+  client: Client;
+  invoice_details: InvoiceDetail[];
+  transactions: Transaction[];
 }
