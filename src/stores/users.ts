@@ -16,6 +16,11 @@ interface UserMessage {
   message: string;
 }
 
+interface Client {
+  id: number;
+  parent_user_id: number;
+  balance: Balance;
+}
 interface UserData {
   isLoggedIn: boolean;
   user: User;
@@ -24,14 +29,9 @@ interface UserData {
   balance: number;
   userMessage: UserMessage;
 }
-interface Client {
-  id: number;
-  parent_user_id: number;
-  balance: Balance;
-}
 
-export type IsLoggedInValue = UserData;
-export const $user = atom<IsLoggedInValue>({
+export type UserProps = UserData;
+export const $user = atom<UserProps>({
   isLoggedIn: false,
   user: {
     id: 0,
