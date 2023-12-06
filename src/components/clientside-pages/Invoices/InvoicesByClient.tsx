@@ -9,11 +9,6 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
-/* 
-TODO crear la vista de las facturas del cliente
-[x] crear hook que maneja la logica de la tabla
-[ ] crear tabla de facturas
-*/
 export const InvoicesByClient = ({ id }: { id: string }) => {
   const { invoicesByClient } = useInvoicesByClient({ id });
   const { invoices, columnNames, renderCell } = invoicesByClient;

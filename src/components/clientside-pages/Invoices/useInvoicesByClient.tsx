@@ -1,9 +1,3 @@
-/* 
-TODO crear la logica de la tabla de facturas
-[x] hacer el fetch de las facturas del cliente
-[ ] hacer el fetch de los detalles de las facturas
-*/
-
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import toast from "react-hot-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
