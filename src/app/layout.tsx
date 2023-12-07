@@ -66,7 +66,8 @@ export default async function RootLayout({
         <Providers>
           <Toaster />
           <Header />
-          <div className="overflow-y-auto mb-16 mt-16 pb-4">{children}</div>
+          {children}
+          {/*  <div className="overflow-y-auto mb-16 mt-16 pb-4"></div> */}
           <Footer />
         </Providers>
       </body>

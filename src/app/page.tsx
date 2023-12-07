@@ -1,13 +1,8 @@
-import { PageWrapper } from "@/components/Utils/PageWrapper";
-import { appName } from "@/data/constants";
+import { Inicio } from "@/components/clientside-pages/home/Inicio";
 export default function Home() {
   return (
-    <PageWrapper>
-      <main className="flex min-h-screen justify-center items-center p-2">
-        <section>
-          <h1>Bievenido a {appName}</h1>
-        </section>
-      </main>
-    </PageWrapper>
+    <main className="">
+      <Inicio />
+    </main>
   );
 }

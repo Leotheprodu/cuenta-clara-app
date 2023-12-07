@@ -2,7 +2,6 @@ import { whiteListPaths } from "@/data/constants";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { motion } from "framer-motion";
-
 export const HeaderBusinessSelector = ({
   handle,
 }: HeaderBusinessSelectorProps) => {
@@ -32,6 +31,9 @@ export const HeaderBusinessSelector = ({
             isDisabled={isLoadingBusiness || isPending}
             items={business}
             label="Selecciona tu negocio"
+            classNames={{
+              label: "invisible lg:visible",
+            }}
             className="max-w-[14rem]"
             selectedKeys={value}
             onSelectionChange={handleSelectionBusiness}

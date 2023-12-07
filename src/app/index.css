@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient-text {
+  background-image: linear-gradient(
+    to right,
+    theme("colors.terciario"),
+    rgb(109, 0, 128)
+  ); /* Define tu gradiente personalizado */
+  background-clip: text; /* Aplica el gradiente al texto */
+  color: transparent; /* Hace el texto transparente para que se vea el gradiente de fondo */
+}
