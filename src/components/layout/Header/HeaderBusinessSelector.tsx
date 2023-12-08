@@ -26,7 +26,7 @@ export const HeaderBusinessSelector = ({
           <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
           <Select
             size="sm"
-            variant="faded"
+            variant="flat"
             color="primary"
             isDisabled={isLoadingBusiness || isPending}
             items={business}
