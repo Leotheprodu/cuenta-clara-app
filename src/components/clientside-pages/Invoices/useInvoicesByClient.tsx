@@ -25,9 +25,29 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
+  // Obtener los datos del cliente
+  const { status: statusFetchClient, data: clientData } = useQuery({
+    queryKey: ["fetch-client"],
+    queryFn: async () =>
+      await fetchAPI({
+        url: `clients/${id}`,
+      }),
+    retry: 2,
+  });
   //Estado para almacenar las columnas de la tabla
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
+  //  estado para almacenar los datos del cliente
+  const [client, setClient] = useState({ username: "", active: 0 });
+
+  useEffect(() => {
+    // si el cliente existe, setearlo en el estado
+    if (statusFetchClient === "success") {
+      setClient(clientData);
+    } else if (statusFetchClient === "error") {
+      setClient({ username: "", active: 0 });
+    }
+  }, [statusFetchClient, clientData]);
 
   //hook useEffect para obtener las facturas del cliente
   useEffect(() => {
@@ -106,6 +126,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       invoices,
       columnNames,
       renderCell,
+      client,
     },
   };
 };

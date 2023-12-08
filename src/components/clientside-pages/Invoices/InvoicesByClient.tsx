@@ -12,12 +12,12 @@ import {
 } from "@nextui-org/react";
 export const InvoicesByClient = ({ id }: { id: string }) => {
   const { invoicesByClient } = useInvoicesByClient({ id });
-  const { invoices, columnNames, renderCell } = invoicesByClient;
+  const { invoices, columnNames, renderCell, client } = invoicesByClient;
   return (
     <div className="w-full flex flex-col gap-2">
       <HeaderCreateInvoice
         handle={{
-          username: invoices[0].client.username,
+          username: client.username,
         }}
       />
       <section className="mt-[3rem] pt-3">
@@ -29,7 +29,7 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody emptyContent={"No hay detalles para mostrar"}>
+          <TableBody emptyContent={"No hay facturas para mostrar"}>
             {invoices.map((row: any, index: number) => (
               <TableRow key={index}>
                 {(columnKey) => (
