@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 export default function Clientes() {
   return (
-    <main className="flex min-h-screen w-full justify-center">
+    <main className="flex min-h-screen w-full justify-center mt-16">
       <section>
         <Clients />
       </section>

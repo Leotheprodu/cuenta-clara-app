@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 export default function Recargas() {
   return (
-    <main className="flex min-h-screen w-full justify-center">
+    <main className="flex min-h-screen w-full justify-center mt-16">
       <section>
         <h1>Recargas</h1>
       </section>

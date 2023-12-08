@@ -4,7 +4,7 @@ import { InvoicesByClient } from "@/components/clientside-pages/Invoices/Invoice
 export default function Invoices({ params }: { params: { id: string } }) {
   return (
     <PageWrapper>
-      <main className="flex min-h-screen w-full justify-center">
+      <main className="flex min-h-screen w-full justify-center mt-16">
         <section>
           <InvoicesByClient id={params.id} />
         </section>
