@@ -28,6 +28,7 @@ export const useHeader = () => {
       await fetchAPI({
         url: "users_business",
       }),
+    retry: 2,
   });
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const useHeader = () => {
         setValue(new Set([defaultBussines[0].id.toString()]));
         $selectedBusiness.set(defaultBussines[0].id);
       }
-    } else {
+    } else if (statusBusiness === "error" && user.isLoggedIn) {
       refetch();
     }
 

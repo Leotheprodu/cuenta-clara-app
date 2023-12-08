@@ -45,6 +45,7 @@ export const Hero = () => {
           src={"/desk1.png"}
           alt="vista en computadora"
           className=""
+          priority
         ></Image>
         <Waves className="absolute bottom-0 rotate-180 scale-105" />
       </motion.div>
