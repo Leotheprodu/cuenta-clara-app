@@ -34,11 +34,11 @@ interface Transaction {
   payment_method: PaymentMethod;
   payment_status: PaymentStatus;
 }
-
+type InvoiceStatus = "paid" | "pending" | "cancelled" | "inReview";
 interface Invoice {
   id: number;
   total_amount: number;
-  status: string;
+  status: InvoiceStatus;
   date: string;
   users_business: UserBusiness;
   client: Client;

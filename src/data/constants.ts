@@ -8,8 +8,21 @@ const appDescription = `${appName}, Tu negocio en tus manos`;
 const billingPrice = 0.03;
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
-const countryCodes: { country: string; code: string }[] = countryCodesJson;
+const countryCodes: {
+  country: string;
+  code: string;
+  currency: string;
+  langCountry: string;
+}[] = countryCodesJson;
 const paymentMethods: { id: number; name: string }[] = paymentMethodsJson;
+/* ----------------------------------Dictionaries---------------------------------------------- */
+const invoicesStatus = {
+  paid: "paid",
+  pending: "pending",
+  cancelled: "cancelled",
+  inReview: "inReview",
+};
+
 /* ----------------------------------Default Initial Data------------------------------------ */
 /**
  * @description Constante que contiene el objeto de cliente por defecto
@@ -34,7 +47,7 @@ const BusinessDefault = {
 const invoiceDefault: Invoice = {
   id: 0,
   total_amount: 0.0,
-  status: "",
+  status: "pending",
   date: "",
   users_business: {
     id: 0,
@@ -91,11 +104,12 @@ const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
   subtotal: 0,
   description: "",
 };
-const statusInvoice = [
-  { status: "paid", name: "Pagada" },
-  { status: "pending", name: "Pendiente" },
-  { status: "canceled", name: "Cancelada" },
-];
+const clientStatusInvoice = {
+  paid: "Pagada",
+  pending: "Pendiente",
+  cancelled: "Cancelada",
+  inReview: "En revisión",
+};
 /* ----------------------------------URLs------------------------------------ */
 /**
  * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
@@ -117,5 +131,6 @@ export {
   invoiceDefault,
   billingPrice,
   paymentMethods,
-  statusInvoice,
+  clientStatusInvoice,
+  invoicesStatus,
 };

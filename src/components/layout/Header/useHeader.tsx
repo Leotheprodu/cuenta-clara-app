@@ -87,7 +87,7 @@ export const useHeader = () => {
     mutateFunction,
     path,
     isLoggedIn: user.isLoggedIn,
-    balance: moneyFormat(user.balance, "CRC", "es-CR"),
+    balance: moneyFormat(user.balance),
     handleShowBalance,
     showBalance,
   };

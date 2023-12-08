@@ -81,19 +81,19 @@ export const ChangeCalculator = ({ total }: { total: number }) => {
                   <div className="flex justify-between">
                     <span className="text-primario font-bold">Recibido:</span>
                     <small className="text-secundario text-lg">
-                      {moneyFormat(received, "CRC", "es-CR")}
+                      {moneyFormat(received)}
                     </small>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-primario font-bold"> - Total:</span>
                     <small className=" text-lg text-danger-300">
-                      {moneyFormat(total, "CRC", "es-CR")}
+                      {moneyFormat(total)}
                     </small>
                   </div>
                   <div className="flex justify-between scale-110 bg-gris rounded-md shadow-sm p-2 border-b-1 border-terciario">
                     <span className="text-primario font-bold">Vuelto:</span>
                     <small className="text-secundario text-lg font-bold">
-                      {moneyFormat(change, "CRC", "es-CR")}
+                      {moneyFormat(change)}
                     </small>
                   </div>
                 </div>

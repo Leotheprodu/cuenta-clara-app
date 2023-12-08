@@ -109,9 +109,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                 <div className=" text-secundario rounded-xl flex justify-end mt-4 ">
                   <p className="bg-gris rounded-lg p-3 shadow-md">
                     Total:{" "}
-                    <span className="text-primario">
-                      {moneyFormat(total, "CRC", "es-CR")}
-                    </span>
+                    <span className="text-primario">{moneyFormat(total)}</span>
                   </p>
                 </div>
                 <div className="flex justify-end mt-8 gap-4">

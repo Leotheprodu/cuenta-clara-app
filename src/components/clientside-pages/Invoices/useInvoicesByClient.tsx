@@ -11,9 +11,7 @@ import {
 } from "@/components/Utils/dataFormat";
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
-import { invoiceDefault } from "@/data/constants";
-import { getStatusNameInvoices } from "@/components/Utils/getStatusName";
-
+import { clientStatusInvoice, invoiceDefault } from "@/data/constants";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   const {
     status: statusInvoices,
@@ -72,12 +70,10 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
         return <p className="">{formatDate(invoice.date)}</p>;
       case "total_amount":
         return (
-          <p className="text-right">
-            {moneyFormat(invoice.total_amount, "CRC", "es-CR")}
-          </p>
+          <p className="text-right">{moneyFormat(invoice.total_amount)}</p>
         );
       case "status":
-        return <p>{getStatusNameInvoices(invoice.status)}</p>;
+        return <p>{clientStatusInvoice[invoice.status]}</p>;
 
       case "actions":
         return (

@@ -275,22 +275,14 @@ export const useInvoiceDetail = ({
       case "quantity":
         return <p className="text-right">{formatNumber(detail.quantity)}</p>;
       case "price":
-        return (
-          <p className="text-right">
-            {moneyFormat(detail.unit_price, "CRC", "es-CR")}
-          </p>
-        );
+        return <p className="text-right">{moneyFormat(detail.unit_price)}</p>;
       case "name":
         return <p>{nameOfProductOrService(detail.code)}</p>;
 
       case "description":
         return <p>{detail.description}</p>;
       case "subtotal":
-        return (
-          <p className="text-right">
-            {moneyFormat(detail.subtotal, "CRC", "es-CR")}
-          </p>
-        );
+        return <p className="text-right">{moneyFormat(detail.subtotal)}</p>;
 
       case "actions":
         return (

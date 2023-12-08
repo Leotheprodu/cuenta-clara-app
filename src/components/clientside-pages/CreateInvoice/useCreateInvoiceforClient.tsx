@@ -6,7 +6,11 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useInvoiceDetail } from "./useInvoiceDetail";
-import { billingPrice, productsAndServicesDefault } from "@/data/constants";
+import {
+  billingPrice,
+  invoicesStatus,
+  productsAndServicesDefault,
+} from "@/data/constants";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
@@ -64,7 +68,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     total,
     invoice_details: [],
     payment_method_id: parseInt(payment_method_id, 10),
-    status: payNow ? "paid" : "pending",
+    status: payNow ? invoicesStatus.paid : invoicesStatus.pending,
   });
   // hook useEffect para setear los datos de la factura
   useEffect(() => {
@@ -73,9 +77,11 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       business_id: selectedBusiness,
       total,
       invoice_details: invoiceDetails,
+      payment_method_id: parseInt(payment_method_id, 10),
+      status: payNow ? invoicesStatus.paid : invoicesStatus.pending,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoiceDetails, total, selectedBusiness]);
+  }, [invoiceDetails, total, selectedBusiness, payNow, payment_method_id]);
 
   //hook useEffect para calcular el monto total de la factura
   useEffect(() => {

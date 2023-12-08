@@ -82,7 +82,7 @@ export const ModalSearchProductsAndServices = ({
                             <td className="py-1 px-2">{ps.name}</td>
                             <td className="py-1 px-2">{ps.unit}</td>
                             <td className="py-1 px-2">
-                              {moneyFormat(ps.unit_price, "CRC", "es-CR")}
+                              {moneyFormat(ps.unit_price)}
                             </td>
                             <td className="py-1 px-2 text-center">
                               {ps.default ? "Si" : "No"}

@@ -1,13 +1,18 @@
-export const moneyFormat = (
-  value: number,
-  currency: string = "USD",
-  langCountry: string = "en-US"
-) => {
+import { countryCodes } from "@/data/constants";
+import { $user } from "@/stores/users";
+
+export const moneyFormat = (value: number) => {
+  const userCountry = $user.value?.user.country;
+  const data = countryCodes.find(
+    (countryCode) => countryCode.country === userCountry
+  );
+  const currency: string = (data?.currency as string) || "USD";
+  const langCountry: string = (data?.langCountry as string) || "en-US";
+
   const formatter = new Intl.NumberFormat(langCountry, {
     style: "currency",
     currency,
   });
-
   return formatter.format(value);
 };
 
