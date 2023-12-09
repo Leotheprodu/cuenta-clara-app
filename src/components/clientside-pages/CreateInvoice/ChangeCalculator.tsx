@@ -43,7 +43,9 @@ export const ChangeCalculator = ({ total }: { total: number }) => {
                     type="number"
                     placeholder="Monto recibido"
                     value={received.toString()}
-                    onChange={(e) => setReceived(parseInt(e.target.value) || 0)}
+                    onChange={(e) =>
+                      setReceived(parseFloat(e.target.value) || 0)
+                    }
                     color="primary"
                   ></Input>
                   <div className="flex items-center justify-center gap-1 flex-wrap mt-4">

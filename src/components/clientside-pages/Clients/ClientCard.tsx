@@ -6,7 +6,7 @@ import { InfoIcon } from "@/icons/infoIcon";
 import { Tooltip } from "@nextui-org/react";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   const { username, id, detail = "", balances } = client;
-  const balance = parseInt(balances[0].amount, 10);
+  const balance = parseFloat(balances[0].amount);
   const { ref } = useClientCard({ username });
   return (
     <div
