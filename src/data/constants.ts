@@ -28,15 +28,29 @@ const invoicesStatus = {
  * @description Constante que contiene el objeto de cliente por defecto
  * @usedIn useFiltersClients.tsx
  */
-const clienteDefault = {
+const clientDefault: ClientProps = {
   id: 0,
   username: "Nombre de Cliente",
   email: "correo@correo.com",
-  cellphone: 7777777,
+  cellphone: "7777777",
   token: "token",
   user_id: null,
   active: true,
   country: "Costa Rica",
+  createdAt: "",
+  updatedAt: "",
+  parent_user_id: 0,
+  detail: "",
+  balances: [
+    {
+      id: 0,
+      amount: "0.00",
+      users_business: {
+        id: 0,
+        name: "",
+      },
+    },
+  ],
 };
 const BusinessDefault = {
   id: 0,
@@ -61,9 +75,14 @@ const invoiceDefault: Invoice = {
     {
       id: 0,
       quantity: "0.00",
+      description: "",
       unit_price: "0.00",
       subtotal: "0.00",
       code: "",
+      products_and_service: {
+        id: 0,
+        name: "",
+      },
     },
   ],
   transactions: [
@@ -122,7 +141,7 @@ export {
   appDescription,
   whiteListPaths,
   countryCodes,
-  clienteDefault,
+  clientDefault,
   BusinessDefault,
   domain,
   baseUrl,

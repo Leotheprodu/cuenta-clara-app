@@ -63,8 +63,8 @@ export const useHeader = () => {
   });
   useEffect(() => {
     if (status === "success" && user.isLoggedIn) {
-      refetch();
       $selectedBusiness.set(Number(Array.from(value)[0]));
+      refetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, user]);

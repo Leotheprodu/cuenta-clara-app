@@ -11,8 +11,26 @@ import {
 } from "@/components/Utils/dataFormat";
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
+import { $selectedBusiness } from "@/stores/business";
+import { useStore } from "@nanostores/react";
 import { clientStatusInvoice, invoiceDefault } from "@/data/constants";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
+  //state para almacenar las facturas
+  const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
+  //  estado para almacenar los datos del cliente
+  const [client, setClient] = useState({ username: "", active: 0 });
+  const businessId = useStore($selectedBusiness);
+  //filtra las facturas por negocio
+  /* useEffect(() => {
+    const filterInvoicesByBusiness = (invoices: Invoice[]) => {
+      return invoices.filter(
+        (invoice) => invoice.users_business.id === businessId
+      );
+    };
+    setInvoices(filterInvoicesByBusiness(invoices));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [businessId]); */
+  console.log(businessId);
   const {
     status: statusInvoices,
     data: dataInvoices,
@@ -35,10 +53,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     retry: 2,
   });
   //Estado para almacenar las columnas de la tabla
-  //state para almacenar las facturas
-  const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
-  //  estado para almacenar los datos del cliente
-  const [client, setClient] = useState({ username: "", active: 0 });
 
   useEffect(() => {
     // si el cliente existe, setearlo en el estado
@@ -59,6 +73,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
   const columnNames: ColumnNamesProps[] = [
     { key: "id", name: "Id" },
     { key: "date", name: "Fecha" },
+    { key: "business_name", name: "Empresa" },
     { key: "total_amount", name: "Monto" },
     { key: "status", name: "Status" },
     { key: "actions", name: "Acciones" },
@@ -86,6 +101,8 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     switch (columnKey) {
       case "id":
         return <p>{invoice.id}</p>;
+      case "business_name":
+        return <p>{invoice.users_business.name}</p>;
       case "date":
         return <p className="">{formatDate(invoice.date)}</p>;
       case "total_amount":

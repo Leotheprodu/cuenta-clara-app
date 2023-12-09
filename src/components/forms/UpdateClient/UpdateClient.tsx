@@ -11,91 +11,87 @@ import { InputDetail } from "../NewClient/InputDetail";
 import { useRouter } from "next/navigation";
 
 export const UpdateClient = ({ id }: { id: string }) => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const {
-        handleUpdateClient,
-        handleOnChange,
-        handleNewToken,
-        username,
-        detail,
-        email,
-        cellphone,
-        token,
-        isPending,
-        isLoadingBusiness,
-        business,
-        selectedKeys,
-        codeSelected,
-        handleSelectionChange,
-        handleCountrySelectionChange,
-        countryCodes,
-        countrySelected,
-    } = useUpdateClient(
-        {
-            id: parseInt(id, 10),
-            username: "",
-            email: "",
-            cellphone: "",
-            token: "",
-            detail: "",
-            id_business: [],
-        },
-        id
-    );
+  const {
+    handleUpdateClient,
+    handleOnChange,
+    handleNewToken,
+    username,
+    detail,
+    email,
+    cellphone,
+    token,
+    isPending,
+    isLoadingBusiness,
+    business,
+    selectedKeys,
+    codeSelected,
+    handleSelectionChange,
+    handleCountrySelectionChange,
+    countryCodes,
+    countrySelected,
+  } = useUpdateClient(
+    {
+      id: parseInt(id, 10),
+      username: "",
+      email: "",
+      cellphone: "",
+      token: "",
+      detail: "",
+      id_business: [],
+    },
+    id
+  );
 
-    return (
-        <form
-            onSubmit={handleUpdateClient}
-            className="flex flex-col items-center justify-center gap-4"
+  return (
+    <form
+      onSubmit={handleUpdateClient}
+      className="flex flex-col items-center justify-center gap-4"
+    >
+      <BusinessList
+        title="Actualiza tu cliente"
+        handle={{
+          isLoadingBusiness,
+          business,
+          selectedKeys,
+          handleSelectionChange,
+        }}
+      />
+      <SelectCountry
+        handle={{
+          countryCodes,
+          countrySelected,
+          handleCountrySelectionChange,
+        }}
+      />
+      <InputUsername handle={{ username, handleOnChange }} />
+
+      <InputEmail handle={{ email, handleOnChange }} />
+
+      <InputCellphone handle={{ cellphone, handleOnChange, codeSelected }} />
+      <InputDetail handle={{ detail, handleOnChange }} />
+
+      <InputChangeToken handle={{ token, handleOnChange, handleNewToken }} />
+      <div className="flex gap-2 mt-3">
+        <Button
+          onClick={() => router.back()}
+          type="button"
+          color="danger"
+          className=" uppercase w-full"
         >
-            <BusinessList
-                title="Actualiza tu cliente"
-                handle={{
-                    isLoadingBusiness,
-                    business,
-                    selectedKeys,
-                    handleSelectionChange,
-                }}
-            />
-            <SelectCountry
-                handle={{
-                    countryCodes,
-                    countrySelected,
-                    handleCountrySelectionChange,
-                }}
-            />
-            <InputUsername handle={{ username, handleOnChange }} />
+          Cancelar
+        </Button>
 
-            <InputEmail handle={{ email, handleOnChange }} />
-
-            <InputCellphone
-                handle={{ cellphone, handleOnChange, codeSelected }}
-            />
-            <InputDetail handle={{ detail, handleOnChange }} />
-
-            <InputChangeToken
-                handle={{ token, handleOnChange, handleNewToken }}
-            />
-            <div className="flex gap-2 mt-3">
-                <Button
-                    onClick={() => router.back()}
-                    type="button"
-                    color="danger"
-                    className=" uppercase w-full"
-                >
-                    Cancelar
-                </Button>
-
-                <Button
-                    isLoading={isPending}
-                    color="primary"
-                    className="uppercase w-full"
-                    type="submit"
-                >
-                    Actualizar
-                </Button>
-            </div>
-        </form>
-    );
+        <Button
+          isLoading={isPending}
+          color="primary"
+          className="uppercase w-full"
+          type="submit"
+        >
+          Actualizar
+        </Button>
+      </div>
+    </form>
+  );
 };

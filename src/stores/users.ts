@@ -11,6 +11,7 @@ interface User {
 }
 interface Balance {
   amount: string;
+  users_business: UserBusiness;
 }
 interface UserMessage {
   message: string;
@@ -19,7 +20,7 @@ interface UserMessage {
 interface Client {
   id: number;
   parent_user_id: number;
-  balance: Balance;
+  balances: Balance[];
 }
 interface UserData {
   isLoggedIn: boolean;
@@ -48,9 +49,15 @@ export const $user = atom<UserProps>({
     {
       id: 0,
       parent_user_id: 0,
-      balance: {
-        amount: "0.00",
-      },
+      balances: [
+        {
+          amount: "0.00",
+          users_business: {
+            id: 0,
+            name: "",
+          },
+        },
+      ],
     },
   ],
   balance: 0,

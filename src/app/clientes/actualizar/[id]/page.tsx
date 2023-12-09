@@ -7,7 +7,7 @@ export default function ActualizarCliente({
 }) {
   return (
     <PageWrapper>
-      <main className="flex min-h-screen justify-center items-center mt-16 p-2">
+      <main className="flex min-h-screen justify-center items-center my-16 p-2">
         <section>
           <UpdateClientPage id={params.id} />
         </section>

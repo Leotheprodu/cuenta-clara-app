@@ -11,9 +11,11 @@ interface Client {
 interface InvoiceDetail {
   id: number;
   quantity: string;
+  description: string;
   unit_price: string;
   subtotal: string;
   code: string;
+  products_and_service: Products_and_service;
 }
 
 interface PaymentMethod {
@@ -33,6 +35,10 @@ interface Transaction {
   date: string;
   payment_method: PaymentMethod;
   payment_status: PaymentStatus;
+}
+interface Products_and_service {
+  id: number;
+  name: string;
 }
 type InvoiceStatus = "paid" | "pending" | "cancelled" | "inReview";
 interface Invoice {

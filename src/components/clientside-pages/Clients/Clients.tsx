@@ -30,7 +30,7 @@ export const Clients = () => {
 
       <div className="z-0 py-28 flex flex-col gap-4 items-center justify-center">
         {clientsSearched.length > 0 &&
-          clientsSearched.map((client: any) => (
+          clientsSearched.map((client: ClientProps) => (
             <PageWrapper key={client.id}>
               <DragableClient id={client.id}>
                 <ClientCard
