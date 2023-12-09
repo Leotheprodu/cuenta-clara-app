@@ -7,7 +7,60 @@
     to right,
     theme("colors.terciario"),
     rgb(109, 0, 128)
-  ); /* Define tu gradiente personalizado */
-  background-clip: text; /* Aplica el gradiente al texto */
-  color: transparent; /* Hace el texto transparente para que se vea el gradiente de fondo */
+  );
+  background-clip: text;
+  background-repeat: no-repeat;
+  color: transparent;
+  background-size: 200% 200%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+.gradient-bg {
+  background: linear-gradient(
+    270deg,
+    theme("colors.terciario"),
+    rgb(109, 0, 128),
+    rgb(238, 7, 7),
+    rgb(2, 161, 247)
+  );
+  background-size: 300% 300%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

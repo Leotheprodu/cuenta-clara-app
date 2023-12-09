@@ -28,7 +28,7 @@ export const DragableClient = ({
     // Verifica si el elemento se soltó en un área específica
     if (info.point.x > 900) {
       setDragXPosition("agregar factura");
-    } else if (info.point.x < 330) {
+    } else if (info.point.x < 230) {
       setDragXPosition("ver facturas del cliente");
     }
   };
@@ -40,7 +40,7 @@ export const DragableClient = ({
           dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
           whileDrag={{ scale: 1.2 }}
           onDragEnd={handleDragEnd}
-          className=" flex flex-col z-0 rounded-2xl border-1 bg-blanco border-secundario p-2 w-[20rem] shadow-md"
+          className=" flex flex-col z-0 rounded-2xl border-1 gradient-bg border-secundario p-[1px] w-[20rem] shadow-medium"
         >
           {children}
         </motion.div>

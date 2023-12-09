@@ -12,7 +12,7 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
     <div
       ref={ref}
       className={`flex z-0 flex-col rounded-xl ${
-        isShowActivoButton ? "bg-primario/10" : "bg-danger-400/10"
+        isShowActivoButton ? "bg-gris" : "bg-foreground-300"
       } ${balance < 0 && "border-t-2 border-danger-400 bg-danger-400/5"} ${
         balance > 0 && "border-t-2 border-cuaternario"
       }`}
