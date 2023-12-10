@@ -2,7 +2,7 @@
 import { AddButton } from "./AddButton";
 import { usePathname } from "next/navigation";
 import { LinksFooter } from "./LinksFooter";
-import { LinkNav } from "../Header/nav/LinkNav";
+import { LinkNav } from "../Header/LinkNav";
 import { whiteListPaths } from "@/data/constants";
 
 export const Footer = () => {

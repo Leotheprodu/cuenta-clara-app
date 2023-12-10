@@ -1,6 +1,9 @@
 interface whatsappMsgsNames {
   name: "justContact" | "sendDashboardLink";
 }
+type UseLetterViewProps = {
+  username: string;
+};
 interface ClientProps {
   id: number;
   username: string;

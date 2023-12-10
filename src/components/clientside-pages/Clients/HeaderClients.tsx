@@ -1,4 +1,4 @@
-import { SwitchActivo } from "./SwitchActivo";
+import { SwitchFilterActive } from "./SwitchFilterActive";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "@/icons/SearchIcon";
 
@@ -11,7 +11,7 @@ export const HeaderClients = ({ handle }: HeaderClientsProps) => {
   } = handle;
   return (
     <div className="z-10 flex fixed left-0 items-center justify-center w-full bg-blanco/80 shadow-md backdrop-blur-sm">
-      <SwitchActivo handle={{ isShowActivoButton, HanldeIsSelected }} />
+      <SwitchFilterActive handle={{ isShowActivoButton, HanldeIsSelected }} />
       <Input
         onChange={handleSearchClient}
         value={searchClient}

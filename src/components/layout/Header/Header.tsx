@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useHeader } from "./useHeader";
 import { HeaderBusinessSelector } from "./HeaderBusinessSelector";
 import { appName } from "@/data/constants";
-import { NavMenu } from "./nav/NavMenu";
+import { NavMenu } from "./NavMenu";
 
 export const Header = () => {
   const {

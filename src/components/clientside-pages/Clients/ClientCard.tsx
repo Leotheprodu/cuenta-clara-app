@@ -1,13 +1,14 @@
 import { ClientSections } from "./ClientSections";
 import { MainContactInfo } from "./MainContactInfo";
 import { moneyFormat } from "@/components/Utils/dataFormat";
-import { useClientCard } from "./useClientCard";
+
 import { InfoIcon } from "@/icons/infoIcon";
 import { Tooltip } from "@nextui-org/react";
+import { useLetterView } from "./useLetterView";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   const { username, id, detail = "", balances } = client;
   const balance = parseFloat(balances[0].amount);
-  const { ref } = useClientCard({ username });
+  const { ref } = useLetterView({ username });
   return (
     <div
       ref={ref}

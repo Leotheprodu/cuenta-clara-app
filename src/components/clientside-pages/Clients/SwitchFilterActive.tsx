@@ -1,6 +1,6 @@
 import { Switch, cn } from "@nextui-org/react";
 
-export const SwitchActivo = ({
+export const SwitchFilterActive = ({
   handle,
 }: {
   handle: {

@@ -9,7 +9,7 @@ import { Button, Popover, PopoverTrigger } from "@nextui-org/react";
 import { PopoverContent } from "@nextui-org/react";
 import { LogoutIcon } from "@/icons/LogoutIcon";
 import { LoginIcon } from "@/icons/LoginIcon";
-import { MotionAddButtonLink } from "../../Footer/MotionAddButtonLink";
+import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const { handlePopoverTriggerClick } = handle;
@@ -20,7 +20,6 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
       <nav className="flex flex-col items-start">
         <MotionAddButtonLink delay={0.1}>
           <LinkNav
-            handlePopoverTriggerClick={handlePopoverTriggerClick}
             link={{
               href: "/sesion",
               icon: user.isLoggedIn === true ? <LogoutIcon /> : <LoginIcon />,
@@ -36,7 +35,6 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
         </MotionAddButtonLink>
         <MotionAddButtonLink delay={0.2}>
           <LinkNav
-            handlePopoverTriggerClick={handlePopoverTriggerClick}
             link={{
               href: "/clientes",
               icon: <ClientsIcon />,

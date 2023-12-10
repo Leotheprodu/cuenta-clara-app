@@ -1,8 +1,6 @@
 import Loading from "@/app/loading";
-import { internalLinks } from "@/components/Utils/internalLinks";
 import { AnimatePresence, motion } from "framer-motion";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useDragableClient } from "./useDragableClient";
 
 export const DragableClient = ({
   children,
@@ -11,27 +9,8 @@ export const DragableClient = ({
   children: React.ReactNode;
   id: number;
 }) => {
-  const [isRedirecting, setIsRedirecting] = useState(false);
-  const [dragXPosition, setDragXPosition] = useState("");
-  useEffect(() => {
-    if (dragXPosition === "agregar factura") {
-      setIsRedirecting(true);
-      redirect(`${internalLinks("add-invoice")}${id}`);
-    } else if (dragXPosition === "ver facturas del cliente") {
-      setIsRedirecting(true);
-      redirect(`${internalLinks("client-invoices")}${id}`);
-    }
-  }, [dragXPosition, id]);
+  const { handleDragEnd, isRedirecting } = useDragableClient({ id });
 
-  // eslint-disable-next-line
-  const handleDragEnd = (event: any, info: any) => {
-    // Verifica si el elemento se soltó en un área específica
-    if (info.point.x > 900) {
-      setDragXPosition("agregar factura");
-    } else if (info.point.x < 230) {
-      setDragXPosition("ver facturas del cliente");
-    }
-  };
   return (
     <div>
       <div className="relative">
@@ -40,7 +19,7 @@ export const DragableClient = ({
           dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
           whileDrag={{ scale: 1.2 }}
           onDragEnd={handleDragEnd}
-          className=" flex flex-col z-0 rounded-2xl border-1 gradient-bg border-secundario p-[1px] w-[20rem] shadow-medium"
+          className=" flex flex-col z-0 rounded-xl border-1 bg-blanco bg-opacity-50 border-secundario/10 p-2 w-[20rem] shadow-sm shadow-cuaternario/40"
         >
           {children}
         </motion.div>
