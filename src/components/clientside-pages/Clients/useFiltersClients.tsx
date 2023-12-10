@@ -13,7 +13,8 @@ export const useFiltersClients = ({
   const [clients, setClients] = useState([clientDefault]);
   const [clientsActives, setClientsActives] = useState([clientDefault]);
   const [clientsSearched, setClientsSearched] = useState([clientDefault]);
-  //1 Clientes activos o inactivos
+
+  //filtra los clientes por negocio
   useEffect(() => {
     if (status === "success") {
       const clients = data.filter((item: ClientProps) =>
@@ -27,6 +28,8 @@ export const useFiltersClients = ({
       setClients([clientDefault]);
     }
   }, [selectedBusiness, data, status]);
+
+  //filtra los clientes por activos o inactivos
   useEffect(() => {
     if (isShowActivoButton)
       setClientsActives(
@@ -38,9 +41,11 @@ export const useFiltersClients = ({
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowActivoButton, clients]);
+
+  //filtra los clientes por nombre, email, celular o detalle
   useEffect(() => {
     if (searchClient.length > 0) {
-      const searchLower = searchClient.toLowerCase(); // Convertimos el input a minúsculas
+      const searchLower = searchClient.toLowerCase();
       const filtered = clientsActives.filter((client: ClientProps) => {
         const usernameMatch = client.username
           .toLowerCase()

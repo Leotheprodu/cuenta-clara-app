@@ -21,18 +21,10 @@ export const useClientsPage = () => {
     searchClient,
   });
 
-  //Extrae los balances filtrados por Negocio
-
-  /**
-   * @description Activa o desactiva el boton que muestra usuario activos o no activos.
-   * @param {boolean[]} value - Es el valor que se le asigna al estado isShowActivoButton.
-   */
   const HanldeIsSelected = (value: boolean) => {
     setIsShowActivoButton(value);
   };
-  /**
-   * @description maneja el onChange de el buscador de Clientes.
-   */
+
   const handleSearchClient = (e: any) => {
     setSearchClient(e.target.value);
   };
