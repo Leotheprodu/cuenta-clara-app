@@ -9,7 +9,7 @@ interface FormValuesNewInvoice {
 interface BusinessSelecterProps {
   id: number;
   name: string;
-  isClientInBusiness: boolean;
+  isClientInBusiness?: boolean;
 }
 interface NotClientInBusinessProps {
   handle: {
@@ -20,7 +20,7 @@ interface NotClientInBusinessProps {
 interface HeaderCreateInvoiceProps {
   handle: {
     username: string;
-    businessSelected?: BusinessSelecterProps;
+    businessSelected?: string;
   };
 }
 interface HandleOnChangeDetailProps {
@@ -82,7 +82,10 @@ interface CreateInvoiceDetailProps {
 interface UseInvoiceDetailProps {
   id: string;
   productsAndServices: ProductsAndServicesProps;
-  selectedBusiness: number;
+  selectedBusiness: {
+    id: number;
+    name: string;
+  };
   statusCreateInvoice: string;
 }
 interface ProductsAndServicesProps {

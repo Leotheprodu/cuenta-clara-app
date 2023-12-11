@@ -39,7 +39,9 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
 
   return (
     <div className="w-full flex flex-col gap-2">
-      <HeaderCreateInvoice handle={{ username, businessSelected }} />
+      <HeaderCreateInvoice
+        handle={{ username, businessSelected: businessSelected.name }}
+      />
       <section className="pt-2 px-4">
         <PageWrapper>
           <form

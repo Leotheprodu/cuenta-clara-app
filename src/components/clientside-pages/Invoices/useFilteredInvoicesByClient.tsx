@@ -17,11 +17,11 @@ export const useFilteredInvoicesByClient = ({
     if (!businessId) return;
     const filterInvoicesByBusiness = (invoices: Invoice[]) => {
       return invoices.filter(
-        (invoice) => invoice.users_business.id === businessId
+        (invoice) => invoice.users_business.id === businessId.id
       );
     };
     if (invoices.length === 0) {
-      setInvoicesByBusiness(invoices);
+      setInvoicesByBusiness([]);
     } else {
       setInvoicesByBusiness(filterInvoicesByBusiness(invoices));
     }

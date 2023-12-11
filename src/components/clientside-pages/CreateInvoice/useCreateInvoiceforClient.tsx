@@ -66,7 +66,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const { invoiceDetails } = createInvoiceDetail;
   const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
     date: getCurrentDate(),
-    business_id: selectedBusiness,
+    business_id: selectedBusiness.id,
     total,
     invoice_details: [],
     payment_method_id: parseInt(payment_method_id, 10),
@@ -76,7 +76,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   useEffect(() => {
     setFormInvoice({
       ...formInvoice,
-      business_id: selectedBusiness,
+      business_id: selectedBusiness.id,
       total,
       invoice_details: invoiceDetails,
       payment_method_id: parseInt(payment_method_id, 10),
@@ -128,7 +128,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     queryKey: ["user-products-and-services"],
     queryFn: async () =>
       await fetchAPI({
-        url: `products_and_services/${selectedBusiness}`,
+        url: `products_and_services/${selectedBusiness.id}`,
       }),
     retry: 2,
   });
@@ -150,7 +150,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     ) {
       // buscar el nombre del negocio seleccionado
       const findBusinessName = dataBusiness.find(
-        (item: BusinessProps) => item.id === selectedBusiness
+        (item: BusinessProps) => item.id === selectedBusiness.id
       );
       // buscar los negocios donde el cliente tiene balances
       const businessofClient = dataBalance.map((item: any) => item.business_id);
@@ -158,7 +158,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       setBusinessSelected({
         id: findBusinessName?.id,
         name: findBusinessName?.name,
-        isClientInBusiness: businessofClient?.includes(selectedBusiness),
+        isClientInBusiness: businessofClient?.includes(selectedBusiness.id),
       });
     }
   }, [
@@ -196,7 +196,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     if (statusCreateInvoice === "success") {
       toast.success("Factura creada exitosamente");
       localStorage.removeItem(
-        `invoiceDetails${user.user.id}-${selectedBusiness}-${id}`
+        `invoiceDetails${user.user.id}-${selectedBusiness.id}-${id}`
       );
       $AppState.set({ ...appState, isCreatedInvoice: true });
       $user.set({

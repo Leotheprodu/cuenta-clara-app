@@ -15,7 +15,7 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   useEffect(() => {
     if (balances.length > 0) {
       const balancesByBusiness = balances?.filter(
-        (balance) => balance.users_business.id === businessId
+        (balance) => balance.users_business.id === businessId.id
       );
       setBalance(parseFloat(balancesByBusiness[0]?.amount) || 0);
       /* setBalance(parseFloat(balancesByBusiness[0].amount)); */

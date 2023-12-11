@@ -1,3 +1,10 @@
 import { atom } from "nanostores";
-
-export const $selectedBusiness = atom(0);
+interface SelectedBusinessProps {
+  id: number;
+  name: string;
+}
+export type PropsSelectedBusiness = SelectedBusinessProps;
+export const $selectedBusiness = atom<PropsSelectedBusiness>({
+  id: 0,
+  name: "",
+});

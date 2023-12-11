@@ -55,7 +55,7 @@ export const useInvoiceDetail = ({
   const nameOfProductOrService = (code: string) => {
     const productOrService = productsAndServices.all.find(
       (productOrService: any) =>
-        productOrService.code === `${user.id}-${selectedBusiness}-${code}`
+        productOrService.code === `${user.id}-${selectedBusiness.id}-${code}`
     );
     if (productOrService) {
       return productOrService.name;
@@ -113,7 +113,7 @@ export const useInvoiceDetail = ({
     if (!isEditing.state) {
       setInvoiceDetails([...invoiceDetails, formDataDetail]);
       localStorage.setItem(
-        `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
+        `invoiceDetails${user.id}-${selectedBusiness.id}-${id}`,
         JSON.stringify([...invoiceDetails, formDataDetail])
       );
       toast.success("Detalle agregado correctamente", { duration: 4000 });
@@ -125,7 +125,7 @@ export const useInvoiceDetail = ({
       newInvoiceDetails[isEditing.index] = formDataDetail;
       setInvoiceDetails(newInvoiceDetails);
       localStorage.setItem(
-        `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
+        `invoiceDetails${user.id}-${selectedBusiness.id}-${id}`,
         JSON.stringify(newInvoiceDetails)
       );
       toast.success("Detalle editado correctamente", { duration: 4000 });
@@ -143,7 +143,7 @@ export const useInvoiceDetail = ({
   // Obtener los detalles de la factura del localstorage
   useEffect(() => {
     const data = localStorage.getItem(
-      `invoiceDetails${user.id}-${selectedBusiness}-${id}`
+      `invoiceDetails${user.id}-${selectedBusiness.id}-${id}`
     );
 
     if (data) {
@@ -177,7 +177,7 @@ export const useInvoiceDetail = ({
       invoiceDetails.filter((detail, detailIndex) => detailIndex !== index)
     );
     localStorage.setItem(
-      `invoiceDetails${user.id}-${selectedBusiness}-${id}`,
+      `invoiceDetails${user.id}-${selectedBusiness.id}-${id}`,
       JSON.stringify(
         invoiceDetails.filter((detail, detailIndex) => detailIndex !== index)
       )
@@ -249,7 +249,7 @@ export const useInvoiceDetail = ({
       const productOrService = productsAndServices.all.find(
         (productOrService: any) =>
           productOrService.code ===
-          `${user.id}-${selectedBusiness}-${formDataDetail.code}`
+          `${user.id}-${selectedBusiness.id}-${formDataDetail.code}`
       );
       if (productOrService) {
         setFormDataDetail({

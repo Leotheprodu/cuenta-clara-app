@@ -8,9 +8,7 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
       {businessSelected && (
         <p className="bg-primario p-1 rounded-md text-center text-blanco">
           Negocio:{" "}
-          <span className="uppercase text-terciario">
-            {businessSelected.name}
-          </span>
+          <span className="uppercase text-terciario">{businessSelected}</span>
         </p>
       )}
     </div>

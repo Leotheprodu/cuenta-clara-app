@@ -44,7 +44,10 @@ export const useHeader = () => {
       });
       if (defaultBussines.length === 1) {
         setValue(new Set([defaultBussines[0].id.toString()]));
-        $selectedBusiness.set(defaultBussines[0].id);
+        $selectedBusiness.set({
+          id: defaultBussines[0].id,
+          name: defaultBussines[0].name,
+        });
       }
     } else if (statusBusiness === "error" && user.isLoggedIn) {
       refetch();
@@ -53,7 +56,7 @@ export const useHeader = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusBusiness, dataBusiness, user]);
 
-  const { status, mutate, isPending } = useMutation({
+  const { status, mutate, isPending, data } = useMutation({
     mutationKey: ["favorite-business"],
     mutationFn: async () =>
       await fetchAPI({
@@ -63,7 +66,15 @@ export const useHeader = () => {
   });
   useEffect(() => {
     if (status === "success" && user.isLoggedIn) {
-      $selectedBusiness.set(Number(Array.from(value)[0]));
+      const defaultBussines = data.filter((item: any) => {
+        if (item.default) {
+          return item;
+        }
+      });
+      $selectedBusiness.set({
+        id: defaultBussines[0].id,
+        name: defaultBussines[0].name,
+      });
       refetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
