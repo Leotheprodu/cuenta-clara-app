@@ -5,9 +5,23 @@ import { moneyFormat } from "@/components/Utils/dataFormat";
 import { InfoIcon } from "@/icons/infoIcon";
 import { Tooltip } from "@nextui-org/react";
 import { useLetterView } from "./useLetterView";
+import { useStore } from "@nanostores/react";
+import { $selectedBusiness } from "@/stores/business";
+import { useEffect, useState } from "react";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   const { username, id, detail = "", balances } = client;
-  const balance = parseFloat(balances[0].amount);
+  const businessId = useStore($selectedBusiness);
+  const [balance, setBalance] = useState<number>(0);
+  useEffect(() => {
+    if (balances.length > 0) {
+      const balancesByBusiness = balances?.filter(
+        (balance) => balance.users_business.id === businessId
+      );
+      setBalance(parseFloat(balancesByBusiness[0]?.amount) || 0);
+      /* setBalance(parseFloat(balancesByBusiness[0].amount)); */
+    }
+  }, [balances, businessId]);
+
   const { ref } = useLetterView({ username });
   return (
     <div

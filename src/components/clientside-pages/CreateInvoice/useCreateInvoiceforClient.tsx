@@ -14,6 +14,7 @@ import {
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
+import { $AppState } from "@/stores/generalConfig";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   // estado para almacenar el total de la factura
   const [total, setTotal] = useState<number>(0);
@@ -26,6 +27,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const selectedBusiness = useStore($selectedBusiness);
   //  estado para almacenar el usuario logueado
   const user = useStore($user);
+  //  estado para almacenar el estado de la aplicacion
+  const appState = useStore($AppState);
   //  estado para almacenar el negocio seleccionado con el nombre y si el cliente tiene balances en ese negocio
   const [businessSelected, setBusinessSelected] =
     useState<BusinessSelecterProps>({
@@ -48,7 +51,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     mutationKey: ["invoice-create"],
     mutationFn: async () =>
       await fetchAPI({
-        url: "invoices/create",
+        url: `invoices/create/${parseInt(id, 10)}`,
         method: "POST",
         body: formInvoice,
       }),
@@ -62,7 +65,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   });
   const { invoiceDetails } = createInvoiceDetail;
   const [formInvoice, setFormInvoice] = useState<FormValuesNewInvoice>({
-    client_id: parseInt(id, 10),
     date: getCurrentDate(),
     business_id: selectedBusiness,
     total,
@@ -111,7 +113,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   });
   // obtener el balance del cliente en el negocio seleccionado
   const { status: statusBalance, data: dataBalance } = useQuery({
-    queryKey: ["user-balance"],
+    queryKey: ["client-balance"],
     queryFn: async () =>
       await fetchAPI({
         url: `balances/${id}`,
@@ -196,6 +198,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       localStorage.removeItem(
         `invoiceDetails${user.user.id}-${selectedBusiness}-${id}`
       );
+      $AppState.set({ ...appState, isCreatedInvoice: true });
       $user.set({
         ...user,
         balance: user.balance - total * billingPrice,

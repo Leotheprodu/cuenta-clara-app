@@ -30,7 +30,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     setInvoices(filterInvoicesByBusiness(invoices));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [businessId]); */
-  console.log(businessId);
   const {
     status: statusInvoices,
     data: dataInvoices,

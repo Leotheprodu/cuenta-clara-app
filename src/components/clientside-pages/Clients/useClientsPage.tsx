@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useFiltersClients } from "./useFiltersClients";
+import { $AppState } from "@/stores/generalConfig";
+import { useStore } from "@nanostores/react";
 export const useClientsPage = () => {
   const [isShowActivoButton, setIsShowActivoButton] = useState(true);
   const [searchClient, setSearchClient] = useState("");
-
-  const { status, data, isLoading } = useQuery({
+  const appState = useStore($AppState);
+  const { status, data, isLoading, refetch } = useQuery({
     queryKey: ["clientes"],
     queryFn: async () =>
       await fetchAPI({
@@ -14,6 +16,13 @@ export const useClientsPage = () => {
       }),
     retry: 2,
   });
+  useEffect(() => {
+    if (appState.isCreatedInvoice) {
+      refetch();
+      $AppState.set({ ...appState, isCreatedInvoice: false });
+    }
+  }, [refetch, appState]);
+
   const { clientsSearched } = useFiltersClients({
     data,
     status,

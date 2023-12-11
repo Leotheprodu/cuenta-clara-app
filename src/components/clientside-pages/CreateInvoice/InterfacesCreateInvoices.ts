@@ -1,6 +1,5 @@
 interface FormValuesNewInvoice {
   date: string;
-  client_id: number;
   business_id: number;
   invoice_details: InitialStateInvoiceDetailProps[];
   total: number;
