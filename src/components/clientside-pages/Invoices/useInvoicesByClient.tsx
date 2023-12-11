@@ -4,11 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
-import {
-  formatDate,
-  formatNumber,
-  moneyFormat,
-} from "@/components/Utils/dataFormat";
+import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
 import { $selectedBusiness } from "@/stores/business";
@@ -17,19 +13,26 @@ import { clientStatusInvoice, invoiceDefault } from "@/data/constants";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
+  const [invoicesByBusiness, setInvoicesByBusiness] = useState<Invoice[]>([
+    invoiceDefault,
+  ]);
   //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
   const businessId = useStore($selectedBusiness);
   //filtra las facturas por negocio
-  /* useEffect(() => {
+  useEffect(() => {
+    if (!businessId) return;
     const filterInvoicesByBusiness = (invoices: Invoice[]) => {
       return invoices.filter(
         (invoice) => invoice.users_business.id === businessId
       );
     };
-    setInvoices(filterInvoicesByBusiness(invoices));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [businessId]); */
+    if (invoices.length === 0) {
+      setInvoicesByBusiness(invoices);
+    } else {
+      setInvoicesByBusiness(filterInvoicesByBusiness(invoices));
+    }
+  }, [businessId, invoices]);
   const {
     status: statusInvoices,
     data: dataInvoices,
@@ -139,7 +142,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
 
   return {
     invoicesByClient: {
-      invoices,
+      invoices: invoicesByBusiness,
       columnNames,
       renderCell,
       client,
