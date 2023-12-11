@@ -3,7 +3,11 @@ import { $selectedBusiness } from "@/stores/business";
 import { useStore } from "@nanostores/react";
 import { invoiceDefault } from "@/data/constants";
 
-export const useFilteredInvoicesByClient = ({ invoices }: any) => {
+export const useFilteredInvoicesByClient = ({
+  invoices,
+}: {
+  invoices: Invoice[];
+}) => {
   const [invoicesByBusiness, setInvoicesByBusiness] = useState<Invoice[]>([
     invoiceDefault,
   ]);
