@@ -14,6 +14,7 @@ import {
   invoicesStatus,
 } from "@/data/constants";
 import { useFilteredInvoicesByClient } from "./useFilteredInvoicesByClient";
+import { TransaccionsModal } from "./TransactionsModal";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
@@ -60,13 +61,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     }
   }, [statusInvoices, dataInvoices]);
 
-  const columnNames: ColumnNamesProps[] = [
-    { key: "id", name: "Id" },
-    { key: "date", name: "Fecha" },
-    { key: "total_amount", name: "Monto" },
-    { key: "status", name: "Status" },
-    { key: "actions", name: "Acciones" },
-  ];
   const handleRemoveInvoice = (e: any, index: any) => {
     e.preventDefault();
     const invoiceId = invoices[index].id;
@@ -86,6 +80,13 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     };
     removeInvoice();
   };
+  const columnNames: ColumnNamesProps[] = [
+    { key: "id", name: "Id" },
+    { key: "date", name: "Fecha" },
+    { key: "total_amount", name: "Monto" },
+    { key: "status", name: "Status" },
+    { key: "actions", name: "Acciones" },
+  ];
   const renderCell = (invoice: Invoice, columnKey: any, index: any) => {
     switch (columnKey) {
       case "id":
@@ -102,16 +103,8 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
-            {invoice.status === invoicesStatus.pending && (
-              <Tooltip content="Registrar transaccion">
-                <button
-                  onClick={() => redirect(`/transacciones/${invoice.id}`)}
-                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                >
-                  <AddIcon />
-                </button>
-              </Tooltip>
-            )}
+            <TransaccionsModal invoice={invoice} />
+
             {invoice.status === invoicesStatus.pending && (
               <Tooltip color="danger" content="Cancelar Factura">
                 <button

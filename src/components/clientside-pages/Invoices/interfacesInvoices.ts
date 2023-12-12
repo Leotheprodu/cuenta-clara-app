@@ -22,10 +22,11 @@ interface PaymentMethod {
   id: number;
   name: string;
 }
+type PaymentStatusName = "completed" | "pending" | "cancelled";
 
 interface PaymentStatus {
   id: number;
-  name: string;
+  name: PaymentStatusName;
 }
 
 interface Transaction {

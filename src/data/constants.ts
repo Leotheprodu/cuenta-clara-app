@@ -23,6 +23,18 @@ const invoicesStatus = {
   inReview: "inReview",
   inProcess: "inProcess",
 };
+const clientStatusInvoice = {
+  paid: "Pagada",
+  pending: "Pendiente",
+  cancelled: "Cancelada",
+  inReview: "En revisión",
+  inProcess: "En proceso",
+};
+const paymentStatus = {
+  completed: { id: 2, name: "Completado" },
+  pending: { id: 1, name: "Pendiente" },
+  cancelled: { id: 3, name: "Cancelado" },
+};
 
 /* ----------------------------------Default Initial Data------------------------------------ */
 /**
@@ -98,7 +110,7 @@ const invoiceDefault: Invoice = {
       },
       payment_status: {
         id: 0,
-        name: "",
+        name: "pending",
       },
     },
   ],
@@ -124,13 +136,6 @@ const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
   subtotal: 0,
   description: "",
 };
-const clientStatusInvoice = {
-  paid: "Pagada",
-  pending: "Pendiente",
-  cancelled: "Cancelada",
-  inReview: "En revisión",
-  inProcess: "En proceso",
-};
 /* ----------------------------------URLs------------------------------------ */
 /**
  * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
@@ -154,4 +159,5 @@ export {
   paymentMethods,
   clientStatusInvoice,
   invoicesStatus,
+  paymentStatus,
 };
