@@ -74,7 +74,7 @@ export const TransaccionsModal = ({ invoice }: { invoice: Invoice }) => {
                 )}
                 <Button
                   className="uppercase"
-                  color="secondary"
+                  color="warning"
                   variant="light"
                   onPress={onClose}
                 >
