@@ -40,6 +40,16 @@ export const AddTransactionModal = ({ invoice }: { invoice: Invoice }) => {
               </ModalBody>
               <ModalFooter>
                 <Button
+                  form="add-transaction-form"
+                  className="uppercase"
+                  color="primary"
+                  variant="solid"
+                  type="submit"
+                >
+                  Agregar
+                </Button>
+                <Button
+                  type="button"
                   className="uppercase"
                   color="warning"
                   variant="light"
