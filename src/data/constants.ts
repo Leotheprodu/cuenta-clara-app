@@ -21,6 +21,7 @@ const invoicesStatus = {
   pending: "pending",
   cancelled: "cancelled",
   inReview: "inReview",
+  inProcess: "inProcess",
 };
 
 /* ----------------------------------Default Initial Data------------------------------------ */
@@ -128,6 +129,7 @@ const clientStatusInvoice = {
   pending: "Pendiente",
   cancelled: "Cancelada",
   inReview: "En revisión",
+  inProcess: "En proceso",
 };
 /* ----------------------------------URLs------------------------------------ */
 /**

@@ -21,7 +21,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
 
-  const [payNow, setPayNow] = useState<boolean>(true);
+  const [payNow, setPayNow] = useState<boolean>(false);
+
   const [payment_method_id, setPayment_method_id] = useState<string>("1");
   //  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);

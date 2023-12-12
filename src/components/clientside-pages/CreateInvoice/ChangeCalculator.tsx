@@ -101,8 +101,13 @@ export const ChangeCalculator = ({ total }: { total: number }) => {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="success" variant="light" onPress={onClose}>
-                  Cerrar
+                <Button
+                  className="uppercase"
+                  color="success"
+                  variant="light"
+                  onPress={onClose}
+                >
+                  Aceptar
                 </Button>
               </ModalFooter>
             </>

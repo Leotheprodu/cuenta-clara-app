@@ -8,7 +8,11 @@ import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
 import { AddIcon } from "@/icons/AddIcon";
 import { redirect } from "next/navigation";
 
-import { clientStatusInvoice, invoiceDefault } from "@/data/constants";
+import {
+  clientStatusInvoice,
+  invoiceDefault,
+  invoicesStatus,
+} from "@/data/constants";
 import { useFilteredInvoicesByClient } from "./useFilteredInvoicesByClient";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   //state para almacenar las facturas
@@ -59,7 +63,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
   const columnNames: ColumnNamesProps[] = [
     { key: "id", name: "Id" },
     { key: "date", name: "Fecha" },
-    { key: "business_name", name: "Empresa" },
     { key: "total_amount", name: "Monto" },
     { key: "status", name: "Status" },
     { key: "actions", name: "Acciones" },
@@ -87,8 +90,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     switch (columnKey) {
       case "id":
         return <p>{invoice.id}</p>;
-      case "business_name":
-        return <p>{invoice.users_business.name}</p>;
       case "date":
         return <p className="">{formatDate(invoice.date)}</p>;
       case "total_amount":
@@ -100,23 +101,27 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
 
       case "actions":
         return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Registrar transaccion">
-              <button
-                onClick={() => redirect(`/transacciones/${invoice.id}`)}
-                className="text-lg text-default-400 cursor-pointer active:opacity-50"
-              >
-                <AddIcon />
-              </button>
-            </Tooltip>
-            <Tooltip color="danger" content="Eliminar detalle">
-              <button
-                onClick={(e) => handleRemoveInvoice(e, index)}
-                className="text-lg text-danger cursor-pointer active:opacity-50"
-              >
-                <DeleteRowIcon />
-              </button>
-            </Tooltip>
+          <div className="relative flex items-center justify-end gap-2">
+            {invoice.status === invoicesStatus.pending && (
+              <Tooltip content="Registrar transaccion">
+                <button
+                  onClick={() => redirect(`/transacciones/${invoice.id}`)}
+                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                >
+                  <AddIcon />
+                </button>
+              </Tooltip>
+            )}
+            {invoice.status === invoicesStatus.pending && (
+              <Tooltip color="danger" content="Cancelar Factura">
+                <button
+                  onClick={(e) => handleRemoveInvoice(e, index)}
+                  className="text-lg text-danger cursor-pointer active:opacity-50"
+                >
+                  <DeleteRowIcon />
+                </button>
+              </Tooltip>
+            )}
           </div>
         );
       default:
