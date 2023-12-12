@@ -103,8 +103,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
-            <TransaccionsModal invoice={invoice} />
-
             {invoice.status === invoicesStatus.pending && (
               <Tooltip color="danger" content="Cancelar Factura">
                 <button
@@ -115,6 +113,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
                 </button>
               </Tooltip>
             )}
+            <TransaccionsModal invoice={invoice} />
           </div>
         );
       default:
