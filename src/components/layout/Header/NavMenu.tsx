@@ -12,7 +12,6 @@ import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
-  const { handlePopoverTriggerClick } = handle;
   const path = usePathname();
   const user = useStore($user);
   return (
@@ -57,12 +56,12 @@ export const NavMenuPopoverTrigger = ({ handle }: any) => {
   return (
     <PopoverTrigger>
       <Button
-        className="text-blanco flex items-center justify-center h-16 w-16 rounded-full"
+        className="text-blanco flex items-center justify-center h-16 w-16 rounded-sm p-0"
         type="button"
         variant="light"
         onClick={handlePopoverTriggerClick}
       >
-        <MenuButtonIcon />
+        <MenuButtonIcon className="" />
       </Button>
     </PopoverTrigger>
   );
@@ -82,7 +81,6 @@ export const NavMenu = () => {
         onClose={handlePopoverOnClose}
         backdrop="opaque"
         isOpen={isOpen}
-        showArrow
       >
         <NavMenuPopoverTrigger handle={{ handlePopoverTriggerClick }} />
         <AddButtonPopoverContent handle={{ handlePopoverTriggerClick }} />
