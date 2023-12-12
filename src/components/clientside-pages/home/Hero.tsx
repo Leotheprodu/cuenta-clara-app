@@ -37,7 +37,13 @@ export const Hero = () => {
           realizar pagos
         </motion.h2>
       </motion.div>
-      <motion.div style={{ x }} className="sm:w-2/3 relative">
+      <motion.div
+        animate={{ translateX: [2000, 0], opacity: [0, 1] }}
+        transition={{ duration: 1 }}
+        initial={{ translateX: 2000 }}
+        style={{ x }}
+        className="sm:w-2/3 relative"
+      >
         <Waves className="absolute top-0 scale-105" />
         <Image
           width={1200}
