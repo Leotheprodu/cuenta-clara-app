@@ -19,10 +19,18 @@ import { useTransactionsModal } from "./useTransactionsModal";
 import { TransactionsIcon } from "@/icons/TransactionsIcon";
 import { invoicesStatus } from "@/data/constants";
 import { AddTransactionModal } from "./AddTransactionModal";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 
 export const TransaccionsModal = ({ invoice }: { invoice: Invoice }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { columnNames, renderCell } = useTransactionsModal({ invoice });
+  //sumar el total de las transacciones
+  const totalTransactions = invoice.transactions.reduce(
+    (acc: number, transaction: Transaction) => {
+      return acc + parseFloat(transaction.amount);
+    },
+    0
+  );
   return (
     <>
       <Tooltip content="Transacciones" color="success">
@@ -67,6 +75,14 @@ export const TransaccionsModal = ({ invoice }: { invoice: Invoice }) => {
                   </TableBody>
                 </Table>
               </ModalBody>
+              <div>
+                <h2 className="flex justify-end items-center pr-7 text-sm gap-2">
+                  Total:{" "}
+                  <span className=" rounded-md bg-gris p-2">
+                    {moneyFormat(totalTransactions)}
+                  </span>
+                </h2>
+              </div>
               <ModalFooter>
                 {(invoice.status === invoicesStatus.pending ||
                   invoice.status === invoicesStatus.inProcess) && (

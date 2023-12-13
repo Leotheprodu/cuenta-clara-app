@@ -33,7 +33,7 @@ export const AddTransactionModal = ({ invoice }: { invoice: Invoice }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Transacciones
+                Nueva Transaccion
               </ModalHeader>
               <ModalBody className="flex justify-center">
                 <AddTransactionForm invoice={invoice} />
