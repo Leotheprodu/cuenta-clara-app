@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
 import { paymentStatus } from "@/data/constants";
 
-export const useTransactionsModal = ({ invoice }: { invoice: Invoice }) => {
+export const useTransactionsModal = ({
+  handleTransactions,
+}: handleTransactionsProps) => {
+  const { invoice } = handleTransactions;
   const columnNames = [
     { key: "id", name: "Id" },
     { key: "date", name: "Fecha" },
@@ -11,6 +14,18 @@ export const useTransactionsModal = ({ invoice }: { invoice: Invoice }) => {
     { key: "amount", name: "Monto" },
     { key: "status", name: "Estado" },
   ];
+  const [totalTransactions, setTotalTransactions] = useState(0);
+  const [pendingMount, setPendingMount] = useState(0);
+  useEffect(() => {
+    const totalTransactions = invoice.transactions.reduce(
+      (acc: number, transaction: Transaction) => {
+        return acc + parseFloat(transaction.amount);
+      },
+      0
+    );
+    setTotalTransactions(totalTransactions);
+    setPendingMount(invoice.total_amount - totalTransactions);
+  }, [invoice]);
   const renderCell = (
     transactions: Transaction,
     columnKey: any,
@@ -68,7 +83,11 @@ export const useTransactionsModal = ({ invoice }: { invoice: Invoice }) => {
     }
   };
   return {
-    columnNames,
-    renderCell,
+    handle: {
+      columnNames,
+      renderCell,
+      totalTransactions,
+      pendingMount,
+    },
   };
 };

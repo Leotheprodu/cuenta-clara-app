@@ -9,7 +9,10 @@ import {
   useDisclosure,
   Tooltip,
 } from "@nextui-org/react";
-export const AddTransactionModal = ({ invoice }: { invoice: Invoice }) => {
+export const AddTransactionModal = ({
+  handleTransactions,
+}: handleTransactionsProps) => {
+  const { invoice } = handleTransactions;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
@@ -36,7 +39,7 @@ export const AddTransactionModal = ({ invoice }: { invoice: Invoice }) => {
                 Nueva Transaccion
               </ModalHeader>
               <ModalBody className="flex justify-center">
-                <AddTransactionForm invoice={invoice} />
+                <AddTransactionForm handleTransactions={handleTransactions} />
               </ModalBody>
               <ModalFooter>
                 <Button

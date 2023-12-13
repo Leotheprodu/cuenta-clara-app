@@ -52,3 +52,10 @@ interface Invoice {
   invoice_details: InvoiceDetail[];
   transactions: Transaction[];
 }
+
+interface handleTransactionsProps {
+  handleTransactions: {
+    invoice: Invoice;
+    refetchInvoices: () => void;
+  };
+}

@@ -2,8 +2,13 @@ import { Button } from "@nextui-org/react";
 import { useAddTransactionForm } from "./useAddTransactionForm";
 import { moneyFormat } from "@/components/Utils/dataFormat";
 
-export const AddTransactionForm = ({ invoice }: { invoice: Invoice }) => {
-  const { handleAddTransaction } = useAddTransactionForm({ invoice });
+export const AddTransactionForm = ({
+  handleTransactions,
+}: handleTransactionsProps) => {
+  const { invoice } = handleTransactions;
+  const { handleAddTransaction } = useAddTransactionForm({
+    handleTransactions,
+  });
 
   return (
     <form id="add-transaction-form" onSubmit={handleAddTransaction}>

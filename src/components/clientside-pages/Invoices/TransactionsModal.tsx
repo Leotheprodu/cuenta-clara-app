@@ -21,16 +21,14 @@ import { invoicesStatus } from "@/data/constants";
 import { AddTransactionModal } from "./AddTransactionModal";
 import { moneyFormat } from "@/components/Utils/dataFormat";
 
-export const TransaccionsModal = ({ invoice }: { invoice: Invoice }) => {
+export const TransaccionsModal = ({
+  handleTransactions,
+}: handleTransactionsProps) => {
+  const { invoice } = handleTransactions;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { columnNames, renderCell } = useTransactionsModal({ invoice });
-  //sumar el total de las transacciones
-  const totalTransactions = invoice.transactions.reduce(
-    (acc: number, transaction: Transaction) => {
-      return acc + parseFloat(transaction.amount);
-    },
-    0
-  );
+  const { handle } = useTransactionsModal({ handleTransactions });
+  const { totalTransactions, pendingMount, columnNames, renderCell } = handle;
+
   return (
     <>
       <Tooltip content="Transacciones" color="success">
@@ -75,18 +73,26 @@ export const TransaccionsModal = ({ invoice }: { invoice: Invoice }) => {
                   </TableBody>
                 </Table>
               </ModalBody>
-              <div>
-                <h2 className="flex justify-end items-center pr-7 text-sm gap-2">
+              <div className="flex gap-4 mx-6 p-1 justify-center bg-secundario/5 rounded-lg shadow-sm border-1 border-primario/5">
+                <h2 className="flex justify-end items-center text-sm gap-2">
                   Total:{" "}
                   <span className=" rounded-md bg-gris p-2">
                     {moneyFormat(totalTransactions)}
+                  </span>
+                </h2>
+                <h2 className="flex justify-end items-center text-sm gap-2">
+                  Pendiente:{" "}
+                  <span className=" rounded-md bg-gris p-2">
+                    {moneyFormat(pendingMount)}
                   </span>
                 </h2>
               </div>
               <ModalFooter>
                 {(invoice.status === invoicesStatus.pending ||
                   invoice.status === invoicesStatus.inProcess) && (
-                  <AddTransactionModal invoice={invoice} />
+                  <AddTransactionModal
+                    handleTransactions={handleTransactions}
+                  />
                 )}
                 <Button
                   className="uppercase"

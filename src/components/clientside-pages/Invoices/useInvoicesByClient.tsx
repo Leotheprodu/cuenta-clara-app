@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
 import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
-import { AddIcon } from "@/icons/AddIcon";
-import { redirect } from "next/navigation";
 
 import {
   clientStatusInvoice,
@@ -113,7 +111,9 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
                 </button>
               </Tooltip>
             )}
-            <TransaccionsModal invoice={invoice} />
+            <TransaccionsModal
+              handleTransactions={{ invoice, refetchInvoices }}
+            />
           </div>
         );
       default:
