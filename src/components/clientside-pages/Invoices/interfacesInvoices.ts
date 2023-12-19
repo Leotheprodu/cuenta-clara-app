@@ -59,3 +59,14 @@ interface handleTransactionsProps {
     refetchInvoices: () => void;
   };
 }
+interface useTransactionsFormProps {
+  handleTransactions: {
+    invoice: Invoice;
+    refetchInvoices: () => void;
+  };
+  initForm: {
+    date: string;
+    amount: number;
+    description: string;
+  };
+}
