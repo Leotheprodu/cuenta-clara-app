@@ -16,18 +16,6 @@ export const AddTransactionForm = ({
     description,
   } = useAddTransactionForm({
     handleTransactions,
-    initForm: {
-      date: getCurrentDate(),
-      amount:
-        handleTransactions.invoice.total_amount -
-        handleTransactions.invoice.transactions.reduce(
-          (acc: number, transaction: Transaction) => {
-            return acc + parseFloat(transaction.amount);
-          },
-          0
-        ),
-      description: "",
-    },
   });
 
   return (

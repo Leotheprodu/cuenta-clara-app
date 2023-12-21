@@ -136,6 +136,12 @@ const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
   subtotal: 0,
   description: "",
 };
+
+const initialStateTransactionForm = {
+  date: "",
+  amount: 0,
+  description: "",
+};
 /* ----------------------------------URLs------------------------------------ */
 /**
  * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
@@ -160,4 +166,5 @@ export {
   clientStatusInvoice,
   invoicesStatus,
   paymentStatus,
+  initialStateTransactionForm,
 };

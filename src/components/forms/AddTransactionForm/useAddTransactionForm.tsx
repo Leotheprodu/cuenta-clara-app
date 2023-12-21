@@ -1,16 +1,42 @@
 import { handleOnChange } from "@/components/Utils/formUtils";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
-import { paymentStatus } from "@/data/constants";
+import { initialStateTransactionForm, paymentStatus } from "@/data/constants";
+import { getCurrentDate } from "@/components/Utils/getCurrentDate";
+import toast from "react-hot-toast";
 export const useAddTransactionForm = ({
   handleTransactions,
-  initForm,
-}: useTransactionsFormProps) => {
+}: handleTransactionsProps) => {
   const user = useStore($user);
   const { invoice, refetchInvoices } = handleTransactions;
-  const [form, setForm] = useState(initForm);
+  const [form, setForm] = useState(initialStateTransactionForm);
   const [payment_method_id, setPayment_method_id] = useState<string>("1");
+  const balanceInvoice =
+    invoice.total_amount -
+    invoice.transactions.reduce((acc: number, transaction: Transaction) => {
+      return acc + parseFloat(transaction.amount);
+    }, 0);
+
+  useEffect(() => {
+    setForm({
+      ...form,
+      date: getCurrentDate(),
+      amount: balanceInvoice,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (form.amount > balanceInvoice) {
+      setForm({
+        ...form,
+        amount: balanceInvoice,
+      });
+      toast.error("El monto no puede ser mayor al saldo de la factura");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.amount, balanceInvoice]);
+
   const handleSelectPaymentMethod = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
