@@ -1,10 +1,10 @@
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Input, Select, SelectItem } from "@nextui-org/react";
 import { useAddTransactionForm } from "./useAddTransactionForm";
 import { paymentMethods } from "@/data/constants";
-import { getCurrentDate } from "@/components/Utils/getCurrentDate";
 
 export const AddTransactionForm = ({
   handleTransactions,
+  onClose,
 }: handleTransactionsProps) => {
   const {
     handleAddTransaction,
@@ -16,6 +16,7 @@ export const AddTransactionForm = ({
     description,
   } = useAddTransactionForm({
     handleTransactions,
+    onClose,
   });
 
   return (

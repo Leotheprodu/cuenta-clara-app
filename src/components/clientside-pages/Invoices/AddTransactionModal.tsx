@@ -12,7 +12,6 @@ import {
 export const AddTransactionModal = ({
   handleTransactions,
 }: handleTransactionsProps) => {
-  const { invoice } = handleTransactions;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
@@ -39,7 +38,10 @@ export const AddTransactionModal = ({
                 Nueva Transaccion
               </ModalHeader>
               <ModalBody className="flex justify-center">
-                <AddTransactionForm handleTransactions={handleTransactions} />
+                <AddTransactionForm
+                  handleTransactions={handleTransactions}
+                  onClose={onClose}
+                />
               </ModalBody>
               <ModalFooter>
                 <Button

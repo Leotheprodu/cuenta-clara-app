@@ -141,6 +141,11 @@ const initialStateTransactionForm = {
   date: "",
   amount: 0,
   description: "",
+  parent_user_id: 0,
+  client_id: 0,
+  payment_method_id: 0,
+  invoice_id: 0,
+  status_id: 0,
 };
 /* ----------------------------------URLs------------------------------------ */
 /**
