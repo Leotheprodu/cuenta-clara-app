@@ -70,7 +70,7 @@ export const useAddTransactionForm = ({
       status_id: paymentStatus.completed.id,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoice, user, paymentStatus]);
+  }, [invoice, user, paymentStatus, payment_method_id]);
   const handleSelectPaymentMethod = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
