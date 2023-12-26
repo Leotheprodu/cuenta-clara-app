@@ -10,6 +10,7 @@ import { PopoverContent } from "@nextui-org/react";
 import { LogoutIcon } from "@/icons/LogoutIcon";
 import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
+import { TransactionsIcon } from "@/icons/TransactionsIcon";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const path = usePathname();
@@ -38,6 +39,20 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
               href: "/clientes",
               icon: <ClientsIcon />,
               text: "Clientes",
+            }}
+            path={path}
+            textColor="primario"
+            flexType="row"
+            size="lg"
+            component="navMenu"
+          />
+        </MotionAddButtonLink>
+        <MotionAddButtonLink delay={0.3}>
+          <LinkNav
+            link={{
+              href: "/recargas",
+              icon: <TransactionsIcon />,
+              text: "Recargar saldo",
             }}
             path={path}
             textColor="primario"
