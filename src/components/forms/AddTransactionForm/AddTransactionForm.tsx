@@ -5,7 +5,7 @@ import { paymentMethods } from "@/data/constants";
 export const AddTransactionForm = ({
   handleTransactions,
   onClose,
-}: handleTransactionsProps) => {
+}: handleTransactionsFormProps) => {
   const {
     handleAddTransaction,
     handleSelectPaymentMethod,

@@ -58,5 +58,11 @@ interface handleTransactionsProps {
     invoice: Invoice;
     refetchInvoices: () => void;
   };
+}
+interface handleTransactionsFormProps {
+  handleTransactions: {
+    invoice: Invoice;
+    refetchInvoices: () => void;
+  };
   onClose: () => void;
 }

@@ -10,7 +10,7 @@ import { fetchAPI } from "@/components/Utils/fetchAPI";
 export const useAddTransactionForm = ({
   handleTransactions,
   onClose,
-}: handleTransactionsProps) => {
+}: handleTransactionsFormProps) => {
   const user = useStore($user);
   const { invoice, refetchInvoices } = handleTransactions;
   const balanceInvoice =

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 export default function Balances() {
   return (
-    <main className="flex min-h-screen w-full justify-center mt-16">
+    <main className="min-h-screen w-full mt-16">
       <section>
         <RechargeBalance />
       </section>
