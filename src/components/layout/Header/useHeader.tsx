@@ -15,7 +15,7 @@ export const useHeader = () => {
   const user = useStore($user);
   const [business, setBusiness] = useState([BusinessDefault]);
   const [value, setValue] = useState(new Set(["0"]));
-  const [showBalance, setShowBalance] = useState(true);
+  const [showBalance, setShowBalance] = useState(false);
 
   const {
     status: statusBusiness,
