@@ -5,14 +5,14 @@ import { useRecargeBalance } from "./useRecargeBalance";
 export const RechargeBalance = () => {
   const { balanceTypes } = useRecargeBalance();
   return (
-    <div className="relative">
+    <div className="">
       <section className="bg-secundario w-full text-gris text-center pt-10 pb-28 ">
         <div className="w-1/2 my-0 mx-auto">
-          <h1 className="text-2xl mb-8">Recargar Saldo</h1>
+          <h1 className="text-2xl mb-8">Recarga de Saldo</h1>
           <p className="text-base font-light">
-            Para poder utilizar esta aplicación es necesario que recargues
-            saldo, este saldo son puntos y se llaman colones (como la moneda de
-            Costa Rica).
+            Para poder utilizar esta aplicación es necesario tener saldo
+            positivo, y ademas realizar cualquiera de estas recargas al menos
+            una vez al mes para tener tu cuenta activa.
           </p>
           <br />
 
@@ -22,8 +22,8 @@ export const RechargeBalance = () => {
           </p>
         </div>
       </section>
-      <section className="absolute bottom-[-4rem] w-full">
-        <div className="flex gap-4 justify-center items-center flex-wrap">
+      <section className="relative w-full">
+        <div className="flex gap-4 justify-center items-center flex-wrap absolute top-[-3rem] pb-24">
           {balanceTypes.map((balanceType) => (
             <RechargeTypeItem key={balanceType.id} balanceType={balanceType} />
           ))}

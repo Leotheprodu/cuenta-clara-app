@@ -1,1 +1,7 @@
-["/sesion", "/", "/sesion/registrarse", "sesion/verificar-email/*"]
+[
+  "/sesion",
+  "/",
+  "/sesion/registrarse",
+  "sesion/verificar-email/*",
+  "recargas/*"
+]
