@@ -35,6 +35,16 @@ const paymentStatus = {
   pending: { id: 1, name: "Pendiente" },
   cancelled: { id: 3, name: "Cancelado" },
 };
+const ramdomSaludo = [
+  "Hola",
+  "Hey",
+  "Excelente",
+  "En buena hora",
+  "Muy bien",
+  "Genial",
+  "Perfecto",
+  "Buenas Noticias",
+];
 
 /* ----------------------------------Default Initial Data------------------------------------ */
 /**
@@ -172,4 +182,5 @@ export {
   invoicesStatus,
   paymentStatus,
   initialStateTransactionForm,
+  ramdomSaludo,
 };

@@ -7,7 +7,7 @@ export const moneyFormat = (value: number) => {
     (countryCode) => countryCode.country === userCountry
   );
   const currency: string = (data?.currency as string) || "CRC";
-  const langCountry: string = (data?.langCountry as string) || "cr-US";
+  const langCountry: string = (data?.langCountry as string) || "es-CR";
 
   const formatter = new Intl.NumberFormat(langCountry, {
     style: "currency",

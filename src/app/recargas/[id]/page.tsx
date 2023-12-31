@@ -7,9 +7,7 @@ type Props = {
   params: { id: string };
 };
 async function getData(id: string) {
-  const res = await fetch(`${baseUrl}balances/types/balance/${id}`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`${baseUrl}balances/types/balance/${id}`, {});
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -44,8 +42,8 @@ export default async function BalanceType({
   return (
     <main className=" w-full mt-24">
       <section className="flex flex-col items-center justify-center p-4 ">
-        <h1 className="text-2xl text-center">{data.name}</h1>
-        <p>Sigue los siguientes pasos para realizar la recarga:</p>
+        <h1 className="text-2xl text-center gradient-text">{data.name}</h1>
+        <p className="text-slate-500">{moneyFormat(data.price)}</p>
       </section>
       <section>
         <RechargingBalance balanceType={data} />
