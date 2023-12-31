@@ -6,8 +6,8 @@ export const moneyFormat = (value: number) => {
   const data = countryCodes.find(
     (countryCode) => countryCode.country === userCountry
   );
-  const currency: string = (data?.currency as string) || "USD";
-  const langCountry: string = (data?.langCountry as string) || "en-US";
+  const currency: string = (data?.currency as string) || "CRC";
+  const langCountry: string = (data?.langCountry as string) || "cr-US";
 
   const formatter = new Intl.NumberFormat(langCountry, {
     style: "currency",
@@ -17,7 +17,7 @@ export const moneyFormat = (value: number) => {
 };
 
 export const formatNumber = (number: number) => {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("es-CR", {
     style: "decimal",
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,

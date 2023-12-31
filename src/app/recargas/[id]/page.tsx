@@ -42,7 +42,7 @@ export default async function BalanceType({
 }) {
   const { data }: { data: BalanceTypes } = await getData(params.id);
   return (
-    <main className="min-h-screen w-full mt-24">
+    <main className=" w-full mt-24">
       <section className="flex flex-col items-center justify-center p-4 ">
         <h1 className="text-2xl text-center">{data.name}</h1>
         <p>Sigue los siguientes pasos para realizar la recarga:</p>
