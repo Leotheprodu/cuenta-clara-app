@@ -6,6 +6,10 @@ import paymentMethodsJson from "./payment-methods.json";
 const appName = "Yehu";
 const appDescription = `${appName}, Tu negocio en tus manos`;
 const billingPrice = 0.04;
+const businessConfigInfo = {
+  userId: 9,
+  businessId: 1,
+};
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
 const countryCodes: {
@@ -157,6 +161,20 @@ const initialStateTransactionForm = {
   invoice_id: 0,
   status_id: 0,
 };
+const paymentMethodsDefault: PaymentInfo = {
+  id: 0,
+  payment_method_full_name: "",
+  payment_method_cellphone: "",
+  payment_method_iban: "",
+  payment_method_email: "",
+  payment_method_description: "",
+  user_id: 0,
+  payment_method: {
+    id: 0,
+    name: "",
+  },
+};
+
 /* ----------------------------------URLs------------------------------------ */
 /**
  * @description Constante que tiene el dominio de la página, para poder enviar links correctamente.
@@ -183,4 +201,6 @@ export {
   paymentStatus,
   initialStateTransactionForm,
   ramdomSaludo,
+  businessConfigInfo,
+  paymentMethodsDefault,
 };
