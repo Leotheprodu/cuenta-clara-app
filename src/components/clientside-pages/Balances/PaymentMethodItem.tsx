@@ -1,3 +1,5 @@
+import { $balanceRechargeInfo } from "@/stores/business";
+import { useStore } from "@nanostores/react";
 import toast from "react-hot-toast";
 
 export const PaymentMethodItem = ({
@@ -5,6 +7,7 @@ export const PaymentMethodItem = ({
 }: {
   payment_method: PaymentInfo;
 }) => {
+  const balanceRechargeInfo = useStore($balanceRechargeInfo);
   const handleCopyText = (textToCopy: string) => {
     // Copia el contenido del estado al portapapeles
     navigator.clipboard
@@ -16,10 +19,16 @@ export const PaymentMethodItem = ({
         toast.error(`No se pudo copiar al portapapeles`);
       });
   };
+  const handleSelectedMethodDetail = (payment_method: PaymentInfo) => {
+    $balanceRechargeInfo.set({
+      ...balanceRechargeInfo,
+      payment_method,
+    });
+  };
   return (
     <div
-      key={payment_method.id}
-      className="flex flex-col justify-center items-center gap-2 bg-slate-200 shadow-medium rounded-md p-2"
+      className="flex flex-col justify-center items-center gap-2 bg-slate-200 shadow-medium rounded-md p-2 hover:scale-110 ease-in duration-200 cursor-pointer"
+      onClick={() => handleSelectedMethodDetail(payment_method)}
     >
       {payment_method.payment_method_full_name && (
         <p className="">Nombre: {payment_method.payment_method_full_name}</p>

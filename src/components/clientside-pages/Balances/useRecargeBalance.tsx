@@ -1,16 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { useEffect, useState } from "react";
+import { balanceTypesDefault } from "@/data/constants";
 
 export const useRecargeBalance = () => {
   const [balanceTypes, setBalanceTyoes] = useState<BalanceTypes[]>([
-    {
-      id: 0,
-      name: "",
-      price: 0.0,
-      balance: 0.0,
-      extra: 0,
-    },
+    balanceTypesDefault,
   ]);
 
   const { status, data } = useQuery({

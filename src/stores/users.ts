@@ -10,6 +10,7 @@ interface User {
   updatedAt: string;
 }
 interface Balance {
+  id: number;
   amount: string;
   users_business: UserBusiness;
 }
@@ -51,6 +52,7 @@ export const $user = atom<UserProps>({
       parent_user_id: 0,
       balances: [
         {
+          id: 0,
           amount: "0.00",
           users_business: {
             id: 0,

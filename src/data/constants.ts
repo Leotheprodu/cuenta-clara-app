@@ -9,6 +9,7 @@ const billingPrice = 0.04;
 const businessConfigInfo = {
   userId: 9,
   businessId: 1,
+  whatsapp: "50663017707",
 };
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
@@ -174,6 +175,13 @@ const paymentMethodsDefault: PaymentInfo = {
     name: "",
   },
 };
+const balanceTypesDefault: BalanceTypes = {
+  id: 0,
+  name: "",
+  price: 0,
+  balance: 0,
+  extra: 0,
+};
 
 /* ----------------------------------URLs------------------------------------ */
 /**
@@ -203,4 +211,5 @@ export {
   ramdomSaludo,
   businessConfigInfo,
   paymentMethodsDefault,
+  balanceTypesDefault,
 };

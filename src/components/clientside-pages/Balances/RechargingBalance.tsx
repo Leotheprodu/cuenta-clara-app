@@ -4,7 +4,6 @@ import { appName } from "@/data/constants";
 import { useRechargingBalance } from "./useRechargingBalance";
 import { Button, Radio, RadioGroup } from "@nextui-org/react";
 import { PaymentMethodItem } from "./PaymentMethodItem";
-
 export const RechargingBalance = ({
   balanceType,
 }: {
@@ -13,13 +12,15 @@ export const RechargingBalance = ({
   const {
     user,
     saludo,
-    payment_methods,
     paymentNames,
     handleSelectedMethod,
     selectedMethod,
     infoSelectedMethod,
-  } = useRechargingBalance();
-
+    balanceRechargeInfo,
+    handleSendRecharge,
+    isPendingSendRecharge,
+    statusSendRecharge,
+  } = useRechargingBalance({ balanceType });
   return (
     <section className="pb-20">
       <div className="flex flex-col items-center">
@@ -41,11 +42,10 @@ export const RechargingBalance = ({
       </h2>
 
       <div className="w-1/2 my-0 mx-auto">
-        <RadioGroup
-          label="1. Selecciona el método de pago"
-          value={selectedMethod}
-          onValueChange={handleSelectedMethod}
-        >
+        <h3 className="mb-10 text-slate-600">
+          1. Selecciona el metodo de pago que mas te guste
+        </h3>
+        <RadioGroup value={selectedMethod} onValueChange={handleSelectedMethod}>
           {paymentNames.map((payment_name) => (
             <Radio key={payment_name.id} value={`${payment_name.id}`}>
               {payment_name.name}
@@ -55,12 +55,13 @@ export const RechargingBalance = ({
       </div>
       <div className="w-1/2 my-0 mx-auto">
         {infoSelectedMethod.length > 0 && (
-          <div className="flex flex-col items-center">
-            <h3>
-              2. copia la informacion de pago y realiza el pago con la siguiente
-              informacion
+          <div className="flex flex-col items-center my-10">
+            <h3 className="mb-10 text-slate-600">
+              2. Realiza el pago con la siguiente informacion, al tocar el
+              numero/correo/cuenta lo copias para que vayas a tu app favorita a
+              pagar cuando lo hagas vuelves para que hagas el tercer paso.
             </h3>
-            <div className=" flex justify-center items-center gap-2">
+            <div className=" flex justify-center items-center gap-2 flex-wrap">
               {infoSelectedMethod.map((payment_method) => (
                 <PaymentMethodItem
                   key={payment_method.id}
@@ -68,6 +69,32 @@ export const RechargingBalance = ({
                 />
               ))}
             </div>
+            <p className="mt-10 text-slate-600">
+              {" "}
+              Recuerda guardar el comprobante para enviarlo por whatsapp en el
+              siguiente paso para agilizar la recarga.
+            </p>
+          </div>
+        )}
+      </div>
+      <div>
+        {balanceRechargeInfo.payment_method.id > 0 && (
+          <div className="w-1/2 my-0 mx-auto flex flex-col items-center justify-center">
+            <h3 className="mb-10 text-slate-600">
+              3. Una vez realizado el pago, toca el siguiente boton, para
+              confirmar la recarga ademas te conectaremos a whatsapp para que
+              puedas enviar el comprobante.
+            </h3>
+            <Button
+              isLoading={isPendingSendRecharge}
+              isDisabled={statusSendRecharge === "success"}
+              className="w-1/4"
+              color="primary"
+              variant="shadow"
+              onClick={handleSendRecharge}
+            >
+              Confirmar Pago
+            </Button>
           </div>
         )}
       </div>
