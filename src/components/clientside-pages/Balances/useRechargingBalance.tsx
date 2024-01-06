@@ -29,6 +29,7 @@ export const useRechargingBalance = ({
   ]);
   const [bodyRecharge, setBodyRecharge] = useState({
     amount: 0,
+    balance_amount: 0,
     client_id: 0,
     balance_id: 0,
     user_payment_methods_id: 0,
@@ -67,7 +68,8 @@ export const useRechargingBalance = ({
     );
     if (filteredClient.length === 1) {
       setBodyRecharge({
-        amount: balanceType.balance * 1,
+        amount: balanceType.price * 1,
+        balance_amount: balanceType.balance * 1,
         client_id: filteredClient[0].id,
         balance_id: filteredClient[0].balances[0].id,
         user_payment_methods_id: parseInt(selectedMethod),

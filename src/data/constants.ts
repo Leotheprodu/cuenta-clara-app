@@ -11,6 +11,24 @@ const businessConfigInfo = {
   businessId: 1,
   whatsapp: "50663017707",
 };
+const typeOfRoles = {
+  admin: {
+    id: 1,
+    name: "admin",
+  },
+  verified: {
+    id: 2,
+    name: "verified",
+  },
+  unverified: {
+    id: 3,
+    name: "unverified",
+  },
+  vip: {
+    id: 4,
+    name: "vip",
+  },
+};
 /* ----------------------------------JSON files------------------------------------ */
 const whiteListPaths: string[] = whiteListPathsJson;
 const countryCodes: {
@@ -182,6 +200,41 @@ const balanceTypesDefault: BalanceTypes = {
   balance: 0,
   extra: 0,
 };
+const DataRechargesBalanceByClientDefault: DataRechargesBalanceByClientProps = {
+  id: 0,
+  amount: 0,
+  balance_amount: 0,
+  status: "pending",
+  createdAt: "",
+  updatedAt: "",
+  balances_type: {
+    id: 0,
+    name: "",
+  },
+  client: {
+    id: 0,
+    username: "",
+    cellphone: "",
+    token: "",
+    email: "",
+  },
+  balance: {
+    id: 0,
+    amount: "",
+  },
+  user_payment_method: {
+    id: 0,
+    payment_method_full_name: "",
+    payment_method_cellphone: "",
+    payment_method_iban: "",
+    payment_method_email: "",
+    payment_method_description: "",
+    payment_method: {
+      id: 0,
+      name: "",
+    },
+  },
+};
 
 /* ----------------------------------URLs------------------------------------ */
 /**
@@ -212,4 +265,6 @@ export {
   businessConfigInfo,
   paymentMethodsDefault,
   balanceTypesDefault,
+  typeOfRoles,
+  DataRechargesBalanceByClientDefault,
 };

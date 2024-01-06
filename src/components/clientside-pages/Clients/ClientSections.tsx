@@ -1,22 +1,27 @@
 import Loading from "@/app/loading";
 import { internalLinks } from "@/components/Utils/internalLinks";
+import { typeOfRoles } from "@/data/constants";
 import { AddClientIcon } from "@/icons/AddClientIcon";
 import { AddInvoiceIcon } from "@/icons/AddInvoiceIcon";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { DeleteUserIcon } from "@/icons/DeleteUserIcon";
 import { EditIcon } from "@/icons/EditIcon";
+import { InfoIcon } from "@/icons/infoIcon";
+import { $user } from "@/stores/users";
+import { useStore } from "@nanostores/react";
 import { Tooltip } from "@nextui-org/react";
 import Link from "next/link";
 import { useState } from "react";
-
 export const ClientSections = ({
   client,
   isShowActivoButton,
 }: ClientCardProps) => {
   const { id } = client;
+  const user = useStore($user);
+  const roles = user?.roles;
   const [clickLink, setClickLink] = useState(false);
   if (clickLink) {
-    <Loading label="Un momento" />;
+    return <Loading label="Un momento" />;
   }
   return (
     <div className="flex justify-center w-full gap-8 text-xs p-2">
@@ -75,6 +80,22 @@ export const ClientSections = ({
           )}
         </Link>
       </Tooltip>
+      {roles.includes(typeOfRoles.admin.id) && (
+        <Tooltip
+          content="Ver Recargas"
+          showArrow
+          placement="top"
+          color="success"
+        >
+          <Link
+            className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
+            href={`${internalLinks("recharge-client")}${id}`}
+            onClick={() => setClickLink(true)}
+          >
+            <InfoIcon className="w-6 h-6" />
+          </Link>
+        </Tooltip>
+      )}
     </div>
   );
 };

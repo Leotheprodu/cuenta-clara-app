@@ -62,5 +62,9 @@
   {
     "page": "recharges",
     "href": "/recargas"
+  },
+  {
+    "page": "recharge-client",
+    "href": "/clientes/recargas/"
   }
 ]
