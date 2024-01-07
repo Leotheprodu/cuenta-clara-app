@@ -11,6 +11,17 @@ const businessConfigInfo = {
   businessId: 1,
   whatsapp: "50663017707",
 };
+
+/* ----------------------------------JSON files------------------------------------ */
+const whiteListPaths: string[] = whiteListPathsJson;
+const countryCodes: {
+  country: string;
+  code: string;
+  currency: string;
+  langCountry: string;
+}[] = countryCodesJson;
+const paymentMethods: { id: number; name: string }[] = paymentMethodsJson;
+/* ----------------------------------Dictionaries---------------------------------------------- */
 const typeOfRoles = {
   admin: {
     id: 1,
@@ -29,16 +40,28 @@ const typeOfRoles = {
     name: "vip",
   },
 };
-/* ----------------------------------JSON files------------------------------------ */
-const whiteListPaths: string[] = whiteListPathsJson;
-const countryCodes: {
-  country: string;
-  code: string;
-  currency: string;
-  langCountry: string;
-}[] = countryCodesJson;
-const paymentMethods: { id: number; name: string }[] = paymentMethodsJson;
-/* ----------------------------------Dictionaries---------------------------------------------- */
+const paymentMethod = {
+  cash: {
+    id: paymentMethods[0].id,
+    name: paymentMethods[0].name,
+  },
+  sinpeMovil: {
+    id: paymentMethods[1].id,
+    name: paymentMethods[1].name,
+  },
+  bankTransfer: {
+    id: paymentMethods[2].id,
+    name: paymentMethods[2].name,
+  },
+  paypal: {
+    id: paymentMethods[3].id,
+    name: paymentMethods[3].name,
+  },
+  creditCard: {
+    id: paymentMethods[4].id,
+    name: paymentMethods[4].name,
+  },
+};
 const invoicesStatus = {
   paid: "paid",
   pending: "pending",
@@ -256,6 +279,7 @@ export {
   initialStateInvoiceDetail,
   invoiceDefault,
   billingPrice,
+  paymentMethod,
   paymentMethods,
   clientStatusInvoice,
   invoicesStatus,

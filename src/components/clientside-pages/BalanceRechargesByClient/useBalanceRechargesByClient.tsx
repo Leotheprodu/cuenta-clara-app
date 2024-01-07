@@ -2,19 +2,25 @@ import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import {
   DataRechargesBalanceByClientDefault,
-  clientStatusInvoice,
+  paymentMethod,
   paymentStatus,
 } from "@/data/constants";
+import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
 import { Tooltip } from "@nextui-org/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { CheckmarkIcon } from "react-hot-toast";
+import toast, { CheckmarkIcon } from "react-hot-toast";
 
 export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
   const [recharges, setRecharges] = useState<
     DataRechargesBalanceByClientProps[]
   >([DataRechargesBalanceByClientDefault]); // [BalanceRecharge
-  const { status, data } = useQuery({
+  const [selectedRecharge, setSelectedRecharge] = useState({
+    id: 0,
+    click: false,
+    apply: true,
+  }); // [BalanceRecharge
+  const { status, data, refetch } = useQuery({
     queryKey: ["recharges-by-client"],
     queryFn: async () =>
       await fetchAPI({
@@ -22,17 +28,75 @@ export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
       }),
     retry: 2,
   });
+  const { status: statusSendRecharge, mutate: mutateSendRecharge } =
+    useMutation({
+      mutationKey: ["ok-recharge"],
+      mutationFn: async () =>
+        await fetchAPI({
+          url: `balances/recharges/ok/${selectedRecharge.id}`,
+          method: "PATCH",
+        }),
+    });
+  const { status: statusCancelRecharge, mutate: mutateCancelRecharge } =
+    useMutation({
+      mutationKey: ["cancel-recharge"],
+      mutationFn: async () =>
+        await fetchAPI({
+          url: `balances/recharges/cancel/${selectedRecharge.id}`,
+          method: "PATCH",
+        }),
+    });
+  useEffect(() => {
+    if (
+      selectedRecharge.click &&
+      selectedRecharge.id > 0 &&
+      selectedRecharge.apply
+    ) {
+      mutateSendRecharge();
+      setSelectedRecharge({ id: 0, click: false, apply: true });
+    } else if (
+      selectedRecharge.click &&
+      selectedRecharge.id > 0 &&
+      !selectedRecharge.apply
+    ) {
+      mutateCancelRecharge();
+      setSelectedRecharge({ id: 0, click: false, apply: false });
+    }
+  }, [selectedRecharge, mutateSendRecharge, mutateCancelRecharge]);
+  useEffect(() => {
+    if (statusSendRecharge === "success") {
+      refetch();
+      toast.success("Recarga Aceptada");
+    } else if (statusSendRecharge === "error") {
+      toast.error("Error al aceptar la recarga");
+    }
+  }, [statusSendRecharge, refetch]);
+  useEffect(() => {
+    if (statusCancelRecharge === "success") {
+      refetch();
+      toast.success("Recarga Cancelada");
+    } else if (statusCancelRecharge === "error") {
+      toast.error("Error al cancelar la recarga");
+    }
+  }, [statusCancelRecharge, refetch]);
   useEffect(() => {
     if (status === "success") {
       setRecharges(data);
     }
   }, [status, data]);
-
+  const handleApplyrecharge = (id: number) => {
+    setSelectedRecharge({ id, click: true, apply: true });
+  };
+  const handleCancelRecharge = (id: number) => {
+    setSelectedRecharge({ id, click: true, apply: false });
+  };
   const columnNames: ColumnNamesProps[] = [
     { key: "id", name: "Id" },
     { key: "createdAt", name: "Fecha" },
     { key: "amount", name: "Monto" },
     { key: "status", name: "Status" },
+    { key: "paymentMethod", name: "Metodo de Pago" },
+    { key: "usedPaymentMethod", name: "Metodo Usado" },
     { key: "actions", name: "Acciones" },
   ];
   const renderCell = (
@@ -49,19 +113,67 @@ export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
         return <p className="text-right">{moneyFormat(recharges.amount)}</p>;
       case "status":
         return <p>{paymentStatus[recharges.status].name}</p>;
+      case "paymentMethod":
+        return <p>{recharges.user_payment_method.payment_method.name}</p>;
+      case "usedPaymentMethod":
+        if (
+          recharges.user_payment_method.payment_method.name ===
+          paymentMethod.sinpeMovil.name
+        ) {
+          return (
+            <p>
+              {recharges.user_payment_method.payment_method_cellphone}(
+              {recharges.user_payment_method.payment_method_description})
+            </p>
+          );
+        } else if (
+          recharges.user_payment_method.payment_method.name ===
+          paymentMethod.bankTransfer.name
+        ) {
+          return (
+            <p>
+              {recharges.user_payment_method.payment_method_iban}(
+              {recharges.user_payment_method.payment_method_description})
+            </p>
+          );
+        } else if (
+          recharges.user_payment_method.payment_method.name ===
+          paymentMethod.paypal.name
+        ) {
+          return (
+            <p>
+              {recharges.user_payment_method.payment_method_email}(
+              {recharges.user_payment_method.payment_method_description})
+            </p>
+          );
+        } else {
+          return (
+            <p>{recharges.user_payment_method.payment_method_description}</p>
+          );
+        }
 
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
-            {recharges.status === paymentStatus.pending.name && (
-              <Tooltip color="success" content="Aceptar Recarga">
-                <button
-                  onClick={(e) => console.log("Aceptar Recarga de Saldo")}
-                  className="text-lg text-danger cursor-pointer active:opacity-50"
-                >
-                  <CheckmarkIcon />
-                </button>
-              </Tooltip>
+            {recharges.status === "pending" && (
+              <>
+                <Tooltip color="success" content="Aplicar Recarga">
+                  <button
+                    onClick={() => handleApplyrecharge(recharges.id)}
+                    className="text-lg text-danger cursor-pointer active:opacity-50"
+                  >
+                    <CheckmarkIcon />
+                  </button>
+                </Tooltip>
+                <Tooltip color="danger" content="Cancelar Recarga">
+                  <button
+                    onClick={() => handleCancelRecharge(recharges.id)}
+                    className="text-lg text-danger cursor-pointer active:opacity-50"
+                  >
+                    <DeleteRowIcon />
+                  </button>
+                </Tooltip>
+              </>
             )}
           </div>
         );

@@ -72,11 +72,12 @@ export const useRechargingBalance = ({
         balance_amount: balanceType.balance * 1,
         client_id: filteredClient[0].id,
         balance_id: filteredClient[0].balances[0].id,
-        user_payment_methods_id: parseInt(selectedMethod),
+        user_payment_methods_id: balanceRechargeInfo.payment_method.id,
         balances_types_id: balanceType.id,
       });
+      console.log(balanceRechargeInfo);
     }
-  }, [user, selectedMethod, balanceType]);
+  }, [user, selectedMethod, balanceType, balanceRechargeInfo]);
   useEffect(() => {
     $balanceRechargeInfo.set({
       ...balanceRechargeInfo,

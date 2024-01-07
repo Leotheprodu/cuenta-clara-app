@@ -25,9 +25,10 @@ export const formatNumber = (number: number) => {
 };
 
 export const formatDate = (date: string) => {
-  const dateParts = date.split("-");
-  const year = dateParts[0];
-  const month = dateParts[1];
-  const day = dateParts[2];
+  const dateObject = new Date(date);
+
+  const day = dateObject.getDate().toString().padStart(2, "0");
+  const month = (dateObject.getMonth() + 1).toString().padStart(2, "0"); // Los meses van de 0 a 11, por eso se suma 1
+  const year = dateObject.getFullYear();
   return `${day}-${month}-${year}`;
 };
