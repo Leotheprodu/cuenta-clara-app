@@ -5,7 +5,8 @@ import { useStore } from "@nanostores/react";
 import { useEffect } from "react";
 
 export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
-  const { username, showChangeClient = true } = handle;
+  const { username = "Selecciona un Cliente", showChangeClient = true } =
+    handle;
   const appState = useStore($AppState);
   const selectedBusiness = useStore($selectedBusiness);
   useEffect(() => {
