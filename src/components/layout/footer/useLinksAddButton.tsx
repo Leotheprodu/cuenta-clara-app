@@ -24,7 +24,7 @@ export const useLinksAddButton = () => {
         href: `${internalLinks("client-invoices")}${appState.client_id}`,
         icon: <AddTransactionIcon />,
         title: "Ver Facturas",
-        description: "Ir a la sección de facturas del cliente",
+        description: `Ir a la sección de facturas de ${appState.client_name}`,
         needClient_id: true,
         pagesIncluded: ["add-invoice"],
         delay: 0.2,
@@ -36,7 +36,16 @@ export const useLinksAddButton = () => {
         description: "Agregar un nuevo cliente",
         needClient_id: false,
         pagesIncluded: ["clients"],
-        delay: 0.4,
+        delay: 0.2,
+      },
+      {
+        href: `${internalLinks("add-invoice")}${appState.client_id}`,
+        icon: <AddTransactionIcon />,
+        title: "Crear Facturas",
+        description: `Agregar una nueva factura a ${appState.client_name}`,
+        needClient_id: true,
+        pagesIncluded: ["client-invoices"],
+        delay: 0.2,
       },
     ]);
   }, [appState]);

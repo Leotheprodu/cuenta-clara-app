@@ -7,6 +7,7 @@ interface AppStateProps {
   isCreatedInvoice: boolean;
   page: string;
   client_id: number;
+  client_name: string;
 }
 
 export type PropsLetterView = LetterViewClientProps;
@@ -21,4 +22,5 @@ export const $AppState = atom<PropsAppState>({
   isCreatedInvoice: false,
   page: "",
   client_id: 0,
+  client_name: "",
 });

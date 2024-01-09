@@ -1,10 +1,17 @@
 import { ModalChangeClient } from "@/components/clientside-pages/Invoices/ModalChangeClient";
 import { $selectedBusiness } from "@/stores/business";
+import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
+import { useEffect } from "react";
 
 export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   const { username } = handle;
+  const appState = useStore($AppState);
   const selectedBusiness = useStore($selectedBusiness);
+  useEffect(() => {
+    $AppState.set({ ...appState, client_name: username });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
   return (
     <div className="bg-secundario z-10 w-full h-[3rem] flex gap-2 justify-center items-center fixed left-0">
       <ModalChangeClient />
