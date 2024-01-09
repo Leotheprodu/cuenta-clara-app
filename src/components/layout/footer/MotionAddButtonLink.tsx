@@ -15,7 +15,7 @@ export const MotionAddButtonLink = ({
       transition: { delay },
     }}
     exit={{ opacity: 0, x: 20 }}
-    className="px-1 py-2 flex gap-2 items-center active:text-terciario ease-linear duration-200 rounded-lg p-1"
+    className="px-1 py-2 flex gap-2 items-center rounded-lg p-1"
   >
     {children}
   </motion.div>

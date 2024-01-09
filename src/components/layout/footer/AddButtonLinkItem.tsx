@@ -11,7 +11,7 @@ export const AddButtonLinkItem = ({ link }: AddButtonLinkItemProps) => {
     pagesIncluded,
   } = link;
   return (
-    <Link className="hover:" href={href}>
+    <Link className="" href={href}>
       <MotionAddButtonLink delay={delay}>
         {icon}
         <div>
