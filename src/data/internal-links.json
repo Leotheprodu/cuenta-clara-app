@@ -52,10 +52,6 @@
     "href": "/sesion/registrarse"
   },
   {
-    "page": "balance-recharge",
-    "href": "/recargas"
-  },
-  {
     "page": "verify-email",
     "href": "/sesion/verificar-email/"
   },

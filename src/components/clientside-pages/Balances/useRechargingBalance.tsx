@@ -13,11 +13,13 @@ import { $balanceRechargeInfo } from "@/stores/business";
 import { whatsappMsgs } from "@/components/Utils/whatsappMsgs";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { $AppState } from "@/stores/generalConfig";
 export const useRechargingBalance = ({
   balanceType,
 }: {
   balanceType: BalanceTypes;
 }) => {
+  const appState = useStore($AppState);
   const balanceRechargeInfo = useStore($balanceRechargeInfo);
   const [selectedMethod, setSelectedMethod] = useState<string>("0");
   const [infoSelectedMethod, setInfoSelectedMethod] = useState<PaymentInfo[]>([
@@ -61,6 +63,14 @@ export const useRechargingBalance = ({
       }),
   });
   useEffect(() => {
+    $AppState.set({
+      ...appState,
+      page: "recharges",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     const filteredClient = user.client.filter((client) =>
       client.balances.some(
         (balance) => balance.users_business.id === businessConfigInfo.businessId
@@ -75,7 +85,6 @@ export const useRechargingBalance = ({
         user_payment_methods_id: balanceRechargeInfo.payment_method.id,
         balances_types_id: balanceType.id,
       });
-      console.log(balanceRechargeInfo);
     }
   }, [user, selectedMethod, balanceType, balanceRechargeInfo]);
   useEffect(() => {
@@ -135,7 +144,6 @@ export const useRechargingBalance = ({
         redirect(link);
       }
     }
-    console.log(balanceRechargeInfo.balanceRechargeId);
   }, [balanceRechargeInfo.balanceRechargeId, user.user.username]);
   useEffect(() => {
     const selected = payment_methods.filter(

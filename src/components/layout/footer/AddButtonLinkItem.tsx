@@ -1,15 +1,7 @@
 import Link from "next/link";
 import { MotionAddButtonLink } from "./MotionAddButtonLink";
 export const AddButtonLinkItem = ({ link }: AddButtonLinkItemProps) => {
-  const {
-    href,
-    icon,
-    title,
-    description,
-    delay,
-    needClient_id,
-    pagesIncluded,
-  } = link;
+  const { href, icon, title, description, delay } = link;
   return (
     <Link className="" href={href}>
       <MotionAddButtonLink delay={delay}>

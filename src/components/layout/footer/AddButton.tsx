@@ -11,7 +11,6 @@ export const AddButton = () => {
   const { isOpen, handlePopoverOnClose, handlePopoverTriggerClick } =
     useAddButton();
   const appState = useStore($AppState);
-  console.log(appState);
   return (
     <div className="absolute top-[-1rem] transform-translate-y-1/2">
       <Popover

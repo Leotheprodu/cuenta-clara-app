@@ -4,14 +4,20 @@ import {
   DataRechargesBalanceByClientDefault,
   paymentMethod,
   paymentStatus,
+  typeOfRoles,
 } from "@/data/constants";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
+import { $AppState } from "@/stores/generalConfig";
+import { $user } from "@/stores/users";
+import { useStore } from "@nanostores/react";
 import { Tooltip } from "@nextui-org/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import toast, { CheckmarkIcon } from "react-hot-toast";
 
 export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
+  const user = useStore($user);
+  const appState = useStore($AppState);
   const [recharges, setRecharges] = useState<
     DataRechargesBalanceByClientProps[]
   >([DataRechargesBalanceByClientDefault]); // [BalanceRecharge
@@ -46,6 +52,14 @@ export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
           method: "PATCH",
         }),
     });
+  useEffect(() => {
+    $AppState.set({
+      ...appState,
+      page: "recharge-client",
+      client_id: id,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     if (
       selectedRecharge.click &&
@@ -97,8 +111,9 @@ export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
     { key: "status", name: "Status" },
     { key: "paymentMethod", name: "Metodo de Pago" },
     { key: "usedPaymentMethod", name: "Metodo Usado" },
-    { key: "actions", name: "Acciones" },
   ];
+  user.roles.includes(typeOfRoles.admin.id) &&
+    columnNames.push({ key: "actions", name: "Acciones" });
   const renderCell = (
     recharges: DataRechargesBalanceByClientProps,
     columnKey: any,
