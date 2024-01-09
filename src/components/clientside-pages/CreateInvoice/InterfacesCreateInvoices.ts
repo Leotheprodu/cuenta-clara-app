@@ -20,7 +20,6 @@ interface NotClientInBusinessProps {
 interface HeaderCreateInvoiceProps {
   handle: {
     username: string;
-    businessSelected?: string;
   };
 }
 interface HandleOnChangeDetailProps {

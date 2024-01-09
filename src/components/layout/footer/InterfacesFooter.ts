@@ -10,6 +10,8 @@ interface AddButtonLinkItemProps {
     icon: JSX.Element;
     title: string;
     description: string;
+    needClient_id: boolean;
+    pagesIncluded: string[];
     delay: number;
   };
 }

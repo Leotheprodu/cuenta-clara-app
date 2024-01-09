@@ -73,6 +73,14 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     payment_method_id: parseInt(payment_method_id, 10),
     status: payNow ? invoicesStatus.paid : invoicesStatus.pending,
   });
+  useEffect(() => {
+    $AppState.set({
+      ...appState,
+      page: "add-invoice",
+      client_id: parseInt(id),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   // hook useEffect para setear los datos de la factura
   useEffect(() => {
     setFormInvoice({
@@ -204,7 +212,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
         ...user,
         balance: user.balance - total * billingPrice,
       });
-      redirect(`/facturas/${id}`);
+      /* redirect(`/facturas/${id}`); */
     } else if (statusCreateInvoice === "error") {
       toast.error(errorCreateInvoice?.message || "Error al crear la factura");
     }

@@ -1,6 +1,4 @@
 "use client";
-
-import { $selectedBusiness } from "@/stores/business";
 import { HeaderCreateInvoice } from "../CreateInvoice/HeaderCreateInvoice";
 import { useInvoicesByClient } from "./useInvoicesByClient";
 import {
@@ -11,17 +9,15 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
-import { useStore } from "@nanostores/react";
+
 export const InvoicesByClient = ({ id }: { id: string }) => {
   const { invoicesByClient } = useInvoicesByClient({ id });
   const { invoices, columnNames, renderCell, client } = invoicesByClient;
-  const selectedBusiness = useStore($selectedBusiness);
   return (
     <div className="w-full flex flex-col gap-2">
       <HeaderCreateInvoice
         handle={{
           username: client.username,
-          businessSelected: selectedBusiness.name,
         }}
       />
       <section className="mt-[3rem] pt-3">

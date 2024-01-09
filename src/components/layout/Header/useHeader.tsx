@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
@@ -8,6 +8,7 @@ import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
 import { moneyFormat } from "@/components/Utils/dataFormat";
+import { $AppState } from "@/stores/generalConfig";
 
 export const useHeader = () => {
   useCheckSession();
@@ -16,7 +17,6 @@ export const useHeader = () => {
   const [business, setBusiness] = useState([BusinessDefault]);
   const [value, setValue] = useState(new Set(["0"]));
   const [showBalance, setShowBalance] = useState(false);
-
   const {
     status: statusBusiness,
     data: dataBusiness,
@@ -79,7 +79,6 @@ export const useHeader = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, user]);
-
   const handleSelectionBusiness = (e: any) => {
     setValue(e);
   };

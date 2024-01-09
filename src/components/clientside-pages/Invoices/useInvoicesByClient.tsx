@@ -1,11 +1,10 @@
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import toast from "react-hot-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
 import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
-
 import {
   clientStatusInvoice,
   invoiceDefault,
@@ -13,12 +12,14 @@ import {
 } from "@/data/constants";
 import { useFilteredInvoicesByClient } from "./useFilteredInvoicesByClient";
 import { TransaccionsModal } from "./TransactionsModal";
+import { $AppState } from "@/stores/generalConfig";
+import { useStore } from "@nanostores/react";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
   //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
-
+  const appState = useStore($AppState);
   const { invoicesByBusiness } = useFilteredInvoicesByClient({ invoices });
   const {
     status: statusInvoices,
@@ -41,8 +42,14 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
-  //Estado para almacenar las columnas de la tabla
-
+  useEffect(() => {
+    $AppState.set({
+      ...appState,
+      page: "client-invoices",
+      client_id: parseInt(id),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   useEffect(() => {
     // si el cliente existe, setearlo en el estado
     if (statusFetchClient === "success") {

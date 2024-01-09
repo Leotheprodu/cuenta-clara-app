@@ -22,7 +22,13 @@ export const useClientsPage = () => {
       $AppState.set({ ...appState, isCreatedInvoice: false });
     }
   }, [refetch, appState]);
-
+  useEffect(() => {
+    $AppState.set({
+      ...appState,
+      page: "clients",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { clientsSearched } = useFiltersClients({
     data,
     status,
