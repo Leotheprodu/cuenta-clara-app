@@ -39,10 +39,10 @@ export const useLinksAddButton = () => {
       {
         href: internalLinks("create-client"),
         icon: <AddClientIcon />,
-        title: "Crear Cliente",
+        title: "Nuevo Cliente",
         description: "Agrega un nuevo cliente",
         needClient_id: false,
-        pagesIncluded: ["clients"],
+        pagesIncluded: ["clients", "add-invoice"],
         delay: 0.2,
       },
       {
