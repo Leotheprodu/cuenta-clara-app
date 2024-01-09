@@ -47,7 +47,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
   return (
     <form
       onSubmit={handleUpdateClient}
-      className="flex flex-col items-center justify-center gap-4"
+      className="flex flex-col items-center justify-center gap-4 mb-6"
     >
       <BusinessList
         title="Actualiza tu cliente"
