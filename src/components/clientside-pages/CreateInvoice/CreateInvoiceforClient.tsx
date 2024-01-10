@@ -14,8 +14,9 @@ import { NotClientInBusiness } from "./NotClientInBusiness";
 import { CreateInvoiceDetail } from "./CreateInvoiceDetail";
 import { moneyFormat } from "@/components/Utils/dataFormat";
 import { AddIcon } from "@/icons/AddIcon";
-import { paymentMethods } from "@/data/constants";
 import { ChangeCalculator } from "./ChangeCalculator";
+import { paymentMethod } from "@/data/constants";
+import { PaymentMethodItem } from "../Balances/PaymentMethodItem";
 
 export const CreateInvoiceforClient = ({ id }: { id: string }) => {
   const {
@@ -27,6 +28,8 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
     total,
     payNow,
     handlePayNow,
+    paymentNames,
+    infoSelectedMethod,
     payment_method_id,
     handleCreateInvoice,
     handleSelectPaymentMethod,
@@ -38,7 +41,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
     return <NotClientInBusiness handle={{ username, businessSelected }} />;
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="w-full flex flex-col gap-2 mb-20">
       <HeaderCreateInvoice
         handle={{ username: username || "Selecciona un Cliente" }}
       />
@@ -73,8 +76,14 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
               </Button>
             </div>
             <CreateInvoiceDetail handle={{ createInvoiceDetail }} />
-            <div className="grid grid-cols-2">
-              <div className="flex flex-col mt-3 gap-3">
+            <div
+              className={`grid grid-cols-2 ${
+                payNow && payment_method_id !== `${paymentMethod.cash.id}`
+                  ? "grid-rows-2"
+                  : "grid-rows-1"
+              }`}
+            >
+              <div className="flex flex-col mt-3 gap-3 col-span-1 row-span-1">
                 <Checkbox
                   isSelected={payNow}
                   onValueChange={handlePayNow}
@@ -92,7 +101,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                     onChange={handleSelectPaymentMethod}
                     selectedKeys={[payment_method_id]}
                   >
-                    {paymentMethods.map((method) => (
+                    {paymentNames.map((method) => (
                       <SelectItem
                         className="uppercase"
                         key={method.id}
@@ -103,11 +112,11 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                     ))}
                   </Select>
                 )}
-                {payNow && payment_method_id === "1" && (
+                {payNow && payment_method_id === `${paymentMethod.cash.id}` && (
                   <ChangeCalculator total={total} />
                 )}
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col col-span-1 row-span-1">
                 <div className=" text-secundario rounded-xl flex justify-end mt-4 ">
                   <p className="bg-gris rounded-lg p-3 shadow-md">
                     Total:{" "}
@@ -125,6 +134,16 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                     Crear Factura
                   </Button>
                 </div>
+              </div>
+              <div className="col-span-2 row-span-1 flex flex-wrap gap-4 justify-center items-center bg-slate-100 mt-4 shadow-sm rounded-lg">
+                {payNow &&
+                  payment_method_id !== `${paymentMethod.cash.id}` &&
+                  infoSelectedMethod.map((payment_method) => (
+                    <PaymentMethodItem
+                      key={payment_method.id}
+                      payment_method={payment_method}
+                    />
+                  ))}
               </div>
             </div>
           </form>

@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   businessConfigInfo,
   paymentMethodsDefault,
@@ -14,6 +14,7 @@ import { whatsappMsgs } from "@/components/Utils/whatsappMsgs";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { $AppState } from "@/stores/generalConfig";
+import { usePaymentMethodsByBusiness } from "@/components/hooks/usePaymentMethodsByBusiness";
 export const useRechargingBalance = ({
   balanceType,
 }: {
@@ -25,10 +26,7 @@ export const useRechargingBalance = ({
   const [infoSelectedMethod, setInfoSelectedMethod] = useState<PaymentInfo[]>([
     paymentMethodsDefault,
   ]);
-  const [paymentNames, setPaymentNames] = useState([{ id: 0, name: "" }]);
-  const [payment_methods, setPayment_methods] = useState<PaymentInfo[]>([
-    paymentMethodsDefault,
-  ]);
+
   const [bodyRecharge, setBodyRecharge] = useState({
     amount: 0,
     balance_amount: 0,
@@ -40,14 +38,6 @@ export const useRechargingBalance = ({
   const user = useStore($user);
   const [saludo, setSaludo] = useState<string>("");
 
-  const { status, data } = useQuery({
-    queryKey: ["payment-methods"],
-    queryFn: async () =>
-      await fetchAPI({
-        url: `user_payment_methods/${businessConfigInfo.businessId}`,
-      }),
-    retry: 2,
-  });
   const {
     status: statusSendRecharge,
     data: dataSendRecharge,
@@ -69,6 +59,9 @@ export const useRechargingBalance = ({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const { paymentNames, payment_methods } = usePaymentMethodsByBusiness({
+    businessId: businessConfigInfo.businessId,
+  });
 
   useEffect(() => {
     const filteredClient = user.client.filter((client) =>
@@ -94,27 +87,6 @@ export const useRechargingBalance = ({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balanceType]);
-
-  useEffect(() => {
-    if (status === "success") {
-      setPayment_methods(data);
-    }
-  }, [data, status]);
-
-  useEffect(() => {
-    //crea un arreglo con los metodos de pago de payment_methods nombre e id y los filtra para que no se repitan
-    const payment_methods_names = payment_methods
-      .map((payment_method) => ({
-        id: payment_method.payment_method.id,
-        name: payment_method.payment_method.name,
-      }))
-      .filter(
-        (value, index, self) =>
-          self.findIndex((v) => v.name === value.name && v.id === value.id) ===
-          index
-      );
-    setPaymentNames(payment_methods_names);
-  }, [payment_methods]);
 
   useEffect(() => {
     const cantidad = ramdomSaludo.length;

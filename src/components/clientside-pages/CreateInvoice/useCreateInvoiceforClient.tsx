@@ -9,12 +9,13 @@ import { useInvoiceDetail } from "./useInvoiceDetail";
 import {
   billingPrice,
   invoicesStatus,
+  paymentMethodsDefault,
   productsAndServicesDefault,
 } from "@/data/constants";
 import toast from "react-hot-toast";
-import { redirect } from "next/navigation";
 import { $user } from "@/stores/users";
 import { $AppState } from "@/stores/generalConfig";
+import { usePaymentMethodsByBusiness } from "@/components/hooks/usePaymentMethodsByBusiness";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   // estado para almacenar el total de la factura
   const [total, setTotal] = useState<number>(0);
@@ -22,7 +23,9 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   const [client, setClient] = useState({ username: "", active: 0 });
 
   const [payNow, setPayNow] = useState<boolean>(false);
-
+  const [infoSelectedMethod, setInfoSelectedMethod] = useState<PaymentInfo[]>([
+    paymentMethodsDefault,
+  ]);
   const [payment_method_id, setPayment_method_id] = useState<string>("1");
   //  estado para almacenar el negocio seleccionado
   const selectedBusiness = useStore($selectedBusiness);
@@ -70,7 +73,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     business_id: selectedBusiness.id,
     total,
     invoice_details: [],
-    payment_method_id: parseInt(payment_method_id, 10),
+    payment_method_id: parseInt(payment_method_id),
     status: payNow ? invoicesStatus.paid : invoicesStatus.pending,
   });
   useEffect(() => {
@@ -88,7 +91,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       business_id: selectedBusiness.id,
       total,
       invoice_details: invoiceDetails,
-      payment_method_id: parseInt(payment_method_id, 10),
+      payment_method_id: parseInt(payment_method_id),
       status: payNow ? invoicesStatus.paid : invoicesStatus.pending,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,6 +123,7 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
+
   // obtener el balance del cliente en el negocio seleccionado
   const { status: statusBalance, data: dataBalance } = useQuery({
     queryKey: ["client-balance"],
@@ -141,7 +145,22 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
-
+  const { paymentNames, payment_methods, refetchPaymentMethods } =
+    usePaymentMethodsByBusiness({
+      businessId: selectedBusiness.id,
+    });
+  useEffect(() => {
+    refetchPaymentMethods();
+  }, [selectedBusiness, refetchPaymentMethods]);
+  useEffect(() => {
+    const selected = payment_methods.filter(
+      (payment_method) =>
+        payment_method.payment_method.id === parseInt(payment_method_id)
+    );
+    if (selected) {
+      setInfoSelectedMethod(selected);
+    }
+  }, [payment_method_id, payment_methods]);
   useEffect(() => {
     // si el cliente existe, setearlo en el estado
     if (statusFetchClient === "success") {
@@ -245,6 +264,8 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     handleCreateInvoice,
     handleSelectPaymentMethod,
     payment_method_id,
+    paymentNames,
+    infoSelectedMethod,
     handlePayNow,
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) =>
       handleOnChange(setFormInvoice, e),

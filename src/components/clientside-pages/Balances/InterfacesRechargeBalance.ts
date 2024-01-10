@@ -12,9 +12,13 @@ interface PaymentInfo {
   payment_method_iban: string;
   payment_method_email: string;
   payment_method_description: string;
-  user_id: number;
   payment_method: {
     id: number;
     name: string;
+  };
+  users_business: {
+    id: number;
+    name: string;
+    user_id: number;
   };
 }

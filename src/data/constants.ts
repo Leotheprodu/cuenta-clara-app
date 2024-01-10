@@ -210,10 +210,14 @@ const paymentMethodsDefault: PaymentInfo = {
   payment_method_iban: "",
   payment_method_email: "",
   payment_method_description: "",
-  user_id: 0,
   payment_method: {
     id: 0,
     name: "",
+  },
+  users_business: {
+    id: 0,
+    name: "",
+    user_id: 0,
   },
 };
 const balanceTypesDefault: BalanceTypes = {

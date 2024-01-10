@@ -1,13 +1,19 @@
 import { $balanceRechargeInfo } from "@/stores/business";
 import { useStore } from "@nanostores/react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-
+import QRCode from "react-qr-code";
+import { motion } from "framer-motion";
+import { cellphoneFormat } from "@/components/Utils/cellphoneFormat";
 export const PaymentMethodItem = ({
   payment_method,
 }: {
   payment_method: PaymentInfo;
 }) => {
+  const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
+  const maxHeight = window.innerHeight - 300;
   const balanceRechargeInfo = useStore($balanceRechargeInfo);
+  const [showBigQR, setShowBigQR] = useState<boolean>(false);
   const handleCopyText = (textToCopy: string) => {
     // Copia el contenido del estado al portapapeles
     navigator.clipboard
@@ -25,57 +31,92 @@ export const PaymentMethodItem = ({
       payment_method,
     });
   };
+  const handleShowBigQR = () => {
+    setShowBigQR(!showBigQR);
+  };
   return (
-    <div
-      className="flex flex-col justify-center items-center gap-2 bg-slate-200 shadow-medium rounded-md p-2 hover:scale-110 ease-in duration-200 cursor-pointer"
-      onClick={() => handleSelectedMethodDetail(payment_method)}
-    >
-      {payment_method.payment_method_full_name && (
-        <p className="">Nombre: {payment_method.payment_method_full_name}</p>
+    <>
+      {showBigQR && (
+        <motion.div
+          drag
+          dragConstraints={{
+            top: 0,
+            left: 0,
+            right: maxWidth,
+            bottom: maxHeight,
+          }}
+          className="fixed left-2 top-[8rem] z-40 bg-blanco p-4 shadow-sm rounded-md"
+        >
+          <div className="w-full flex flex-col justify-center items-center gap-1">
+            <h3 className="text-center font-bold text-5xl text-slate-500">
+              {cellphoneFormat(payment_method.payment_method_cellphone)}
+            </h3>
+            <QRCode value={payment_method.payment_method_cellphone} />
+          </div>
+        </motion.div>
       )}
-      {payment_method.payment_method_cellphone && (
-        <p className="">
-          numero:{" "}
-          <span
-            className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
-            onClick={() =>
-              handleCopyText(payment_method.payment_method_cellphone)
-            }
+      <div
+        className="flex flex-col justify-center items-center gap-2 bg-primary-50 hover:bg-primary-100 shadow-sm rounded-xl p-2 hover:scale-110 ease-in duration-200 cursor-pointer"
+        onClick={() => handleSelectedMethodDetail(payment_method)}
+      >
+        {payment_method.payment_method_full_name && (
+          <p className="">Nombre: {payment_method.payment_method_full_name}</p>
+        )}
+        {payment_method.payment_method_cellphone && (
+          <p className="">
+            numero:{" "}
+            <span
+              className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
+              onClick={() =>
+                handleCopyText(payment_method.payment_method_cellphone)
+              }
+            >
+              {" "}
+              {cellphoneFormat(payment_method.payment_method_cellphone)}
+            </span>
+          </p>
+        )}
+        {payment_method.payment_method_email && (
+          <p className="">
+            email:{" "}
+            <span
+              className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
+              onClick={() =>
+                handleCopyText(payment_method.payment_method_email)
+              }
+            >
+              {" "}
+              {payment_method.payment_method_email}
+            </span>
+          </p>
+        )}
+        {payment_method.payment_method_iban && (
+          <p className="">
+            cuenta:{" "}
+            <span
+              className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
+              onClick={() => handleCopyText(payment_method.payment_method_iban)}
+            >
+              {" "}
+              {payment_method.payment_method_iban}
+            </span>
+          </p>
+        )}
+        {payment_method.payment_method_description && (
+          <p className="">
+            descripcion: {payment_method.payment_method_description}
+          </p>
+        )}
+        <div>
+          <button
+            type="button"
+            className="bg-slate-100 text-slate-600 p-1 rounded-md shadow-sm hover:bg-slate-200"
+            onClick={handleShowBigQR}
           >
-            {" "}
-            {payment_method.payment_method_cellphone}
-          </span>
-        </p>
-      )}
-      {payment_method.payment_method_email && (
-        <p className="">
-          email:{" "}
-          <span
-            className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
-            onClick={() => handleCopyText(payment_method.payment_method_email)}
-          >
-            {" "}
-            {payment_method.payment_method_email}
-          </span>
-        </p>
-      )}
-      {payment_method.payment_method_iban && (
-        <p className="">
-          cuenta:{" "}
-          <span
-            className=" font-bold cursor-pointer hover:text-slate-600 hover:underline"
-            onClick={() => handleCopyText(payment_method.payment_method_iban)}
-          >
-            {" "}
-            {payment_method.payment_method_iban}
-          </span>
-        </p>
-      )}
-      {payment_method.payment_method_description && (
-        <p className="">
-          descripcion: {payment_method.payment_method_description}
-        </p>
-      )}
-    </div>
+            {showBigQR ? "Ocultar QR" : "Ver QR"}
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
