@@ -16,12 +16,12 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   return (
     <div className="bg-secundario z-10 w-full h-[3rem] flex gap-2 justify-center items-center fixed left-0">
       {showChangeClient && <ModalChangeClient />}
-      <p className="bg-primario p-1 rounded-md text-center text-blanco">
+      <p className=" text-sm sm:text-base text-center text-blanco">
         Cliente: <span className="uppercase text-terciario">{username}</span>
       </p>
 
       {selectedBusiness && (
-        <p className="bg-primario p-1 rounded-md text-center text-blanco">
+        <p className="text-sm sm:text-base text-center text-blanco">
           Negocio:{" "}
           <span className="uppercase text-terciario">
             {selectedBusiness.name}
