@@ -9,7 +9,7 @@ const billingPrice = 0.04;
 const businessConfigInfo = {
   userId: 9,
   businessId: 1,
-  whatsapp: "50663017707",
+  whatsapp: "63017707",
 };
 
 /* ----------------------------------JSON files------------------------------------ */

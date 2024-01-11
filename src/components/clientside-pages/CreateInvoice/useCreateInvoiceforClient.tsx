@@ -243,9 +243,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
     e.preventDefault();
     mutateCreateInvoice();
   };
-  /*   useEffect(() => {
-    console.log(payment_method_id);
-  }, [payment_method_id]); */
 
   const handlePayNow = () => {
     setPayNow(!payNow);

@@ -2,9 +2,9 @@ import { $balanceRechargeInfo } from "@/stores/business";
 import { useStore } from "@nanostores/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import QRCode from "react-qr-code";
 import { motion } from "framer-motion";
 import { cellphoneFormat } from "@/components/Utils/cellphoneFormat";
+import { ShowQrCode } from "./ShowQrCode";
 export const PaymentMethodItem = ({
   payment_method,
 }: {
@@ -47,12 +47,10 @@ export const PaymentMethodItem = ({
           }}
           className="fixed left-2 top-[8rem] z-40 bg-blanco p-4 shadow-sm rounded-md"
         >
-          <div className="w-full flex flex-col justify-center items-center gap-1">
-            <h3 className="text-center font-bold text-5xl text-slate-500">
-              {cellphoneFormat(payment_method.payment_method_cellphone)}
-            </h3>
-            <QRCode value={payment_method.payment_method_cellphone} />
-          </div>
+          <ShowQrCode
+            value={payment_method.payment_method_cellphone}
+            title={cellphoneFormat(payment_method.payment_method_cellphone)}
+          />
         </motion.div>
       )}
       <div
