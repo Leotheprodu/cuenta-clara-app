@@ -1,6 +1,8 @@
 import { isUserRequired } from "@/components/Utils/internalLinks";
 import { whiteListPaths } from "@/data/constants";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
+import { $AppState } from "@/stores/generalConfig";
+import { useStore } from "@nanostores/react";
 
 import { Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { motion } from "framer-motion";
@@ -14,51 +16,53 @@ export const HeaderBusinessSelector = ({
     value,
     isPending,
     mutateFunction,
-    path,
     balance,
     handleShowBalance,
     showBalance,
   } = handle;
   const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
   const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
+  const appState = useStore($AppState);
 
   return (
-    <>
-      <>
-        <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
-        <Select
-          size="sm"
-          variant="flat"
-          color="primary"
-          isDisabled={isLoadingBusiness || isPending}
-          items={business}
-          label="Selecciona tu negocio"
-          classNames={{
-            label: "invisible lg:visible",
-          }}
-          className="max-w-[14rem]"
-          selectedKeys={value}
-          onSelectionChange={handleSelectionBusiness}
-          onChange={mutateFunction}
-        >
-          {(business) => (
-            <SelectItem key={business.id} value={business.id}>
-              {business.name}
-            </SelectItem>
+    <div className="flex gap-1 items-center">
+      {isUserRequired(appState.page) && (
+        <div className="flex gap-1 items-center">
+          <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
+          <Select
+            size="sm"
+            variant="flat"
+            color="primary"
+            isDisabled={isLoadingBusiness || isPending}
+            items={business}
+            label="Selecciona tu negocio"
+            classNames={{
+              label: "invisible lg:visible",
+            }}
+            className="min-w-[10rem]"
+            selectedKeys={value}
+            onSelectionChange={handleSelectionBusiness}
+            onChange={mutateFunction}
+          >
+            {(business) => (
+              <SelectItem key={business.id} value={business.id}>
+                {business.name}
+              </SelectItem>
+            )}
+          </Select>
+          {!showBalance && (
+            <Tooltip content="Ver saldo">
+              <motion.button
+                onClick={handleShowBalance}
+                layoutId="balance"
+                className="flex items-center justify-center h-8 w-8 rounded-md bg-primario/50"
+              >
+                <AddTransactionIcon className="text-cuaternario/50 h-6" />
+              </motion.button>
+            </Tooltip>
           )}
-        </Select>
-        {!showBalance && (
-          <Tooltip content="Ver saldo">
-            <motion.button
-              onClick={handleShowBalance}
-              layoutId="balance"
-              className="flex items-center justify-center h-8 w-8 rounded-md bg-primario/50"
-            >
-              <AddTransactionIcon className="text-cuaternario/50 h-6" />
-            </motion.button>
-          </Tooltip>
-        )}
-      </>
+        </div>
+      )}
 
       {showBalance && (
         <motion.div
@@ -84,6 +88,6 @@ export const HeaderBusinessSelector = ({
           </div>
         </motion.div>
       )}
-    </>
+    </div>
   );
 };

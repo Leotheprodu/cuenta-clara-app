@@ -34,7 +34,7 @@ interface UserData {
 
 export type UserProps = UserData;
 export const $user = atom<UserProps>({
-  isLoggedIn: true,
+  isLoggedIn: false,
   user: {
     id: 0,
     username: "",

@@ -11,6 +11,7 @@ import { LogoutIcon } from "@/icons/LogoutIcon";
 import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
 import { TransactionsIcon } from "@/icons/TransactionsIcon";
+import { internalLinks } from "@/components/Utils/internalLinks";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const path = usePathname();
@@ -21,7 +22,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
         <MotionAddButtonLink delay={0.1}>
           <LinkNav
             link={{
-              href: "/sesion",
+              href: internalLinks("users"),
               icon: user.isLoggedIn === true ? <LogoutIcon /> : <LoginIcon />,
               text:
                 user.isLoggedIn === true ? "Cerrar sesion" : "Iniciar sesion",
@@ -36,7 +37,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
         <MotionAddButtonLink delay={0.2}>
           <LinkNav
             link={{
-              href: "/clientes",
+              href: internalLinks("clients"),
               icon: <ClientsIcon />,
               text: "Clientes",
             }}
@@ -50,7 +51,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
         <MotionAddButtonLink delay={0.3}>
           <LinkNav
             link={{
-              href: "/recargas",
+              href: internalLinks("recharges"),
               icon: <TransactionsIcon />,
               text: "Recargar saldo",
             }}
