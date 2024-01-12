@@ -1,66 +1,82 @@
 [
   {
     "page": "create-invoice",
-    "href": "/facturas/crear"
+    "href": "/facturas/crear",
+    "userRequired": true
   },
   {
     "page": "home",
-    "href": "/"
+    "href": "/",
+    "userRequired": false
   },
   {
     "page": "create-client",
-    "href": "/clientes/crear"
+    "href": "/clientes/crear",
+    "userRequired": true
   },
   {
     "page": "update-client",
-    "href": "/clientes/actualizar/"
+    "href": "/clientes/actualizar/",
+    "userRequired": true
   },
   {
     "page": "deactivate-client",
-    "href": "/clientes/desactivar/"
+    "href": "/clientes/desactivar/",
+    "userRequired": true
   },
   {
     "page": "client-invoices",
-    "href": "/facturas/"
+    "href": "/facturas/",
+    "userRequired": true
   },
   {
     "page": "add-invoice",
-    "href": "/facturas/crear/"
+    "href": "/facturas/crear/",
+    "userRequired": true
   },
   {
     "page": "clients",
-    "href": "/clientes"
+    "href": "/clientes",
+    "userRequired": true
   },
   {
     "page": "create-product",
-    "href": "/productos/crear"
+    "href": "/productos/crear",
+    "userRequired": true
   },
   {
     "page": "products",
-    "href": "/productos"
+    "href": "/productos",
+    "userRequired": true
   },
   {
     "page": "create-user",
-    "href": "/usuarios/crear"
+    "href": "/usuarios/crear",
+    "userRequired": false
   },
   {
     "page": "users",
-    "href": "/sesion"
+    "href": "/sesion",
+    "userRequired": false
   },
   {
     "page": "sign-up",
-    "href": "/sesion/registrarse"
+    "href": "/sesion/registrarse",
+    "userRequired": false
   },
   {
     "page": "verify-email",
-    "href": "/sesion/verificar-email/"
+    "href": "/sesion/verificar-email/",
+    "userRequired": false
   },
   {
     "page": "recharges",
-    "href": "/recargas"
+    "href": "/recargas",
+    "userRequired": true
   },
   {
     "page": "recharge-client",
-    "href": "/clientes/recargas/"
+    "href": "/clientes/recargas/",
+    "userRequired": true
   }
 ]

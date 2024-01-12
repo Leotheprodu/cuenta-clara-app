@@ -7,7 +7,9 @@ import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { internalLinks } from "@/components/Utils/internalLinks";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useLoginForm = (formInit: FormValuesLoginForm) => {
+  useNamingPagesRoutes({ internalLink: "users" });
   const user = useStore($user);
   const [form, setForm] = useState(formInit);
   const [isVisible, setIsVisible] = useState(false);

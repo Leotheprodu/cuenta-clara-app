@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useFiltersClients } from "./useFiltersClients";
 import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useClientsPage = () => {
+  useNamingPagesRoutes({ internalLink: "clients" });
   const [isShowActivoButton, setIsShowActivoButton] = useState(true);
   const [searchClient, setSearchClient] = useState("");
   const appState = useStore($AppState);
@@ -22,13 +24,7 @@ export const useClientsPage = () => {
       $AppState.set({ ...appState, isCreatedInvoice: false });
     }
   }, [refetch, appState]);
-  useEffect(() => {
-    $AppState.set({
-      ...appState,
-      page: "clients",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   const { clientsSearched } = useFiltersClients({
     data,
     status,

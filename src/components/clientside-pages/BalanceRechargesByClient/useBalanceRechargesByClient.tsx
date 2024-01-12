@@ -1,5 +1,6 @@
 import { formatDate, moneyFormat } from "@/components/Utils/dataFormat";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 import {
   DataRechargesBalanceByClientDefault,
   paymentMethod,
@@ -16,6 +17,7 @@ import { useEffect, useState } from "react";
 import toast, { CheckmarkIcon } from "react-hot-toast";
 
 export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
+  useNamingPagesRoutes({ internalLink: "recharge-client" });
   const user = useStore($user);
   const appState = useStore($AppState);
   const [recharges, setRecharges] = useState<
@@ -55,7 +57,6 @@ export const useBalanceRechargesByClient = ({ id }: { id: number }) => {
   useEffect(() => {
     $AppState.set({
       ...appState,
-      page: "recharge-client",
       client_id: id,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -24,7 +24,7 @@ export const whatsappMsgs = (
     return `https://wa.me/${
       code + cellphone
     }?text=%2ALink%20de%20Dashboard%2A%0A%0A${username}%2C%20tu%20Link%20es%3A%20%0A%0A${
-      domain + "dashboard/?token=" + token + "%26id=" + id
+      domain + "clientes/dashboard/" + token
     }%0A%0A_Recuerda%20no%20compartir%20este%20link%2C%20para%20proteger%20tu%20informaci%C3%B3n_`;
   } else if (name === "sendRechargeBalanceComprobant") {
     return `https://wa.me/${

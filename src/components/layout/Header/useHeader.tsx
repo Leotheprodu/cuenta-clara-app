@@ -13,6 +13,7 @@ import { $AppState } from "@/stores/generalConfig";
 export const useHeader = () => {
   useCheckSession();
   const path = usePathname();
+  const appState = useStore($AppState);
   const user = useStore($user);
   const [business, setBusiness] = useState([BusinessDefault]);
   const [value, setValue] = useState(new Set(["0"]));
@@ -49,12 +50,10 @@ export const useHeader = () => {
           name: defaultBussines[0].name,
         });
       }
-    } else if (statusBusiness === "error" && user.isLoggedIn) {
-      refetch();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusBusiness, dataBusiness, user]);
+  }, [statusBusiness, dataBusiness, user.isLoggedIn]);
 
   const { status, mutate, isPending, data } = useMutation({
     mutationKey: ["favorite-business"],

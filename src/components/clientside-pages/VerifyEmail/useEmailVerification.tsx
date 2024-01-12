@@ -3,8 +3,9 @@ import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { internalLinks } from "@/components/Utils/internalLinks";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useEmailVerification = (token: string) => {
+  useNamingPagesRoutes({ internalLink: "verify-email" });
   const { status, isLoading, isError, isSuccess, error, data } = useQuery({
     queryKey: ["email-verification"],
     queryFn: async () =>
@@ -20,7 +21,6 @@ export const useEmailVerification = (token: string) => {
       toast.error("Hubo un error");
       console.log(error);
     }
-    /* return () => toast.dismiss(); */
   }, [status, error, data]);
 
   return {

@@ -1,6 +1,5 @@
 import { PopoverContent } from "@nextui-org/react";
 import { AddButtonLinkItem } from "./AddButtonLinkItem";
-import { comparePaths } from "@/components/Utils/comparePaths";
 import { PropsAppState } from "@/stores/generalConfig";
 import { useLinksAddButton } from "./useLinksAddButton";
 import { useEffect } from "react";

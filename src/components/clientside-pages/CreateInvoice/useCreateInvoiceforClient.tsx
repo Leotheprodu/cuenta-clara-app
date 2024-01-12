@@ -16,7 +16,9 @@ import toast from "react-hot-toast";
 import { $user } from "@/stores/users";
 import { $AppState } from "@/stores/generalConfig";
 import { usePaymentMethodsByBusiness } from "@/components/hooks/usePaymentMethodsByBusiness";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
+  useNamingPagesRoutes({ internalLink: "add-invoice" });
   // estado para almacenar el total de la factura
   const [total, setTotal] = useState<number>(0);
   //  estado para almacenar los datos del cliente
@@ -79,7 +81,6 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   useEffect(() => {
     $AppState.set({
       ...appState,
-      page: "add-invoice",
       client_id: parseInt(id),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

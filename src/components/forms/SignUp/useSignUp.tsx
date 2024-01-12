@@ -1,15 +1,14 @@
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { useState, useEffect } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
-import { useStore } from "@nanostores/react";
-import { $user } from "@/stores/users";
-import { redirect } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { internalLinks } from "@/components/Utils/internalLinks";
 import { countryCodes } from "@/data/constants";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 
 export const useSignUp = (formInit: any) => {
+  useNamingPagesRoutes({ internalLink: "sign-up" });
+
   const [form, setForm] = useState(formInit);
   const [isVisible, setIsVisible] = useState(false);
   const [isInvalidPass, setIsInvalidPass] = useState(false);

@@ -40,6 +40,7 @@ const typeOfRoles = {
     name: "vip",
   },
 };
+
 const paymentMethod = {
   cash: {
     id: paymentMethods[0].id,

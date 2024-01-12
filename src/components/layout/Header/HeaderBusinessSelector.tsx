@@ -1,5 +1,7 @@
+import { isUserRequired } from "@/components/Utils/internalLinks";
 import { whiteListPaths } from "@/data/constants";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
+
 import { Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { motion } from "framer-motion";
 export const HeaderBusinessSelector = ({
@@ -19,46 +21,46 @@ export const HeaderBusinessSelector = ({
   } = handle;
   const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
   const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
+
   return (
     <>
-      {!whiteListPaths.includes(path) && (
-        <>
-          <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
-          <Select
-            size="sm"
-            variant="flat"
-            color="primary"
-            isDisabled={isLoadingBusiness || isPending}
-            items={business}
-            label="Selecciona tu negocio"
-            classNames={{
-              label: "invisible lg:visible",
-            }}
-            className="max-w-[14rem]"
-            selectedKeys={value}
-            onSelectionChange={handleSelectionBusiness}
-            onChange={mutateFunction}
-          >
-            {(business) => (
-              <SelectItem key={business.id} value={business.id}>
-                {business.name}
-              </SelectItem>
-            )}
-          </Select>
-          {!showBalance && (
-            <Tooltip content="Ver saldo">
-              <motion.button
-                onClick={handleShowBalance}
-                layoutId="balance"
-                className="flex items-center justify-center h-8 w-8 rounded-md bg-primario/50"
-              >
-                <AddTransactionIcon className="text-cuaternario/50 h-6" />
-              </motion.button>
-            </Tooltip>
+      <>
+        <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
+        <Select
+          size="sm"
+          variant="flat"
+          color="primary"
+          isDisabled={isLoadingBusiness || isPending}
+          items={business}
+          label="Selecciona tu negocio"
+          classNames={{
+            label: "invisible lg:visible",
+          }}
+          className="max-w-[14rem]"
+          selectedKeys={value}
+          onSelectionChange={handleSelectionBusiness}
+          onChange={mutateFunction}
+        >
+          {(business) => (
+            <SelectItem key={business.id} value={business.id}>
+              {business.name}
+            </SelectItem>
           )}
-        </>
-      )}
-      {!whiteListPaths.includes(path) && showBalance && (
+        </Select>
+        {!showBalance && (
+          <Tooltip content="Ver saldo">
+            <motion.button
+              onClick={handleShowBalance}
+              layoutId="balance"
+              className="flex items-center justify-center h-8 w-8 rounded-md bg-primario/50"
+            >
+              <AddTransactionIcon className="text-cuaternario/50 h-6" />
+            </motion.button>
+          </Tooltip>
+        )}
+      </>
+
+      {showBalance && (
         <motion.div
           drag
           dragConstraints={{

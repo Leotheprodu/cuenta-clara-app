@@ -18,7 +18,6 @@ export const Header = () => {
     handleShowBalance,
     showBalance,
   } = useHeader();
-
   return (
     <header className="h-16 flex w-full bg-primario fixed top-0 z-20">
       <div className="flex w-full h-full items-center px-6">

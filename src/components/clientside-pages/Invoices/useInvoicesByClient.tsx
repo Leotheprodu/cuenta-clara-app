@@ -14,7 +14,9 @@ import { useFilteredInvoicesByClient } from "./useFilteredInvoicesByClient";
 import { TransaccionsModal } from "./TransactionsModal";
 import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
+  useNamingPagesRoutes({ internalLink: "client-invoices" });
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
   //  estado para almacenar los datos del cliente
@@ -45,7 +47,6 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
   useEffect(() => {
     $AppState.set({
       ...appState,
-      page: "client-invoices",
       client_id: parseInt(id),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

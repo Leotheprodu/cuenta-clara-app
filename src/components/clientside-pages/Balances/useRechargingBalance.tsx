@@ -13,14 +13,15 @@ import { $balanceRechargeInfo } from "@/stores/business";
 import { whatsappMsgs } from "@/components/Utils/whatsappMsgs";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { $AppState } from "@/stores/generalConfig";
 import { usePaymentMethodsByBusiness } from "@/components/hooks/usePaymentMethodsByBusiness";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const useRechargingBalance = ({
   balanceType,
 }: {
   balanceType: BalanceTypes;
 }) => {
-  const appState = useStore($AppState);
+  useNamingPagesRoutes({ internalLink: "recharges" });
+
   const balanceRechargeInfo = useStore($balanceRechargeInfo);
   const [selectedMethod, setSelectedMethod] = useState<string>("0");
   const [infoSelectedMethod, setInfoSelectedMethod] = useState<PaymentInfo[]>([
@@ -52,13 +53,6 @@ export const useRechargingBalance = ({
         body: bodyRecharge,
       }),
   });
-  useEffect(() => {
-    $AppState.set({
-      ...appState,
-      page: "recharges",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const { paymentNames, payment_methods } = usePaymentMethodsByBusiness({
     businessId: businessConfigInfo.businessId,
   });

@@ -36,7 +36,7 @@ export const LoginForm = () => {
   return (
     <>
       <h1 className="text-3xl text-center font-semibold">Iniciar sesion</h1>
-      <p className="text-center text-gray-400 text-primario mb-4">
+      <p className="text-center  text-primario mb-4">
         Inicia sesion para acceder a tu cuenta
       </p>
       <form onSubmit={handleLogin} className="flex flex-col gap-4">
