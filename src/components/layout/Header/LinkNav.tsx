@@ -1,5 +1,9 @@
 /* import { Link } from "@nextui-org/react"; */
 import { compareRoutes } from "@/components/Utils/comparePaths";
+import { blockedPages } from "@/components/Utils/internalLinks";
+import { $internalLinkName } from "@/stores/generalConfig";
+import { $user } from "@/stores/users";
+import { useStore } from "@nanostores/react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -11,7 +15,16 @@ export const LinkNav = ({
   size = "xs",
   component,
 }: LinkNavProps) => {
-  const { href, icon, text } = link;
+  const { href, icon, text, exclude, isLoggedInRequired } = link;
+  const internalLinkName = useStore($internalLinkName);
+  const user = useStore($user);
+  blockedPages(exclude, internalLinkName);
+  if (!blockedPages(exclude, internalLinkName)) {
+    return null;
+  }
+  if (isLoggedInRequired && !user.isLoggedIn) {
+    return null;
+  }
   return (
     <Link
       className={`${

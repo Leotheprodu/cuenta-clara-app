@@ -2,6 +2,8 @@ interface LinkItemFooter {
   href: string;
   icon: JSX.Element;
   text: string;
+  exclude: string[];
+  isLoggedInRequired: boolean;
 }
 
 interface AddButtonLinkItemProps {

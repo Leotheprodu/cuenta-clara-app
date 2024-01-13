@@ -12,56 +12,28 @@ import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
 import { TransactionsIcon } from "@/icons/TransactionsIcon";
 import { internalLinks } from "@/components/Utils/internalLinks";
+import { useLinksHeader } from "./LinksHeader";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const path = usePathname();
   const user = useStore($user);
+  const { data } = useLinksHeader();
+
   return (
     <PopoverContent className="p-10">
       <nav className="flex flex-col items-start">
-        <MotionAddButtonLink delay={0.1}>
-          <LinkNav
-            link={{
-              href: internalLinks("users"),
-              icon: user.isLoggedIn === true ? <LogoutIcon /> : <LoginIcon />,
-              text:
-                user.isLoggedIn === true ? "Cerrar sesion" : "Iniciar sesion",
-            }}
-            path={path}
-            textColor="primario"
-            flexType="row"
-            size="lg"
-            component="navMenu"
-          />
-        </MotionAddButtonLink>
-        <MotionAddButtonLink delay={0.2}>
-          <LinkNav
-            link={{
-              href: internalLinks("clients"),
-              icon: <ClientsIcon />,
-              text: "Clientes",
-            }}
-            path={path}
-            textColor="primario"
-            flexType="row"
-            size="lg"
-            component="navMenu"
-          />
-        </MotionAddButtonLink>
-        <MotionAddButtonLink delay={0.3}>
-          <LinkNav
-            link={{
-              href: internalLinks("recharges"),
-              icon: <TransactionsIcon />,
-              text: "Recargar saldo",
-            }}
-            path={path}
-            textColor="primario"
-            flexType="row"
-            size="lg"
-            component="navMenu"
-          />
-        </MotionAddButtonLink>
+        {data.map((item: any, index: number) => (
+          <MotionAddButtonLink key={index} delay={item.delay}>
+            <LinkNav
+              link={item.link}
+              path={path}
+              textColor="primario"
+              flexType="row"
+              size="lg"
+              component="navMenu"
+            />
+          </MotionAddButtonLink>
+        ))}
       </nav>
     </PopoverContent>
   );
