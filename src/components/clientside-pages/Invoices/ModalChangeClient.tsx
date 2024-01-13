@@ -13,7 +13,7 @@ import { SearchIcon } from "@/icons/SearchIcon";
 import Link from "next/link";
 import { internalLinks } from "@/components/Utils/internalLinks";
 import { useClientsPage } from "@/components/clientside-pages/Clients/useClientsPage";
-import { $AppState } from "@/stores/generalConfig";
+import { $AppState, $internalLinkName } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { ChangeIcon } from "@/icons/ChangeIcon";
 
@@ -22,6 +22,7 @@ export const ModalChangeClient = () => {
   const { handleSearchClient, searchClient, clientsSearched } =
     useClientsPage();
   const appState = useStore($AppState);
+  const internalLinkName = useStore($internalLinkName);
   return (
     <>
       <Button onPress={onOpen} variant="light" color="primary" className="">
@@ -52,7 +53,9 @@ export const ModalChangeClient = () => {
                     {clientsSearched.length > 0 &&
                       clientsSearched.map((client: ClientProps) => (
                         <Link
-                          href={`${internalLinks(appState.page)}/${client.id}`}
+                          href={`${internalLinks(internalLinkName)}${
+                            client.id
+                          }`}
                           key={client.id}
                           className="flex flex-col gap-2 p-1 bg-slate-100 rounded-md shadow-small hover:shadow-medium duration-100 ease-in cursor-pointer"
                         >

@@ -6,6 +6,7 @@ import { HeaderClients } from "./HeaderClients";
 import { ClientsLetterView } from "./ClientsLetterView";
 import { PageWrapper } from "@/components/Utils/PageWrapper";
 import { DragableClient } from "./DragableClient";
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 export const Clients = () => {
   const {
     handleSearchClient,
@@ -15,7 +16,7 @@ export const Clients = () => {
     searchClient,
     clientsSearched,
   } = useClientsPage();
-
+  useNamingPagesRoutes({ internalLink: "clients" });
   if (isLoading) return <Loading />;
   return (
     <div className=" h-full w-full">

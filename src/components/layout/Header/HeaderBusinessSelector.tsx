@@ -1,7 +1,6 @@
 import { isUserRequired } from "@/components/Utils/internalLinks";
-import { whiteListPaths } from "@/data/constants";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
-import { $AppState } from "@/stores/generalConfig";
+import { $internalLinkName } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 
 import { Select, SelectItem, Tooltip } from "@nextui-org/react";
@@ -20,13 +19,13 @@ export const HeaderBusinessSelector = ({
     handleShowBalance,
     showBalance,
   } = handle;
+  const internalLinkName = useStore($internalLinkName);
   const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
   const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
-  const appState = useStore($AppState);
 
   return (
     <div className="flex gap-1 items-center">
-      {isUserRequired(appState.page) && (
+      {isUserRequired(internalLinkName) && (
         <div className="flex gap-1 items-center">
           <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
           <Select
