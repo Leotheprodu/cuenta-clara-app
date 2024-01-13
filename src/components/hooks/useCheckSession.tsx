@@ -31,7 +31,6 @@ export const useCheckSession = () => {
   useEffect(() => {
     $isCheckingSession.set(isLoading);
   }, [isLoading]);
-  console.log(appState);
   useEffect(() => {
     if (!user.isLoggedIn && !isUserRequired(internalLinkName)) {
       return;

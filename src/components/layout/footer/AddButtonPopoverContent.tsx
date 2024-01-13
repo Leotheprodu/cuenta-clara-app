@@ -1,14 +1,12 @@
 import { PopoverContent } from "@nextui-org/react";
 import { AddButtonLinkItem } from "./AddButtonLinkItem";
-import { PropsAppState } from "@/stores/generalConfig";
 import { useLinksAddButton } from "./useLinksAddButton";
-import { useEffect } from "react";
 import { MotionAddButtonLink } from "./MotionAddButtonLink";
 
 export const AddButtonPopoverContent = ({
-  appState,
+  internalLinkName,
 }: {
-  appState: PropsAppState;
+  internalLinkName: string;
 }) => {
   const { links } = useLinksAddButton();
   return (
@@ -16,7 +14,7 @@ export const AddButtonPopoverContent = ({
       <div>
         {links.map(
           (link, index) =>
-            link.pagesIncluded.includes(appState.page) && (
+            link.pagesIncluded.includes(internalLinkName) && (
               <AddButtonLinkItem key={index} link={link} />
             )
         )}
