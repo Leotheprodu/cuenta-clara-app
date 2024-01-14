@@ -172,6 +172,42 @@ const invoiceDefault: Invoice = {
     },
   ],
 };
+
+const ClientDashboardInitialData: ClientDashboardData = {
+  client: {
+    id: 0,
+    username: "",
+    email: "",
+    cellphone: null,
+    active: false,
+    country: "",
+    user_id: null,
+  },
+  balances: [
+    {
+      id: 0,
+      amount: "0.00",
+      users_business: {
+        id: 0,
+        name: "",
+        user_payment_methods: [
+          {
+            id: 0,
+            payment_method_full_name: "",
+            payment_method_cellphone: "",
+            payment_method_iban: "",
+            payment_method_email: "",
+            payment_method_description: "",
+            payment_method: {
+              id: 0,
+              name: "",
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
 // constante que contiene los datos por defecto de los productos y servicios
 const productsAndServicesDefault: DataProductsAndServicesProps = {
   id: null,
@@ -296,4 +332,5 @@ export {
   balanceTypesDefault,
   typeOfRoles,
   DataRechargesBalanceByClientDefault,
+  ClientDashboardInitialData,
 };
