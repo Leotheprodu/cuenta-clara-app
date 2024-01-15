@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useFiltersClients } from "./useFiltersClients";
 import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
+import { usePinCheckHandle } from "../ClientSideDashboard/usePinCheckHandle";
 export const useClientsPage = () => {
   const [isShowActivoButton, setIsShowActivoButton] = useState(true);
   const [searchClient, setSearchClient] = useState("");
