@@ -3,6 +3,7 @@ import { ClientDashboardInitialData } from "@/data/constants";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { use, useEffect, useState } from "react";
 import { usePinCheckHandle } from "./usePinCheckHandle";
+import toast from "react-hot-toast";
 
 export const useClientSideDashboard = ({ token }: { token: string }) => {
   const [clientInfo, setClientInfo] = useState<ClientDashboardData>(
@@ -21,7 +22,7 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
         },
       }),
   });
-  const { pinCheckHandle } = usePinCheckHandle({ clientHavePin });
+  const { pinCheckHandle } = usePinCheckHandle({ clientHavePin, okPin });
   const { pin } = pinCheckHandle;
   useEffect(() => {
     if (pin[0] !== "" && pin[1] !== "" && pin[2] !== "" && pin[3] !== "") {
@@ -44,6 +45,9 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
       setClientHavePin(true);
     } else if (status === "error" && error.message === "New PIN") {
       setClientHavePin(true);
+    } else if (status === "error" && error.message === "Invalid PIN") {
+      setOkPin(false);
+      toast.error("PIN incorrecto, intente de nuevo");
     }
   }, [status, data, error]);
 
