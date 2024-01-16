@@ -34,12 +34,21 @@ export const useCheckSession = () => {
   useEffect(() => {
     if (!user.isLoggedIn && !isUserRequired(internalLinkName)) {
       return;
-    } else if (!user.isLoggedIn && isUserRequired(internalLinkName)) {
+    } else if (
+      !user.isLoggedIn &&
+      isUserRequired(internalLinkName) &&
+      statusCheckSession !== "pending"
+    ) {
       redirect(internalLinks("users"));
     } else {
       refetchCheckSession();
     }
-  }, [user.isLoggedIn, internalLinkName, refetchCheckSession]);
+  }, [
+    user.isLoggedIn,
+    internalLinkName,
+    refetchCheckSession,
+    statusCheckSession,
+  ]);
   useEffect(() => {
     if (statusCheckSession === "success") {
       if (data.isLoggedIn) {

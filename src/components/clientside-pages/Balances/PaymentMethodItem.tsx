@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { cellphoneFormat } from "@/components/Utils/cellphoneFormat";
 import { ShowQrCode } from "./ShowQrCode";
+import { Button } from "@nextui-org/react";
 export const PaymentMethodItem = ({
   payment_method,
 }: {
@@ -54,7 +55,7 @@ export const PaymentMethodItem = ({
         </motion.div>
       )}
       <div
-        className="flex flex-col justify-center items-center gap-2 bg-primary-50 hover:bg-primary-100 shadow-sm rounded-xl p-2 hover:scale-110 ease-in duration-200 cursor-pointer"
+        className="flex flex-col justify-center items-center gap-2 bg-primary-50 hover:bg-primary-100 shadow-sm rounded-xl p-2 ease-in duration-200 w-full"
         onClick={() => handleSelectedMethodDetail(payment_method)}
       >
         {payment_method.payment_method_full_name && (
@@ -106,13 +107,14 @@ export const PaymentMethodItem = ({
           </p>
         )}
         <div>
-          <button
+          <Button
             type="button"
-            className="bg-slate-100 text-slate-600 p-1 rounded-md shadow-sm hover:bg-slate-200"
+            color={showBigQR ? "danger" : "primary"}
+            variant="ghost"
             onClick={handleShowBigQR}
           >
             {showBigQR ? "Ocultar QR" : "Ver QR"}
-          </button>
+          </Button>
         </div>
       </div>
     </>

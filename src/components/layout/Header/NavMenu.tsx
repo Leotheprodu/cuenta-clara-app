@@ -69,6 +69,7 @@ export const NavMenu = () => {
         onClose={handlePopoverOnClose}
         backdrop="opaque"
         isOpen={isOpen}
+        onClick={handlePopoverOnClose}
       >
         <NavMenuPopoverTrigger handle={{ handlePopoverTriggerClick }} />
         <AddButtonPopoverContent handle={{ handlePopoverTriggerClick }} />

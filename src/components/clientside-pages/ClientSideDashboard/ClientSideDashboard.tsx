@@ -5,8 +5,7 @@ import { useClientSideDashboard } from "./useClientSideDashboard";
 import { PinCheckClientDashboard } from "./PinCheckClientDashboard";
 import { moneyFormat } from "@/components/Utils/dataFormat";
 import { PaymentMethodItem } from "../Balances/PaymentMethodItem";
-import { TransactionsIcon } from "@/icons/TransactionsIcon";
-import { Button } from "@nextui-org/react";
+import { PaymentMethodsModal } from "./PaymentMethodsModal";
 export const ClientSideDashboard = ({ token }: { token: string }) => {
   useNamingPagesRoutes({ internalLink: "ClientSideDashboard" });
   const { clientInfo, okPin, pinCheckHandle } = useClientSideDashboard({
@@ -29,28 +28,12 @@ export const ClientSideDashboard = ({ token }: { token: string }) => {
             <h2 className="text-slate-600">
               Saldo: {moneyFormat(parseFloat(balance.amount))}
             </h2>
-            {/* <div className="flex flex-wrap gap-3 mt-2">
-              {balance.users_business.user_payment_methods.map(
-                (payment_method) => (
-                  <PaymentMethodItem
-                    key={payment_method.id}
-                    //@ts-ignore
-                    payment_method={payment_method}
-                  />
-                )
-              )}
-            </div> */}
           </div>
-          <Button
-            variant="light"
-            color="primary"
-            className="flex justify-center items-center gap-0 p-0 m-0"
-          >
-            <span className="text-secundario">
-              {balance.users_business.user_payment_methods.length}
-            </span>
-            <TransactionsIcon className="text-terciario h-1/2" />
-          </Button>
+          <div className="mt-3">
+            <PaymentMethodsModal
+              paymentMethods={balance.users_business.user_payment_methods}
+            />
+          </div>
         </div>
       ))}
     </section>

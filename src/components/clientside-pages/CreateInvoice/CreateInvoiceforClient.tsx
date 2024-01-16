@@ -76,66 +76,65 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
               </Button>
             </div>
             <CreateInvoiceDetail handle={{ createInvoiceDetail }} />
-            <div
-              className={`grid grid-cols-2 ${
-                payNow && payment_method_id !== `${paymentMethod.cash.id}`
-                  ? "grid-rows-2"
-                  : "grid-rows-1"
-              }`}
-            >
-              <div className="flex flex-col mt-3 gap-3 col-span-1 row-span-1">
-                <Checkbox
-                  isSelected={payNow}
-                  onValueChange={handlePayNow}
-                  size="lg"
-                >
-                  Paga ahora
-                </Checkbox>
-                {payNow && (
-                  <Select
-                    label="metodo de pago"
-                    placeholder="selecciona el methodo de pago"
-                    aria-label="metodo de pago"
-                    variant="flat"
-                    color="primary"
-                    onChange={handleSelectPaymentMethod}
-                    selectedKeys={[payment_method_id]}
+            <div className="flex flex-col">
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col mt-3 gap-3 w-1/2">
+                  <Checkbox
+                    isSelected={payNow}
+                    onValueChange={handlePayNow}
+                    size="lg"
                   >
-                    {paymentNames.map((method) => (
-                      <SelectItem
-                        className="uppercase"
-                        key={method.id}
-                        value={method.id}
-                      >
-                        {method.name}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                )}
-                {payNow && payment_method_id === `${paymentMethod.cash.id}` && (
-                  <ChangeCalculator total={total} />
-                )}
-              </div>
-              <div className="flex flex-col col-span-1 row-span-1">
-                <div className=" text-secundario rounded-xl flex justify-end mt-4 ">
-                  <p className="bg-gris rounded-lg p-3 shadow-md">
-                    Total:{" "}
-                    <span className="text-primario">{moneyFormat(total)}</span>
-                  </p>
+                    Paga ahora
+                  </Checkbox>
+                  {payNow && (
+                    <Select
+                      label="metodo de pago"
+                      placeholder="selecciona el methodo de pago"
+                      aria-label="metodo de pago"
+                      variant="flat"
+                      color="primary"
+                      onChange={handleSelectPaymentMethod}
+                      selectedKeys={[payment_method_id]}
+                    >
+                      {paymentNames.map((method) => (
+                        <SelectItem
+                          className="uppercase"
+                          key={method.id}
+                          value={method.id}
+                        >
+                          {method.name}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                  {payNow &&
+                    payment_method_id === `${paymentMethod.cash.id}` && (
+                      <ChangeCalculator total={total} />
+                    )}
                 </div>
-                <div className="flex justify-end mt-8 gap-4">
-                  <Button
-                    color="primary"
-                    variant="shadow"
-                    className="uppercase"
-                    type="submit"
-                  >
-                    {" "}
-                    Crear Factura
-                  </Button>
+                <div className="flex flex-col w-1/2">
+                  <div className=" text-secundario rounded-xl flex justify-end mt-4 ">
+                    <p className="bg-gris rounded-lg p-3 shadow-md">
+                      Total:{" "}
+                      <span className="text-primario">
+                        {moneyFormat(total)}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex justify-end mt-8 gap-4">
+                    <Button
+                      color="primary"
+                      variant="shadow"
+                      className="uppercase"
+                      type="submit"
+                    >
+                      {" "}
+                      Crear Factura
+                    </Button>
+                  </div>
                 </div>
               </div>
-              <div className="col-span-2 row-span-1 flex flex-wrap gap-4 justify-center items-center bg-slate-100 mt-4 shadow-sm rounded-lg">
+              <div className="flex flex-wrap gap-4 justify-center items-center bg-slate-100 mt-4 shadow-sm rounded-lg">
                 {payNow &&
                   payment_method_id !== `${paymentMethod.cash.id}` &&
                   infoSelectedMethod.map((payment_method) => (
