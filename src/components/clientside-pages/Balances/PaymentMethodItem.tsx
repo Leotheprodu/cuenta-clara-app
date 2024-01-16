@@ -46,11 +46,13 @@ export const PaymentMethodItem = ({
             right: maxWidth,
             bottom: maxHeight,
           }}
-          className="fixed left-2 top-[8rem] z-40 bg-blanco p-4 shadow-sm rounded-md"
+          layoutId={`qr-${payment_method.id}`}
+          className="fixed left-2 top-[8rem] z-40 bg-blanco p-4 shadow-sm rounded-md border-1 border-primario/25"
         >
           <ShowQrCode
             value={payment_method.payment_method_cellphone}
             title={cellphoneFormat(payment_method.payment_method_cellphone)}
+            handleShowBigQR={handleShowBigQR}
           />
         </motion.div>
       )}
@@ -58,6 +60,9 @@ export const PaymentMethodItem = ({
         className="flex flex-col justify-center items-center gap-2 bg-primary-50 hover:bg-primary-100 shadow-sm rounded-xl p-2 ease-in duration-200 w-full"
         onClick={() => handleSelectedMethodDetail(payment_method)}
       >
+        <h3 className="text-center font-bold text-secundario uppercase">
+          {payment_method.payment_method.name}
+        </h3>
         {payment_method.payment_method_full_name && (
           <p className="">Nombre: {payment_method.payment_method_full_name}</p>
         )}
@@ -106,7 +111,7 @@ export const PaymentMethodItem = ({
             descripcion: {payment_method.payment_method_description}
           </p>
         )}
-        <div>
+        <motion.div layoutId={`qr-${payment_method.id}`}>
           <Button
             type="button"
             color={showBigQR ? "danger" : "primary"}
@@ -115,7 +120,7 @@ export const PaymentMethodItem = ({
           >
             {showBigQR ? "Ocultar QR" : "Ver QR"}
           </Button>
-        </div>
+        </motion.div>
       </div>
     </>
   );

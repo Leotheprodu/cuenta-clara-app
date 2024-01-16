@@ -9,6 +9,8 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { PaymentMethodItem } from "../Balances/PaymentMethodItem";
+import { compareByKey } from "@/components/Utils/CompareStringForSort";
+import { paymentMethod } from "@/data/constants";
 
 export const PaymentMethodsModal = ({
   paymentMethods,
@@ -16,7 +18,9 @@ export const PaymentMethodsModal = ({
   paymentMethods: ClientDashboardUserPaymentMethod[];
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const orderedPaymentMethods = paymentMethods.sort(
+    compareByKey<ClientDashboardUserPaymentMethod>("payment_method.name")
+  );
   return (
     <>
       <Button
@@ -27,7 +31,9 @@ export const PaymentMethodsModal = ({
         onPress={onOpen}
       >
         <TransactionsIcon className="text-terciario h-1/2" />
-        <span className="font-bold mr-1">{paymentMethods.length}</span>
+        <span className="font-bold mr-1">
+          {paymentMethods.length - 1 < 0 ? 0 : paymentMethods.length - 1}
+        </span>
         formas de pago
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -39,13 +45,17 @@ export const PaymentMethodsModal = ({
               </ModalHeader>
               <ModalBody>
                 <div className="flex flex-wrap gap-3 mt-2 justify-center items-center">
-                  {paymentMethods.map((payment_method) => (
-                    <PaymentMethodItem
-                      key={payment_method.id}
-                      //@ts-ignore
-                      payment_method={payment_method}
-                    />
-                  ))}
+                  {orderedPaymentMethods.map(
+                    (method) =>
+                      method.payment_method.name !==
+                        paymentMethod.cash.name && (
+                        <PaymentMethodItem
+                          key={method.id}
+                          //@ts-ignore
+                          payment_method={method}
+                        />
+                      )
+                  )}
                 </div>
               </ModalBody>
               <ModalFooter>
