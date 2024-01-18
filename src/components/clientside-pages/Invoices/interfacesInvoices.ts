@@ -40,6 +40,8 @@ interface Transaction {
 interface Products_and_service {
   id: number;
   name: string;
+  unit: string;
+  type: string;
 }
 type InvoiceStatus = "paid" | "pending" | "cancelled" | "inReview";
 type paymentStatus = "completed" | "pending" | "cancelled";

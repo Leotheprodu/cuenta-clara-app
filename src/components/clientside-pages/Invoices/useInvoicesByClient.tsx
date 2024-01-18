@@ -15,6 +15,7 @@ import { TransaccionsModal } from "./TransactionsModal";
 import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
+import { InvoiceDetailsModal } from "./InvoiceDetailsModal";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   useNamingPagesRoutes({ internalLink: "client-invoices" });
   //state para almacenar las facturas
@@ -119,6 +120,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
                 </button>
               </Tooltip>
             )}
+            <InvoiceDetailsModal handleInvoiceDetails={{ invoice }} />
             <TransaccionsModal
               handleTransactions={{ invoice, refetchInvoices }}
             />

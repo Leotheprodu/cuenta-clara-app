@@ -5,7 +5,7 @@ import paymentMethodsJson from "./payment-methods.json";
 /* ----------------------------------Basic Constants------------------------------------ */
 const appName = "Yehu";
 const appDescription = `${appName}, Tu negocio en tus manos`;
-const billingPrice = 0.04;
+const billingPrice = 0.035;
 const businessConfigInfo = {
   userId: 9,
   businessId: 1,
@@ -152,6 +152,8 @@ const invoiceDefault: Invoice = {
       products_and_service: {
         id: 0,
         name: "",
+        unit: "",
+        type: "",
       },
     },
   ],
