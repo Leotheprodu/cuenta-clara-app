@@ -22,6 +22,17 @@ const countryCodes: {
 }[] = countryCodesJson;
 const paymentMethods: { id: number; name: string }[] = paymentMethodsJson;
 /* ----------------------------------Dictionaries---------------------------------------------- */
+type TypeOfProductsAndServices = {
+  [key: string]: {
+    name: string;
+    nombre: string;
+  };
+};
+const typeOfProductsAndServices: TypeOfProductsAndServices = {
+  product: { name: "Product", nombre: "Producto" },
+  service: { name: "Service", nombre: "Servicio" },
+};
+
 const typeOfRoles = {
   admin: {
     id: 1,
@@ -335,4 +346,5 @@ export {
   typeOfRoles,
   DataRechargesBalanceByClientDefault,
   ClientDashboardInitialData,
+  typeOfProductsAndServices,
 };

@@ -1,4 +1,5 @@
 "use client";
+import { invoicesStatus } from "@/data/constants";
 import { HeaderCreateInvoice } from "../CreateInvoice/HeaderCreateInvoice";
 import { useInvoicesByClient } from "./useInvoicesByClient";
 import {
@@ -30,8 +31,19 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
             ))}
           </TableHeader>
           <TableBody emptyContent={"No hay facturas para mostrar"}>
-            {invoices.map((row: any, index: number) => (
-              <TableRow key={index}>
+            {invoices.map((row: Invoice, index: number) => (
+              <TableRow
+                className={
+                  row.status === invoicesStatus.pending
+                    ? "bg-danger-50"
+                    : row.status === invoicesStatus.cancelled
+                    ? "opacity-50"
+                    : row.status === invoicesStatus.inProcess
+                    ? "text-success-500 font-bold"
+                    : ""
+                }
+                key={index}
+              >
                 {(columnKey) => (
                   <TableCell>{renderCell(row, columnKey, index)}</TableCell>
                 )}

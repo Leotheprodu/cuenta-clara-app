@@ -4,7 +4,7 @@ import {
   formatNumber,
   moneyFormat,
 } from "@/components/Utils/dataFormat";
-import { paymentStatus } from "@/data/constants";
+import { paymentStatus, typeOfProductsAndServices } from "@/data/constants";
 import { productAndServiceCodeClean } from "@/components/Utils/productAndServiceCodeClean";
 
 export const useInvoiceDetailsModal = ({ invoice }: { invoice: Invoice }) => {
@@ -62,7 +62,11 @@ export const useInvoiceDetailsModal = ({ invoice }: { invoice: Invoice }) => {
         return (
           <div className="flex justify-center">
             <small className="text-center">
-              {invoiceDetail.products_and_service.type}
+              {
+                typeOfProductsAndServices[
+                  invoiceDetail.products_and_service.type
+                ].nombre
+              }
             </small>
           </div>
         );

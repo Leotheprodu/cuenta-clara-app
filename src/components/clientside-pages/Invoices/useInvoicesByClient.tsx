@@ -16,10 +16,13 @@ import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 import { InvoiceDetailsModal } from "./InvoiceDetailsModal";
+import { dateNow } from "@/components/Utils/handleDate";
 export const useInvoicesByClient = ({ id }: { id: string }) => {
   useNamingPagesRoutes({ internalLink: "client-invoices" });
   //state para almacenar las facturas
   const [invoices, setInvoices] = useState<Invoice[]>([invoiceDefault]);
+  const [invoiceToRemove, setInvoiceToRemove] =
+    useState<Invoice>(invoiceDefault);
   //  estado para almacenar los datos del cliente
   const [client, setClient] = useState({ username: "", active: 0 });
   const appState = useStore($AppState);
@@ -45,6 +48,29 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       }),
     retry: 2,
   });
+
+  const {
+    status: statusDeleteInvoice,
+    mutate,
+    error,
+    isPending,
+  } = useMutation({
+    mutationKey: ["delete-invoice"],
+    mutationFn: async () =>
+      await fetchAPI({
+        url: `invoices/delete/${invoiceToRemove.id}`,
+        method: "DELETE",
+      }),
+  });
+  useEffect(() => {
+    if (statusDeleteInvoice === "success") {
+      toast.success("Factura eliminada con exito");
+      refetchInvoices();
+    } else if (statusDeleteInvoice === "error") {
+      toast.error("Error al eliminar la factura");
+    }
+  }, [statusDeleteInvoice, refetchInvoices]);
+
   useEffect(() => {
     $AppState.set({
       ...appState,
@@ -70,22 +96,8 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
 
   const handleRemoveInvoice = (e: any, index: any) => {
     e.preventDefault();
-    const invoiceId = invoices[index].id;
-    console.log(invoiceId);
-
-    const removeInvoice = async () => {
-      /* const res = await fetchAPI({
-        url: `invoices/${invoiceId}`,
-        method: "DELETE",
-      });
-      if (res.status === 200) {
-        refetchInvoices();
-      } else {
-        toast.error("Error al eliminar la factura");
-      } */
-      toast.success("Factura eliminada");
-    };
-    removeInvoice();
+    setInvoiceToRemove(invoices[index]);
+    mutate();
   };
   const columnNames: ColumnNamesProps[] = [
     { key: "id", name: "Id" },
@@ -110,20 +122,23 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
-            {invoice.status === invoicesStatus.pending && (
-              <Tooltip color="danger" content="Cancelar Factura">
-                <button
-                  onClick={(e) => handleRemoveInvoice(e, index)}
-                  className="text-lg text-danger cursor-pointer active:opacity-50"
-                >
-                  <DeleteRowIcon />
-                </button>
-              </Tooltip>
+            {invoice.status === invoicesStatus.pending &&
+              formatDate(invoice.date) === formatDate(dateNow()) && (
+                <Tooltip color="danger" content="Cancelar Factura">
+                  <button
+                    onClick={(e) => handleRemoveInvoice(e, index)}
+                    className="text-lg text-danger cursor-pointer active:opacity-50"
+                  >
+                    <DeleteRowIcon />
+                  </button>
+                </Tooltip>
+              )}
+            {invoice.status !== invoicesStatus.cancelled && (
+              <TransaccionsModal
+                handleTransactions={{ invoice, refetchInvoices }}
+              />
             )}
             <InvoiceDetailsModal handleInvoiceDetails={{ invoice }} />
-            <TransaccionsModal
-              handleTransactions={{ invoice, refetchInvoices }}
-            />
           </div>
         );
       default:
