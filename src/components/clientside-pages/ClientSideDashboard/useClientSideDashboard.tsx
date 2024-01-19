@@ -15,7 +15,7 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
     mutationKey: ["dashboard-client"],
     mutationFn: async () =>
       await fetchAPI({
-        url: `clients/dashboardInfo/${token}`,
+        url: `clients/dashboard-info/${token}`,
         method: "POST",
         body: {
           pin: pin.join(""),
