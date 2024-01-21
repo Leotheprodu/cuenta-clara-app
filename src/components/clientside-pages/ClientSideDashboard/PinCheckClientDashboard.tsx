@@ -6,12 +6,12 @@ export const PinCheckClientDashboard = ({ pinCheckHandle }: any) => {
   return (
     <section>
       <div className="flex flex-col justify-end items-center gap-1 mb-5">
-        <h1 className="text-slate-700">
+        <h1 className="text-slate-700 text-center">
           {clientHavePin
             ? "Ingrese su PIN para acceder"
             : "Ingresa Un Nuevo PIN"}
         </h1>
-        <p className="text-slate-500 text-xs">
+        <p className="text-slate-500 text-xs text-center">
           {clientHavePin
             ? "Este PIN es el que creaste la primera vez que ingresaste, puedes solicitar resetear el pin contactando a tu proveedor"
             : "Recuerda este PIN para acceder a tu cuenta cada vez que lo necesites"}

@@ -39,3 +39,10 @@ interface ClientDashboardData {
   client: ClientDashboardUser;
   balances: ClientDashboardBalance[];
 }
+
+interface TransactionsInvoiceDashboard {
+  id: number;
+  status: string;
+  total_amount: number;
+  transactions: Transaction[];
+}

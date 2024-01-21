@@ -54,6 +54,7 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
   return {
     clientInfo,
     okPin,
+    pin,
     pinCheckHandle: {
       ...pinCheckHandle,
       clientHavePin,

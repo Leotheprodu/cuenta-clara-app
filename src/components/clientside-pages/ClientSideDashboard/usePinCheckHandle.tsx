@@ -35,7 +35,7 @@ export const usePinCheckHandle = ({
       pin[2] !== "" &&
       pin[3] !== ""
     ) {
-      setPin(["", "", "", ""]);
+      /* setPin(["", "", "", ""]); */
       (inputRefs[0].current as HTMLInputElement).focus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

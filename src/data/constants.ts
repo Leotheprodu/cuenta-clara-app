@@ -185,7 +185,27 @@ const invoiceDefault: Invoice = {
     },
   ],
 };
-
+const transactionsInvoiceDashboard: TransactionsInvoiceDashboard = {
+  id: 0,
+  status: "pending",
+  total_amount: 0.0,
+  transactions: [
+    {
+      id: "",
+      amount: "0.00",
+      description: "",
+      date: "",
+      payment_method: {
+        id: 0,
+        name: "",
+      },
+      payment_status: {
+        id: 0,
+        name: "pending",
+      },
+    },
+  ],
+};
 const ClientDashboardInitialData: ClientDashboardData = {
   client: {
     id: 0,
@@ -347,4 +367,5 @@ export {
   DataRechargesBalanceByClientDefault,
   ClientDashboardInitialData,
   typeOfProductsAndServices,
+  transactionsInvoiceDashboard,
 };
