@@ -237,6 +237,13 @@ const ClientDashboardInitialData: ClientDashboardData = {
             },
           },
         ],
+        user: {
+          id: 0,
+          username: "",
+          email: "",
+          cellphone: "",
+          country: "",
+        },
       },
     },
   ],

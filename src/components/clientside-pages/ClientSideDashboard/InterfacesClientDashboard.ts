@@ -17,15 +17,22 @@ interface ClientDashboardUsersBusiness {
   id: number;
   name: string;
   user_payment_methods: ClientDashboardUserPaymentMethod[];
+  user: ClientDashboardUser;
 }
-
+interface ClientDashboardUser {
+  id: number;
+  username: string;
+  email: string;
+  cellphone: string;
+  country: string;
+}
 interface ClientDashboardBalance {
   id: number;
   amount: string;
   users_business: ClientDashboardUsersBusiness;
 }
 
-interface ClientDashboardUser {
+interface ClientDashboardClient {
   id: number;
   username: string;
   email: string;
@@ -36,7 +43,7 @@ interface ClientDashboardUser {
 }
 
 interface ClientDashboardData {
-  client: ClientDashboardUser;
+  client: ClientDashboardClient;
   balances: ClientDashboardBalance[];
 }
 

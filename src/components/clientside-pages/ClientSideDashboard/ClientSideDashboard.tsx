@@ -27,6 +27,7 @@ export const ClientSideDashboard = ({ token }: { token: string }) => {
     token,
     pin,
     okPin,
+    clientInfo,
   });
   const { invoices, columnNames, renderCell, selectedBusinessId } =
     invoicesByToken;

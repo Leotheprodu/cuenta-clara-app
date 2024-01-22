@@ -6,15 +6,20 @@ import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { TransactionsDashboardModal } from "./TransactionsDashboardModal";
 import { InvoiceDetailsDashboardModal } from "./InvoiceDetailsDashboardModal";
+import Link from "next/link";
+import { whatsappMsgs } from "@/components/Utils/whatsappMsgs";
+import { SendIcon } from "@/icons/SendIcon";
 
 export const useInvoicesDasboard = ({
   token,
   pin,
   okPin,
+  clientInfo,
 }: {
   token: string;
   pin: string[];
   okPin: boolean;
+  clientInfo: ClientDashboardData;
 }) => {
   const [invoices, setInvoices] = useState([]);
   const [isFilteredList, setIsFilteredList] = useState<boolean>(false);
@@ -66,6 +71,18 @@ export const useInvoicesDasboard = ({
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
+            <Tooltip content="Enviar mensaje de whatsapp" placement="top">
+              <Link
+                target="_blank"
+                href={`${whatsappMsgs(
+                  "ContactClientInvoice",
+                  clientInfo,
+                  invoice
+                )}`}
+              >
+                <SendIcon />
+              </Link>
+            </Tooltip>
             {invoice.status !== invoicesStatus.cancelled && (
               <TransactionsDashboardModal
                 invoice_id={invoice.id}

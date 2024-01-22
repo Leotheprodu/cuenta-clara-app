@@ -1,5 +1,9 @@
 interface whatsappMsgsNames {
-  name: "justContact" | "sendDashboardLink" | "sendRechargeBalanceComprobant";
+  name:
+    | "justContact"
+    | "sendDashboardLink"
+    | "sendRechargeBalanceComprobant"
+    | "ContactClientInvoice";
 }
 type UseLetterViewProps = {
   username: string;
