@@ -118,6 +118,7 @@ const clientDefault: ClientProps = {
   user_id: null,
   active: true,
   country: "Costa Rica",
+  address: "",
   createdAt: "",
   updatedAt: "",
   parent_user_id: 0,

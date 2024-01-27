@@ -18,6 +18,7 @@ interface ClientProps {
   parent_user_id: number | null;
   active: boolean;
   country: string;
+  address: string;
   detail: string;
   createdAt: string;
   updatedAt: string;
