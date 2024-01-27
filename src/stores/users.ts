@@ -21,6 +21,7 @@ interface UserMessage {
 interface Client {
   id: number;
   parent_user_id: number;
+  active: boolean;
   balances: Balance[];
 }
 interface UserData {
@@ -50,6 +51,7 @@ export const $user = atom<UserProps>({
     {
       id: 0,
       parent_user_id: 0,
+      active: true,
       balances: [
         {
           id: 0,
