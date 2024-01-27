@@ -21,9 +21,7 @@ export const LoginForm = () => {
     isPending,
   } = useLoginForm({ email: "", password: "" });
 
-  const { showLoading, LoadingElement } = useLoadingByCriticProcess({
-    label: "Cargando...",
-  });
+  const { showLoading, LoadingElement } = useLoadingByCriticProcess();
 
   if (showLoading) {
     return LoadingElement;

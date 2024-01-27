@@ -5,15 +5,10 @@ import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { redirect } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
-import {
-  $AppState,
-  $internalLinkName,
-  $isCheckingSession,
-} from "@/stores/generalConfig";
+import { $GlobalLoading, $internalLinkName } from "@/stores/generalConfig";
 import { internalLinks, isUserRequired } from "../Utils/internalLinks";
 export const useCheckSession = () => {
   const user = useStore($user);
-  const appState = useStore($AppState);
   const internalLinkName = useStore($internalLinkName);
   const {
     status: statusCheckSession,
@@ -29,7 +24,7 @@ export const useCheckSession = () => {
     /*  refetchOnWindowFocus: false, */
   });
   useEffect(() => {
-    $isCheckingSession.set(isLoading);
+    $GlobalLoading.set({ isLoading, message: "Actualizando sesión..." });
   }, [isLoading]);
   useEffect(() => {
     if (!user.isLoggedIn && !isUserRequired(internalLinkName)) {

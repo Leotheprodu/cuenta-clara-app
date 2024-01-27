@@ -8,10 +8,17 @@ interface AppStateProps {
   client_id: number;
   client_name: string;
 }
-
+interface GlobalLoadingProps {
+  isLoading: boolean;
+  message: string;
+}
+export type PropsGlobalLoading = GlobalLoadingProps;
 export type PropsLetterView = LetterViewClientProps;
 export type PropsAppState = AppStateProps;
-export const $isCheckingSession = atom(false);
+export const $GlobalLoading = atom<PropsGlobalLoading>({
+  isLoading: false,
+  message: "",
+});
 export const $LetterViewClient = atom<PropsLetterView>({
   letter: "",
   isClientView: false,

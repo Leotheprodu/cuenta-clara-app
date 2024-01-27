@@ -38,7 +38,7 @@ export const HeaderBusinessSelector = ({
             classNames={{
               label: "invisible lg:visible",
             }}
-            className="min-w-[10rem]"
+            className="min-w-[13rem]"
             selectedKeys={value}
             onSelectionChange={handleSelectionBusiness}
             onChange={mutateFunction}
@@ -50,15 +50,14 @@ export const HeaderBusinessSelector = ({
             )}
           </Select>
           {!showBalance && (
-            <Tooltip content="Ver saldo">
-              <motion.button
-                onClick={handleShowBalance}
-                layoutId="balance"
-                className="flex items-center justify-center h-8 w-8 rounded-md bg-primario/50"
-              >
-                <AddTransactionIcon className="text-cuaternario/50 h-6" />
-              </motion.button>
-            </Tooltip>
+            <motion.button
+              onClick={handleShowBalance}
+              layoutId="balance"
+              className="flex items-center justify-center h-8 rounded-md bg-primario/50"
+            >
+              <AddTransactionIcon className="text-cuaternario/50 h-6" />
+              <span className="text-sm text-slate-400">Saldo</span>
+            </motion.button>
           )}
         </div>
       )}

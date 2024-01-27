@@ -3,12 +3,12 @@ import { PageWrapper } from "@/components/Utils/PageWrapper";
 
 export default function Sesion() {
   return (
-    <PageWrapper>
-      <main className="flex min-h-screen justify-center items-center mt-16 p-2">
-        <section>
+    <main className="flex min-h-screen justify-center items-center mt-16 p-2">
+      <section>
+        <PageWrapper>
           <LoginForm />
-        </section>
-      </main>
-    </PageWrapper>
+        </PageWrapper>
+      </section>
+    </main>
   );
 }

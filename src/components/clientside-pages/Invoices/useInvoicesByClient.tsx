@@ -30,6 +30,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
   const {
     status: statusInvoices,
     data: dataInvoices,
+    isLoading: isLoadingInvoices,
     refetch: refetchInvoices,
   } = useQuery({
     queryKey: ["user-invoices"],
@@ -152,6 +153,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       columnNames,
       renderCell,
       client,
+      isLoadingInvoices,
     },
   };
 };

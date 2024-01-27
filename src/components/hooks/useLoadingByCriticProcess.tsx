@@ -1,13 +1,13 @@
 import { useStore } from "@nanostores/react";
-import { $isCheckingSession } from "@/stores/generalConfig";
 import Loading from "@/app/loading";
+import { $GlobalLoading } from "@/stores/generalConfig";
 /* import { useEffect, useState } from "react"; */
 
-export const useLoadingByCriticProcess = ({ label }: { label: string }) => {
-  const isCheckingSession = useStore($isCheckingSession);
+export const useLoadingByCriticProcess = () => {
+  const { isLoading, message } = useStore($GlobalLoading);
 
   return {
-    showLoading: isCheckingSession,
-    LoadingElement: <Loading label={label} />,
+    showLoading: isLoading,
+    LoadingElement: <Loading label={message} />,
   };
 };
