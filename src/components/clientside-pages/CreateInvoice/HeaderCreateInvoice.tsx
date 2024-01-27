@@ -3,6 +3,7 @@ import { ModalChangeClient } from "@/components/clientside-pages/Invoices/ModalC
 import { $selectedBusiness } from "@/stores/business";
 import { $AppState } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
+import { Spinner } from "@nextui-org/react";
 import { useEffect } from "react";
 
 export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
@@ -21,12 +22,18 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   return (
     <div className="bg-secundario z-10 w-full h-[3rem] flex gap-2 justify-center items-center fixed left-0">
       {showChangeClient && <ModalChangeClient />}
-      <p className=" text-sm sm:text-base text-center text-blanco">
-        Cliente:{" "}
-        <span className="uppercase text-terciario">
-          {isLoading ? <Loading /> : username}
-        </span>
-      </p>
+      <div className="flex text-sm sm:text-base text-blanco gap-1">
+        <p>Cliente:</p>
+        {isLoading ? (
+          <Spinner size="sm" color="warning" />
+        ) : username === "" ? (
+          <span className="uppercase text-terciario">
+            Selecciona un Cliente
+          </span>
+        ) : (
+          <span className="uppercase text-terciario">{username}</span>
+        )}
+      </div>
 
       {selectedBusiness && (
         <p className="text-sm sm:text-base text-center text-blanco">
