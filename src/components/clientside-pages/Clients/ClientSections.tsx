@@ -9,7 +9,7 @@ import { EditIcon } from "@/icons/EditIcon";
 import { InfoIcon } from "@/icons/infoIcon";
 import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
-import { Tooltip } from "@nextui-org/react";
+import { Spinner, Tooltip } from "@nextui-org/react";
 import Link from "next/link";
 import { useState } from "react";
 export const ClientSections = ({
@@ -21,7 +21,17 @@ export const ClientSections = ({
   const roles = user?.roles;
   const [clickLink, setClickLink] = useState(false);
   if (clickLink) {
-    return <Loading label="Un momento" />;
+    return (
+      <div className="flex items-center justify-center">
+        <Spinner
+          size="md"
+          color="secondary"
+          label="Cargando Sección..."
+          labelColor="secondary"
+          className="my-0 mx-auto"
+        />
+      </div>
+    );
   }
   return (
     <div className="flex justify-center w-full gap-8 text-xs p-2">

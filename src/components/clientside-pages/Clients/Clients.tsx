@@ -1,23 +1,25 @@
 "use client";
 import { ClientCard } from "./ClientCard";
 import { useClientsPage } from "./useClientsPage";
-import Loading from "@/app/loading";
 import { HeaderClients } from "./HeaderClients";
 import { ClientsLetterView } from "./ClientsLetterView";
 import { PageWrapper } from "@/components/Utils/PageWrapper";
 import { DragableClient } from "./DragableClient";
 import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
+import { useLoadingByCriticProcess } from "@/components/hooks/useLoadingByCriticProcess";
 export const Clients = () => {
   const {
     handleSearchClient,
     HanldeIsSelected,
     isShowActivoButton,
-    isLoading,
     searchClient,
     clientsSearched,
   } = useClientsPage();
   useNamingPagesRoutes({ internalLink: "clients" });
-  if (isLoading) return <Loading />;
+  const { showLoading, LoadingElement } = useLoadingByCriticProcess();
+
+  showLoading && <div className="my-0 mx-auto">{LoadingElement}</div>;
+
   return (
     <div className=" h-full w-full">
       <HeaderClients

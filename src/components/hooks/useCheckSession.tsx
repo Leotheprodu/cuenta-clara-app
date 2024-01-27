@@ -32,11 +32,9 @@ export const useCheckSession = () => {
     } else if (
       !user.isLoggedIn &&
       isUserRequired(internalLinkName) &&
-      statusCheckSession !== "pending"
+      statusCheckSession === "error"
     ) {
       redirect(internalLinks("users"));
-    } else {
-      refetchCheckSession();
     }
   }, [
     user.isLoggedIn,

@@ -1,9 +1,9 @@
 import React from "react";
 import { Spinner } from "@nextui-org/spinner";
 
-export default function Loading({ label = "Cargando" }: { label?: string }) {
+export default function Loading({ label = "Cargando..." }: { label?: string }) {
   return (
-    <div className=" flex items-center justify-center">
+    <div className=" flex items-center justify-center w-full h-screen">
       <Spinner
         size="lg"
         color="primary"

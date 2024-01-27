@@ -16,8 +16,8 @@ export type PropsGlobalLoading = GlobalLoadingProps;
 export type PropsLetterView = LetterViewClientProps;
 export type PropsAppState = AppStateProps;
 export const $GlobalLoading = atom<PropsGlobalLoading>({
-  isLoading: false,
-  message: "",
+  isLoading: true,
+  message: "Cargando...",
 });
 export const $LetterViewClient = atom<PropsLetterView>({
   letter: "",
