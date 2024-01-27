@@ -66,7 +66,7 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
   useEffect(() => {
     if (status === "success") {
       toast.success(`${form.username} ha sido creado`);
-      redirect(internalLinks("add-invoice"));
+      redirect(internalLinks("clients"));
     } else if (status === "error") {
       toast.error(error?.message || "");
     }

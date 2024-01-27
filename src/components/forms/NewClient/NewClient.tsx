@@ -7,6 +7,7 @@ import { BusinessList } from "./BusinessList";
 import { SelectCountry } from "./SelectCountry";
 import { InputDetail } from "./InputDetail";
 import { useRouter } from "next/navigation";
+import { InputAddress } from "./InputAddress";
 
 export const NewClient = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ export const NewClient = () => {
     handleCreateClient,
     handleOnChange,
     username,
+    address,
     detail,
     email,
     cellphone,
@@ -35,6 +37,7 @@ export const NewClient = () => {
     id_business: [],
     country: "",
     detail: "",
+    address: "",
   });
   return (
     <form
@@ -61,6 +64,7 @@ export const NewClient = () => {
       <InputCellphone handle={{ cellphone, handleOnChange, codeSelected }} />
       <InputEmail handle={{ email, handleOnChange }} />
 
+      <InputAddress handle={{ address, handleOnChange }} />
       <InputDetail handle={{ detail, handleOnChange }} />
       <div className="flex gap-2 mt-3">
         <Button

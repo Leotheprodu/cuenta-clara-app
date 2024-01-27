@@ -9,6 +9,7 @@ import { BusinessList } from "../NewClient/BusinessList";
 import { SelectCountry } from "../NewClient/SelectCountry";
 import { InputDetail } from "../NewClient/InputDetail";
 import { useRouter } from "next/navigation";
+import { InputAddress } from "../NewClient/InputAddress";
 
 export const UpdateClient = ({ id }: { id: string }) => {
   const router = useRouter();
@@ -19,6 +20,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
     handleNewToken,
     username,
     detail,
+    address,
     email,
     cellphone,
     token,
@@ -37,6 +39,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
       username: "",
       email: "",
       cellphone: "",
+      address: "",
       token: "",
       detail: "",
       id_business: [],
@@ -70,6 +73,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
       <InputEmail handle={{ email, handleOnChange }} />
 
       <InputCellphone handle={{ cellphone, handleOnChange, codeSelected }} />
+      <InputAddress handle={{ address, handleOnChange }} />
       <InputDetail handle={{ detail, handleOnChange }} />
 
       <InputChangeToken handle={{ token, handleOnChange, handleNewToken }} />
