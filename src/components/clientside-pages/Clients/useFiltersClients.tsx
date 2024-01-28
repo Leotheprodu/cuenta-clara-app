@@ -56,7 +56,15 @@ export const useFiltersClients = ({
           client.email && client.email.toLowerCase().includes(searchLower);
         const detailMatch =
           client.detail && client.detail.toLowerCase().includes(searchLower);
-        return usernameMatch || cellphoneMatch || emailMatch || detailMatch;
+        const addressMatch =
+          client.address && client.address.toLowerCase().includes(searchLower);
+        return (
+          usernameMatch ||
+          cellphoneMatch ||
+          emailMatch ||
+          detailMatch ||
+          addressMatch
+        );
       });
 
       if (filtered.length === 0) {
