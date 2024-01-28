@@ -5,7 +5,7 @@ export const InputCellphoneSignUpForm = ({ handle }: InputCellphoneProps) => {
   const { handleOnChange, cellphone, codeSelected } = handle;
   return (
     <div className="w-full relative">
-      <span className="absolute text-sm text-negro/70 left-[0] bottom-[1.65rem] z-10">
+      <span className="absolute text-sm text-gray-500 left-[0] bottom-[2.1rem] z-10">
         {"+" + codeSelected}
       </span>
 

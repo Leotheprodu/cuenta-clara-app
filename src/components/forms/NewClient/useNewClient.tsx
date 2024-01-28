@@ -56,7 +56,7 @@ export const useNewClient = (formInit: FormValuesNewClient) => {
         method: "POST",
         body: {
           ...form,
-          token: `${form.username.slice(0, 2)}-${idGenerator()}`,
+          token: `${form.username.toLowerCase().slice(0, 2)}-${idGenerator()}`,
           cellphone: form.cellphone ? form.cellphone.replace(/\D/g, "") : null,
           country: Array.from(countrySelected)[0],
         },

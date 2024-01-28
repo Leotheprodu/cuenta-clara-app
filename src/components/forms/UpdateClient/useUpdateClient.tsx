@@ -129,7 +129,7 @@ export const useUpdateClient = (
   const handleNewToken = () => {
     setForm({
       ...form,
-      token: `${form.username.slice(0, 2)}-${idGenerator()}`,
+      token: `${form.username.toLowerCase().slice(0, 2)}-${idGenerator()}`,
     });
   };
   const handleUpdateClient = async (e: React.FormEvent<HTMLFormElement>) => {

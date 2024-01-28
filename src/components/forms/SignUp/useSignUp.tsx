@@ -17,7 +17,7 @@ export const useSignUp = (formInit: any) => {
     new Set(["Costa Rica"])
   );
   const [isregistered, setIsRegistered] = useState(false);
-  const { status, data, mutate, error, isPending } = useMutation({
+  const { status, mutate, error, isPending } = useMutation({
     mutationKey: ["signUp"],
     mutationFn: async () =>
       await fetchAPI({

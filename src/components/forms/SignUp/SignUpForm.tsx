@@ -7,12 +7,14 @@ import { useSignUp } from "./useSignUp";
 import { InputUsernameSignUpForm } from "./InputUsernameSignUpForm";
 import { InputCellphoneSignUpForm } from "./InputCellphoneSignUpForm";
 import { SelectCountry } from "../NewClient/SelectCountry";
+import { InputAddress } from "../NewClient/InputAddress";
 
 export const SignUpForm = () => {
   const {
     handleSignUp,
     handleOnClear,
     email,
+    address,
     password,
     password2,
     cellphone,
@@ -34,13 +36,14 @@ export const SignUpForm = () => {
     password2: "",
     cellphone: "",
     country: "",
+    address: "",
   });
 
   if (isregistered) {
     return (
       <div>
         <h1 className="text-3xl text-center font-semibold">Registro exitoso</h1>
-        <p className="text-center text-gray-400 text-primario mb-4">
+        <p className="text-center text-primario mb-4">
           Por favor verifique su correo electrónico
         </p>
       </div>
@@ -58,6 +61,7 @@ export const SignUpForm = () => {
       <InputCellphoneSignUpForm
         handle={{ handleOnChange, cellphone, codeSelected }}
       />
+      <InputAddress handle={{ handleOnChange, address }} />
       <InputPasswordLoginForm
         handle={{
           handleOnChange,
