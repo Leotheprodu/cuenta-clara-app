@@ -3,6 +3,7 @@ interface InputEmailLoginFormProps {
     handleOnClear: (name: string) => void;
     email: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    noFormValue?: noFormValueProps;
   };
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Textarea } from "@nextui-org/react";
 
 export const InputAddress = ({ handle }: InputAddressProps) => {
-  const { handleOnChange, address } = handle;
+  const { handleOnChange, address, noFormValue } = handle;
   return (
     <Textarea
       type="text"
@@ -12,6 +12,8 @@ export const InputAddress = ({ handle }: InputAddressProps) => {
       value={address}
       onChange={handleOnChange}
       name="address"
+      required
+      isInvalid={noFormValue.address}
     ></Textarea>
   );
 };

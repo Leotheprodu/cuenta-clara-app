@@ -25,42 +25,41 @@ export const HeaderBusinessSelector = ({
 
   return (
     <div className="flex gap-1 items-center">
-      {isUserRequired(internalLinkName) && (
-        <div className="flex gap-1 items-center">
-          <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
-          <Select
-            size="sm"
-            variant="flat"
-            color="primary"
-            isDisabled={isLoadingBusiness || isPending}
-            items={business}
-            label="Selecciona tu negocio"
-            classNames={{
-              label: "invisible lg:visible",
-            }}
-            className="min-w-[13rem]"
-            selectedKeys={value}
-            onSelectionChange={handleSelectionBusiness}
-            onChange={mutateFunction}
-          >
-            {(business) => (
-              <SelectItem key={business.id} value={business.id}>
-                {business.name}
-              </SelectItem>
-            )}
-          </Select>
-          {!showBalance && (
-            <motion.button
-              onClick={handleShowBalance}
-              layoutId="balance"
-              className="flex items-center justify-center h-8 rounded-md bg-primario/50"
-            >
-              <AddTransactionIcon className="text-cuaternario/50 h-6" />
-              <span className="text-sm text-slate-400">Saldo</span>
-            </motion.button>
+      <div className="flex gap-1 items-center">
+        <span className="w-[1px] mx-1 bg-terciario h-8 rounded-md"></span>
+        <Select
+          size="sm"
+          variant="flat"
+          color="primary"
+          isLoading={isLoadingBusiness || isPending}
+          isDisabled={!isUserRequired(internalLinkName)}
+          items={business}
+          label="Selecciona tu negocio"
+          classNames={{
+            label: "invisible lg:visible",
+          }}
+          className="min-w-[13rem]"
+          selectedKeys={value}
+          onSelectionChange={handleSelectionBusiness}
+          onChange={mutateFunction}
+        >
+          {(business) => (
+            <SelectItem key={business.id} value={business.id}>
+              {business.name}
+            </SelectItem>
           )}
-        </div>
-      )}
+        </Select>
+        {!showBalance && (
+          <motion.button
+            onClick={handleShowBalance}
+            layoutId="balance"
+            className="flex items-center justify-center h-8 rounded-md bg-primario/50"
+          >
+            <AddTransactionIcon className="text-cuaternario/50 h-6" />
+            <span className="text-sm text-slate-400">Saldo</span>
+          </motion.button>
+        )}
+      </div>
 
       {showBalance && (
         <motion.div

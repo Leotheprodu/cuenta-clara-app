@@ -30,6 +30,7 @@ interface InputAddressProps {
   handle: {
     address: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    noFormValue: noFormValueProps;
   };
 }
 interface InputCellphoneProps {
@@ -37,6 +38,7 @@ interface InputCellphoneProps {
     cellphone: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     codeSelected?: string;
+    noFormValue: noFormValueProps;
   };
 }
 interface BusinessListProps {

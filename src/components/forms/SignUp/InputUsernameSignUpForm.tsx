@@ -5,7 +5,7 @@ import { Input } from "@nextui-org/react";
 export const InputUsernameSignUpForm = ({
   handle,
 }: InputEmailSignUpFormProps) => {
-  const { handleOnClear, username, handleOnChange } = handle;
+  const { handleOnClear, username, handleOnChange, noFormValue } = handle;
   return (
     <div>
       <Input
@@ -22,6 +22,8 @@ export const InputUsernameSignUpForm = ({
         value={username}
         onChange={handleOnChange}
         name="username"
+        required
+        isInvalid={noFormValue.username}
       />
     </div>
   );

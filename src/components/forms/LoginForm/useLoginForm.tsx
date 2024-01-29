@@ -33,7 +33,7 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
       toast.error(error?.message || "");
       error?.message === "Contraseña Incorrecta" && setIsInvalidPass(true);
     }
-    return () => toast.dismiss();
+    /* return () => toast.dismiss(); */
   }, [data, error, status]);
 
   const toggleVisibility = () => setIsVisible(!isVisible);

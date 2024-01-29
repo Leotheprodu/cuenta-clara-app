@@ -35,12 +35,14 @@ export const useCheckSession = () => {
       statusCheckSession === "error"
     ) {
       redirect(internalLinks("users"));
+    } else if (!user.isLoggedIn && isUserRequired(internalLinkName)) {
+      refetchCheckSession();
     }
   }, [
     user.isLoggedIn,
     internalLinkName,
-    refetchCheckSession,
     statusCheckSession,
+    refetchCheckSession,
   ]);
   useEffect(() => {
     if (statusCheckSession === "success") {

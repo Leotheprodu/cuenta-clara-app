@@ -12,6 +12,12 @@ export const useSignUp = (formInit: any) => {
   const [form, setForm] = useState(formInit);
   const [isVisible, setIsVisible] = useState(false);
   const [isInvalidPass, setIsInvalidPass] = useState(false);
+  const [noFormValue, setNoFormValue] = useState({
+    username: false,
+    email: false,
+    cellphone: false,
+    address: false,
+  });
   const [codeSelected, setCodeSelected] = useState("506");
   const [countrySelected, setCountrySelected] = useState(
     new Set(["Costa Rica"])
@@ -44,15 +50,26 @@ export const useSignUp = (formInit: any) => {
     /* return () => toast.dismiss(); */
   }, [error, status, form]);
   useEffect(() => {
-    if (form.password2 !== form.password) {
-      setIsInvalidPass(true);
-      toast.error("Las contraseñas no coinciden");
-    } else {
+    if (isInvalidPass) {
       setIsInvalidPass(false);
     }
-    return () => toast.dismiss();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.password2]);
+  }, [form.password2, form.password]);
+  useEffect(() => {
+    if (noFormValue.address && form.address) {
+      setNoFormValue({ ...noFormValue, address: false });
+    }
+    if (noFormValue.cellphone && form.cellphone) {
+      setNoFormValue({ ...noFormValue, cellphone: false });
+    }
+    if (noFormValue.email && form.email) {
+      setNoFormValue({ ...noFormValue, email: false });
+    }
+    if (noFormValue.username && form.username) {
+      setNoFormValue({ ...noFormValue, username: false });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form]);
   useEffect(() => {
     const code = countryCodes.find(
       (item) => item.country === Array.from(countrySelected)[0]
@@ -64,6 +81,27 @@ export const useSignUp = (formInit: any) => {
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (form.password2 !== form.password) {
+      setIsInvalidPass(true);
+      toast.error("Las contraseñas no coinciden");
+      return;
+    } else if (!form.username) {
+      setNoFormValue({ ...noFormValue, username: true });
+      toast.error("El nombre de usuario es requerido");
+      return;
+    } else if (!form.email) {
+      setNoFormValue({ ...noFormValue, email: true });
+      toast.error("El correo electrónico es requerido");
+      return;
+    } else if (!form.cellphone) {
+      setNoFormValue({ ...noFormValue, cellphone: true });
+      toast.error("El número de teléfono es requerido");
+      return;
+    } else if (!form.address) {
+      setNoFormValue({ ...noFormValue, address: true });
+      toast.error("La dirección es requerida");
+      return;
+    }
     mutate();
   };
   const handleCountrySelectionChange = (keys: any) => {
@@ -84,5 +122,6 @@ export const useSignUp = (formInit: any) => {
     countrySelected,
     countryCodes,
     isregistered,
+    noFormValue,
   };
 };

@@ -8,16 +8,17 @@ import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
 import { moneyFormat } from "@/components/Utils/dataFormat";
-import { $AppState } from "@/stores/generalConfig";
+import { $internalLinkName } from "@/stores/generalConfig";
+import { isUserRequired } from "@/components/Utils/internalLinks";
 
 export const useHeader = () => {
   const { statusCheckSession } = useCheckSession();
   const path = usePathname();
-  const appState = useStore($AppState);
   const user = useStore($user);
   const [business, setBusiness] = useState([BusinessDefault]);
   const [value, setValue] = useState(new Set(["0"]));
   const [showBalance, setShowBalance] = useState(false);
+  const internalLinkName = useStore($internalLinkName);
   const {
     status: statusBusiness,
     data: dataBusiness,
@@ -32,16 +33,23 @@ export const useHeader = () => {
     retry: 2,
   });
   useEffect(() => {
-    if (user.isLoggedIn && business[0].id === 0) {
+    console.log(business);
+  }, [business]);
+  useEffect(() => {
+    if (
+      user.isLoggedIn &&
+      isUserRequired(internalLinkName) &&
+      business[0].id === 0
+    ) {
       refetch();
     }
-  }, [user.isLoggedIn, business, refetch]);
+  }, [user.isLoggedIn, business, refetch, internalLinkName]);
 
   useEffect(() => {
     if (!user.isLoggedIn) {
       return;
     }
-    if (statusBusiness === "success" && statusCheckSession === "success") {
+    if (statusBusiness === "success") {
       setBusiness(dataBusiness);
       const defaultBussines = dataBusiness.filter((item: any) => {
         if (item.default) {
@@ -55,8 +63,6 @@ export const useHeader = () => {
           name: defaultBussines[0].name,
         });
       }
-    } else {
-      refetch();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
