@@ -30,7 +30,7 @@ interface InputAddressProps {
   handle: {
     address: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    noFormValue: noFormValueProps;
+    noFormValue?: noFormValueProps;
   };
 }
 interface InputCellphoneProps {

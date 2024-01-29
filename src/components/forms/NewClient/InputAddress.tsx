@@ -13,7 +13,7 @@ export const InputAddress = ({ handle }: InputAddressProps) => {
       onChange={handleOnChange}
       name="address"
       required
-      isInvalid={noFormValue.address}
+      isInvalid={noFormValue?.address}
     ></Textarea>
   );
 };
