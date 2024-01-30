@@ -1,8 +1,8 @@
 import { isUserRequired } from "@/components/Utils/internalLinks";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { $internalLinkName } from "@/stores/generalConfig";
+import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
-
 import { Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { motion } from "framer-motion";
 export const HeaderBusinessSelector = ({
@@ -20,6 +20,7 @@ export const HeaderBusinessSelector = ({
     showBalance,
   } = handle;
   const internalLinkName = useStore($internalLinkName);
+  const user = useStore($user);
   const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
   const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
 
@@ -49,7 +50,7 @@ export const HeaderBusinessSelector = ({
             </SelectItem>
           )}
         </Select>
-        {!showBalance && (
+        {!showBalance && user.isLoggedIn && (
           <motion.button
             onClick={handleShowBalance}
             layoutId="balance"
@@ -61,7 +62,7 @@ export const HeaderBusinessSelector = ({
         )}
       </div>
 
-      {showBalance && (
+      {showBalance && user.isLoggedIn && (
         <motion.div
           drag
           dragConstraints={{

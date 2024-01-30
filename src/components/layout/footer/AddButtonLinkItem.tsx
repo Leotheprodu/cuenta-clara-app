@@ -7,8 +7,14 @@ export const AddButtonLinkItem = ({ link }: AddButtonLinkItemProps) => {
   const [click, setClick] = useState(false);
   if (click) {
     return (
-      <div className="flex items-center justify-center">
-        <Spinner size="lg" color="primary" className="my-0 mx-auto" />
+      <div className="flex items-center justify-center mx-1 my-2">
+        <Spinner
+          size="lg"
+          color="primary"
+          className="my-0 mx-auto text-center text-xs"
+          label={`...${title}`}
+          labelColor="primary"
+        />
       </div>
     );
   }
@@ -16,10 +22,14 @@ export const AddButtonLinkItem = ({ link }: AddButtonLinkItemProps) => {
   return (
     <Link onClick={() => setClick(true)} className="" href={href}>
       <MotionAddButtonLink delay={delay}>
-        {icon}
-        <div>
-          <h2 className="text-small font-bold uppercase">{title}</h2>
-          <p className="text-tiny">{description}</p>
+        <div className="flex items-center mx-1 my-2 gap-2 hover:bg-secundario/5 duration-300 ease-in">
+          <div className="text-terciario">{icon}</div>
+          <div>
+            <h2 className="text-small font-bold uppercase text-primario">
+              {title}
+            </h2>
+            <p className="text-tiny text-secundario">{description}</p>
+          </div>
         </div>
       </MotionAddButtonLink>
     </Link>

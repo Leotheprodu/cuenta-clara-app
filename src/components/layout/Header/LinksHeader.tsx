@@ -15,8 +15,9 @@ export const useLinksHeader = () => {
         href: "",
         icon: <LogoutIcon />,
         text: "",
-        exclude: [""],
+        exclude: [],
         isLoggedInRequired: true,
+        page: "",
       },
 
       delay: 0,
@@ -32,6 +33,7 @@ export const useLinksHeader = () => {
           text: user.isLoggedIn === true ? "Cerrar sesion" : "Iniciar sesion",
           exclude: [],
           isLoggedInRequired: false,
+          page: "users",
         },
 
         delay: 0.1,
@@ -43,6 +45,7 @@ export const useLinksHeader = () => {
           text: "Clientes",
           exclude: [],
           isLoggedInRequired: true,
+          page: "clients",
         },
 
         delay: 0.2,
@@ -54,6 +57,7 @@ export const useLinksHeader = () => {
           text: "Recargar saldo",
           exclude: [],
           isLoggedInRequired: true,
+          page: "recharges",
         },
         delay: 0.3,
       },

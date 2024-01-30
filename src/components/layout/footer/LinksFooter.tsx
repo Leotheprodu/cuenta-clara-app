@@ -9,6 +9,7 @@ export const LinksFooter = [
     text: "Crear",
     exclude: ["ClientSideDashboard"],
     isLoggedInRequired: true,
+    page: "add-invoice",
   },
   {
     href: internalLinks("clients"),
@@ -16,5 +17,6 @@ export const LinksFooter = [
     text: "Clientes",
     exclude: ["ClientSideDashboard"],
     isLoggedInRequired: true,
+    page: "clients",
   },
 ];

@@ -136,7 +136,7 @@ const clientDefault: ClientProps = {
 };
 const BusinessDefault = {
   id: 0,
-  name: "Su negocio",
+  name: "Registrate para usar",
   default: false,
   user_id: 0,
 };

@@ -4,6 +4,7 @@ interface LinkItemFooter {
   text: string;
   exclude: string[];
   isLoggedInRequired: boolean;
+  page: string;
 }
 
 interface AddButtonLinkItemProps {

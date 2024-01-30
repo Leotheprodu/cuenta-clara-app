@@ -6,3 +6,7 @@ interface LinkNavProps {
   size?: "xs" | "sm" | "md" | "lg";
   component: string;
 }
+interface LinksHeaderDataProps {
+  link: LinkItemFooter;
+  delay: number;
+}

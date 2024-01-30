@@ -7,25 +7,48 @@ import { usePathname } from "next/navigation";
 import { ClientsIcon } from "@/icons/ClientsIcon";
 import { Button, Popover, PopoverTrigger } from "@nextui-org/react";
 import { PopoverContent } from "@nextui-org/react";
-import { LogoutIcon } from "@/icons/LogoutIcon";
-import { LoginIcon } from "@/icons/LoginIcon";
 import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
-import { TransactionsIcon } from "@/icons/TransactionsIcon";
-import { internalLinks } from "@/components/Utils/internalLinks";
+import { blockedPages, internalLinks } from "@/components/Utils/internalLinks";
 import { useLinksHeader } from "./LinksHeader";
+import { $internalLinkName } from "@/stores/generalConfig";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const path = usePathname();
   const user = useStore($user);
   const { data } = useLinksHeader();
-
+  const internalLinkName = useStore($internalLinkName);
   return (
     <PopoverContent className="p-10">
       <nav className="flex flex-col items-start">
-        {data.map((item: any, index: number) => (
-          <MotionAddButtonLink key={index} delay={item.delay}>
+        {data.map((item: LinksHeaderDataProps, index: number) => (
+          <MotionAddButtonLink
+            disabled={!blockedPages(item.link.exclude, internalLinkName)}
+            key={index}
+            delay={item.delay}
+          >
+            <div className="flex items-center">
+              <LinkNav
+                link={item.link}
+                path={path}
+                textColor="primario"
+                flexType="row"
+                size="lg"
+                component="navMenu"
+              />
+            </div>
+          </MotionAddButtonLink>
+        ))}
+        {!user.isLoggedIn && (
+          <MotionAddButtonLink delay={0.2}>
             <LinkNav
-              link={item.link}
+              link={{
+                href: internalLinks("sign-up"),
+                icon: <ClientsIcon />,
+                text: "Registrarse",
+                exclude: ["sign-up"],
+                isLoggedInRequired: false,
+                page: "sign-up",
+              }}
               path={path}
               textColor="primario"
               flexType="row"
@@ -33,7 +56,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
               component="navMenu"
             />
           </MotionAddButtonLink>
-        ))}
+        )}
       </nav>
     </PopoverContent>
   );
