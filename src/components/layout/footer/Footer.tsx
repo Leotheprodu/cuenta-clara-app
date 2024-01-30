@@ -14,7 +14,7 @@ export const Footer = () => {
           <div className="flex gap-28 justify-center items-center w-full h-full  ">
             <AddButton />
             {LinksFooter.map((link, index) => (
-              <LinkNav key={index} link={link} path={path} component="footer" />
+              <LinkNav key={index} link={link} component="footer" />
             ))}
           </div>
         </footer>

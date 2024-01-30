@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export const LinkNav = ({
   link,
-  path,
   textColor = "blanco",
   flexType = "col",
   size = "xs",
@@ -28,7 +27,11 @@ export const LinkNav = ({
     <Link
       className={`${
         component === "footer" && "w-[3rem]"
-      } relative text-${size} text-${textColor} flex flex-${flexType} justify-center items-center hover:bg-secundario/5 rounded-lg p-1 duration-300 ease-in ${
+      } relative text-${size} text-${textColor} flex flex-${flexType} justify-center items-center ${
+        component === "footer" ? "hover:bg-secundario/50" : "hover:bg-slate-100"
+      } ${
+        page === internalLinkName && component !== "footer" && "bg-slate-50"
+      } rounded-lg p-1 duration-300 ease-in ${
         flexType === "row" ? "gap-4" : "gap-0"
       }`}
       href={href}
@@ -37,7 +40,7 @@ export const LinkNav = ({
         <>
           <motion.span
             layoutId={component}
-            className="absolute bottom-0 block h-[1px] w-full bg-gradient-to-l from-terciario to-secundario rounded-lg"
+            className="absolute bottom-0 block h-[1px] w-full bg-slate-200 rounded-lg"
           />
         </>
       )}

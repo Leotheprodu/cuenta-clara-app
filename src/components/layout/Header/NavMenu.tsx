@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useStore } from "@nanostores/react";
 import { $user } from "@/stores/users";
 import { LinkNav } from "./LinkNav";
-import { usePathname } from "next/navigation";
 import { ClientsIcon } from "@/icons/ClientsIcon";
 import { Button, Popover, PopoverTrigger } from "@nextui-org/react";
 import { PopoverContent } from "@nextui-org/react";
@@ -13,7 +12,6 @@ import { useLinksHeader } from "./LinksHeader";
 import { $internalLinkName } from "@/stores/generalConfig";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
-  const path = usePathname();
   const user = useStore($user);
   const { data } = useLinksHeader();
   const internalLinkName = useStore($internalLinkName);
@@ -29,7 +27,6 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
             <div className="flex items-center">
               <LinkNav
                 link={item.link}
-                path={path}
                 textColor="primario"
                 flexType="row"
                 size="lg"
@@ -49,7 +46,6 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
                 isLoggedInRequired: false,
                 page: "sign-up",
               }}
-              path={path}
               textColor="primario"
               flexType="row"
               size="lg"
