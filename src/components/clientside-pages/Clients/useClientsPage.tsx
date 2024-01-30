@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchAPI } from "../../Utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useFiltersClients } from "./useFiltersClients";
-import { $AppState } from "@/stores/generalConfig";
+import { $AppState, $GlobalLoading } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { usePinCheckHandle } from "../ClientSideDashboard/usePinCheckHandle";
 export const useClientsPage = () => {
@@ -23,6 +23,9 @@ export const useClientsPage = () => {
       $AppState.set({ ...appState, isCreatedInvoice: false });
     }
   }, [refetch, appState]);
+  useEffect(() => {
+    $GlobalLoading.set({ isLoading, message: "Cargando Clientes..." });
+  }, [isLoading]);
   const { clientsSearched } = useFiltersClients({
     data,
     status,

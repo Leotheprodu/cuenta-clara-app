@@ -18,7 +18,9 @@ export const Clients = () => {
   useNamingPagesRoutes({ internalLink: "clients" });
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
 
-  showLoading && <div className="my-0 mx-auto">{LoadingElement}</div>;
+  if (showLoading) {
+    return LoadingElement;
+  }
 
   return (
     <div className=" h-full w-full">
@@ -35,12 +37,14 @@ export const Clients = () => {
         {clientsSearched.length > 0 &&
           clientsSearched.map((client: ClientProps) => (
             <PageWrapper key={client.id}>
-              <DragableClient id={client.id}>
-                <ClientCard
-                  isShowActivoButton={isShowActivoButton}
-                  client={client}
-                />
-              </DragableClient>
+              {client.id !== 0 && (
+                <DragableClient id={client.id}>
+                  <ClientCard
+                    isShowActivoButton={isShowActivoButton}
+                    client={client}
+                  />
+                </DragableClient>
+              )}
             </PageWrapper>
           ))}
         <ClientsLetterView />
