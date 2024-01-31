@@ -17,7 +17,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
   const internalLinkName = useStore($internalLinkName);
   return (
     <PopoverContent className="p-10">
-      <nav className="flex flex-col items-start">
+      <nav className="flex flex-col items-start gap-1">
         {data.map((item: LinksHeaderDataProps, index: number) => (
           <MotionAddButtonLink
             disabled={!blockedPages(item.link.exclude, internalLinkName)}
@@ -42,7 +42,7 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
                 href: internalLinks("sign-up"),
                 icon: <ClientsIcon />,
                 text: "Registrarse",
-                exclude: ["sign-up"],
+                exclude: [],
                 isLoggedInRequired: false,
                 page: "sign-up",
               }}

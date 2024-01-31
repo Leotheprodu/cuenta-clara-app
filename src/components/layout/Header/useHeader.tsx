@@ -8,7 +8,7 @@ import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
 import { moneyFormat } from "@/components/Utils/dataFormat";
-import { $internalLinkName } from "@/stores/generalConfig";
+import { $GlobalLoading, $internalLinkName } from "@/stores/generalConfig";
 import { isUserRequired } from "@/components/Utils/internalLinks";
 
 export const useHeader = () => {
@@ -33,8 +33,8 @@ export const useHeader = () => {
     retry: 2,
   });
   useEffect(() => {
-    console.log(business);
-  }, [business]);
+    $GlobalLoading.set({ isLoading: false, message: `pagina cargada` });
+  }, [internalLinkName]);
   useEffect(() => {
     if (
       user.isLoggedIn &&
