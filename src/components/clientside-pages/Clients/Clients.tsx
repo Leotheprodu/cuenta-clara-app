@@ -38,12 +38,12 @@ export const Clients = () => {
           clientsSearched.map((client: ClientProps) => (
             <PageWrapper key={client.id}>
               {client.id !== 0 && (
-                <DragableClient id={client.id}>
+                <div className=" flex flex-col z-0 rounded-xl border-1 bg-blanco bg-opacity-50 border-secundario/10 p-2 w-[20rem] shadow-sm shadow-cuaternario/40">
                   <ClientCard
                     isShowActivoButton={isShowActivoButton}
                     client={client}
                   />
-                </DragableClient>
+                </div>
               )}
             </PageWrapper>
           ))}

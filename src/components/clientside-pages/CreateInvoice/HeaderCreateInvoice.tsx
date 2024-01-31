@@ -20,7 +20,7 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   }, [username]);
 
   return (
-    <div className="bg-secundario z-10 w-full h-[3rem] flex gap-2 justify-center items-center fixed left-0">
+    <div className="bg-secundario z-10 w-screen h-[3rem] flex gap-2 justify-center items-center fixed left-0">
       {showChangeClient && <ModalChangeClient />}
       <div className="flex text-sm sm:text-base text-blanco gap-1">
         <p>Cliente:</p>

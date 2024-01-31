@@ -25,8 +25,8 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
         }}
       />
       <PageWrapper>
-        <section className="mt-[3rem] pt-3">
-          <Table isStriped aria-label="Detalle de Factura">
+        <section className="mt-[3rem] pt-3 w-screen">
+          <Table isStriped aria-label="Detalle de Factura w-screen">
             <TableHeader>
               {columnNames.map((column: ColumnNamesProps) => (
                 <TableColumn className="text-center" key={column.key}>

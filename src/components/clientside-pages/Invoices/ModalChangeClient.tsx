@@ -25,7 +25,7 @@ export const ModalChangeClient = () => {
   const internalLinkName = useStore($internalLinkName);
   return (
     <>
-      <Button onPress={onOpen} variant="light" color="primary" className="">
+      <Button onPress={onOpen} variant="light" color="primary">
         <ChangeIcon className="text-terciario" />
       </Button>
 

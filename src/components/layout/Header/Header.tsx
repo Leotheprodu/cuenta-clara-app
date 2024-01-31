@@ -19,8 +19,8 @@ export const Header = () => {
     showBalance,
   } = useHeader();
   return (
-    <header className="h-16 flex w-full bg-primario fixed top-0 z-20">
-      <div className="flex w-full h-full items-center px-6">
+    <header className="h-16 flex w-screen bg-primario fixed top-0 z-20">
+      <div className="flex w-full h-full items-center px-1 sm:px-6">
         <Link href="/">
           <h1 className="gradient-text font-sans uppercase">{appName}</h1>
         </Link>

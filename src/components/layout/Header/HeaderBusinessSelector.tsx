@@ -57,7 +57,9 @@ export const HeaderBusinessSelector = ({
             className="flex items-center justify-center h-8 rounded-md bg-primario/50"
           >
             <AddTransactionIcon className="text-cuaternario/50 h-6" />
-            <span className="text-sm text-slate-400">Saldo</span>
+            <span className="text-sm text-slate-400 hidden sm:block">
+              Saldo
+            </span>
           </motion.button>
         )}
       </div>

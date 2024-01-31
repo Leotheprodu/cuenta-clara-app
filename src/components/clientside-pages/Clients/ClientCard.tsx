@@ -8,10 +8,14 @@ import { useLetterView } from "./useLetterView";
 import { useStore } from "@nanostores/react";
 import { $selectedBusiness } from "@/stores/business";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   const { username, id, detail = "", balances } = client;
   const businessId = useStore($selectedBusiness);
   const [balance, setBalance] = useState<number>(0);
+  const handleInfoClick = () => {
+    toast.success(detail);
+  };
   useEffect(() => {
     if (balances.length > 0) {
       const balancesByBusiness = balances?.filter(
@@ -43,9 +47,12 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
                 placement="bottom"
                 color="primary"
               >
-                <div className="text-secundario/50 absolute right-1 top-1">
+                <button
+                  onClick={handleInfoClick}
+                  className="text-secundario/50 absolute right-1 top-1"
+                >
                   <InfoIcon className="w-6 h-6" />
-                </div>
+                </button>
               </Tooltip>
             </>
           )}

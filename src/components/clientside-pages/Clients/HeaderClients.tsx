@@ -18,7 +18,8 @@ export const HeaderClients = ({ handle }: HeaderClientsProps) => {
         type="text"
         size="sm"
         placeholder="Buscar cliente"
-        className="sm:w-1/4 shadow-sm"
+        className="w-[20rem]"
+        classNames={{ inputWrapper: "h-[2rem]" }}
         startContent={
           <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
         }
