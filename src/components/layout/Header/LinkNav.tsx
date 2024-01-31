@@ -65,12 +65,9 @@ export const LinkNav = ({
         </>
       )}
 
-      <motion.div
-        animate={{ scale: [1, 1.1, 1] }}
-        className={`${component !== "footer" && "text-terciario"}`}
-      >
+      <div className={`${component !== "footer" && "text-terciario"}`}>
         {showSpinner ? <Spinner /> : icon}
-      </motion.div>
+      </div>
       <p className={`${component !== "footer" && "text-primario"}`}>{text}</p>
     </Link>
   );

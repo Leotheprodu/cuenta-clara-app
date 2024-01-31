@@ -4,10 +4,10 @@ export const TransactionsIcon = (props: React.SVGProps<SVGSVGElement>) => (
     aria-hidden="true"
     fill="none"
     focusable="false"
-    height="2rem"
+    height="1.5rem"
     role="presentation"
     viewBox="0 -960 960 960"
-    width="2rem"
+    width="1.5rem"
     {...props}
   >
     <path

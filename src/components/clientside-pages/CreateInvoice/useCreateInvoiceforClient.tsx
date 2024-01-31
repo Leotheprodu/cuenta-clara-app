@@ -242,6 +242,19 @@ export const useCreateInvoiceforClient = ({ id }: { id: string }) => {
   //funcion para crear la factura interactuando con el servidor
   const handleCreateInvoice = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (total === 0) {
+      return toast.error(
+        "La factura debe tener al menos un producto o servicio"
+      );
+    }
+    if (invoiceDetails.length === 0) {
+      return toast.error(
+        "La factura debe tener al menos un producto o servicio"
+      );
+    }
+    if (payNow && user.balance < total * billingPrice) {
+      return toast.error("No tienes suficiente saldo para pagar la factura");
+    }
     mutateCreateInvoice();
   };
 
