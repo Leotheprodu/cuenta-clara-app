@@ -30,7 +30,7 @@ interface PaymentStatus {
 }
 
 interface Transaction {
-  id: string;
+  id: number;
   amount: string;
   description: string;
   date: string;
