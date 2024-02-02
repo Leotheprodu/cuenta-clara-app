@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   const {
-    username = "Selecciona un Cliente",
+    username = "Seleccione",
     showChangeClient = true,
     isLoading = false,
   } = handle;
@@ -27,9 +27,7 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
         {isLoading ? (
           <Spinner size="sm" color="warning" />
         ) : username === "" ? (
-          <span className="uppercase text-terciario">
-            Selecciona un Cliente
-          </span>
+          <span className="uppercase text-terciario">Seleccione</span>
         ) : (
           <span className="uppercase text-terciario">{username}</span>
         )}

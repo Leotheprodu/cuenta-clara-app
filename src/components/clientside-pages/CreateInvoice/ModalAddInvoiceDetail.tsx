@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { ModalSearchProductsAndServices } from "./ModalSearchProductsAndServices";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 
 export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
   const { createInvoiceDetail } = handle;
@@ -93,6 +94,25 @@ export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
                   onFocus={handleFocus}
                   tabIndex={2}
                 />
+                <Input
+                  className="h-12"
+                  ref={quantityInput}
+                  isRequired
+                  variant="underlined"
+                  label="Precio"
+                  type="number"
+                  inputMode="numeric"
+                  step={0.01}
+                  name="unit_price"
+                  value={
+                    formDataDetail.unit_price === 0
+                      ? ""
+                      : formDataDetail.unit_price.toString()
+                  }
+                  onChange={handleOnChangeDetail}
+                  onFocus={handleFocus}
+                  tabIndex={3}
+                />
                 <Textarea
                   className=""
                   isRequired
@@ -104,6 +124,14 @@ export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
                   onFocus={handleFocus}
                   tabIndex={4}
                 />
+              </div>
+              <div className="flex justify-end items-center text-slate-600 gap-1">
+                <span>Total:</span>
+                <small className="font-bold">
+                  {moneyFormat(
+                    formDataDetail.unit_price * formDataDetail.quantity
+                  )}
+                </small>
               </div>
             </ModalBody>
             <ModalFooter>

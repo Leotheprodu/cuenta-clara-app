@@ -21,7 +21,7 @@ interface HeaderCreateInvoiceProps {
   handle: {
     username: string;
     showChangeClient?: boolean;
-    isLoading: boolean;
+    isLoading?: boolean;
   };
 }
 interface HandleOnChangeDetailProps {

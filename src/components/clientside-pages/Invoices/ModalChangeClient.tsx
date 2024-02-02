@@ -13,7 +13,7 @@ import { SearchIcon } from "@/icons/SearchIcon";
 import Link from "next/link";
 import { internalLinks } from "@/components/Utils/internalLinks";
 import { useClientsPage } from "@/components/clientside-pages/Clients/useClientsPage";
-import { $AppState, $internalLinkName } from "@/stores/generalConfig";
+import { $internalLinkName } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 import { ChangeIcon } from "@/icons/ChangeIcon";
 
@@ -21,7 +21,6 @@ export const ModalChangeClient = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { handleSearchClient, searchClient, clientsSearched } =
     useClientsPage();
-  const appState = useStore($AppState);
   const internalLinkName = useStore($internalLinkName);
   return (
     <>

@@ -63,7 +63,7 @@ export const NavMenuPopoverTrigger = ({ handle }: any) => {
   return (
     <PopoverTrigger>
       <Button
-        className="text-blanco flex items-center justify-center h-16 w-16 rounded-sm p-0"
+        className="text-blanco flex items-center justify-center h-16 w-16 rounded-sm p-0 mr-2"
         type="button"
         variant="light"
         onClick={handlePopoverTriggerClick}
