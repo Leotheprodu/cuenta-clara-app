@@ -171,7 +171,7 @@ const invoiceDefault: Invoice = {
   ],
   transactions: [
     {
-      id: "",
+      id: 0,
       amount: "0.00",
       description: "",
       date: "",
@@ -192,7 +192,7 @@ const transactionsInvoiceDashboard: TransactionsInvoiceDashboard = {
   total_amount: 0.0,
   transactions: [
     {
-      id: "",
+      id: 0,
       amount: "0.00",
       description: "",
       date: "",

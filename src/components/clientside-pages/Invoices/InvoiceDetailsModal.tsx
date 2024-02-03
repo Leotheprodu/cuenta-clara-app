@@ -16,6 +16,7 @@ import {
 } from "@nextui-org/react";
 import { useInvoiceDetailsModal } from "./useInvoiceDetailsModal";
 import { InfoIcon } from "@/icons/infoIcon";
+import { moneyFormat } from "@/components/Utils/dataFormat";
 
 export const InvoiceDetailsModal = ({
   handleInvoiceDetails,
@@ -27,7 +28,12 @@ export const InvoiceDetailsModal = ({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { handle } = useInvoiceDetailsModal({ invoice });
   const { columnNames, renderCell } = handle;
-
+  const totalDetail = invoice.invoice_details.reduce(
+    (acc: number, detail: InvoiceDetail) => {
+      return acc + parseFloat(detail.subtotal);
+    },
+    0
+  );
   return (
     <>
       <Tooltip content="Detalles de factura" color="primary">
@@ -71,6 +77,12 @@ export const InvoiceDetailsModal = ({
                     ))}
                   </TableBody>
                 </Table>
+                <div className="flex justify-end items-center text-slate-600 gap-1">
+                  <span>Total:</span>
+                  <small className="font-bold">
+                    {moneyFormat(totalDetail)}
+                  </small>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button

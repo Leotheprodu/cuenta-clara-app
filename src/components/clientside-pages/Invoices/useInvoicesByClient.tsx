@@ -104,10 +104,18 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
     { key: "id", name: "Id" },
     { key: "date", name: "Fecha" },
     { key: "total_amount", name: "Monto" },
+    { key: "paid_amount", name: "Pagado" },
+    { key: "balance", name: "Saldo" },
     { key: "status", name: "Status" },
     { key: "actions", name: "Acciones" },
   ];
   const renderCell = (invoice: Invoice, columnKey: any, index: any) => {
+    const totalTransactions = invoice.transactions.reduce(
+      (acc: number, transaction: Transaction) => {
+        return acc + parseFloat(transaction.amount);
+      },
+      0
+    );
     switch (columnKey) {
       case "id":
         return <p>{invoice.id}</p>;
@@ -116,6 +124,24 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       case "total_amount":
         return (
           <p className="text-right">{moneyFormat(invoice.total_amount)}</p>
+        );
+      case "paid_amount":
+        return (
+          <p className="text-right">
+            {invoice.status === invoicesStatus.cancelled
+              ? "N/A"
+              : moneyFormat(totalTransactions)}
+          </p>
+        );
+
+      case "balance":
+        return (
+          <p className="text-right">
+            {invoice.status === invoicesStatus.cancelled ||
+            invoice.status === invoicesStatus.paid
+              ? "N/A"
+              : moneyFormat(invoice.total_amount - totalTransactions)}
+          </p>
         );
       case "status":
         return <p>{clientStatusInvoice[invoice.status]}</p>;

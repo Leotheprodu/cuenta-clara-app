@@ -14,8 +14,8 @@ export const useTransactionsModal = ({
     { key: "amount", name: "Monto" },
     { key: "status", name: "Estado" },
   ];
-  const [totalTransactions, setTotalTransactions] = useState(0);
   const [pendingMount, setPendingMount] = useState(0);
+  const [totalTransactions, setTotalTransactions] = useState(0);
   useEffect(() => {
     const totalTransactions = invoice.transactions.reduce(
       (acc: number, transaction: Transaction) => {

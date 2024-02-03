@@ -12,7 +12,7 @@ export const useInvoiceDetailsModal = ({ invoice }: { invoice: Invoice }) => {
   const columnNames = [
     { key: "id", name: "Id" },
     { key: "code", name: "Codigo" },
-    { key: "name", name: "Nombre" },
+    { key: "description", name: "Descripcion" },
     { key: "type", name: "Tipo de Producto" },
     { key: "unit", name: "Unidad" },
     { key: "quantity", name: "Cantidad" },
@@ -50,12 +50,10 @@ export const useInvoiceDetailsModal = ({ invoice }: { invoice: Invoice }) => {
             </small>
           </div>
         );
-      case "name":
+      case "description":
         return (
           <div className="flex justify-center">
-            <small className="text-center">
-              {invoiceDetail.products_and_service.name}
-            </small>
+            <small className="text-center">{invoiceDetail.description}</small>
           </div>
         );
       case "type":
