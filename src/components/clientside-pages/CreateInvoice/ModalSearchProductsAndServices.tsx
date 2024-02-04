@@ -56,8 +56,8 @@ export const ModalSearchProductsAndServices = ({
                 }
               ></Input>
               <div className="overflow-x-auto">
-                <div className="rounded-xl w-full shadow-lg">
-                  <table className="table-auto w-full">
+                <div className="w-full">
+                  <table className="table-auto w-full shadow-lg border border-slate-200 rounded-2xl">
                     <thead className="bg-gris/80 text-center">
                       <tr>
                         <th className="py-1 px-2">Código</th>
@@ -73,7 +73,7 @@ export const ModalSearchProductsAndServices = ({
                         (ps: DataProductsAndServicesProps) => (
                           <tr
                             onClick={() => handleAddPStoDetail(onClose, ps)}
-                            className="cursor-pointer hover:bg-primario hover:text-blanco rounded-2xl"
+                            className="cursor-pointer ease-in duration-200 hover:bg-slate-100"
                             key={ps.id}
                           >
                             <td className="py-1 px-2 text-center">

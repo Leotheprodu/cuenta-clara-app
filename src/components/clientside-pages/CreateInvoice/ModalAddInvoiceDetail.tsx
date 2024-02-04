@@ -12,6 +12,7 @@ import {
 } from "@nextui-org/react";
 import { ModalSearchProductsAndServices } from "./ModalSearchProductsAndServices";
 import { moneyFormat } from "@/components/Utils/dataFormat";
+import { SearchIcon } from "@/icons/SearchIcon";
 
 export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
   const { createInvoiceDetail } = handle;
@@ -44,14 +45,14 @@ export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
             </ModalHeader>
             <ModalBody>
               <div className="flex flex-col px-10 justify-center items-center gap-2 mt-4">
-                <div className="flex gap-2 w-full relative">
-                  <Tooltip content="Buscar">
+                <div className="flex gap-2 w-full">
+                  <Tooltip content="Buscar" showArrow offset={-10}>
                     <button
                       onClick={() => handleOpenSearchPS()}
                       name="buscar"
-                      className="absolute left-[-2rem] bottom-1 bg-secundario/20 rounded-md text-blanco hover:bg-secundario duration-300"
+                      className=" text-terciario hover:scale-110 duration-200 ease-in"
                     >
-                      <AddIcon />
+                      <SearchIcon />
                     </button>
                   </Tooltip>
                   <ModalSearchProductsAndServices
