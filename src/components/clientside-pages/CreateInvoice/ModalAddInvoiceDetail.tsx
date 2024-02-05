@@ -46,15 +46,17 @@ export const ModalAddInvoiceDetail = ({ handle }: CreateInvoiceDetailProps) => {
             <ModalBody>
               <div className="flex flex-col px-10 justify-center items-center gap-2 mt-4">
                 <div className="flex gap-2 w-full">
-                  <Tooltip content="Buscar" showArrow offset={-10}>
-                    <button
-                      onClick={() => handleOpenSearchPS()}
-                      name="buscar"
-                      className=" text-terciario hover:scale-110 duration-200 ease-in"
-                    >
-                      <SearchIcon />
-                    </button>
-                  </Tooltip>
+                  <div className="bg-slate-100 px-2 flex items-center rounded-md">
+                    <Tooltip content="Buscar" showArrow>
+                      <button
+                        onClick={() => handleOpenSearchPS()}
+                        name="buscar"
+                        className=" text-terciario hover:scale-110 duration-200 ease-in"
+                      >
+                        <SearchIcon />
+                      </button>
+                    </Tooltip>
+                  </div>
                   <ModalSearchProductsAndServices
                     handle={{
                       createInvoiceDetail,

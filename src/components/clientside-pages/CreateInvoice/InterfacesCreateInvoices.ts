@@ -104,6 +104,9 @@ interface DataProductsAndServicesProps {
   business_id: number | null;
   code: string;
   type: string;
+  inventory_control: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 interface InitialStateInvoiceDetailProps {
   code: string;
