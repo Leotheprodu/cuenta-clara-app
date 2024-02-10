@@ -14,9 +14,6 @@ interface Balance {
   amount: string;
   users_business: UserBusiness;
 }
-interface UserMessage {
-  message: string;
-}
 
 interface Client {
   id: number;
@@ -24,13 +21,19 @@ interface Client {
   active: boolean;
   balances: Balance[];
 }
+interface Employee {
+  isEmployee: boolean;
+  isAdmin: boolean;
+  active: boolean;
+  employeeName: string;
+}
 interface UserData {
   isLoggedIn: boolean;
   user: User;
   roles: number[];
   client: Client[];
   balance: number;
-  userMessage: UserMessage;
+  employee: Employee;
 }
 
 export type UserProps = UserData;
@@ -65,7 +68,10 @@ export const $user = atom<UserProps>({
     },
   ],
   balance: 0,
-  userMessage: {
-    message: "",
+  employee: {
+    isEmployee: false,
+    isAdmin: false,
+    active: false,
+    employeeName: "",
   },
 });

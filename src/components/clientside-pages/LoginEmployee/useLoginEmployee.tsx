@@ -21,14 +21,20 @@ export const useLoginEmployee = (formInit: {
       await fetchAPI({
         url: "auth/login-employee",
         method: "POST",
-        body: form,
+        body: { ...form, isEmployee: true },
       }),
   });
 
   useEffect(() => {
     if (status === "success") {
       $user.set(data);
-      toast.success(`Bienvenido ${data.user.username}`);
+      toast.success(
+        `Bienvenido ${
+          data.employee.isEmployee
+            ? data.employee.employeeName
+            : data.user.username
+        }`
+      );
       redirect(internalLinks("clients"));
     } else if (status === "error") {
       toast.error(error?.message || "");

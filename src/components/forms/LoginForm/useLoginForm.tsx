@@ -20,7 +20,7 @@ export const useLoginForm = (formInit: FormValuesLoginForm) => {
       await fetchAPI({
         url: "auth/login",
         method: "POST",
-        body: form,
+        body: { ...form, isEmployee: false },
       }),
   });
 
