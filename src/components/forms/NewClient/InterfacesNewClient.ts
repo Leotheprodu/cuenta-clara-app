@@ -12,6 +12,7 @@ interface InputUsernameProps {
   handle: {
     username: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    type?: "client" | "employee";
   };
 }
 interface InputEmailProps {

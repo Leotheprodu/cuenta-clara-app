@@ -60,6 +60,11 @@
     "userRequired": false
   },
   {
+    "page": "employee",
+    "href": "/sesion/empleado",
+    "userRequired": false
+  },
+  {
     "page": "sign-up",
     "href": "/sesion/registrarse",
     "userRequired": false

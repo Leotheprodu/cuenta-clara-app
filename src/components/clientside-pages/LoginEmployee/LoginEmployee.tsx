@@ -1,45 +1,46 @@
 "use client";
-import { Button, Link } from "@nextui-org/react";
-import { IsLoggedInHandle } from "./IsLoggedInHandle";
-import { useLoginForm } from "@/components/forms/LoginForm/useLoginForm";
-import { InputEmailLoginForm } from "./InputEmailLoginForm";
-import { InputPasswordLoginForm } from "./InputPasswordLoginForm";
+
+import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
+import { useLoginEmployee } from "./useLoginEmployee";
 import { useLoadingByCriticProcess } from "@/components/hooks/useLoadingByCriticProcess";
+import { IsLoggedInHandle } from "@/components/forms/LoginForm/IsLoggedInHandle";
+import { InputUsername } from "@/components/forms/NewClient/InputUsername";
+import { InputPasswordLoginForm } from "@/components/forms/LoginForm/InputPasswordLoginForm";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import { internalLinks } from "@/components/Utils/internalLinks";
 
-export const LoginForm = () => {
+export const LoginEmployee = () => {
+  useNamingPagesRoutes({ internalLink: "employee" });
   const {
     isVisible,
     handleOnChange,
-    handleOnClear,
+    isPending,
     toggleVisibility,
     handleLogin,
     isInvalidPass,
-    email,
+    username,
     password,
     user,
-    isPending,
-  } = useLoginForm({ email: "", password: "" });
+  } = useLoginEmployee({ username: "", password: "" });
 
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
 
   if (showLoading) {
     return LoadingElement;
   }
-
   if (user.isLoggedIn) {
     return <IsLoggedInHandle />;
   }
-
   return (
     <>
       <h1 className="text-3xl text-center font-semibold">Iniciar sesion</h1>
       <p className="text-center  text-primario mb-4">
-        Inicia sesion para acceder a tu cuenta
+        Inicia sesion para empezar a trabajar
       </p>
       <form onSubmit={handleLogin} className="flex flex-col gap-4">
-        <InputEmailLoginForm
-          handle={{ handleOnClear, email, handleOnChange }}
+        <InputUsername
+          handle={{ username, handleOnChange, type: "employee" }}
         />
         <InputPasswordLoginForm
           handle={{
@@ -61,21 +62,12 @@ export const LoginForm = () => {
       </form>
       <div className="mt-4">
         <p className="text-center text-sm text-gray-400">
-          ¿No tienes cuenta?{" "}
+          ¿No eres un empleado?{" "}
           <Link
-            href={internalLinks("sign-up")}
+            href={internalLinks("users")}
             className="text-primary hover:underline"
           >
-            Registrate
-          </Link>
-        </p>
-        <p className="text-center text-sm text-gray-400">
-          ¿Eres un empleado?{" "}
-          <Link
-            href={internalLinks("employee")}
-            className="text-primary hover:underline"
-          >
-            Accede como empleado
+            Inicia sesion como cliente
           </Link>
         </p>
       </div>
