@@ -91,7 +91,7 @@
   },
   {
     "page": "admin",
-    "href": "/administracion",
+    "href": "/administrar",
     "userRequired": true
   }
 ]

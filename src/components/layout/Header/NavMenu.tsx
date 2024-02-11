@@ -10,6 +10,7 @@ import { MotionAddButtonLink } from "../Footer/MotionAddButtonLink";
 import { blockedPages, internalLinks } from "@/components/Utils/internalLinks";
 import { useLinksHeader } from "./LinksHeader";
 import { $internalLinkName } from "@/stores/generalConfig";
+import { AdminPanelIcon } from "@/icons/AdminPanelIcon";
 
 export const AddButtonPopoverContent = ({ handle }: any) => {
   const user = useStore($user);
@@ -45,6 +46,24 @@ export const AddButtonPopoverContent = ({ handle }: any) => {
                 exclude: [],
                 isLoggedInRequired: false,
                 page: "sign-up",
+              }}
+              textColor="primario"
+              flexType="row"
+              size="lg"
+              component="navMenu"
+            />
+          </MotionAddButtonLink>
+        )}
+        {(user.employee.isAdmin || !user.employee.isEmployee) && (
+          <MotionAddButtonLink delay={0.4}>
+            <LinkNav
+              link={{
+                href: internalLinks("admin"),
+                icon: <AdminPanelIcon className="w-6" />,
+                text: "Administrar",
+                exclude: [],
+                isLoggedInRequired: true,
+                page: "admin",
               }}
               textColor="primario"
               flexType="row"

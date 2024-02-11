@@ -68,7 +68,11 @@ export default function AdminLayout({
             </section>
           </PageWrapper>
         )}
-        <div className={`w-full ${!isMovil && showMenu && "ml-[17rem]"}`}>
+        <div
+          className={`w-full ${!isMovil && showMenu && "ml-[17rem]"} ${
+            !isMovil && !showMenu && "px-40 my-12"
+          }`}
+        >
           {children}
         </div>
       </div>

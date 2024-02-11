@@ -3,7 +3,7 @@
 import { internalLinks } from "@/components/Utils/internalLinks";
 import { MotionAddButtonLink } from "@/components/layout/Footer/MotionAddButtonLink";
 import { LinkNav } from "@/components/layout/Header/LinkNav";
-import { HomeIcon } from "@/icons/HomeIcon";
+import { AdminPanelIcon } from "@/icons/AdminPanelIcon";
 import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
 
@@ -15,7 +15,7 @@ export const AdminNav = () => {
         <LinkNav
           link={{
             href: internalLinks("admin"),
-            icon: <HomeIcon />,
+            icon: <AdminPanelIcon />,
             text: "Administrar",
             exclude: [],
             isLoggedInRequired: true,

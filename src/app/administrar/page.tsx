@@ -3,7 +3,7 @@ import { PageWrapper } from "@/components/Utils/PageWrapper";
 
 export default function Admin() {
   return (
-    <main className="flex min-h-screen justify-center items-center p-2">
+    <main className="flex min-h-screen p-10 sm:px-20">
       <section>
         <PageWrapper>
           <AdminPage />

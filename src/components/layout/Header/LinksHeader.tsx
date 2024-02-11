@@ -6,6 +6,7 @@ import { LoginIcon } from "@/icons/LoginIcon";
 import { ClientsIcon } from "@/icons/ClientsIcon";
 import { TransactionsIcon } from "@/icons/TransactionsIcon";
 import { useEffect, useState } from "react";
+import { AdminPanelIcon } from "@/icons/AdminPanelIcon";
 
 export const useLinksHeader = () => {
   const user = useStore($user);
