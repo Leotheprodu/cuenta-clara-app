@@ -35,8 +35,8 @@ export default function AdminLayout({
               className={`${
                 isMovil
                   ? "w-full"
-                  : "w-[20rem] border-r-1 border-r-slate-200 shadow-sm"
-              } bg-slate-50 flex flex-col items-center justify-start min-h-screen fixed`}
+                  : "w-[17rem] border-r-1 border-r-slate-200 shadow-small"
+              } bg-blanco flex flex-col items-center justify-start min-h-screen fixed`}
             >
               <PageWrapper variant="2">
                 <AdminNav />
@@ -68,7 +68,7 @@ export default function AdminLayout({
             </section>
           </PageWrapper>
         )}
-        <div className={`w-full ${!isMovil && showMenu && "ml-[20rem]"}`}>
+        <div className={`w-full ${!isMovil && showMenu && "ml-[17rem]"}`}>
           {children}
         </div>
       </div>
