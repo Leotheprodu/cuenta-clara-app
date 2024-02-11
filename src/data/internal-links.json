@@ -88,5 +88,10 @@
     "page": "ClientSideDashboard",
     "href": "/clientes/dashboard/",
     "userRequired": false
+  },
+  {
+    "page": "admin",
+    "href": "/administracion",
+    "userRequired": true
   }
 ]

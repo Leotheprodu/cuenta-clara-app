@@ -36,9 +36,6 @@ export const HeaderBusinessSelector = ({
           isDisabled={!isUserRequired(internalLinkName)}
           items={business}
           label="Selecciona tu negocio"
-          classNames={{
-            label: "invisible lg:visible",
-          }}
           className="min-w-[13rem]"
           selectedKeys={value}
           onSelectionChange={handleSelectionBusiness}
