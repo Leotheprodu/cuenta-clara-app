@@ -134,11 +134,12 @@ const clientDefault: ClientProps = {
     },
   ],
 };
-const BusinessDefault = {
+const BusinessDefault: InterfacesBusinessPage = {
   id: 0,
   name: "Registrate para usar",
   default: false,
   user_id: 0,
+  active: false,
 };
 const invoiceDefault: Invoice = {
   id: 0,

@@ -93,5 +93,10 @@
     "page": "admin",
     "href": "/administrar",
     "userRequired": true
+  },
+  {
+    "page": "businesses",
+    "href": "/administrar/negocios",
+    "userRequired": true
   }
 ]

@@ -15,7 +15,9 @@ export const useHeader = () => {
   const { statusCheckSession } = useCheckSession();
   const path = usePathname();
   const user = useStore($user);
-  const [business, setBusiness] = useState([BusinessDefault]);
+  const [business, setBusiness] = useState<InterfacesBusinessPage[]>([
+    BusinessDefault,
+  ]);
   const [value, setValue] = useState(new Set(["0"]));
   const [showBalance, setShowBalance] = useState(false);
   const internalLinkName = useStore($internalLinkName);
@@ -28,7 +30,7 @@ export const useHeader = () => {
     queryKey: ["users-business"],
     queryFn: async () =>
       await fetchAPI({
-        url: "users_business",
+        url: "users_business?active=1",
       }),
     retry: 2,
   });
