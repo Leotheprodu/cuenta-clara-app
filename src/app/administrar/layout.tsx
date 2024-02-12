@@ -69,9 +69,9 @@ export default function AdminLayout({
           </PageWrapper>
         )}
         <div
-          className={`w-full ${!isMovil && showMenu && "ml-[17rem]"} ${
-            !isMovil && !showMenu && "px-40 my-12"
-          }`}
+          className={`w-full flex justify-center ${
+            !isMovil && showMenu && "ml-[17rem]"
+          } ${!isMovil && !showMenu && "px-40 my-12"}`}
         >
           {children}
         </div>

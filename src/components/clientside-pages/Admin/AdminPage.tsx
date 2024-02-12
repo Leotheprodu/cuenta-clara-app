@@ -11,9 +11,7 @@ export const AdminPage = () => {
   const user = useStore($user);
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
   const selectedBusiness = useStore($selectedBusiness);
-  if (showLoading) {
-    return LoadingElement;
-  }
+  if (showLoading) return LoadingElement;
 
   return (
     <div className="flex flex-col gap-10">
