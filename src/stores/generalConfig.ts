@@ -31,3 +31,4 @@ export const $AppState = atom<PropsAppState>({
 });
 
 export const $internalLinkName = atom<string>("");
+export const $refetchBusinessHeader = atom<boolean>(false);

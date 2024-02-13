@@ -8,13 +8,18 @@ import { useCheckSession } from "@/components/hooks/useCheckSession";
 import { usePathname } from "next/navigation";
 import { BusinessDefault } from "@/data/constants";
 import { moneyFormat } from "@/components/Utils/dataFormat";
-import { $GlobalLoading, $internalLinkName } from "@/stores/generalConfig";
+import {
+  $GlobalLoading,
+  $internalLinkName,
+  $refetchBusinessHeader,
+} from "@/stores/generalConfig";
 import { isUserRequired } from "@/components/Utils/internalLinks";
 
 export const useHeader = () => {
   const { statusCheckSession } = useCheckSession();
   const path = usePathname();
   const user = useStore($user);
+  const refetchBusinessHeader = useStore($refetchBusinessHeader);
   const [business, setBusiness] = useState<InterfacesBusinessPage[]>([
     BusinessDefault,
   ]);
@@ -34,6 +39,9 @@ export const useHeader = () => {
       }),
     retry: 2,
   });
+  useEffect(() => {
+    refetchBusinessHeader && refetch();
+  }, [refetchBusinessHeader, refetch]);
   useEffect(() => {
     $GlobalLoading.set({ isLoading: false, message: `pagina cargada` });
   }, [internalLinkName]);
