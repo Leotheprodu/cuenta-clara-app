@@ -1,6 +1,7 @@
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { useAddTransactionForm } from "./useAddTransactionForm";
-import { paymentMethods } from "@/data/constants";
+import { paymentMethod, paymentMethods } from "@/data/constants";
+import { ChangeCalculator } from "@/components/clientside-pages/CreateInvoice/ChangeCalculator";
 
 export const AddTransactionForm = ({
   handleTransactions,
@@ -42,35 +43,47 @@ export const AddTransactionForm = ({
           name="amount"
           placeholder="Ingresa el monto"
           className=""
-          required
+          isRequired
           value={amount.toString()}
           onChange={handleOnChange}
         ></Input>
-        <Select
-          label="metodo de pago"
-          placeholder="selecciona el methodo de pago"
-          aria-label="metodo de pago"
-          variant="flat"
-          color="primary"
-          onChange={handleSelectPaymentMethod}
-          selectedKeys={[payment_method_id]}
-        >
-          {paymentMethods.map((method) => (
-            <SelectItem className="uppercase" key={method.id} value={method.id}>
-              {method.name}
-            </SelectItem>
-          ))}
-        </Select>
+        <div className="flex w-full gap-1 items-center justify-center">
+          <Select
+            className="w-full"
+            label="metodo de pago"
+            placeholder="selecciona el methodo de pago"
+            aria-label="metodo de pago"
+            variant="flat"
+            color="primary"
+            isRequired
+            onChange={handleSelectPaymentMethod}
+            selectedKeys={[payment_method_id]}
+          >
+            {paymentMethods.map((method) => (
+              <SelectItem
+                className="uppercase"
+                key={method.id}
+                value={method.id}
+              >
+                {method.name}
+              </SelectItem>
+            ))}
+          </Select>
+          {payment_method_id === paymentMethod.cash.id.toString() && (
+            <ChangeCalculator total={amount} />
+          )}
+        </div>
         <Input
           variant="flat"
           color="primary"
           label="Detalle"
           type="text"
           name="description"
-          placeholder="Ingresa algun detalle si es necesario"
+          placeholder="Ingrese el detalle de la transaccion"
           className=""
           value={description}
           onChange={handleOnChange}
+          isRequired
         ></Input>
       </div>
     </form>

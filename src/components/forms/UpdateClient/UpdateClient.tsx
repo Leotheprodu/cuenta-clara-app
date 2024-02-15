@@ -33,6 +33,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
     handleCountrySelectionChange,
     countryCodes,
     countrySelected,
+    disabledKeys,
   } = useUpdateClient(
     {
       id: parseInt(id, 10),
@@ -58,6 +59,7 @@ export const UpdateClient = ({ id }: { id: string }) => {
           isLoadingBusiness,
           business,
           selectedKeys,
+          disabledKeys,
           handleSelectionChange,
         }}
       />

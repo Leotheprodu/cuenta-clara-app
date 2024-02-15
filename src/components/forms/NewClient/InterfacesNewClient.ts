@@ -39,7 +39,7 @@ interface InputCellphoneProps {
     cellphone: string;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     codeSelected?: string;
-    noFormValue: noFormValueProps;
+    noFormValue?: noFormValueProps;
   };
 }
 interface BusinessListProps {
@@ -47,6 +47,7 @@ interface BusinessListProps {
     isLoadingBusiness: boolean;
     business: Array<BusinessProps>;
     selectedKeys: Set<string>;
+    disabledKeys: Set<string>;
     handleSelectionChange: (selectedKeys: any) => void;
   };
   title: string;

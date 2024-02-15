@@ -16,6 +16,7 @@ export const useUpdateClient = (
   useNamingPagesRoutes({ internalLink: "update-client" });
   const [form, setForm] = useState(formInit);
   const [selectedKeys, setSelectedKeys] = useState(new Set(["0"]));
+  const [disabledKeys, setDisabledKeys] = useState(new Set(["0"]));
   const [business, setBusiness] = useState([BusinessDefault]);
   const [countrySelected, setCountrySelected] = useState(
     new Set(["Costa Rica"])
@@ -46,10 +47,17 @@ export const useUpdateClient = (
       const ClientBusinessAsign = dataBalance?.map(
         (item: any) => item.business_id
       );
-      const selectedKeysString = ClientBusinessAsign.map((item: any) => {
-        return item.toString();
-      });
+      const disabledBusinesstoInactivate = dataBalance
+        ?.filter((item: any) => parseFloat(item.amount) !== 0)
+        .map((item: any) => item.business_id);
+      const selectedKeysString = ClientBusinessAsign.map((item: any) =>
+        item.toString()
+      );
+      const disabledKeysString = disabledBusinesstoInactivate.map((item: any) =>
+        item.toString()
+      );
       setSelectedKeys(new Set(selectedKeysString));
+      setDisabledKeys(new Set(disabledKeysString));
     }
   }, [statusBalance, dataBalance]);
 
@@ -161,5 +169,6 @@ export const useUpdateClient = (
     codeSelected,
     countryCodes,
     countrySelected,
+    disabledKeys,
   };
 };
