@@ -126,12 +126,10 @@ export const useUpdateClient = (
   useEffect(() => {
     if (status === "success") {
       toast.success(`${form.username} ha sido actualizado`);
-      redirect(internalLinks("clients") || "/");
+      redirect(internalLinks("clients"));
     } else if (status === "error") {
       toast.error(error?.message || "");
     }
-
-    return () => toast.dismiss();
   }, [status, error, form]);
 
   const handleNewToken = () => {
