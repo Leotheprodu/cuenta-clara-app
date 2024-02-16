@@ -28,6 +28,7 @@ interface BalanceProps {
   id: number;
   amount: string;
   users_business: UsersBusinessProps;
+  active: boolean;
 }
 interface UsersBusinessProps {
   id: number;

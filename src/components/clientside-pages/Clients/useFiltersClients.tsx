@@ -19,7 +19,8 @@ export const useFiltersClients = ({
     if (status === "success") {
       const clients = data.filter((item: ClientProps) =>
         item.balances?.some(
-          (balance) => balance.users_business?.id === selectedBusiness.id
+          (balance) =>
+            balance.users_business?.id === selectedBusiness.id && balance.active
         )
       );
       setClients(clients);
