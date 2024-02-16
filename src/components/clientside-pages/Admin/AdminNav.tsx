@@ -44,6 +44,22 @@ export const AdminNav = () => {
           component="adminMenu"
         />
       </MotionAddButtonLink>
+      <MotionAddButtonLink delay={0.5}>
+        <LinkNav
+          link={{
+            href: internalLinks("catalog"),
+            icon: <HomeIcon />,
+            text: "Catálogo ",
+            exclude: [],
+            isLoggedInRequired: true,
+            page: "catalog",
+          }}
+          textColor="secundario"
+          flexType="row"
+          size="lg"
+          component="adminMenu"
+        />
+      </MotionAddButtonLink>
     </nav>
   );
 };

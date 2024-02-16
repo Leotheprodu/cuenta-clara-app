@@ -98,5 +98,10 @@
     "page": "businesses",
     "href": "/administrar/negocios",
     "userRequired": true
+  },
+  {
+    "page": "catalog",
+    "href": "/administrar/catalogo",
+    "userRequired": true
   }
 ]

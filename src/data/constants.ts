@@ -127,6 +127,7 @@ const clientDefault: ClientProps = {
     {
       id: 0,
       amount: "0.00",
+      active: true,
       users_business: {
         id: 0,
         name: "",
