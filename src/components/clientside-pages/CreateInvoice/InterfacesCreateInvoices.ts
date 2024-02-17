@@ -105,8 +105,6 @@ interface DataProductsAndServicesProps {
   code: string;
   type: string;
   inventory_control: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 interface InitialStateInvoiceDetailProps {
   code: string;

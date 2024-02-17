@@ -1,6 +1,11 @@
+import { moneyFormat } from "@/components/Utils/dataFormat";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
-import { productsAndServicesDefault } from "@/data/constants";
+import { productAndServiceCodeClean } from "@/components/Utils/productAndServiceCodeClean";
+import {
+  productsAndServicesDefault,
+  typeOfProductsAndServices,
+} from "@/data/constants";
 import { ChangeIcon } from "@/icons/ChangeIcon";
 import { $selectedBusiness } from "@/stores/business";
 import { useStore } from "@nanostores/react";
@@ -12,6 +17,9 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Select,
+  SelectItem,
+  Selection,
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
@@ -21,6 +29,9 @@ import toast from "react-hot-toast";
 
 export const useCatalogPage = () => {
   const selectedBusiness = useStore($selectedBusiness);
+  const [typeValue, setTypeValue] = useState<Selection>(new Set(["service"]));
+  const [productOrService, setProductOrService] =
+    useState<DataProductsAndServicesProps>(productsAndServicesDefault);
   const [catalog, setCatalog] = useState<DataProductsAndServicesProps[]>([
     productsAndServicesDefault,
   ]);
@@ -37,6 +48,18 @@ export const useCatalogPage = () => {
       }),
     retry: 2,
   });
+
+  useEffect(() => {
+    typeValue &&
+      setProductOrService({
+        ...productOrService,
+        type: Array.from(typeValue)[0].toString(),
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [typeValue]);
+  useEffect(() => {
+    refetchProductsAndServices();
+  }, [selectedBusiness, refetchProductsAndServices]);
   useEffect(() => {
     if (statusProductsAndServices === "success") {
       setCatalog(dataProductsAndServices);
@@ -44,31 +67,53 @@ export const useCatalogPage = () => {
       toast.error("Error al cargar los productos y servicios");
     }
   }, [statusProductsAndServices, dataProductsAndServices]);
-  const handleOnClearForm = (name: string) => handleOnClear(name, setCatalog);
+  const handleOnClearForm = (name: string) =>
+    handleOnClear(name, setProductOrService);
   const handleOnChangeForm = (e: React.ChangeEvent<HTMLInputElement>) =>
-    handleOnChange(setCatalog, e);
+    handleOnChange(setProductOrService, e);
   const columnNames: ColumnNamesProps[] = [
+    { key: "code", name: "Codigo" },
     { key: "name", name: "Nombre" },
     { key: "description", name: "Descripcion" },
+    { key: "type", name: "Tipo" },
+    { key: "unit", name: "Unidad" },
+    { key: "price", name: "Precio" },
     { key: "actions", name: "Acciones" },
   ];
+  const handleOpenModalUpdateItem = (e: React.MouseEvent, index: number) => {
+    e.preventDefault();
+    setProductOrService(catalog[index]);
+    setTypeValue(new Set([catalog[index].type]));
+    onOpen();
+  };
   const renderCell = (
     catalog: DataProductsAndServicesProps,
     columnKey: any,
     index: any
   ) => {
     switch (columnKey) {
+      case "code":
+        return <p className="">{productAndServiceCodeClean(catalog.code)}</p>;
       case "name":
         return <p className="">{catalog.name}</p>;
       case "description":
         return <p className="text-right">{catalog.description}</p>;
-
+      case "type":
+        return (
+          <p className="">
+            {catalog.type && typeOfProductsAndServices[catalog.type].nombre}
+          </p>
+        );
+      case "unit":
+        return <p className="">{catalog.unit}</p>;
+      case "price":
+        return <p className="">{moneyFormat(catalog.unit_price)}</p>;
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
             <Tooltip color={"default"} content="Actualizar Negocio">
               <button
-                /*  onClick={(e) => handleOpenModalUpdateBusiness(e, index)} */
+                onClick={(e) => handleOpenModalUpdateItem(e, index)}
                 className={`text-lg cursor-pointer active:opacity-50`}
               >
                 <ChangeIcon className="w-6 text-primary-500" />
@@ -88,28 +133,59 @@ export const useCatalogPage = () => {
                     </ModalHeader>
                     <ModalBody className="flex justify-center">
                       <form
-                        id="updateBusiness-form"
+                        id="updateProductOrService-form"
                         /*  onSubmit={(e) => handleUpdateBusiness(e, onClose)} */
-                        className="flex gap-1 items-center justify-center"
+                        className="flex flex-col gap-1 items-center justify-center"
                       >
+                        <Select
+                          selectedKeys={typeValue}
+                          onSelectionChange={setTypeValue}
+                          label="Tipo"
+                          className="max-w-xs"
+                        >
+                          {[
+                            { value: "service", label: "Servicio" },
+                            { value: "product", label: "Producto" },
+                          ].map((servOrProduct) => (
+                            <SelectItem
+                              key={servOrProduct.value}
+                              value={servOrProduct.value}
+                            >
+                              {servOrProduct.label}
+                            </SelectItem>
+                          ))}
+                        </Select>
                         <Input
+                          className="max-w-xs"
                           size="sm"
                           type="text"
-                          label="Editar nombre de negocio"
-                          placeholder="Ingresa el nombre del negocio"
+                          label="Nombre"
+                          placeholder="Ingresa el nombre del servicio o producto"
                           onClear={() => handleOnClearForm("name")}
-                          value={catalog.name}
+                          value={productOrService.name}
                           onChange={handleOnChangeForm}
                           name="name"
                           isClearable
                           required
-                          /* disabled={isPendingCreateBusiness} */
+                        ></Input>
+                        <Input
+                          className="max-w-xs"
+                          size="sm"
+                          type="text"
+                          label="Descripcion"
+                          placeholder="Ingresa la descripcion del servicio o producto"
+                          onClear={() => handleOnClearForm("description")}
+                          value={productOrService.description}
+                          onChange={handleOnChangeForm}
+                          name="description"
+                          isClearable
+                          required
                         ></Input>
                       </form>
                     </ModalBody>
                     <ModalFooter>
                       <Button
-                        form="updateBusiness-form"
+                        form="updateProductOrService-form"
                         className="uppercase"
                         color="primary"
                         variant="solid"

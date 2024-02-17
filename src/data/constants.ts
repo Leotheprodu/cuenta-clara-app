@@ -264,8 +264,6 @@ const productsAndServicesDefault: DataProductsAndServicesProps = {
   code: "",
   type: "",
   inventory_control: false,
-  createdAt: "",
-  updatedAt: "",
 };
 // Datos iniciales para los detalles de la factura
 const initialStateInvoiceDetail: InitialStateInvoiceDetailProps = {
