@@ -14,7 +14,7 @@ import { useCatalogPage } from "./useCatalogPage";
 
 export const CatalogPage = () => {
   useNamingPagesRoutes({ internalLink: "catalog" });
-  const { catalog, columnNames, renderCell, handleOnChange, handleOnClear } =
+  const { allCatalog, columnNames, renderCell, handleOnChange, handleOnClear } =
     useCatalogPage();
   /* const user = useStore($user); */
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
@@ -31,7 +31,7 @@ export const CatalogPage = () => {
           ))}
         </TableHeader>
         <TableBody emptyContent={"No hay facturas para mostrar"}>
-          {catalog.map((row: any, index: number) => (
+          {allCatalog.map((row: any, index: number) => (
             <TableRow
               className={
                 row.default === true

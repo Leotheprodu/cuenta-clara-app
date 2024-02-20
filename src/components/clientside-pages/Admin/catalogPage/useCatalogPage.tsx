@@ -11,6 +11,7 @@ import { $selectedBusiness } from "@/stores/business";
 import { useStore } from "@nanostores/react";
 import {
   Button,
+  Checkbox,
   Input,
   Modal,
   ModalBody,
@@ -32,7 +33,7 @@ export const useCatalogPage = () => {
   const [typeValue, setTypeValue] = useState<Selection>(new Set(["service"]));
   const [productOrService, setProductOrService] =
     useState<DataProductsAndServicesProps>(productsAndServicesDefault);
-  const [catalog, setCatalog] = useState<DataProductsAndServicesProps[]>([
+  const [allCatalog, setAllCatalog] = useState<DataProductsAndServicesProps[]>([
     productsAndServicesDefault,
   ]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -46,7 +47,6 @@ export const useCatalogPage = () => {
       await fetchAPI({
         url: `products_and_services/${selectedBusiness.id}`,
       }),
-    retry: 2,
   });
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export const useCatalogPage = () => {
   }, [selectedBusiness, refetchProductsAndServices]);
   useEffect(() => {
     if (statusProductsAndServices === "success") {
-      setCatalog(dataProductsAndServices);
+      setAllCatalog(dataProductsAndServices);
     } else if (statusProductsAndServices === "error") {
       toast.error("Error al cargar los productos y servicios");
     }
@@ -82,9 +82,12 @@ export const useCatalogPage = () => {
   ];
   const handleOpenModalUpdateItem = (e: React.MouseEvent, index: number) => {
     e.preventDefault();
-    setProductOrService(catalog[index]);
-    setTypeValue(new Set([catalog[index].type]));
+    setProductOrService(allCatalog[index]);
+    setTypeValue(new Set([allCatalog[index].type]));
     onOpen();
+  };
+  const handleChangeDefaultItem = (index: number) => {
+    console.log(allCatalog[index].id);
   };
   const renderCell = (
     catalog: DataProductsAndServicesProps,
@@ -119,6 +122,15 @@ export const useCatalogPage = () => {
                 <ChangeIcon className="w-6 text-primary-500" />
               </button>
             </Tooltip>
+
+            <Checkbox
+              disabled={allCatalog?.length === 1}
+              isSelected={catalog.default}
+              onValueChange={() => handleChangeDefaultItem(index)}
+            >
+              Default
+            </Checkbox>
+
             <Modal
               size="2xl"
               backdrop="blur"
@@ -181,6 +193,44 @@ export const useCatalogPage = () => {
                           isClearable
                           required
                         ></Input>
+                        <Input
+                          className="max-w-xs"
+                          size="sm"
+                          type="text"
+                          label="Unidad"
+                          placeholder="Ingresa la unidad del servicio o producto"
+                          onClear={() => handleOnClearForm("unit")}
+                          value={productOrService.unit}
+                          onChange={handleOnChangeForm}
+                          name="unit"
+                          isClearable
+                          required
+                        ></Input>
+                        <Input
+                          className="max-w-xs"
+                          size="sm"
+                          type="number"
+                          label="Precio"
+                          placeholder="Ingresa el precio del servicio o producto"
+                          value={productOrService.unit_price.toString()}
+                          onChange={handleOnChangeForm}
+                          name="unit_price"
+                          required
+                        ></Input>
+                        <div className="flex gap-2">
+                          <Checkbox
+                            isSelected={productOrService.inventory_control}
+                            onValueChange={() => {
+                              setProductOrService({
+                                ...productOrService,
+                                inventory_control:
+                                  !productOrService.inventory_control,
+                              });
+                            }}
+                          >
+                            Control de Inventario
+                          </Checkbox>
+                        </div>
                       </form>
                     </ModalBody>
                     <ModalFooter>
@@ -214,7 +264,7 @@ export const useCatalogPage = () => {
     }
   };
   return {
-    catalog,
+    allCatalog,
     columnNames,
     renderCell,
     handleOnChange,
