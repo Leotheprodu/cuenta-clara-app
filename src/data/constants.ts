@@ -253,14 +253,14 @@ const ClientDashboardInitialData: ClientDashboardData = {
 };
 // constante que contiene los datos por defecto de los productos y servicios
 const productsAndServicesDefault: DataProductsAndServicesProps = {
-  id: null,
-  user_id: null,
+  id: 0,
+  user_id: 0,
   name: "",
   description: "",
   unit: "",
   unit_price: 0,
   default: false,
-  business_id: null,
+  business_id: 0,
   code: "",
   type: "",
   inventory_control: false,

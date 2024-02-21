@@ -94,14 +94,14 @@ interface ProductsAndServicesProps {
   default: DataProductsAndServicesProps;
 }
 interface DataProductsAndServicesProps {
-  id: number | null;
-  user_id: number | null;
+  id: number;
+  user_id: number;
   name: string;
   description: string;
   unit: string;
   unit_price: number;
   default: boolean;
-  business_id: number | null;
+  business_id: number;
   code: string;
   type: string;
   inventory_control: boolean;

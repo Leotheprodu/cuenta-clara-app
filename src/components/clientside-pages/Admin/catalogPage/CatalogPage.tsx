@@ -22,7 +22,7 @@ export const CatalogPage = () => {
   if (showLoading) return LoadingElement;
   return (
     <section>
-      <Table isStriped aria-label="Detalle de Factura w-screen">
+      <Table isStriped aria-label="Catalogo">
         <TableHeader>
           {columnNames.map((column: ColumnNamesProps) => (
             <TableColumn className="text-center" key={column.key}>
@@ -30,23 +30,23 @@ export const CatalogPage = () => {
             </TableColumn>
           ))}
         </TableHeader>
-        <TableBody emptyContent={"No hay facturas para mostrar"}>
-          {allCatalog.map((row: any, index: number) => (
-            <TableRow
-              className={
-                row.default === true
-                  ? "border-1 border-primario/10 text-primary-500"
-                  : row.active === false
-                  ? "text-slate-400"
-                  : ""
-              }
-              key={index}
-            >
-              {(columnKey) => (
-                <TableCell>{renderCell(row, columnKey, index)}</TableCell>
-              )}
-            </TableRow>
-          ))}
+        <TableBody emptyContent={"No hay catalogo para mostrar"}>
+          {allCatalog.map(
+            (row: DataProductsAndServicesProps, index: number) => (
+              <TableRow
+                className={
+                  row.default === true
+                    ? "border-1 border-primario/10 text-primary-500"
+                    : ""
+                }
+                key={index}
+              >
+                {(columnKey) => (
+                  <TableCell>{renderCell(row, columnKey, index)}</TableCell>
+                )}
+              </TableRow>
+            )
+          )}
         </TableBody>
       </Table>
     </section>

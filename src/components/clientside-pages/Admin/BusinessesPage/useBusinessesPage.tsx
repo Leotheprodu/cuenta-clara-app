@@ -1,8 +1,8 @@
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { BusinessDefault } from "@/data/constants";
-import { ChangeIcon } from "@/icons/ChangeIcon";
 import { DeleteRowIcon } from "@/icons/DeleteRowIcon";
+import { EditRowIcon } from "@/icons/EditRowIcon";
 import { $selectedBusiness } from "@/stores/business";
 import { $GlobalLoading, $refetchBusinessHeader } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
@@ -149,8 +149,6 @@ export const useBusinessesPage = ({ name }: { name: string }) => {
     if (statusBusiness === "success") {
       setBusiness(dataBusiness);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusBusiness, dataBusiness]);
   const handleDeactivateBusiness = (e: any, index: number) => {
     e.preventDefault();
@@ -220,7 +218,7 @@ export const useBusinessesPage = ({ name }: { name: string }) => {
                 onClick={(e) => handleOpenModalUpdateBusiness(e, index)}
                 className={`text-lg cursor-pointer active:opacity-50`}
               >
-                <ChangeIcon className="w-6 text-primary-500" />
+                <EditRowIcon className="text-primary-500" />
               </button>
             </Tooltip>
             <Modal
