@@ -48,7 +48,9 @@ export const CatalogForm = ({
         size="sm"
         type="text"
         label="Codigo"
-        placeholder="Ingresa el codigo del servicio o producto"
+        placeholder={`Ingresa el codigo para tu ${
+          productOrService.type === "service" ? "servicio" : "producto"
+        }`}
         value={productOrService.code}
         onChange={handleOnChangeForm}
         name="code"
@@ -60,7 +62,9 @@ export const CatalogForm = ({
         size="sm"
         type="text"
         label="Nombre"
-        placeholder="Ingresa el nombre del servicio o producto"
+        placeholder={`Ingresa el nombre para tu ${
+          productOrService.type === "service" ? "servicio" : "producto"
+        }`}
         onClear={() => handleOnClearForm("name")}
         value={productOrService.name}
         onChange={handleOnChangeForm}
@@ -73,7 +77,9 @@ export const CatalogForm = ({
         size="sm"
         type="text"
         label="Descripcion"
-        placeholder="Ingresa la descripcion del servicio o producto"
+        placeholder={`Ingresa la descripcion de tu ${
+          productOrService.type === "service" ? "servicio" : "producto"
+        }`}
         onClear={() => handleOnClearForm("description")}
         value={productOrService.description}
         onChange={handleOnChangeForm}
@@ -98,7 +104,9 @@ export const CatalogForm = ({
         size="sm"
         type="number"
         label="Precio"
-        placeholder="Ingresa el precio del servicio o producto"
+        placeholder={`Ingresa el precio de tu ${
+          productOrService.type === "service" ? "servicio" : "producto"
+        }`}
         value={productOrService.unit_price.toString()}
         onClear={() => handleOnClearForm("unit_price")}
         isClearable

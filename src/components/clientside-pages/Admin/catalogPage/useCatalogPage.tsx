@@ -162,7 +162,7 @@ export const useCatalogPage = () => {
       business_id: selectedBusiness.id,
       user_id: user.user.id,
     });
-    setTypeValue(new Set(["service"]));
+    setTypeValue(new Set(["product"]));
     setUnitValue(new Set(["unidad"]));
     onOpenCreateProductOrService();
   };
@@ -267,7 +267,7 @@ export const useCatalogPage = () => {
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-2">
-            <Tooltip color={"warning"} content="Editar producto/servicio">
+            <Tooltip color={"warning"} content="Editar">
               <button
                 onClick={(e) => handleOpenModalUpdateItem(e, index)}
                 className={`text-lg cursor-pointer active:opacity-50`}
