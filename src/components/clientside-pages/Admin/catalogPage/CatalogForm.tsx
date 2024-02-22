@@ -1,3 +1,4 @@
+import { unitsOfProductsAndServices } from "@/data/constants";
 import { Checkbox, Input, Select, SelectItem } from "@nextui-org/react";
 
 export const CatalogForm = ({
@@ -10,8 +11,10 @@ export const CatalogForm = ({
   const {
     typeValue,
     setTypeValue,
+    unitValue,
+    setUnitValue,
     productOrService,
-    handleSubmitCatalogForm,
+    handleSubmit,
     onClose,
     handleOnChangeForm,
     handleOnClearForm,
@@ -20,7 +23,7 @@ export const CatalogForm = ({
   return (
     <form
       id={formId}
-      onSubmit={(e) => handleSubmitCatalogForm(e, onClose)}
+      onSubmit={(e) => handleSubmit(e, onClose)}
       className="flex flex-col gap-1 items-center justify-center"
     >
       <Select
@@ -75,19 +78,18 @@ export const CatalogForm = ({
         isClearable
         required
       ></Input>
-      <Input
+      <Select
+        selectedKeys={unitValue}
+        onSelectionChange={setUnitValue}
+        label="Tipo"
         className="max-w-xs"
-        size="sm"
-        type="text"
-        label="Unidad"
-        placeholder="Ingresa la unidad del servicio o producto"
-        onClear={() => handleOnClearForm("unit")}
-        value={productOrService.unit}
-        onChange={handleOnChangeForm}
-        name="unit"
-        isClearable
-        required
-      ></Input>
+      >
+        {unitsOfProductsAndServices.map((units) => (
+          <SelectItem key={units} value={units}>
+            {units}
+          </SelectItem>
+        ))}
+      </Select>
       <Input
         className="max-w-xs"
         size="sm"

@@ -11,11 +11,19 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import { useCatalogPage } from "./useCatalogPage";
+import { ModalCreateProductOrService } from "./ModalCreateProductOrService";
 
 export const CatalogPage = () => {
   useNamingPagesRoutes({ internalLink: "catalog" });
-  const { allCatalog, columnNames, renderCell, handleOnChange, handleOnClear } =
-    useCatalogPage();
+  const {
+    allCatalog,
+    columnNames,
+    renderCell,
+    handleCreate,
+    isOpenCreateProductOrService,
+    handleOpenModalCreateItem,
+    onOpenChangeCreateProductOrService,
+  } = useCatalogPage();
   /* const user = useStore($user); */
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
   /* const selectedBusiness = useStore($selectedBusiness); */
@@ -49,6 +57,12 @@ export const CatalogPage = () => {
           )}
         </TableBody>
       </Table>
+      <ModalCreateProductOrService
+        handleCreate={handleCreate}
+        isOpenCreateProductOrService={isOpenCreateProductOrService}
+        onOpenChangeCreateProductOrService={onOpenChangeCreateProductOrService}
+        handleOpenModalCreateItem={handleOpenModalCreateItem}
+      />
     </section>
   );
 };

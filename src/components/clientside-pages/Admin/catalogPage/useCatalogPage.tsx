@@ -30,12 +30,22 @@ import { EditRowIcon } from "@/icons/EditRowIcon";
 export const useCatalogPage = () => {
   const selectedBusiness = useStore($selectedBusiness);
   const [typeValue, setTypeValue] = useState<Selection>(new Set(["service"]));
+  const [unitValue, setUnitValue] = useState<Selection>(new Set(["unidad"]));
   const [productOrService, setProductOrService] =
     useState<DataProductsAndServicesProps>(productsAndServicesDefault);
   const [allCatalog, setAllCatalog] = useState<DataProductsAndServicesProps[]>([
     productsAndServicesDefault,
   ]);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isOpenupdateProductOrService,
+    onOpen: onOpenupdateProductOrService,
+    onOpenChange: onOpenChangeupdateProductOrService,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenCreateProductOrService,
+    onOpen: onOpenCreateProductOrService,
+    onOpenChange: onOpenChangeCreateProductOrService,
+  } = useDisclosure();
   const {
     status: statusProductsAndServices,
     data: dataProductsAndServices,
@@ -97,6 +107,14 @@ export const useCatalogPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeValue]);
   useEffect(() => {
+    unitValue &&
+      setProductOrService({
+        ...productOrService,
+        unit: Array.from(unitValue)[0].toString(),
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitValue]);
+  useEffect(() => {
     refetchProductsAndServices();
   }, [selectedBusiness, refetchProductsAndServices]);
   useEffect(() => {
@@ -125,7 +143,14 @@ export const useCatalogPage = () => {
       code: productAndServiceCodeClean(allCatalog[index].code),
     });
     setTypeValue(new Set([allCatalog[index].type]));
-    onOpen();
+    setUnitValue(new Set([allCatalog[index].unit]));
+    onOpenupdateProductOrService();
+  };
+  const handleOpenModalCreateItem = () => {
+    setProductOrService(productsAndServicesDefault);
+    setTypeValue(new Set(["service"]));
+    setUnitValue(new Set(["unidad"]));
+    onOpenCreateProductOrService();
   };
   const handleInventory_controlItem = () => {
     setProductOrService({
@@ -138,7 +163,7 @@ export const useCatalogPage = () => {
       return;
     }
   };
-  const handleSubmitCatalogForm = (e: any, onClose: () => void) => {
+  const handleSubmitUpdate = (e: any, onClose: () => void) => {
     e.preventDefault();
     if (productOrService.unit_price <= 0) {
       toast.error("El precio debe ser mayor a 0");
@@ -151,6 +176,22 @@ export const useCatalogPage = () => {
     onClose();
     setTimeout(() => {
       mutateUpdateProductsAndServices();
+    }, 500);
+  };
+  const handleSubmitCreate = (e: any, onClose: () => void) => {
+    e.preventDefault();
+    if (productOrService.unit_price <= 0) {
+      toast.error("El precio debe ser mayor a 0");
+      return;
+    }
+    setProductOrService({
+      ...productOrService,
+      code: `${productOrService.id}-${productOrService.business_id}-${productOrService.code}`,
+    });
+    onClose();
+    setTimeout(() => {
+      console.log("create");
+      /* mutateCreateProductsAndServices(); */
     }, 500);
   };
   const renderCell = (
@@ -202,23 +243,25 @@ export const useCatalogPage = () => {
             <Modal
               size="2xl"
               backdrop="opaque"
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
+              isOpen={isOpenupdateProductOrService}
+              onOpenChange={onOpenChangeupdateProductOrService}
             >
               <ModalContent>
-                {(onClose) => (
+                {(onCloseupdateProductOrService) => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">
-                      Actualizar Negocio
+                      Actualizar Producto o Servicio
                     </ModalHeader>
                     <ModalBody className="flex justify-center">
                       <CatalogForm
                         handleCatalogForm={{
                           typeValue,
                           setTypeValue,
+                          unitValue,
+                          setUnitValue,
                           productOrService,
-                          handleSubmitCatalogForm,
-                          onClose,
+                          handleSubmit: handleSubmitUpdate,
+                          onClose: onCloseupdateProductOrService,
                           handleOnChangeForm,
                           handleOnClearForm,
                           handleInventory_controlItem,
@@ -241,7 +284,7 @@ export const useCatalogPage = () => {
                         className="uppercase"
                         color="warning"
                         variant="light"
-                        onPress={onClose}
+                        onPress={onCloseupdateProductOrService}
                       >
                         Cancelar
                       </Button>
@@ -260,7 +303,19 @@ export const useCatalogPage = () => {
     allCatalog,
     columnNames,
     renderCell,
-    handleOnChange,
-    handleOnClear,
+    isOpenCreateProductOrService,
+    onOpenChangeCreateProductOrService,
+    handleOpenModalCreateItem,
+    handleCreate: {
+      typeValue,
+      setTypeValue,
+      unitValue,
+      setUnitValue,
+      productOrService,
+      handleSubmit: handleSubmitCreate,
+      handleOnChangeForm,
+      handleOnClearForm,
+      handleInventory_controlItem,
+    },
   };
 };

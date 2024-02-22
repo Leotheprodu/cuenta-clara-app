@@ -32,6 +32,29 @@ const typeOfProductsAndServices: TypeOfProductsAndServices = {
   product: { name: "Product", nombre: "Producto" },
   service: { name: "Service", nombre: "Servicio" },
 };
+const unitsOfProductsAndServices = [
+  "unidad",
+  "bolsa",
+  "caja",
+  "metro",
+  "metro cubico",
+  "kilogramo",
+  "gramo",
+  "litro",
+  "mililitro",
+  "paquete",
+  "botella",
+  "barra",
+  "docena",
+  "rollo",
+  "pack",
+  "pieza",
+  "lata",
+  "tableta",
+  "tubo",
+  "tarro",
+  "fardo",
+];
 
 const typeOfRoles = {
   admin: {
@@ -258,7 +281,7 @@ const productsAndServicesDefault: DataProductsAndServicesProps = {
   name: "",
   description: "",
   unit: "",
-  unit_price: 0,
+  unit_price: 1,
   default: false,
   business_id: 0,
   code: "",
@@ -379,4 +402,5 @@ export {
   ClientDashboardInitialData,
   typeOfProductsAndServices,
   transactionsInvoiceDashboard,
+  unitsOfProductsAndServices,
 };
