@@ -26,13 +26,17 @@ import toast from "react-hot-toast";
 import { CatalogForm } from "./CatalogForm";
 import { $GlobalLoading } from "@/stores/generalConfig";
 import { EditRowIcon } from "@/icons/EditRowIcon";
+import { $user } from "@/stores/users";
 
 export const useCatalogPage = () => {
+  const user = useStore($user);
   const selectedBusiness = useStore($selectedBusiness);
   const [typeValue, setTypeValue] = useState<Selection>(new Set(["service"]));
   const [unitValue, setUnitValue] = useState<Selection>(new Set(["unidad"]));
+  const [inputError, setInputError] = useState({ code: false });
   const [productOrService, setProductOrService] =
     useState<DataProductsAndServicesProps>(productsAndServicesDefault);
+  const [allCodesOfCatalog, setAllCodesOfCatalog] = useState<string[]>(["0"]);
   const [allCatalog, setAllCatalog] = useState<DataProductsAndServicesProps[]>([
     productsAndServicesDefault,
   ]);
@@ -71,15 +75,11 @@ export const useCatalogPage = () => {
         body: productOrService,
       }),
   });
+
   useEffect(() => {
-    if (statusUpdateProductsAndServices === "success") {
-      toast.success("Producto o servicio actualizado con exito");
-      refetchProductsAndServices();
-      setProductOrService(productsAndServicesDefault);
-    } else if (statusUpdateProductsAndServices === "error") {
-      toast.error("Error al actualizar producto o servicio");
-    }
-  }, [statusUpdateProductsAndServices, refetchProductsAndServices]);
+    const codes = allCatalog.map((item) => item.code);
+    setAllCodesOfCatalog(codes);
+  }, [allCatalog]);
   useEffect(() => {
     if (allCatalog?.length === 0) {
       refetchProductsAndServices();
@@ -122,10 +122,20 @@ export const useCatalogPage = () => {
       setAllCatalog(dataProductsAndServices);
     }
   }, [statusProductsAndServices, dataProductsAndServices]);
+  useEffect(() => {
+    if (statusUpdateProductsAndServices === "success") {
+      refetchProductsAndServices();
+    }
+  }, [statusUpdateProductsAndServices, refetchProductsAndServices]);
   const handleOnClearForm = (name: string) =>
     handleOnClear(name, setProductOrService);
-  const handleOnChangeForm = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleOnChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleOnChange(setProductOrService, e);
+    const inputName = e.target.name;
+    if (inputName === "code") {
+      setInputError({ ...inputError, code: false });
+    }
+  };
   const columnNames: ColumnNamesProps[] = [
     { key: "code", name: "Codigo" },
     { key: "name", name: "Nombre" },
@@ -147,7 +157,11 @@ export const useCatalogPage = () => {
     onOpenupdateProductOrService();
   };
   const handleOpenModalCreateItem = () => {
-    setProductOrService(productsAndServicesDefault);
+    setProductOrService({
+      ...productsAndServicesDefault,
+      business_id: selectedBusiness.id,
+      user_id: user.user.id,
+    });
     setTypeValue(new Set(["service"]));
     setUnitValue(new Set(["unidad"]));
     onOpenCreateProductOrService();
@@ -165,13 +179,25 @@ export const useCatalogPage = () => {
   };
   const handleSubmitUpdate = (e: any, onClose: () => void) => {
     e.preventDefault();
+    const codeAssembly = `${user.user.id}-${productOrService.business_id}-${productOrService.code}`;
+    const existingProduct = allCatalog?.find(
+      (item) => item.id === productOrService.id
+    );
+    const existingCode = existingProduct ? existingProduct.code : "0";
     if (productOrService.unit_price <= 0) {
       toast.error("El precio debe ser mayor a 0");
+      return;
+    } else if (
+      existingCode !== codeAssembly &&
+      allCodesOfCatalog.includes(codeAssembly)
+    ) {
+      setInputError({ code: true });
+      toast.error("El codigo ya existe");
       return;
     }
     setProductOrService({
       ...productOrService,
-      code: `${productOrService.id}-${productOrService.business_id}-${productOrService.code}`,
+      code: codeAssembly,
     });
     onClose();
     setTimeout(() => {
@@ -180,17 +206,26 @@ export const useCatalogPage = () => {
   };
   const handleSubmitCreate = (e: any, onClose: () => void) => {
     e.preventDefault();
+    const codeAssembly = `${user.user.id}-${productOrService.business_id}-${productOrService.code}`;
     if (productOrService.unit_price <= 0) {
       toast.error("El precio debe ser mayor a 0");
+      return;
+    } else if (productOrService.code === "") {
+      setInputError({ code: true });
+      toast.error("El codigo no puede estar vacio");
+      return;
+    } else if (allCodesOfCatalog.includes(codeAssembly)) {
+      setInputError({ code: true });
+      toast.error("El codigo ya existe");
       return;
     }
     setProductOrService({
       ...productOrService,
-      code: `${productOrService.id}-${productOrService.business_id}-${productOrService.code}`,
+      code: codeAssembly,
     });
     onClose();
     setTimeout(() => {
-      console.log("create");
+      console.log(productOrService);
       /* mutateCreateProductsAndServices(); */
     }, 500);
   };
@@ -255,6 +290,8 @@ export const useCatalogPage = () => {
                     <ModalBody className="flex justify-center">
                       <CatalogForm
                         handleCatalogForm={{
+                          setInputError,
+                          inputError,
                           typeValue,
                           setTypeValue,
                           unitValue,
@@ -307,6 +344,8 @@ export const useCatalogPage = () => {
     onOpenChangeCreateProductOrService,
     handleOpenModalCreateItem,
     handleCreate: {
+      setInputError,
+      inputError,
       typeValue,
       setTypeValue,
       unitValue,

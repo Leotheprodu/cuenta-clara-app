@@ -24,9 +24,7 @@ export const CatalogPage = () => {
     handleOpenModalCreateItem,
     onOpenChangeCreateProductOrService,
   } = useCatalogPage();
-  /* const user = useStore($user); */
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
-  /* const selectedBusiness = useStore($selectedBusiness); */
   if (showLoading) return LoadingElement;
   return (
     <section>

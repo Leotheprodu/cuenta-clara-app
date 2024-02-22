@@ -9,6 +9,8 @@ export const CatalogForm = ({
   formId: string;
 }) => {
   const {
+    setInputError,
+    inputError,
     typeValue,
     setTypeValue,
     unitValue,
@@ -51,6 +53,7 @@ export const CatalogForm = ({
         onChange={handleOnChangeForm}
         name="code"
         required
+        isInvalid={inputError.code}
       ></Input>
       <Input
         className="max-w-xs"
