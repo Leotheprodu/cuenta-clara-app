@@ -132,6 +132,7 @@ const ramdomSaludo = [
  * @description Constante que contiene el objeto de cliente por defecto
  * @usedIn useFiltersClients.tsx
  */
+
 const clientDefault: ClientProps = {
   id: 0,
   username: "Nombre de Cliente",
@@ -366,6 +367,7 @@ const DataRechargesBalanceByClientDefault: DataRechargesBalanceByClientProps = {
     },
   },
 };
+const inputErrorDefault = { code: false };
 
 /* ----------------------------------URLs------------------------------------ */
 /**
@@ -403,4 +405,5 @@ export {
   typeOfProductsAndServices,
   transactionsInvoiceDashboard,
   unitsOfProductsAndServices,
+  inputErrorDefault,
 };

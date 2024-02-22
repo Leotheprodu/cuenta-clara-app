@@ -3,6 +3,7 @@ import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { handleOnChange, handleOnClear } from "@/components/Utils/formUtils";
 import { productAndServiceCodeClean } from "@/components/Utils/productAndServiceCodeClean";
 import {
+  inputErrorDefault,
   productsAndServicesDefault,
   typeOfProductsAndServices,
 } from "@/data/constants";
@@ -27,13 +28,14 @@ import { CatalogForm } from "./CatalogForm";
 import { $GlobalLoading } from "@/stores/generalConfig";
 import { EditRowIcon } from "@/icons/EditRowIcon";
 import { $user } from "@/stores/users";
+import { CopyContentIcon } from "@/icons/CopyContentIcon";
 
 export const useCatalogPage = () => {
   const user = useStore($user);
   const selectedBusiness = useStore($selectedBusiness);
   const [typeValue, setTypeValue] = useState<Selection>(new Set(["service"]));
   const [unitValue, setUnitValue] = useState<Selection>(new Set(["unidad"]));
-  const [inputError, setInputError] = useState({ code: false });
+  const [inputError, setInputError] = useState(inputErrorDefault);
   const [productOrService, setProductOrService] =
     useState<DataProductsAndServicesProps>(productsAndServicesDefault);
   const [allCodesOfCatalog, setAllCodesOfCatalog] = useState<string[]>(["0"]);
@@ -154,7 +156,23 @@ export const useCatalogPage = () => {
     });
     setTypeValue(new Set([allCatalog[index].type]));
     setUnitValue(new Set([allCatalog[index].unit]));
+    setInputError(inputErrorDefault);
     onOpenupdateProductOrService();
+  };
+  const handleOpenModalCreateCopyItem = (
+    e: React.MouseEvent,
+    index: number
+  ) => {
+    e.preventDefault();
+    setProductOrService({
+      ...allCatalog[index],
+      code: productAndServiceCodeClean(allCatalog[index].code),
+      id: 0,
+    });
+    setTypeValue(new Set([allCatalog[index].type]));
+    setUnitValue(new Set([allCatalog[index].unit]));
+    setInputError(inputErrorDefault);
+    onOpenCreateProductOrService();
   };
   const handleOpenModalCreateItem = () => {
     setProductOrService({
@@ -164,9 +182,11 @@ export const useCatalogPage = () => {
     });
     setTypeValue(new Set(["product"]));
     setUnitValue(new Set(["unidad"]));
+
     onOpenCreateProductOrService();
   };
   const handleInventory_controlItem = () => {
+    setInputError(inputErrorDefault);
     setProductOrService({
       ...productOrService,
       inventory_control: !productOrService.inventory_control,
@@ -266,13 +286,21 @@ export const useCatalogPage = () => {
         return <p className="text-center">{moneyFormat(catalog.unit_price)}</p>;
       case "actions":
         return (
-          <div className="relative flex items-center justify-end gap-2">
+          <div className="relative flex items-center justify-end gap-4">
             <Tooltip color={"warning"} content="Editar">
               <button
                 onClick={(e) => handleOpenModalUpdateItem(e, index)}
                 className={`text-lg cursor-pointer active:opacity-50`}
               >
                 <EditRowIcon className=" text-terciario" />
+              </button>
+            </Tooltip>
+            <Tooltip color={"success"} content="Crear Copia">
+              <button
+                onClick={(e) => handleOpenModalCreateCopyItem(e, index)}
+                className={`text-lg cursor-pointer active:opacity-50`}
+              >
+                <CopyContentIcon className=" text-success-500" />
               </button>
             </Tooltip>
             <Modal
@@ -285,7 +313,7 @@ export const useCatalogPage = () => {
                 {(onCloseupdateProductOrService) => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">
-                      Actualizar Producto o Servicio
+                      Editar Producto o Servicio
                     </ModalHeader>
                     <ModalBody className="flex justify-center">
                       <CatalogForm
