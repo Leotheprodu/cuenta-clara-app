@@ -48,6 +48,7 @@ export const CatalogForm = ({
         size="sm"
         type="text"
         label="Codigo"
+        autoFocus
         placeholder={`Ingresa el codigo para tu ${
           productOrService.type === "service" ? "servicio" : "producto"
         }`}
