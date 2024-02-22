@@ -65,6 +65,7 @@ export const useCatalogPage = () => {
     if (statusUpdateProductsAndServices === "success") {
       toast.success("Producto o servicio actualizado con exito");
       refetchProductsAndServices();
+      setProductOrService(productsAndServicesDefault);
     } else if (statusUpdateProductsAndServices === "error") {
       toast.error("Error al actualizar producto o servicio");
     }
@@ -222,11 +223,12 @@ export const useCatalogPage = () => {
                           handleOnClearForm,
                           handleInventory_controlItem,
                         }}
+                        formId="updateProductOrService"
                       />
                     </ModalBody>
                     <ModalFooter>
                       <Button
-                        form="updateProductOrService-form"
+                        form="updateProductOrService"
                         className="uppercase"
                         color="primary"
                         variant="solid"

@@ -2,8 +2,10 @@ import { Checkbox, Input, Select, SelectItem } from "@nextui-org/react";
 
 export const CatalogForm = ({
   handleCatalogForm,
+  formId,
 }: {
   handleCatalogForm: any;
+  formId: string;
 }) => {
   const {
     typeValue,
@@ -17,7 +19,7 @@ export const CatalogForm = ({
   } = handleCatalogForm;
   return (
     <form
-      id="updateProductOrService-form"
+      id={formId}
       onSubmit={(e) => handleSubmitCatalogForm(e, onClose)}
       className="flex flex-col gap-1 items-center justify-center"
     >
