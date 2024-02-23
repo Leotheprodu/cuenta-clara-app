@@ -17,7 +17,7 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
   const { invoices, columnNames, renderCell, client, isLoadingInvoices } =
     invoicesByClient;
   return (
-    <div className=" flex flex-col gap-2 pb-24 w-screen">
+    <div className=" flex flex-col gap-2 pb-24 w-screen px-4">
       <HeaderCreateInvoice
         handle={{
           username: client.username,

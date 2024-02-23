@@ -47,7 +47,7 @@ export const AddTransactionForm = ({
           value={amount.toString()}
           onChange={handleOnChange}
         ></Input>
-        <div className="flex w-full gap-1 items-center justify-center">
+        <div className="flex w-full gap-1 flex-col sm:flex-row items-center justify-center">
           <Select
             className="w-full"
             label="metodo de pago"
