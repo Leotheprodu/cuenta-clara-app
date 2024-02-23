@@ -29,7 +29,7 @@ export const BusinessesPage = () => {
   /* const selectedBusiness = useStore($selectedBusiness); */
   if (showLoading) return LoadingElement;
   return (
-    <section>
+    <section className="p-4 w-screen">
       <Table isStriped aria-label="Detalle de Factura w-screen">
         <TableHeader>
           {columnNames.map((column: ColumnNamesProps) => (

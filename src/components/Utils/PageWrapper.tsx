@@ -16,7 +16,7 @@ export const PageWrapper = ({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{ duration: 0.5 }}
-          className="z-0"
+          className=""
         >
           {children}
         </motion.div>
@@ -30,7 +30,7 @@ export const PageWrapper = ({
           animate={{ x: 0 }}
           exit={{ x: -1000 }}
           transition={{ duration: 0.5 }}
-          className="z-0"
+          className=""
         >
           {children}
         </motion.div>

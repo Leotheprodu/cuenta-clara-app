@@ -166,12 +166,12 @@ export const useCatalogPage = () => {
     e.preventDefault();
     setProductOrService({
       ...allCatalog[index],
-      code: productAndServiceCodeClean(allCatalog[index].code),
+      code: "",
       id: 0,
     });
     setTypeValue(new Set([allCatalog[index].type]));
     setUnitValue(new Set([allCatalog[index].unit]));
-    setInputError(inputErrorDefault);
+    setInputError({ code: true });
     onOpenCreateProductOrService();
   };
   const handleOpenModalCreateItem = () => {
@@ -182,7 +182,7 @@ export const useCatalogPage = () => {
     });
     setTypeValue(new Set(["product"]));
     setUnitValue(new Set(["unidad"]));
-
+    setInputError(inputErrorDefault);
     onOpenCreateProductOrService();
   };
   const handleInventory_controlItem = () => {
@@ -256,23 +256,19 @@ export const useCatalogPage = () => {
   ) => {
     switch (columnKey) {
       case "code":
-        return (
-          <p className="text-center">
-            {productAndServiceCodeClean(catalog.code)}
-          </p>
-        );
+        return <p className="">{productAndServiceCodeClean(catalog.code)}</p>;
       case "name":
-        return <p className="text-center">{catalog.name}</p>;
+        return <p className="">{catalog.name}</p>;
       case "description":
-        return <p className="text-center">{catalog.description}</p>;
+        return <p className=" break-words">{catalog.description}</p>;
       case "type":
         return (
-          <p className="text-center">
+          <p className="">
             {catalog.type && typeOfProductsAndServices[catalog.type].nombre}
           </p>
         );
       case "unit":
-        return <p className="text-center">{catalog.unit}</p>;
+        return <p className="">{catalog.unit}</p>;
       case "default":
         return (
           <Checkbox
@@ -283,7 +279,7 @@ export const useCatalogPage = () => {
           ></Checkbox>
         );
       case "price":
-        return <p className="text-center">{moneyFormat(catalog.unit_price)}</p>;
+        return <p className="">{moneyFormat(catalog.unit_price)}</p>;
       case "actions":
         return (
           <div className="relative flex items-center justify-end gap-4">

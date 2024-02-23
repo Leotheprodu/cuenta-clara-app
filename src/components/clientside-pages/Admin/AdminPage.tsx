@@ -14,7 +14,7 @@ export const AdminPage = () => {
   if (showLoading) return LoadingElement;
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 p-4">
       <p className="text-primario">
         Hola{" "}
         {user.employee.isEmployee

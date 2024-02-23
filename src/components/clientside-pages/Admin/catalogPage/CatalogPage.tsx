@@ -27,7 +27,7 @@ export const CatalogPage = () => {
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
   if (showLoading) return LoadingElement;
   return (
-    <section>
+    <section className="w-screen p-4">
       <Table isStriped aria-label="Catalogo">
         <TableHeader>
           {columnNames.map((column: ColumnNamesProps) => (

@@ -5,11 +5,8 @@ import { MotionAddButtonLink } from "@/components/layout/Footer/MotionAddButtonL
 import { LinkNav } from "@/components/layout/Header/LinkNav";
 import { AdminPanelIcon } from "@/icons/AdminPanelIcon";
 import { HomeIcon } from "@/icons/HomeIcon";
-import { $user } from "@/stores/users";
-import { useStore } from "@nanostores/react";
 
 export const AdminNav = () => {
-  const user = useStore($user);
   return (
     <nav className="mt-20 flex flex-col items-start gap-4">
       <MotionAddButtonLink delay={0.3}>

@@ -36,11 +36,13 @@ export default function AdminLayout({
                 isMovil
                   ? "w-full"
                   : "w-[17rem] border-r-1 border-r-slate-200 shadow-small"
-              } bg-blanco flex flex-col items-center justify-start min-h-screen fixed`}
+              } bg-blanco flex flex-col z-10 items-center justify-start min-h-screen fixed`}
             >
-              <PageWrapper variant="2">
-                <AdminNav />
-              </PageWrapper>
+              <div onClick={() => setShowMenu(false)}>
+                <PageWrapper variant="2">
+                  <AdminNav />
+                </PageWrapper>
+              </div>
 
               <Button
                 variant="light"
@@ -57,7 +59,7 @@ export default function AdminLayout({
           </PageWrapper>
         ) : (
           <PageWrapper variant="2">
-            <section className="fixed">
+            <section className="z-10 fixed">
               <Button
                 className="flex items-center justify-center h-12 w-12 rounded-sm p-0"
                 variant="light"
@@ -69,7 +71,7 @@ export default function AdminLayout({
           </PageWrapper>
         )}
         <div
-          className={`w-full flex justify-center ${
+          className={`z-0 w-full flex justify-center ${
             !isMovil && showMenu && "ml-[17rem]"
           } ${!isMovil && !showMenu && "px-40 my-12"}`}
         >

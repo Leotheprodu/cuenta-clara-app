@@ -22,7 +22,7 @@ export const ModalCreateProductOrService = ({
 }) => {
   return (
     <section className="mt-6 flex justify-center">
-      <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-1/2">
+      <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
         <p className="text-slate-500 ">
           Crea un nuevo producto o servicio para tu negocio.
         </p>

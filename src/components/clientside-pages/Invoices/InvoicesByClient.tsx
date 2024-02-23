@@ -17,7 +17,7 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
   const { invoices, columnNames, renderCell, client, isLoadingInvoices } =
     invoicesByClient;
   return (
-    <div className="w-full flex flex-col gap-2 pb-24">
+    <div className=" flex flex-col gap-2 pb-24 w-screen">
       <HeaderCreateInvoice
         handle={{
           username: client.username,
@@ -25,8 +25,8 @@ export const InvoicesByClient = ({ id }: { id: string }) => {
         }}
       />
       <PageWrapper>
-        <section className="mt-[3rem] pt-3 max-w-full">
-          <Table isStriped aria-label="Detalle de Factura w-screen">
+        <section className="mt-[3rem] pt-3">
+          <Table isStriped aria-label="Detalle de Factura">
             <TableHeader>
               {columnNames.map((column: ColumnNamesProps) => (
                 <TableColumn className="text-center" key={column.key}>
