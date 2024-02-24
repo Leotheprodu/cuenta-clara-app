@@ -35,10 +35,10 @@ export default function AdminLayout({
               className={`${
                 isMovil
                   ? "w-full"
-                  : "w-[17rem] border-r-1 border-r-slate-200 shadow-small"
+                  : "w-[14rem] border-r-1 border-r-slate-200 shadow-small"
               } bg-blanco flex flex-col z-10 items-center justify-start min-h-screen fixed`}
             >
-              <div onClick={() => setShowMenu(false)}>
+              <div onClick={() => isMovil && setShowMenu(false)}>
                 <PageWrapper variant="2">
                   <AdminNav />
                 </PageWrapper>
@@ -72,8 +72,8 @@ export default function AdminLayout({
         )}
         <div
           className={`z-0 w-full flex justify-center ${
-            !isMovil && showMenu && "ml-[17rem]"
-          } ${!isMovil && !showMenu && "px-40 my-12"}`}
+            !isMovil && "ml-[14rem] my-12"
+          }`}
         >
           {children}
         </div>

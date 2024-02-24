@@ -25,7 +25,7 @@ export const BalanceRechargesByClient = ({ id }: { id: number }) => {
   if (cliente || user.roles.includes(typeOfRoles.admin.id)) {
     if (cliente[0]?.id === id || user.roles.includes(typeOfRoles.admin.id)) {
       return (
-        <section className="flex flex-col gap-2 pb-24 w-screen px-4">
+        <section className="flex flex-col gap-2 pb-24 w-screen sm:w-full px-4">
           <HeaderCreateInvoice
             handle={{
               username: recharges[0]?.client.username,

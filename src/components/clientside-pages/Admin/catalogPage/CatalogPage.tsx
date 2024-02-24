@@ -27,8 +27,8 @@ export const CatalogPage = () => {
   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
   if (showLoading) return LoadingElement;
   return (
-    <section className="w-screen p-4">
-      <Table isStriped aria-label="Catalogo">
+    <section className="w-screen sm:w-full p-4">
+      <Table className="" isStriped aria-label="Catalogo">
         <TableHeader>
           {columnNames.map((column: ColumnNamesProps) => (
             <TableColumn className="text-center" key={column.key}>

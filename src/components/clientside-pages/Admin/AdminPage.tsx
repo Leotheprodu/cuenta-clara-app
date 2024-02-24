@@ -14,8 +14,8 @@ export const AdminPage = () => {
   if (showLoading) return LoadingElement;
 
   return (
-    <div className="flex flex-col gap-10 p-4">
-      <p className="text-primario">
+    <div className="w-screen sm:w-full p-4 ">
+      <p className="text-primario sm:w-1/2 sm:my-0 sm:mx-auto">
         Hola{" "}
         {user.employee.isEmployee
           ? user.employee.employeeName
