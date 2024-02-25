@@ -64,7 +64,6 @@ export const ModalSearchProductsAndServices = ({
                         <th className="py-1 px-2">Nombre</th>
                         <th className="py-1 px-2">Unidad</th>
                         <th className="py-1 px-2">Precio</th>
-                        <th className="py-1 px-2">Favorito</th>
                         <th className="py-1 px-2">Descripción</th>
                       </tr>
                     </thead>
@@ -83,9 +82,6 @@ export const ModalSearchProductsAndServices = ({
                             <td className="py-1 px-2">{ps.unit}</td>
                             <td className="py-1 px-2">
                               {moneyFormat(ps.unit_price)}
-                            </td>
-                            <td className="py-1 px-2 text-center">
-                              {ps.default ? "Si" : "No"}
                             </td>
                             <td className="py-1 px-2">{ps.description}</td>
                           </tr>
