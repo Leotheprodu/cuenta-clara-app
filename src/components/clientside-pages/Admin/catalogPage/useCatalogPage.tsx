@@ -77,6 +77,19 @@ export const useCatalogPage = () => {
         body: productOrService,
       }),
   });
+  const {
+    status: statusCreateProductsAndServices,
+    mutate: mutateCreateProductsAndServices,
+    isPending: isPendingCreateProductsAndServices,
+  } = useMutation({
+    mutationKey: ["create-products-and-services"],
+    mutationFn: async () =>
+      await fetchAPI({
+        url: "products_and_services",
+        method: "POST",
+        body: productOrService,
+      }),
+  });
 
   useEffect(() => {
     const codes = allCatalog.map((item) => item.code);
@@ -101,10 +114,11 @@ export const useCatalogPage = () => {
     });
   }, [isPendingUpdateProductsAndServices]);
   useEffect(() => {
-    typeValue &&
+    const type = Array.from(typeValue)[0].toString();
+    type !== "" &&
       setProductOrService({
         ...productOrService,
-        type: Array.from(typeValue)[0].toString(),
+        type,
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeValue]);
@@ -127,8 +141,19 @@ export const useCatalogPage = () => {
   useEffect(() => {
     if (statusUpdateProductsAndServices === "success") {
       refetchProductsAndServices();
+      toast.success("Producto o servicio actualizado");
+    } else if (statusUpdateProductsAndServices === "error") {
+      toast.error("Error al actualizar producto o servicio");
     }
   }, [statusUpdateProductsAndServices, refetchProductsAndServices]);
+  useEffect(() => {
+    if (statusCreateProductsAndServices === "success") {
+      refetchProductsAndServices();
+      toast.success("Producto o servicio Creado");
+    } else if (statusCreateProductsAndServices === "error") {
+      toast.error("Error al actualizar producto o servicio");
+    }
+  }, [statusCreateProductsAndServices, refetchProductsAndServices]);
   const handleOnClearForm = (name: string) =>
     handleOnClear(name, setProductOrService);
   const handleOnChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,6 +204,7 @@ export const useCatalogPage = () => {
       ...productsAndServicesDefault,
       business_id: selectedBusiness.id,
       user_id: user.user.id,
+      type: "product",
     });
     setTypeValue(new Set(["product"]));
     setUnitValue(new Set(["unidad"]));
@@ -245,8 +271,7 @@ export const useCatalogPage = () => {
     });
     onClose();
     setTimeout(() => {
-      console.log(productOrService);
-      /* mutateCreateProductsAndServices(); */
+      mutateCreateProductsAndServices();
     }, 500);
   };
   const renderCell = (
