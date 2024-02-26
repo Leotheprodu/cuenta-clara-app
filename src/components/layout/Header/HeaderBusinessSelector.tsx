@@ -1,3 +1,4 @@
+"use client";
 import { isUserRequired } from "@/components/Utils/internalLinks";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { $internalLinkName } from "@/stores/generalConfig";

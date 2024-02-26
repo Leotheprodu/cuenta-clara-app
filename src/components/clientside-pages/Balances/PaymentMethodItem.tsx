@@ -1,3 +1,4 @@
+"use client";
 import { $balanceRechargeInfo } from "@/stores/business";
 import { useStore } from "@nanostores/react";
 import { useState } from "react";
