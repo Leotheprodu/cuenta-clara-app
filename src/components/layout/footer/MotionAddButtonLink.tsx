@@ -19,7 +19,6 @@ export const MotionAddButtonLink = ({
           transition: { delay },
         }}
         exit={{ opacity: 0, x: 20 }}
-        className=""
       >
         {children}
       </motion.div>
