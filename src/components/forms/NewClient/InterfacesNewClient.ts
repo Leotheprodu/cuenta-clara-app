@@ -47,7 +47,7 @@ interface BusinessListProps {
     isLoadingBusiness: boolean;
     business: Array<BusinessProps>;
     selectedKeys: Set<string>;
-    disabledKeys: Set<string>;
+    disabledKeys?: Set<string>;
     handleSelectionChange: (selectedKeys: any) => void;
   };
   title: string;

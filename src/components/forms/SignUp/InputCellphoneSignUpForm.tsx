@@ -19,7 +19,7 @@ export const InputCellphoneSignUpForm = ({ handle }: InputCellphoneProps) => {
         name="cellphone"
         description="Preferiblemente el número de WhatsApp"
         required
-        isInvalid={noFormValue.cellphone}
+        isInvalid={noFormValue?.cellphone}
       ></Input>
     </div>
   );
