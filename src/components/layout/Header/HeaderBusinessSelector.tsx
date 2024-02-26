@@ -21,8 +21,8 @@ export const HeaderBusinessSelector = ({
   } = handle;
   const internalLinkName = useStore($internalLinkName);
   const user = useStore($user);
-  const maxWidth = window.innerWidth - 130; // 300 es el margen derecho que deseas
-  const maxHeight = window.innerHeight - 300; // 500 es el margen inferior que deseas
+  const maxWidth = window?.innerWidth - 130; // 300 es el margen derecho que deseas
+  const maxHeight = window?.innerHeight - 300; // 500 es el margen inferior que deseas
 
   return (
     <div className="flex gap-1 items-center">
