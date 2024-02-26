@@ -78,6 +78,18 @@ export const useCatalogPage = () => {
       }),
   });
   const {
+    status: statusUpdateDefaultProductsAndServices,
+    mutate: mutateUpdateDefaultProductsAndServices,
+    isPending: isPendingUpdateDefaultProductsAndServices,
+  } = useMutation({
+    mutationKey: ["update-default-products-and-services"],
+    mutationFn: async (id: number) =>
+      await fetchAPI({
+        url: `products_and_services/${id}`,
+        method: "PATCH",
+      }),
+  });
+  const {
     status: statusCreateProductsAndServices,
     mutate: mutateCreateProductsAndServices,
     isPending: isPendingCreateProductsAndServices,
@@ -173,29 +185,32 @@ export const useCatalogPage = () => {
     { key: "default", name: "Favorito" },
     { key: "actions", name: "Acciones" },
   ];
-  const handleOpenModalUpdateItem = (e: React.MouseEvent, index: number) => {
+  const handleOpenModalUpdateItem = (
+    e: React.MouseEvent,
+    item: DataProductsAndServicesProps
+  ) => {
     e.preventDefault();
     setProductOrService({
-      ...allCatalog[index],
-      code: productAndServiceCodeClean(allCatalog[index].code),
+      ...item,
+      code: productAndServiceCodeClean(item.code),
     });
-    setTypeValue(new Set([allCatalog[index].type]));
-    setUnitValue(new Set([allCatalog[index].unit]));
+    setTypeValue(new Set([item.type]));
+    setUnitValue(new Set([item.unit]));
     setInputError(inputErrorDefault);
     onOpenupdateProductOrService();
   };
   const handleOpenModalCreateCopyItem = (
     e: React.MouseEvent,
-    index: number
+    item: DataProductsAndServicesProps
   ) => {
     e.preventDefault();
     setProductOrService({
-      ...allCatalog[index],
+      ...item,
       code: "",
       id: 0,
     });
-    setTypeValue(new Set([allCatalog[index].type]));
-    setUnitValue(new Set([allCatalog[index].unit]));
+    setTypeValue(new Set([item.type]));
+    setUnitValue(new Set([item.unit]));
     setInputError({ code: true });
     onOpenCreateProductOrService();
   };
@@ -218,10 +233,17 @@ export const useCatalogPage = () => {
       inventory_control: !productOrService.inventory_control,
     });
   };
-  const handleChangeDefaultItem = (index: number) => {
-    if (allCatalog[index].default) {
-      return;
-    }
+  const handleChangeDefaultItem = (item: DataProductsAndServicesProps) => {
+    if (item.default) return;
+    mutateUpdateDefaultProductsAndServices(item.id, {
+      onSuccess: () => {
+        refetchProductsAndServices();
+        toast.success("Producto o servicio favorito actualizado");
+      },
+      onError: () => {
+        toast.error("Error al actualizar producto o servicio favorito");
+      },
+    });
   };
   const handleSubmitUpdate = (e: any, onClose: () => void) => {
     e.preventDefault();
@@ -300,7 +322,7 @@ export const useCatalogPage = () => {
             className="my-0 mx-auto"
             disabled={allCatalog?.length === 1}
             isSelected={catalog.default}
-            onValueChange={() => handleChangeDefaultItem(index)}
+            onValueChange={() => handleChangeDefaultItem(catalog)}
           ></Checkbox>
         );
       case "price":
@@ -310,7 +332,7 @@ export const useCatalogPage = () => {
           <div className="relative flex items-center justify-end gap-4">
             <Tooltip color={"warning"} content="Editar">
               <button
-                onClick={(e) => handleOpenModalUpdateItem(e, index)}
+                onClick={(e) => handleOpenModalUpdateItem(e, catalog)}
                 className={`text-lg cursor-pointer active:opacity-50`}
               >
                 <EditRowIcon className=" text-terciario" />
@@ -318,7 +340,7 @@ export const useCatalogPage = () => {
             </Tooltip>
             <Tooltip color={"success"} content="Crear Copia">
               <button
-                onClick={(e) => handleOpenModalCreateCopyItem(e, index)}
+                onClick={(e) => handleOpenModalCreateCopyItem(e, catalog)}
                 className={`text-lg cursor-pointer active:opacity-50`}
               >
                 <CopyContentIcon className=" text-success-500" />
