@@ -18,14 +18,12 @@ export default function AdminLayout({
   const [isMovil, setIsMovil] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth <= 768) {
-        setIsMovil(true);
-        setShowMenu(false);
-      } else {
-        setIsMovil(false);
-        setShowMenu(true);
-      }
+    if (typeof window !== "undefined" && window.innerWidth <= 768) {
+      setIsMovil(true);
+      setShowMenu(false);
+    } else {
+      setIsMovil(false);
+      setShowMenu(true);
     }
   }, []);
   if (user.employee.isAdmin) {

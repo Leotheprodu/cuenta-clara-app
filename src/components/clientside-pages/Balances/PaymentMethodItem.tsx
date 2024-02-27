@@ -12,8 +12,9 @@ export const PaymentMethodItem = ({
 }: {
   payment_method: PaymentInfo;
 }) => {
-  const maxWidth = window?.innerWidth - 130; // 300 es el margen derecho que deseas
-  const maxHeight = window?.innerHeight - 300;
+  const maxWidth = typeof window !== "undefined" ? window.innerWidth - 130 : 0; // 300 es el margen derecho que deseas
+  const maxHeight =
+    typeof window !== "undefined" ? window.innerHeight - 300 : 0; // 500 es el margen inferior que deseas
   const balanceRechargeInfo = useStore($balanceRechargeInfo);
   const [showBigQR, setShowBigQR] = useState<boolean>(false);
   const handleCopyText = (textToCopy: string) => {
