@@ -208,6 +208,7 @@ export const useCatalogPage = () => {
       ...item,
       code: "",
       id: 0,
+      default: false,
     });
     setTypeValue(new Set([item.type]));
     setUnitValue(new Set([item.unit]));
