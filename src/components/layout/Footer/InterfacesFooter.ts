@@ -22,5 +22,6 @@ interface AddButtonLinkItemProps {
 interface AddButtonPopoverTriggerProps {
   handle: {
     handlePopoverTriggerClick: () => void;
+    isOpen: boolean;
   };
 }

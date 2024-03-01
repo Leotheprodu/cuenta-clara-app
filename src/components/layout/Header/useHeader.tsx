@@ -46,6 +46,16 @@ export const useHeader = () => {
     $GlobalLoading.set({ isLoading: false, message: `pagina cargada` });
   }, [internalLinkName]);
   useEffect(() => {
+    if (!user.isLoggedIn) {
+      setValue(new Set(["0"]));
+      $selectedBusiness.set({
+        id: 0,
+        name: "Registrate para usar",
+      });
+      setBusiness([BusinessDefault]);
+    }
+  }, [user.isLoggedIn]);
+  useEffect(() => {
     if (
       user.isLoggedIn &&
       isUserRequired(internalLinkName) &&
