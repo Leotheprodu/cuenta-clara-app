@@ -5,12 +5,11 @@ import { AddButtonPopoverContent } from "./AddButtonPopoverContent";
 import { AddButtonPopoverTrigger } from "./AddButtonPopoverTrigger";
 import { useAddButton } from "./useAddButton";
 import { useStore } from "@nanostores/react";
-import { $AppState, $internalLinkName } from "@/stores/generalConfig";
+import { $internalLinkName } from "@/stores/generalConfig";
 
 export const AddButton = () => {
   const { isOpen, handlePopoverOnClose, handlePopoverTriggerClick } =
     useAddButton();
-  const appState = useStore($AppState);
   const internalLinkName = useStore($internalLinkName);
   return (
     <div className="absolute top-[-1rem] transform-translate-y-1/2">
@@ -20,7 +19,9 @@ export const AddButton = () => {
         isOpen={isOpen}
         className="z-10"
       >
-        <AddButtonPopoverTrigger handle={{ handlePopoverTriggerClick }} />
+        <AddButtonPopoverTrigger
+          handle={{ handlePopoverTriggerClick, isOpen }}
+        />
         <AddButtonPopoverContent internalLinkName={internalLinkName} />
       </Popover>
     </div>
