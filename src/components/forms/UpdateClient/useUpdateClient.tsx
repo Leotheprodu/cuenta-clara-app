@@ -26,13 +26,13 @@ export const useUpdateClient = (
     status: statusBusiness,
     data: dataBusiness,
     isLoading: isLoadingBusiness,
+    refetch,
   } = useQuery({
     queryKey: ["users-business"],
     queryFn: async () =>
       await fetchAPI({
         url: "users_business",
       }),
-    retry: 2,
   });
   const { status: statusBalance, data: dataBalance } = useQuery({
     queryKey: ["user-balance"],
