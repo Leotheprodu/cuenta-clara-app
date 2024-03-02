@@ -28,7 +28,7 @@ export const BusinessList = ({ handle, title }: BusinessListProps) => {
           onSelectionChange={handleSelectionChange}
           disabledKeys={disabledKeys}
         >
-          {business.map((item) => (
+          {business?.map((item) => (
             <ListboxItem textValue="Negocio" key={item.id}>
               {item.name}
             </ListboxItem>
