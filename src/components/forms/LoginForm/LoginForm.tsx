@@ -21,11 +21,11 @@ export const LoginForm = () => {
     isPending,
   } = useLoginForm({ email: "", password: "" });
 
-  /*   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
+  const { showLoading, LoadingElement } = useLoadingByCriticProcess();
 
   if (showLoading) {
     return LoadingElement;
-  } */
+  }
 
   if (user.isLoggedIn) {
     return <IsLoggedInHandle />;
