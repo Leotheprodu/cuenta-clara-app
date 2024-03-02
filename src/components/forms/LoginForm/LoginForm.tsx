@@ -21,18 +21,18 @@ export const LoginForm = () => {
     isPending,
   } = useLoginForm({ email: "", password: "" });
 
-  const { showLoading, LoadingElement } = useLoadingByCriticProcess();
+  /*   const { showLoading, LoadingElement } = useLoadingByCriticProcess();
 
   if (showLoading) {
     return LoadingElement;
-  }
+  } */
 
   if (user.isLoggedIn) {
     return <IsLoggedInHandle />;
   }
 
   return (
-    <>
+    <div>
       <h1 className="text-3xl text-center font-semibold">Iniciar sesion</h1>
       <p className="text-center  text-primario mb-4">
         Inicia sesion para acceder a tu cuenta
@@ -79,6 +79,6 @@ export const LoginForm = () => {
           </Link>
         </p>
       </div>
-    </>
+    </div>
   );
 };

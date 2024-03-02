@@ -34,6 +34,11 @@ export const useUpdateClient = (
         url: "users_business",
       }),
   });
+  useEffect(() => {
+    if (dataBusiness?.length === 0) {
+      refetch();
+    }
+  }, [dataBusiness, refetch]);
   const { status: statusBalance, data: dataBalance } = useQuery({
     queryKey: ["user-balance"],
     queryFn: async () =>
