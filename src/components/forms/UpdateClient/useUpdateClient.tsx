@@ -61,10 +61,12 @@ export const useUpdateClient = (
       const disabledKeysString = disabledBusinesstoInactivate.map((item: any) =>
         item.toString()
       );
-      setSelectedKeys(new Set(selectedKeysString));
-      setDisabledKeys(new Set(disabledKeysString));
+      if (statusBusiness === "success") {
+        setSelectedKeys(new Set(selectedKeysString));
+        setDisabledKeys(new Set(disabledKeysString));
+      }
     }
-  }, [statusBalance, dataBalance]);
+  }, [statusBalance, dataBalance, statusBusiness]);
 
   useEffect(() => {
     if (statusBusiness === "success") {
