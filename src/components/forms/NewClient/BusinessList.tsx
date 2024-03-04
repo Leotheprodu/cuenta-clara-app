@@ -8,9 +8,9 @@ export const BusinessList = ({ handle, title }: BusinessListProps) => {
     disabledKeys,
     handleSelectionChange,
   } = handle;
-  if (isLoadingBusiness) {
+  /* if (isLoadingBusiness) {
     return <Loading />;
-  }
+  } */
   return (
     <div className="flex flex-col gap-2">
       <div className="w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
