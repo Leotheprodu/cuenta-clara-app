@@ -31,7 +31,7 @@ export const useUpdateClient = (
     queryKey: ["users-business"],
     queryFn: async () =>
       await fetchAPI({
-        url: "users_business",
+        url: "users_business?active=1",
       }),
   });
   useEffect(() => {
