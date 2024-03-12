@@ -31,7 +31,7 @@ export const useUpdateClient = (
     queryKey: ["users-business"],
     queryFn: async () =>
       await fetchAPI({
-        url: "users_business",
+        url: "users_business?active=1",
       }),
   });
   useEffect(() => {
@@ -61,10 +61,12 @@ export const useUpdateClient = (
       const disabledKeysString = disabledBusinesstoInactivate.map((item: any) =>
         item.toString()
       );
-      setSelectedKeys(new Set(selectedKeysString));
-      setDisabledKeys(new Set(disabledKeysString));
+      if (statusBusiness === "success") {
+        setSelectedKeys(new Set(selectedKeysString));
+        setDisabledKeys(new Set(disabledKeysString));
+      }
     }
-  }, [statusBalance, dataBalance]);
+  }, [statusBalance, dataBalance, statusBusiness]);
 
   useEffect(() => {
     if (statusBusiness === "success") {

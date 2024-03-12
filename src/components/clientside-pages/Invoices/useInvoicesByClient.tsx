@@ -143,8 +143,7 @@ export const useInvoicesByClient = ({ id }: { id: string }) => {
       case "balance":
         return (
           <p className="text-right">
-            {invoice.status === invoicesStatus.cancelled ||
-            invoice.status === invoicesStatus.paid
+            {invoice.status === invoicesStatus.cancelled
               ? "N/A"
               : moneyFormat(invoice.total_amount - totalTransactions)}
           </p>
