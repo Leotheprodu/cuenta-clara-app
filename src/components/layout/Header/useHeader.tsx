@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useStore } from "@nanostores/react";
@@ -90,9 +90,9 @@ export const useHeader = () => {
 
   const { status, mutate, isPending, data } = useMutation({
     mutationKey: ["favorite-business"],
-    mutationFn: async () =>
+    mutationFn: async (businessId: number) =>
       await fetchAPI({
-        url: `users_business/favorite/${Array.from(value)[0]}`,
+        url: `users_business/favorite/${businessId}`,
       }),
     retry: 2,
   });
@@ -112,12 +112,10 @@ export const useHeader = () => {
   }, [status, user]);
   const handleSelectionBusiness = (e: any) => {
     setValue(e);
+    mutate(Array.from(e)[0] as number);
   };
   const handleShowBalance = () => {
     setShowBalance(!showBalance);
-  };
-  const mutateFunction = () => {
-    mutate();
   };
   return {
     business,
@@ -125,7 +123,6 @@ export const useHeader = () => {
     value,
     handleSelectionBusiness,
     isPending,
-    mutateFunction,
     path,
     isLoggedIn: user.isLoggedIn,
     balance: moneyFormat(user.balance),

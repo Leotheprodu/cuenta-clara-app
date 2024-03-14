@@ -4,7 +4,7 @@ import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { $internalLinkName } from "@/stores/generalConfig";
 import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
-import { Select, SelectItem, Tooltip } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { motion } from "framer-motion";
 export const HeaderBusinessSelector = ({
   handle,
@@ -41,7 +41,6 @@ export const HeaderBusinessSelector = ({
           className="min-w-[13rem]"
           selectedKeys={value}
           onSelectionChange={handleSelectionBusiness}
-          onChange={mutateFunction}
         >
           {(business) => (
             <SelectItem key={business.id} value={business.id}>
