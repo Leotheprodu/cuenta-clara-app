@@ -15,7 +15,6 @@ export const HeaderBusinessSelector = ({
     handleSelectionBusiness,
     value,
     isPending,
-    mutateFunction,
     balance,
     handleShowBalance,
     showBalance,

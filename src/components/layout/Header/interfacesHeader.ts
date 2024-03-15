@@ -12,7 +12,6 @@ interface HeaderBusinessSelectorProps {
     handleSelectionBusiness: (e: any) => void;
     value: Set<string>;
     isPending: boolean;
-    mutateFunction: () => void;
     path: string;
     balance: string;
     handleShowBalance: () => void;
