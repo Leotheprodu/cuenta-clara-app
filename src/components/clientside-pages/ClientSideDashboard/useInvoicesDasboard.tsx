@@ -26,12 +26,12 @@ export const useInvoicesDasboard = ({
   const [selectedBusinessId, setSelectedBusinessId] = useState<number>(0);
   const { status, error, data, mutate } = useMutation({
     mutationKey: ["dashboard-invoice"],
-    mutationFn: async () =>
+    mutationFn: async (pinUser: string) =>
       await fetchAPI({
         url: `invoices/dashboard-info/${token}`,
         method: "POST",
         body: {
-          pin: pin.join(""),
+          pin: pinUser,
         },
       }),
   });
@@ -45,14 +45,16 @@ export const useInvoicesDasboard = ({
   ];
   useEffect(() => {
     if (okPin) {
-      mutate();
+      mutate(pin.join(""));
     }
-  }, [mutate, okPin]);
+  }, [mutate, okPin, pin]);
   useEffect(() => {
     if (status === "success") {
       setInvoices(data);
+    } else if (status === "error") {
+      console.log(error.message);
     }
-  }, [status, data]);
+  }, [status, data, error]);
   const renderCell = (invoice: Invoice, columnKey: any, index: any) => {
     switch (columnKey) {
       case "id":

@@ -3,9 +3,11 @@ import { createRef, useEffect, useState } from "react";
 export const usePinCheckHandle = ({
   clientHavePin,
   okPin,
+  status,
 }: {
   clientHavePin: boolean;
   okPin: boolean;
+  status: string;
 }) => {
   const [pin, setPin] = useState(["", "", "", ""]);
   const inputRefs = [createRef(), createRef(), createRef(), createRef()];
@@ -21,25 +23,20 @@ export const usePinCheckHandle = ({
     }
   };
   useEffect(() => {
-    if (clientHavePin) {
+    if (clientHavePin && !okPin) {
       setPin(["", "", "", ""]);
       (inputRefs[0].current as HTMLInputElement).focus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientHavePin]);
   useEffect(() => {
-    if (
-      !okPin &&
-      pin[0] !== "" &&
-      pin[1] !== "" &&
-      pin[2] !== "" &&
-      pin[3] !== ""
-    ) {
+    console.log("okPin", okPin);
+    if (status === "error") {
       setPin(["", "", "", ""]);
       (inputRefs[0].current as HTMLInputElement).focus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [okPin, pin]);
+  }, [status]);
 
   useEffect(() => {
     (inputRefs[0].current as HTMLInputElement).focus();

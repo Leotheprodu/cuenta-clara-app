@@ -1,9 +1,10 @@
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { ClientDashboardInitialData } from "@/data/constants";
 import { useMutation } from "@tanstack/react-query";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePinCheckHandle } from "./usePinCheckHandle";
 import toast from "react-hot-toast";
+import { notFound } from "next/navigation";
 
 export const useClientSideDashboard = ({ token }: { token: string }) => {
   const [clientInfo, setClientInfo] = useState<ClientDashboardData>(
@@ -22,7 +23,11 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
         },
       }),
   });
-  const { pinCheckHandle } = usePinCheckHandle({ clientHavePin, okPin });
+  const { pinCheckHandle } = usePinCheckHandle({
+    clientHavePin,
+    okPin,
+    status,
+  });
   const { pin } = pinCheckHandle;
   useEffect(() => {
     if (pin[0] !== "" && pin[1] !== "" && pin[2] !== "" && pin[3] !== "") {
@@ -35,8 +40,13 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
   }, [mutate]);
 
   useEffect(() => {
+    if (status === "error" && error.message === "Token no encontrado") {
+      toast.error("Token no encontrado");
+      return notFound();
+    }
     if (status === "success") {
       setOkPin(true);
+      setClientHavePin(true);
       setClientInfo(data);
     } else if (status === "error" && error.message === "No PIN") {
       setClientHavePin(false);
@@ -51,7 +61,6 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
       toast.error("Error al cargar la información");
     }
   }, [status, data, error]);
-
   return {
     clientInfo,
     okPin,
