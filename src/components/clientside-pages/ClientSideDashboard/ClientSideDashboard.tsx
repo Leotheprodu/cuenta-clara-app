@@ -4,7 +4,6 @@ import { useNamingPagesRoutes } from "@/components/hooks/useNamingPagesRoutes";
 import { useClientSideDashboard } from "./useClientSideDashboard";
 import { PinCheckClientDashboard } from "./PinCheckClientDashboard";
 import { moneyFormat } from "@/components/Utils/dataFormat";
-import { PaymentMethodItem } from "../Balances/PaymentMethodItem";
 import { PaymentMethodsModal } from "./PaymentMethodsModal";
 import {
   Button,

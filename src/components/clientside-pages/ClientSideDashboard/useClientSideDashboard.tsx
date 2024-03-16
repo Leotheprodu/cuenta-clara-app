@@ -1,6 +1,6 @@
 import { fetchAPI } from "@/components/Utils/fetchAPI";
 import { ClientDashboardInitialData } from "@/data/constants";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { use, useEffect, useState } from "react";
 import { usePinCheckHandle } from "./usePinCheckHandle";
 import toast from "react-hot-toast";
@@ -13,12 +13,12 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
   const [okPin, setOkPin] = useState<boolean>(false);
   const { status, error, data, mutate } = useMutation({
     mutationKey: ["dashboard-client"],
-    mutationFn: async () =>
+    mutationFn: async (pinInput: string) =>
       await fetchAPI({
         url: `clients/dashboard-info/${token}`,
         method: "POST",
         body: {
-          pin: pin.join(""),
+          pin: pinInput,
         },
       }),
   });
@@ -26,13 +26,12 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
   const { pin } = pinCheckHandle;
   useEffect(() => {
     if (pin[0] !== "" && pin[1] !== "" && pin[2] !== "" && pin[3] !== "") {
-      mutate();
+      mutate(pin.join(""));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pin]);
+  }, [pin, mutate]);
 
   useEffect(() => {
-    mutate();
+    mutate("");
   }, [mutate]);
 
   useEffect(() => {
@@ -48,6 +47,8 @@ export const useClientSideDashboard = ({ token }: { token: string }) => {
     } else if (status === "error" && error.message === "Invalid PIN") {
       setOkPin(false);
       toast.error("PIN incorrecto, intente de nuevo");
+    } else if (status === "error") {
+      toast.error("Error al cargar la información");
     }
   }, [status, data, error]);
 
