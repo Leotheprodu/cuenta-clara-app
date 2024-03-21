@@ -1,38 +1,44 @@
 {
-    "name": "billeo.app",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint"
-    },
-    "dependencies": {
-        "@nanostores/react": "^0.7.1",
-        "@nextui-org/react": "^2.2.9",
-        "@tanstack/react-query": "^5.0.0",
-        "@tanstack/react-query-devtools": "5.0.1",
-        "framer-motion": "^10.16.4",
-        "million": "^2.6.4",
-        "nanostores": "^0.9.3",
-        "next": "13.5.3",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "react-hot-toast": "^2.4.1",
-        "react-intersection-observer": "^9.5.2",
-        "react-qr-code": "^2.0.12"
-    },
-    "devDependencies": {
-        "@tanstack/eslint-plugin-query": "^5.0.0",
-        "@types/node": "latest",
-        "@types/react": "latest",
-        "@types/react-dom": "latest",
-        "autoprefixer": "latest",
-        "eslint": "latest",
-        "eslint-config-next": "latest",
-        "postcss": "latest",
-        "tailwindcss": "3.3.3",
-        "typescript": "latest"
-    }
+  "name": "billeo.app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "test:watch": "jest --watchAll"
+  },
+  "dependencies": {
+    "@nanostores/react": "0.7.1",
+    "@nextui-org/react": "2.2.9",
+    "@tanstack/react-query": "5.0.0",
+    "@tanstack/react-query-devtools": "5.0.1",
+    "framer-motion": "10.16.4",
+    "million": "2.6.4",
+    "nanostores": "0.9.3",
+    "next": "13.5.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hot-toast": "2.4.1",
+    "react-intersection-observer": "9.5.2",
+    "react-qr-code": "2.0.12"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "5.0.0",
+    "@testing-library/react": "14.2.2",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "3.3.3",
+    "ts-node": "10.9.2",
+    "typescript": "latest",
+    "vitest": "^1.4.0"
+  }
 }
