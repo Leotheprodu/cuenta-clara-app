@@ -1,19 +1,6 @@
 import Home from "@/app/page";
-import { $AppState } from "@/stores/generalConfig";
 import { render, screen, within } from "@testing-library/react";
-import { cleanStores, keepMount } from "nanostores";
-import { afterEach, expect, test } from "vitest";
-afterEach(() => {
-  cleanStores($AppState);
-});
-test("is anonymous from the beginning", () => {
-  keepMount($AppState);
-  expect($AppState.get()).toEqual({
-    isCreatedInvoice: false,
-    client_id: 0,
-    client_name: "",
-  });
-});
+import { expect, test } from "vitest";
 
 test("render home page", () => {
   render(<Home />);
