@@ -103,5 +103,10 @@
     "page": "catalog",
     "href": "/administrar/catalogo",
     "userRequired": true
+  },
+  {
+    "page": "admin-payment-methods",
+    "href": "/administrar/metodos-de-pago",
+    "userRequired": true
   }
 ]

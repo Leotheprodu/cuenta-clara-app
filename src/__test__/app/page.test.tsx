@@ -12,3 +12,8 @@ test("render home page", () => {
     })
   ).toBeDefined();
 });
+
+test("render home page to same of the snapshot", () => {
+  const { container } = render(<Home />);
+  expect(container).toMatchSnapshot();
+});
