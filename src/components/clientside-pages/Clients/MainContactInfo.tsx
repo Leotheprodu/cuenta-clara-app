@@ -10,7 +10,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
     <section className="flex flex-col">
       {address?.length > 0 && (
         <div className="flex flex-col justify-center items-center mt-2 p-1">
-          <p className="text-sm text-slate-500 text-center">{address}</p>
+          <p className="text-sm text-slate-500">{address}</p>
         </div>
       )}
       {(email || cellphone) && (

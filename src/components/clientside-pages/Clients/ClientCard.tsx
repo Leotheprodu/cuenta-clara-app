@@ -68,7 +68,7 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
         />
       </div>
       <div
-        className={`flex relative gap-2 justify-center items-center w-full rounded-b-xl bg-slate-100 px-2 py-1 rounded-sm`}
+        className={`flex relative gap-2 justify-center items-center w-full rounded-b-xl bg-slate-50 px-2 py-1 rounded-sm`}
       >
         <h3 className=" absolute left-2 text-slate-500">Saldo:</h3>
         <div>
