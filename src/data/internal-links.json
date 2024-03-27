@@ -80,11 +80,6 @@
     "userRequired": true
   },
   {
-    "page": "recharge-client",
-    "href": "/clientes/recargas/",
-    "userRequired": true
-  },
-  {
     "page": "ClientSideDashboard",
     "href": "/clientes/dashboard/",
     "userRequired": false

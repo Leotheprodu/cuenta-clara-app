@@ -64,7 +64,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                 onChange={handleOnChange}
               />
               <Button
-                color="secondary"
+                color="primary"
                 variant="light"
                 className=" uppercase"
                 onPress={() => handleOpenAddDetail()}
@@ -122,7 +122,7 @@ export const CreateInvoiceforClient = ({ id }: { id: string }) => {
                   <div className="flex justify-end mt-8 gap-4">
                     <Button
                       color="primary"
-                      variant="shadow"
+                      variant="solid"
                       className="uppercase"
                       type="submit"
                     >

@@ -62,12 +62,11 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${inter.className}`}>
+      <body className={`${inter.className} bg-neutral-50`}>
         <Providers>
           <Toaster />
           <Header />
           {children}
-          {/*  <div className="overflow-y-auto mb-16 mt-16 pb-4"></div> */}
           <Footer />
         </Providers>
       </body>

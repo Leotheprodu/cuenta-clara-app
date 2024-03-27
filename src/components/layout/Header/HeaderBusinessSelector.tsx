@@ -1,11 +1,15 @@
 "use client";
-import { isUserRequired } from "@/components/Utils/internalLinks";
+import {
+  internalLinks,
+  isUserRequired,
+} from "@/components/Utils/internalLinks";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { $internalLinkName } from "@/stores/generalConfig";
 import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
 import { Select, SelectItem } from "@nextui-org/react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 export const HeaderBusinessSelector = ({
   handle,
 }: HeaderBusinessSelectorProps) => {
@@ -70,7 +74,7 @@ export const HeaderBusinessSelector = ({
             right: maxWidth,
             bottom: maxHeight,
           }}
-          className="fixed left-2 top-[8rem] z-40 bg-gris p-4 shadow-sm rounded-md"
+          className="fixed left-2 top-[8rem] z-40 bg-gris p-5 shadow-md rounded-md"
           layoutId="balance"
         >
           <button
@@ -83,6 +87,12 @@ export const HeaderBusinessSelector = ({
             <h4 className="text-sm text-secundario/50">Saldo</h4>
             <small className="text-sm text-primario">{balance}</small>
           </div>
+          <Link
+            className="text-[.7rem] text-primary absolute right-1 hover:border-b border-b-primary duration-200 ease-out"
+            href={internalLinks("recharges")}
+          >
+            Recargar
+          </Link>
         </motion.div>
       )}
     </div>

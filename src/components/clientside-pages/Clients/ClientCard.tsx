@@ -30,13 +30,13 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
   return (
     <div
       ref={ref}
-      className={`flex z-0 flex-col rounded-xl ${
-        isShowActivoButton ? "bg-gris" : "bg-foreground-300"
-      } ${balance < 0 && "border-t-2 border-danger-400 bg-danger-400/5"} ${
+      className={`w-[20rem] flex z-0 flex-col rounded-xl ${
+        isShowActivoButton ? "bg-blanco" : "bg-foreground-300"
+      } ${balance < 0 && "border-t-2 border-danger-100"} ${
         balance > 0 && "border-t-2 border-cuaternario"
       }`}
     >
-      <div className="z-0">
+      <div className="z-0 sm:h-[15rem]">
         <div className="relative flex flex-col justify-center items-center">
           <h2 className="font-bold text-2xl">{username}</h2>
           {detail?.length > 0 && (
@@ -68,14 +68,14 @@ export const ClientCard = ({ client, isShowActivoButton }: ClientCardProps) => {
         />
       </div>
       <div
-        className={`flex relative gap-2 border-x-1 border-b-1 justify-center border-terciario w-full rounded-b-xl bg-secundario px-2 py-1 rounded-sm`}
+        className={`flex relative gap-2 justify-center items-center w-full rounded-b-xl bg-slate-100 px-2 py-1 rounded-sm`}
       >
-        <h3 className="text-terciario absolute left-2">Saldo:</h3>
+        <h3 className=" absolute left-2 text-slate-500">Saldo:</h3>
         <div>
           <p
-            className={`text-blanco ${
+            className={` ${
               balance < 0 && "text-danger-400"
-            } font-sans text-xl text-center w-full`}
+            } text-2xl text-center w-full`}
           >
             {moneyFormat(balance)}
           </p>

@@ -33,12 +33,12 @@ export const Clients = () => {
         }}
       />
 
-      <div className="z-0 py-28 flex flex-col gap-4 items-center justify-center">
+      <div className="z-0 py-28 flex sm:flex-wrap flex-col sm:flex-row gap-4 items-center justify-center">
         {clientsSearched.length > 0 &&
           clientsSearched.map((client: ClientProps) => (
             <PageWrapper key={client.id}>
               {client.id !== 0 && (
-                <div className=" flex flex-col z-0 rounded-xl border-1 bg-blanco bg-opacity-50 border-secundario/10 p-2 w-[20rem] shadow-sm shadow-cuaternario/40">
+                <div className=" flex flex-col z-0 rounded-xl border-1 bg-blanco border-secundario/10 p-2 ">
                   <ClientCard
                     isShowActivoButton={isShowActivoButton}
                     client={client}

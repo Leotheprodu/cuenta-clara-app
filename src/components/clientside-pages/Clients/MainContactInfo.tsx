@@ -17,25 +17,31 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
         <div className="flex flex-wrap justify-center items-center mt-2 p-1 text-slate-500">
           {cellphone && (
             <>
-              <Tooltip content="Enviar mensaje al cliente por whatsapp">
+              <Tooltip
+                color="primary"
+                content="Enviar mensaje al cliente por whatsapp"
+              >
                 <a
                   className="text-sm hover:text-secundario ease-in duration-300"
                   target="_blank"
                   href={whatsappMsgs("justContact", client)}
                 >
-                  <p className="hover:scale-110 duration-200">
+                  <p className="">
                     {"+" + code?.code + " " + cellphoneFormat(cellphone)}
                   </p>
                 </a>
               </Tooltip>
               <span className="px-2 my-auto mx-0">-</span>
-              <Tooltip content="Enviar link del dashboard del cliente por WhatsApp">
+              <Tooltip
+                color="primary"
+                content="Enviar link del dashboard del cliente por WhatsApp"
+              >
                 <a
                   className="text-sm hover:text-secundario ease-in duration-300"
                   target="_blank"
                   href={whatsappMsgs("sendDashboardLink", client)}
                 >
-                  <p className="hover:scale-110 duration-200">Enviar Link</p>
+                  <p className="">Enviar Link</p>
                 </a>
               </Tooltip>
             </>
@@ -43,6 +49,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
           {email && (
             <>
               <Tooltip
+                color="primary"
                 placement="bottom"
                 content="Enviar mensaje al cliente por correo electronico"
               >
@@ -51,7 +58,7 @@ export const MainContactInfo = ({ client }: ClientCardProps) => {
                   className="text-sm hover:text-secundario ease-in duration-300"
                   href={`mailto:${email}`}
                 >
-                  <p className="hover:scale-110 duration-200">{email}</p>
+                  <p className="">{email}</p>
                 </a>
               </Tooltip>
             </>

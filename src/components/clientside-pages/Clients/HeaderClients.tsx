@@ -10,7 +10,7 @@ export const HeaderClients = ({ handle }: HeaderClientsProps) => {
     searchClient,
   } = handle;
   return (
-    <div className="z-10 flex fixed left-0 items-center justify-center w-full bg-blanco/80 shadow-md backdrop-blur-sm">
+    <div className="z-10 flex fixed left-0 items-center justify-center w-full bg-neutral-50 shadow-sm">
       <SwitchFilterActive handle={{ isShowActivoButton, HanldeIsSelected }} />
       <Input
         onChange={handleSearchClient}

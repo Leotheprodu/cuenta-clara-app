@@ -7,6 +7,7 @@ import {
   Button,
   useDisclosure,
   Input,
+  Tooltip,
 } from "@nextui-org/react";
 
 import { SearchIcon } from "@/icons/SearchIcon";
@@ -24,9 +25,11 @@ export const ModalChangeClient = () => {
   const internalLinkName = useStore($internalLinkName);
   return (
     <>
-      <Button onPress={onOpen} variant="light" color="primary">
-        <ChangeIcon className="text-terciario" />
-      </Button>
+      <Tooltip color="primary" content="Cambiar de Cliente">
+        <Button onPress={onOpen} variant="light" color="primary">
+          <ChangeIcon className="text-primario" />
+        </Button>
+      </Tooltip>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="z-20">
         <ModalContent>

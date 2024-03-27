@@ -1,11 +1,12 @@
 import { internalLinks } from "@/components/Utils/internalLinks";
-import { typeOfRoles } from "@/data/constants";
+import { businessConfigInfo, typeOfRoles } from "@/data/constants";
 import { AddClientIcon } from "@/icons/AddClientIcon";
 import { AddInvoiceIcon } from "@/icons/AddInvoiceIcon";
 import { AddTransactionIcon } from "@/icons/AddTransactionIcon";
 import { DeleteUserIcon } from "@/icons/DeleteUserIcon";
 import { EditIcon } from "@/icons/EditIcon";
 import { InfoIcon } from "@/icons/infoIcon";
+import { $selectedBusiness } from "@/stores/business";
 import { $user } from "@/stores/users";
 import { useStore } from "@nanostores/react";
 import { Spinner, Tooltip } from "@nextui-org/react";
@@ -17,6 +18,7 @@ export const ClientSections = ({
 }: ClientCardProps) => {
   const { id } = client;
   const user = useStore($user);
+  const business = useStore($selectedBusiness);
   const roles = user?.roles;
   const [clickLink, setClickLink] = useState(false);
   if (clickLink) {
@@ -24,9 +26,9 @@ export const ClientSections = ({
       <div className="flex items-center justify-center">
         <Spinner
           size="md"
-          color="secondary"
+          color="primary"
           label="Cargando Sección..."
-          labelColor="secondary"
+          labelColor="primary"
           className="my-0 mx-auto"
         />
       </div>
@@ -36,7 +38,7 @@ export const ClientSections = ({
     <div className="flex justify-center w-full gap-8 text-xs p-2">
       <Tooltip content="Ver Facturas" showArrow placement="top" color="primary">
         <Link
-          className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-lg transition-all duration-200 p-1"
+          className="text-primary rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-lg transition-all duration-200 p-1"
           href={`${internalLinks("client-invoices")}${id}`}
           onClick={() => setClickLink(true)}
         >
@@ -47,10 +49,10 @@ export const ClientSections = ({
         content="Crear Factura"
         showArrow
         placement="top"
-        color="secondary"
+        color="primary"
       >
         <Link
-          className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
+          className="text-primary rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
           href={`${internalLinks("add-invoice")}${id}`}
           onClick={() => setClickLink(true)}
         >
@@ -61,10 +63,10 @@ export const ClientSections = ({
         content="Actualizar Cliente"
         showArrow
         placement="top"
-        color="warning"
+        color="primary"
       >
         <Link
-          className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
+          className="text-primary rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
           href={`${internalLinks("update-client")}${id}`}
           onClick={() => setClickLink(true)}
         >
@@ -75,10 +77,10 @@ export const ClientSections = ({
         content={isShowActivoButton ? "Desactivar Cliente" : "Activar Cliente"}
         showArrow
         placement="top"
-        color="danger"
+        color="primary"
       >
         <Link
-          className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-md transition-all duration-200 p-1"
+          className="text-primary rounded-full hover:scale-110 bg-blanco shadow-md hover:shadow-md transition-all duration-200 p-1"
           href={`${internalLinks("deactivate-client")}${id}`}
           onClick={() => setClickLink(true)}
         >
@@ -89,22 +91,23 @@ export const ClientSections = ({
           )}
         </Link>
       </Tooltip>
-      {roles.includes(typeOfRoles.admin.id) && (
-        <Tooltip
-          content="Ver Recargas"
-          showArrow
-          placement="top"
-          color="success"
-        >
-          <Link
-            className="text-terciario rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
-            href={`${internalLinks("recharge-client")}${id}`}
-            onClick={() => setClickLink(true)}
+      {roles.includes(typeOfRoles.admin.id) &&
+        business.id === businessConfigInfo.businessId && (
+          <Tooltip
+            content="Ver Recargas"
+            showArrow
+            placement="top"
+            color="primary"
           >
-            <InfoIcon className="w-6 h-6" />
-          </Link>
-        </Tooltip>
-      )}
+            <Link
+              className="text-primary rounded-full hover:scale-110 bg-blanco shadow-lg hover:shadow-lg transition-all duration-200 p-1"
+              href={`${internalLinks("recharge-client")}${id}`}
+              onClick={() => setClickLink(true)}
+            >
+              <InfoIcon className="w-6 h-6" />
+            </Link>
+          </Tooltip>
+        )}
     </div>
   );
 };

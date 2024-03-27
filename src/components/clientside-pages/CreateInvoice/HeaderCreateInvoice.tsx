@@ -20,23 +20,23 @@ export const HeaderCreateInvoice = ({ handle }: HeaderCreateInvoiceProps) => {
   }, [username]);
 
   return (
-    <div className="bg-secundario z-10 w-screen h-[3rem] flex gap-2 justify-center items-center fixed left-0">
+    <div className="bg-neutral-50 z-10 w-screen h-[4rem] flex gap-2 justify-center items-center fixed left-0 shadow-sm">
       {showChangeClient && <ModalChangeClient />}
-      <div className="flex text-sm sm:text-base text-blanco gap-1">
+      <div className="flex text-sm sm:text-base text-slate-500 gap-1">
         <p>Cliente:</p>
         {isLoading ? (
           <Spinner size="sm" color="warning" />
         ) : username === "" ? (
-          <span className="uppercase text-terciario">Seleccione</span>
+          <span className="uppercase text-slate-500">Seleccione</span>
         ) : (
-          <span className="uppercase text-terciario">{username}</span>
+          <span className="uppercase text-primario">{username}</span>
         )}
       </div>
 
       {selectedBusiness && (
-        <p className="text-sm sm:text-base text-center text-blanco">
+        <p className="text-sm sm:text-base text-center text-slate-500">
           Negocio:{" "}
-          <span className="uppercase text-terciario">
+          <span className="uppercase text-primario">
             {selectedBusiness.name}
           </span>
         </p>
