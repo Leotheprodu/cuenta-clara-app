@@ -44,8 +44,7 @@ export const useInvoiceDetailsDashboardModal = ({
   const columnNames = [
     { key: "id", name: "Id" },
     { key: "code", name: "Codigo" },
-    { key: "name", name: "Nombre" },
-    { key: "type", name: "Tipo de Producto" },
+    { key: "description", name: "Descripción" },
     { key: "unit", name: "Unidad" },
     { key: "quantity", name: "Cantidad" },
     { key: "unit_price", name: "Precio" },
@@ -82,24 +81,10 @@ export const useInvoiceDetailsDashboardModal = ({
             </small>
           </div>
         );
-      case "name":
+      case "description":
         return (
           <div className="flex justify-center">
-            <small className="text-center">
-              {invoiceDetail.products_and_service.name}
-            </small>
-          </div>
-        );
-      case "type":
-        return (
-          <div className="flex justify-center">
-            <small className="text-center">
-              {
-                typeOfProductsAndServices[
-                  invoiceDetail.products_and_service.type
-                ].nombre
-              }
-            </small>
+            <small className="text-center">{invoiceDetail.description}</small>
           </div>
         );
       case "unit":
