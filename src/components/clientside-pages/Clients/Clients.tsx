@@ -11,8 +11,9 @@ import { moneyFormat } from "@/components/Utils/dataFormat";
 export const Clients = () => {
   const {
     handleSearchClient,
-    HanldeIsSelected,
+    handleIsSelectedSwitch,
     isShowActivoButton,
+    isShowDebtorsButton,
     searchClient,
     clientsSearched,
   } = useClientsPage();
@@ -57,7 +58,8 @@ export const Clients = () => {
       <HeaderClients
         handle={{
           isShowActivoButton,
-          HanldeIsSelected,
+          isShowDebtorsButton,
+          handleIsSelectedSwitch,
           handleSearchClient,
           searchClient,
         }}

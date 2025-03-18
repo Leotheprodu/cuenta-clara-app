@@ -1,17 +1,35 @@
-import { SwitchFilterActive } from "./SwitchFilterActive";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "@/icons/SearchIcon";
+import { SwitchFilterClients } from "./SwitchFilterClients";
 
 export const HeaderClients = ({ handle }: HeaderClientsProps) => {
   const {
     isShowActivoButton,
-    HanldeIsSelected,
+    isShowDebtorsButton,
+    handleIsSelectedSwitch,
     handleSearchClient,
     searchClient,
   } = handle;
   return (
     <div className="z-10 flex fixed left-0 items-center justify-center w-full bg-neutral-50 shadow-sm">
-      <SwitchFilterActive handle={{ isShowActivoButton, HanldeIsSelected }} />
+      <SwitchFilterClients
+        handle={{
+          isShowActivoButton,
+          handleIsSelectedSwitch,
+          typeOfSwitch: "actives",
+          switchText: { on: "Usuarios activos", off: "Usuarios activos" },
+          isActive: !isShowDebtorsButton,
+        }}
+      />
+      <SwitchFilterClients
+        handle={{
+          isShowDebtorsButton,
+          handleIsSelectedSwitch,
+          typeOfSwitch: "debtors",
+          switchText: { on: "Filtrar deudores", off: "Filtrar deudores" },
+          isActive: isShowActivoButton,
+        }}
+      />
       <Input
         onChange={handleSearchClient}
         value={searchClient}

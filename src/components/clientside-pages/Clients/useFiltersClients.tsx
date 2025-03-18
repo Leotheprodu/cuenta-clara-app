@@ -7,6 +7,7 @@ export const useFiltersClients = ({
   data,
   status,
   isShowActivoButton,
+  isShowDebtorsButton,
   searchClient,
 }: FilterClientsProps) => {
   const selectedBusiness = useStore($selectedBusiness);
@@ -42,6 +43,20 @@ export const useFiltersClients = ({
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowActivoButton, clients]);
+
+  // filtra los clientes por los que tienen algún saldo pendiente
+  useEffect(() => {
+    if (isShowDebtorsButton) {
+      setClientsSearched(
+        clientsActives.filter((client: ClientProps) =>
+          client.balances.some((balance) => balance.amount !== "0.00")
+        )
+      );
+    } else {
+      setClientsSearched(clientsActives);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShowDebtorsButton, clientsActives]);
 
   //filtra los clientes por nombre, email, celular o detalle
   useEffect(() => {

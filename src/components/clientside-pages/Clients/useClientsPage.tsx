@@ -6,6 +6,7 @@ import { $AppState, $GlobalLoading } from "@/stores/generalConfig";
 import { useStore } from "@nanostores/react";
 export const useClientsPage = () => {
   const [isShowActivoButton, setIsShowActivoButton] = useState(true);
+  const [isShowDebtorsButton, setIsShowDebtorsButton] = useState(false);
   const [searchClient, setSearchClient] = useState("");
   const appState = useStore($AppState);
   const { status, data, isLoading, refetch } = useQuery({
@@ -29,11 +30,20 @@ export const useClientsPage = () => {
     data,
     status,
     isShowActivoButton,
+    isShowDebtorsButton,
     searchClient,
   });
 
-  const HanldeIsSelected = (value: boolean) => {
-    setIsShowActivoButton(value);
+  const handleIsSelectedSwitch = (
+    value: boolean,
+    typeOfSwitch: "actives" | "debtors"
+  ) => {
+    if (typeOfSwitch === "actives") {
+      if (value !== isShowActivoButton) setIsShowActivoButton(value);
+    }
+    if (typeOfSwitch === "debtors") {
+      if (value !== isShowDebtorsButton) setIsShowDebtorsButton(value);
+    }
   };
 
   const handleSearchClient = (e: any) => {
@@ -43,8 +53,9 @@ export const useClientsPage = () => {
   return {
     clientsSearched,
     isLoading,
-    HanldeIsSelected,
+    handleIsSelectedSwitch,
     isShowActivoButton,
+    isShowDebtorsButton,
     handleSearchClient,
     searchClient,
   };

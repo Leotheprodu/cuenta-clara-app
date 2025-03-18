@@ -42,12 +42,17 @@ interface FilterClientsProps {
   data: ClientProps[];
   status: string;
   isShowActivoButton: boolean;
+  isShowDebtorsButton: boolean;
   searchClient: string;
 }
 interface HeaderClientsProps {
   handle: {
     isShowActivoButton: boolean;
-    HanldeIsSelected: (value: boolean) => void;
+    isShowDebtorsButton: boolean;
+    handleIsSelectedSwitch: (
+      value: boolean,
+      typeOfSwitch: "actives" | "debtors"
+    ) => void;
     handleSearchClient: (e: React.ChangeEvent<HTMLInputElement>) => void;
     searchClient: string;
   };
